@@ -1,0 +1,72 @@
+name: Security Scan
+
+on:
+  schedule:
+    - cron: "0 3 * * *"  # Daily at 03:00 UTC
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  gitleaks:
+    name: Secret Detection (gitleaks)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  safety:
+    name: CVE Scan (safety)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install safety
+
+      - name: Run safety check
+        run: |
+          safety check --full-report
+
+  bandit:
+    name: SAST (bandit)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install bandit
+        run: pip install bandit[toml]
+
+      - name: Run bandit
+        run: |
+          bandit -r core/ signedai/ rct_control_plane/ microservices/ -f json -o bandit-results.json || true
+          bandit -r core/ signedai/ rct_control_plane/ microservices/ -ll
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bandit-results
+          path: bandit-results.json

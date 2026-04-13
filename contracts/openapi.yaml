@@ -1,0 +1,312 @@
+openapi: 3.1.0
+
+info:
+  title: RCT Ecosystem API
+  version: 1.0.0
+  description: |
+    Unified API for the RCT Ecosystem including Kernel execution, RCTDB queries,
+    and observability endpoints.
+    
+    ## Authentication
+    
+    Most endpoints require Bearer token authentication. Obtain tokens from the 
+    authentication service.
+    
+    ## Rate Limiting
+    
+    API requests are rate-limited to 100 requests per minute per API key.
+    
+    ## Trace IDs
+    
+    All requests support optional `X-Trace-Id` header for observability correlation.
+    Responses will include the same trace ID.
+  contact:
+    name: RCT Labs API Support
+    url: https://rctlabs.co/support
+    email: api@rctlabs.co
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+
+servers:
+  - url: http://localhost:8000
+    description: Local Development
+  - url: https://api.rctlabs.co
+    description: Production
+
+paths:
+  /health:
+    get:
+      operationId: getHealth
+      summary: Health check endpoint
+      description: Returns the health status of the API service
+      tags:
+        - System
+      parameters:
+        - name: X-Trace-Id
+          in: header
+          required: false
+          schema:
+            type: string
+            format: uuid
+          description: Optional trace ID for observability
+      responses:
+        '200':
+          description: Service is healthy
+          headers:
+            X-Trace-Id:
+              schema:
+                type: string
+              description: Trace ID for request correlation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [ok, degraded]
+                    example: ok
+                  timestamp:
+                    type: string
+                    format: date-time
+                  version:
+                    type: string
+                    example: "1.0.0"
+                  service:
+                    type: string
+                    example: "kernel-api"
+                  trace_id:
+                    type: string
+                    format: uuid
+                required:
+                  - status
+                  - timestamp
+
+  /metrics:
+    get:
+      operationId: getMetrics
+      summary: Prometheus metrics endpoint
+      description: Returns metrics in Prometheus format
+      tags:
+        - System
+      responses:
+        '200':
+          description: Metrics in Prometheus text format
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: |
+                  # HELP http_requests_total Total HTTP requests
+                  # TYPE http_requests_total counter
+                  http_requests_total{method="GET",path="/health"} 42
+
+  /v1/kernel/execute:
+    post:
+      operationId: executeKernel
+      summary: Execute RCT Kernel with intent
+      description: |
+        Execute the RCT Kernel with a user intent. The kernel will process the
+        intent through its 9-tier architecture and return the result along with
+        any generated evidence.
+      tags:
+        - Kernel
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: X-Trace-Id
+          in: header
+          required: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/kernel.execute.request.json'
+            examples:
+              simple:
+                summary: Simple query
+                value:
+                  intent: "Analyze this dataset"
+                  input:
+                    data: [1, 2, 3, 4, 5]
+              with_context:
+                summary: Query with context
+                value:
+                  intent: "Generate report"
+                  input:
+                    report_type: "summary"
+                  context:
+                    user_id: "user-123"
+                    session_id: "session-456"
+                  trace_id: "550e8400-e29b-41d4-a716-446655440000"
+      responses:
+        '200':
+          description: Kernel execution successful
+          headers:
+            X-Trace-Id:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/kernel.execute.response.json'
+              examples:
+                success:
+                  summary: Successful execution
+                  value:
+                    output:
+                      result: "Analysis complete"
+                      summary: "Dataset contains 5 numbers"
+                    trace_id: "550e8400-e29b-41d4-a716-446655440000"
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/common.error.json'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/common.error.json'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/common.error.json'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/common.error.json'
+
+  /v1/rctdb/query:
+    post:
+      operationId: queryRCTDB
+      summary: Query RCTDB knowledge vault
+      description: |
+        Execute a query against the RCTDB knowledge vault. Supports vector search,
+        graph traversal, and hybrid queries.
+      tags:
+        - RCTDB
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: X-Trace-Id
+          in: header
+          required: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/rctdb.query.request.json'
+            examples:
+              vector_search:
+                summary: Vector similarity search
+                value:
+                  query: "Find similar documents"
+                  query_type: "vector"
+                  limit: 10
+              graph_traversal:
+                summary: Graph traversal
+                value:
+                  query: "Find related entities"
+                  query_type: "graph"
+                  start_node: "node-123"
+                  max_depth: 3
+      responses:
+        '200':
+          description: Query successful
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/rctdb.query.response.json'
+        '400':
+          description: Invalid query
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/common.error.json'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/common.error.json'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT bearer token authentication. Obtain token from /v1/auth/login endpoint.
+        
+        Example:
+        ```
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        ```
+
+  parameters:
+    TraceIdHeader:
+      name: X-Trace-Id
+      in: header
+      required: false
+      schema:
+        type: string
+        format: uuid
+      description: Optional trace ID for request correlation
+
+  responses:
+    UnauthorizedError:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/common.error.json'
+          example:
+            error:
+              code: "UNAUTHORIZED"
+              message: "Authentication required"
+              trace_id: "550e8400-e29b-41d4-a716-446655440000"
+
+    RateLimitError:
+      description: Rate limit exceeded
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+          description: Request limit per window
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+          description: Requests remaining in window
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+          description: Unix timestamp when limit resets
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/common.error.json'
+          example:
+            error:
+              code: "RATE_LIMIT_EXCEEDED"
+              message: "Too many requests. Please try again later."
+              details:
+                limit: 100
+                window: "1 minute"
+              trace_id: "550e8400-e29b-41d4-a716-446655440000"
