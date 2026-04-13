@@ -34,6 +34,11 @@ jobs:
         run: |
           python -m pytest --cov=. --cov-report=xml --cov-fail-under=80 -v
 
+      - name: Update stats cache (Python 3.11 only)
+        if: matrix.python-version == '3.11'
+        run: |
+          python scripts/update_stats_cache.py --skip-pytest
+
       - name: Upload coverage
         uses: codecov/codecov-action@v4
         if: matrix.python-version == '3.11'

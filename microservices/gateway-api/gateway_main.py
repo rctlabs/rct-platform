@@ -79,46 +79,60 @@ app.add_middleware(
 # RCT Labs public data endpoints (consumed by rctlabs-website)
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# Stats cache — loaded once at startup; refreshed by CI/CD write to this file
+# Format: { "testCount": int, "microserviceCount": int, "algorithmCount": int }
+# ---------------------------------------------------------------------------
+_STATS_CACHE_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(current_dir))),
+    ".stats_cache.json"
+)
+_BASELINE_STATS = {
+    "testCount": 4849,
+    "microserviceCount": 62,
+    "algorithmCount": 41,
+}
+
+
+def _load_stats_cache() -> dict:
+    """Load stats from cache file written by CI. Falls back to baseline."""
+    import json as _json
+    try:
+        if os.path.isfile(_STATS_CACHE_PATH):
+            mtime = os.path.getmtime(_STATS_CACHE_PATH)
+            age_hours = (__import__('time').time() - mtime) / 3600
+            if age_hours < 24:  # Cache valid for 24 hours
+                with open(_STATS_CACHE_PATH, "r") as f:
+                    data = _json.load(f)
+                    return {**_BASELINE_STATS, **data, "source": "cache"}
+    except Exception:
+        pass
+    return {**_BASELINE_STATS, "source": "baseline"}
+
+
 @app.get("/rctlabs/system/stats", tags=["RCT Labs"])
 async def rctlabs_system_stats():
     """Live system stats consumed by rctlabs-website /api/stats.
     Returns the same field names as the website FALLBACK constant so the
     frontend can merge: { ...FALLBACK, ...data, source: 'live' }.
+
+    Stats are served from a pre-computed cache file written by CI/CD.
+    This prevents blocking the request thread with a subprocess pytest run.
+    To refresh manually: python scripts/update_stats_cache.py
     """
-    import subprocess, json as _json
-
-    # Attempt to read live test count from pytest cache; fall back to baseline
-    test_count = 4849
-    microservice_count = 62
-    algorithm_count = 41
-
-    try:
-        result = subprocess.run(
-            ["python", "-m", "pytest", "--co", "-q", "--no-header"],
-            capture_output=True, text=True, timeout=30,
-            cwd=os.path.dirname(os.path.dirname(os.path.dirname(current_dir))),
-        )
-        # Count lines ending with "test session starts" summary
-        for line in result.stdout.splitlines():
-            if "selected" in line and "test" in line:
-                import re
-                m = re.search(r"(\d+) selected", line)
-                if m:
-                    test_count = int(m.group(1))
-                    break
-    except Exception:
-        pass  # Use baseline values
+    stats = _load_stats_cache()
 
     return {
-        "testCount": test_count,
-        "microserviceCount": microservice_count,
-        "algorithmCount": algorithm_count,
+        "testCount": stats["testCount"],
+        "microserviceCount": stats["microserviceCount"],
+        "algorithmCount": stats["algorithmCount"],
         "layerCount": 10,
         "hexaCoreCount": 7,
         "consensusModels": 7,
         "uptime": "99.98% SLA",
         "hallucinationRate": "0.3% benchmark",
         "version": app.version,
+        "source": stats.get("source", "baseline"),
         "timestamp": __import__('datetime').datetime.utcnow().isoformat() + "Z",
     }
 
