@@ -15,11 +15,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from rct_platform.config import (
+from signedai.core.registry import (
     SignedAITier,
     RiskLevel,
     SignedAIRegistry,
-    HexaCoreRegistry
+    HexaCoreRegistry,
 )
 
 

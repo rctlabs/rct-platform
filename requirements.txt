@@ -23,9 +23,7 @@ httpx>=0.25.0  # For TestClient
 # Optional: Production deployment
 gunicorn>=21.2.0  # For production WSGI serving
 
-# ── Plan 20: RCT Benchmark Command Center Dashboard ──────────────────────────
-streamlit>=1.32.0          # War Room UI
-plotly>=5.18.0             # Interactive charts (line, bar, gauge)
-pandas>=2.0.0              # Data aggregation and tabular display
-watchdog>=4.0.0            # File-system monitoring (live log refresh)
-streamlit-autorefresh>=1.0.1  # st_autorefresh component
+# ── Dashboard deps (internal only — not published to public repo) ────────────
+# streamlit, plotly, pandas, watchdog, streamlit-autorefresh
+# are development/dashboard tools and are excluded from the public SDK.
+# Install them separately if you run the internal Benchmark Command Center.
