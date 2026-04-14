@@ -40,6 +40,10 @@ class ModelInfo(BaseModel):
     cost_input: float = Field(description="USD per 1M input tokens")
     cost_output: float = Field(description="USD per 1M output tokens")
     context_window: int
+    specialties: List[str] = Field(default_factory=list)
+    use_cases: List[str] = Field(default_factory=list)
+    programming_rank: Optional[int] = None
+    reasoning_rank: Optional[int] = None
 
 
 class HexaCoreRegistry:
@@ -61,6 +65,10 @@ class HexaCoreRegistry:
             cost_input=5.0,
             cost_output=25.0,
             context_window=1_000_000,
+            specialties=["Architecture", "Planning", "Complex reasoning", "Final decisions"],
+            use_cases=["System architecture design", "Crisis management", "Final arbitration in Tier 8", "Complex problem solving", "Code review (critical)"],
+            programming_rank=1,
+            reasoning_rank=1,
         ),
         HexaCoreRole.LEAD_BUILDER: ModelInfo(
             id="moonshotai/kimi-k2.5",
@@ -70,6 +78,9 @@ class HexaCoreRegistry:
             cost_input=0.45,
             cost_output=2.25,
             context_window=1_000_000,
+            specialties=["Programming", "Visual coding", "Code generation", "Debugging"],
+            use_cases=["Complex code generation", "Visual analysis (screenshots)", "System integration", "Senior-level code review"],
+            programming_rank=1,
         ),
         HexaCoreRole.JUNIOR_BUILDER: ModelInfo(
             id="minimax/minimax-m2.1",
@@ -79,6 +90,9 @@ class HexaCoreRegistry:
             cost_input=0.27,
             cost_output=0.95,
             context_window=200_000,
+            specialties=["Programming", "Unit tests", "JSON formatting"],
+            use_cases=["Routine code generation", "Unit test writing", "JSON schema generation", "Simple automation scripts"],
+            programming_rank=2,
         ),
         HexaCoreRole.SPECIALIST: ModelInfo(
             id="google/gemini-3-flash",
@@ -88,6 +102,8 @@ class HexaCoreRegistry:
             cost_input=0.50,
             cost_output=3.00,
             context_window=1_000_000,
+            specialties=["Finance", "Health", "Speed", "Multimodal"],
+            use_cases=["Financial calculations", "Health data analysis", "Real-time low-latency tasks", "Image + text multimodal analysis"],
         ),
         HexaCoreRole.LIBRARIAN: ModelInfo(
             id="x-ai/grok-4.1-fast",
@@ -97,6 +113,9 @@ class HexaCoreRegistry:
             cost_input=0.20,
             cost_output=0.50,
             context_window=2_000_000,
+            specialties=["Long context", "Science", "Memory", "RAG"],
+            use_cases=["RAG systems (long document retrieval)", "Scientific analysis", "Multi-document synthesis", "RCTDB context window tasks"],
+            reasoning_rank=3,
         ),
         HexaCoreRole.HUMANIZER: ModelInfo(
             id="deepseek/deepseek-v3.2",
@@ -106,6 +125,9 @@ class HexaCoreRegistry:
             cost_input=0.25,
             cost_output=0.38,
             context_window=200_000,
+            specialties=["Roleplay", "Natural language", "Creative writing", "Translation"],
+            use_cases=["User chat (natural conversation)", "Thai language translation", "Creative content generation", "Empathetic response writing"],
+            reasoning_rank=2,
         ),
     }
 
@@ -123,6 +145,29 @@ class HexaCoreRegistry:
         """Estimate USD cost for one request to *role*."""
         model = cls.MODELS[role]
         return (input_tokens / 1_000_000) * model.cost_input + (output_tokens / 1_000_000) * model.cost_output
+
+    @classmethod
+    def get_geopolitical_balance(cls) -> Dict[str, int]:
+        """Return count of models per country."""
+        balance: Dict[str, int] = {}
+        for model in cls.MODELS.values():
+            balance[model.country] = balance.get(model.country, 0) + 1
+        return balance
+
+    @classmethod
+    def get_cheapest_coder(cls) -> ModelInfo:
+        """Return the most cost-effective coding model."""
+        return cls.MODELS[HexaCoreRole.JUNIOR_BUILDER]
+
+    @classmethod
+    def get_smartest(cls) -> ModelInfo:
+        """Return the highest-capability reasoning model."""
+        return cls.MODELS[HexaCoreRole.SUPREME_ARCHITECT]
+
+    @classmethod
+    def get_longest_context(cls) -> ModelInfo:
+        """Return the model with the largest context window."""
+        return cls.MODELS[HexaCoreRole.LIBRARIAN]
 
 
 # ---------------------------------------------------------------------------
