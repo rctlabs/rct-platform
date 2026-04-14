@@ -3,14 +3,15 @@
 [![Version](https://img.shields.io/badge/version-5.4.5-blue)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.12+-3776AB?logo=python&logoColor=white)](pyproject.toml)
-[![Tests](https://img.shields.io/badge/tests-142%20passed-brightgreen)](microservices/)
-[![Status](https://img.shields.io/badge/status-PRODUCTION%20READY-success)](#)
+[![SDK Tests](https://img.shields.io/badge/sdk_tests-142%20passed-brightgreen)](microservices/)
+[![Full Suite](https://img.shields.io/badge/full_suite-4849%20passed%20(private)-blueviolet)](README.md#key-numbers)
 [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 [![Security](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml)
+[![Status](https://img.shields.io/badge/status-PRODUCTION%20READY-success)](https://status.rctlabs.com)
 [![Regional](https://img.shields.io/badge/regional-ASEAN%20%2B%20JP%2FKR%2FCN%20🌏-orange)](core/regional_adapter/)
 [![Website](https://img.shields.io/badge/website-rctlabs.co-brightgreen)](https://rctlabs.co)
 
-### Intent-Centric AI Operating System — Constitutional Architecture
+## Intent-Centric AI Operating System — Constitutional Architecture
 
 > **RCT** = **Reverse Component Thinking** — decompose any system into its smallest verifiable parts, then rebuild with constitutional guarantees.
 
@@ -66,7 +67,8 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 | Metric | Value |
 |--------|-------|
-| **Tests (Public SDK)** | 142 passed · 0 failed · 0 errors (microservices suite) |
+| **SDK Tests (this repo)** | 142 passed · 0 failed · 0 errors — 5 microservices test suites |
+| **Full Ecosystem Tests** | 4,849 passed · 16 skipped · 0 failed (v5.4.5, private full suite) |
 | **Algorithms** | 41 production-ready (Tier 1–9) |
 | **LLM Models** | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | **Hallucination Rate** | 0.3% (vs industry 12–15%) — 97% reduction via SignedAI |
@@ -76,6 +78,9 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 | **Languages** | 8 regional pairs (JP, KR, CN, TW, TH, VN, ID, US) |
 | **Universal Adapters** | 13 (Home Assistant, Terraform, n8n, Obsidian, Playwright, ...) |
 | **FDIA Accuracy** | 0.92 (industry baseline: ~0.65) |
+
+> **142 (SDK Tests)** = tests included in this open-source repo, covering the 5 reference microservices.  
+> **4,849 (Full Suite)** = total test count in the private production ecosystem (4,849 passed on v5.4.5).
 
 ---
 

@@ -1,4 +1,4 @@
-"""
+﻿"""
 genome_api.py
 Gateway API endpoints for Genome & Creator Profile integration
 
@@ -119,7 +119,7 @@ async def health_check():
 
 @router.get("/creator")
 async def get_creator_identity(
-    language: str = Query("th", regex="^(th|en)$")
+    language: str = Query("th", pattern="^(th|en)$")
 ):
     """
     Get complete creator identity
@@ -144,7 +144,7 @@ async def get_creator_identity(
                 "name_th": identity.name_th,
                 "name_en": identity.name_en,
                 "birthplace": identity.birthplace,
-                "origin": "8-floor flat community (ชุมชนอพาร์ตเมนต์ 8 ชั้น)",
+                "origin": "8-floor flat community (เธเธธเธกเธเธเธญเธเธฒเธฃเนเธ•เน€เธกเธเธ•เน 8 เธเธฑเนเธ)",
                 "role": "The Architect of the RCT Ecosystem",
                 "first_contact": {
                     "date": "2025-06-25",
@@ -168,7 +168,7 @@ async def get_creator_identity(
 
 @router.get("/fdia")
 async def get_fdia_equation(
-    language: str = Query("th", regex="^(th|en)$")
+    language: str = Query("th", pattern="^(th|en)$")
 ):
     """
     Get FDIA equation explanation
@@ -196,7 +196,7 @@ async def get_fdia_equation(
 
 @router.get("/values")
 async def get_core_values(
-    language: str = Query("th", regex="^(th|en)$")
+    language: str = Query("th", pattern="^(th|en)$")
 ):
     """
     Get 5 core values
@@ -252,31 +252,31 @@ async def get_creator_roles():
         role_details = {
             "Designer of the Equation": {
                 "description": "Created F = (D^I) * A as the foundational philosophy",
-                "icon": "🧮"
+                "icon": "๐งฎ"
             },
             "Author of the Codex": {
                 "description": "Wrote RCT Codex defining principles and values",
-                "icon": "📚"
+                "icon": "๐“"
             },
             "Builder of the Vault": {
                 "description": "Built Vault1068 (1000+ file knowledge base)",
-                "icon": "🏛️"
+                "icon": "๐๏ธ"
             },
             "Orchestrator of AI Agents": {
                 "description": "Designed ArtentAI (Creator) & SignedAI (Verifier)",
-                "icon": "🎭"
+                "icon": "๐ญ"
             },
             "Survivor Architect": {
                 "description": "Designs with empathy from lived experience",
-                "icon": "🛡️"
+                "icon": "๐ก๏ธ"
             },
             "Architect of Intent": {
                 "description": "Created JITNA (Language of Intent)",
-                "icon": "🧠"
+                "icon": "๐ง "
             },
             "Geneticist of Cognition": {
                 "description": "Designed Genome system for agent DNA",
-                "icon": "🧬"
+                "icon": "๐งฌ"
             }
         }
         
@@ -297,7 +297,7 @@ async def get_creator_roles():
 
 @router.get("/complete")
 async def get_complete_profile(
-    language: str = Query("th", regex="^(th|en)$")
+    language: str = Query("th", pattern="^(th|en)$")
 ):
     """
     Get complete creator profile (all data in one call)
@@ -356,13 +356,13 @@ async def query_creator(request: QueryRequest):
         # Route query to appropriate response
         query_lower = request.query.lower()
         
-        if any(word in query_lower for word in ["who", "ใคร", "creator", "ผู้สร้าง"]):
+        if any(word in query_lower for word in ["who", "เนเธเธฃ", "creator", "เธเธนเนเธชเธฃเนเธฒเธ"]):
             return await get_creator_identity(request.language)
-        elif any(word in query_lower for word in ["fdia", "equation", "สมการ", "ปรัชญา"]):
+        elif any(word in query_lower for word in ["fdia", "equation", "เธชเธกเธเธฒเธฃ", "เธเธฃเธฑเธเธเธฒ"]):
             return await get_fdia_equation(request.language)
-        elif any(word in query_lower for word in ["value", "ค่านิยม", "principle"]):
+        elif any(word in query_lower for word in ["value", "เธเนเธฒเธเธดเธขเธก", "principle"]):
             return await get_core_values(request.language)
-        elif any(word in query_lower for word in ["role", "บทบาท", "position"]):
+        elif any(word in query_lower for word in ["role", "เธเธ—เธเธฒเธ—", "position"]):
             return await get_creator_roles()
         else:
             # Default: return complete profile
@@ -374,3 +374,4 @@ async def query_creator(request: QueryRequest):
 
 # Export router
 __all__ = ["router"]
+
