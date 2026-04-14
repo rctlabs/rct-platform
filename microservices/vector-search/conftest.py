@@ -10,6 +10,13 @@ from unittest.mock import MagicMock
 import numpy as np
 from types import ModuleType
 
+# Purge cached 'app' module so vector-search's own 'app.*' package is resolved
+# correctly when pytest collects all microservices together (analysearch-intent
+# also exposes an 'app.*' namespace and its conftest runs first alphabetically).
+for _key in list(sys.modules.keys()):
+    if _key == "app" or _key.startswith("app."):
+        del sys.modules[_key]
+
 
 class FakeFaissIndex:
     """Fake FAISS index that actually stores and searches vectors."""
