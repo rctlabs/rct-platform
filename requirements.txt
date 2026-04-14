@@ -1,7 +1,6 @@
 # Control Plane v1.0 Dependencies
-
-# Core
-python>=3.10
+# Python version constraint lives in pyproject.toml (requires-python = ">=3.10")
+# Do NOT add "python>=X.Y" here — it is not a valid pip package name.
 
 # FastAPI and ASGI server
 fastapi>=0.104.0
