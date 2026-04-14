@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rctlabs.co/schemas/kernel.execute.response.json",
+  "title": "Kernel Execute Response",
+  "description": "Response schema from RCT Kernel execution",
+  "type": "object",
+  "properties": {
+    "output": {
+      "type": "object",
+      "description": "Execution output. Structure depends on the executed intent.",
+      "additionalProperties": true,
+      "examples": [
+        {
+          "result": "success",
+          "summary": "Dataset analyzed successfully"
+        },
+        {
+          "report": "...",
+          "charts": ["chart1.png", "chart2.png"]
+        }
+      ]
+    },
+    "evidence_id": {
+      "type": "string",
+      "description": "ID of evidence artifacts generated during execution (if any)",
+      "format": "uuid",
+      "examples": ["7c9e6679-7425-40de-944b-e07fc1f90ae7"]
+    },
+    "warnings": {
+      "type": "array",
+      "description": "Non-fatal warnings encountered during execution",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "examples": [
+        ["Query returned partial results", "Some data sources timed out"]
+      ]
+    },
+    "trace_id": {
+      "type": "string",
+      "description": "Trace ID for observability correlation (echoed from request or generated)",
+      "format": "uuid",
+      "examples": ["550e8400-e29b-41d4-a716-446655440000"]
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Execution metadata",
+      "properties": {
+        "duration_ms": {
+          "type": "number",
+          "description": "Execution duration in milliseconds",
+          "minimum": 0
+        },
+        "tier_used": {
+          "type": "integer",
+          "description": "Execution tier used (4/6/8)",
+          "enum": [4, 6, 8]
+        },
+        "tokens_consumed": {
+          "type": "integer",
+          "description": "LLM tokens consumed (if applicable)",
+          "minimum": 0
+        },
+        "cache_hit": {
+          "type": "boolean",
+          "description": "Whether result was served from cache"
+        }
+      }
+    }
+  },
+  "required": ["output"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "output": {
+        "result": "success",
+        "summary": "Analysis complete"
+      },
+      "trace_id": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    {
+      "output": {
+        "report": "Detailed analysis report...",
+        "charts": ["chart1.png"]
+      },
+      "evidence_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+      "warnings": ["Some data sources timed out"],
+      "trace_id": "550e8400-e29b-41d4-a716-446655440000",
+      "metadata": {
+        "duration_ms": 1250,
+        "tier_used": 6,
+        "tokens_consumed": 2500,
+        "cache_hit": false
+      }
+    }
+  ]
+}

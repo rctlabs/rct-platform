@@ -1,0 +1,3 @@
+"""
+SignedAI Core Compatibility Package
+"""

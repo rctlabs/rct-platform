@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rctlabs.co/schemas/common.error.json",
+  "title": "Error Response",
+  "description": "Standard error response schema for all API endpoints",
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "object",
+      "description": "Error details",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Machine-readable error code",
+          "enum": [
+            "VALIDATION_ERROR",
+            "UNAUTHORIZED",
+            "FORBIDDEN",
+            "NOT_FOUND",
+            "RATE_LIMIT_EXCEEDED",
+            "INTERNAL_ERROR",
+            "SERVICE_UNAVAILABLE",
+            "TIMEOUT",
+            "INVALID_REQUEST",
+            "CONFLICT"
+          ],
+          "examples": ["VALIDATION_ERROR", "UNAUTHORIZED"]
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message",
+          "examples": [
+            "Invalid request parameters",
+            "Authentication required"
+          ]
+        },
+        "details": {
+          "type": "object",
+          "description": "Additional error details (optional)",
+          "additionalProperties": true,
+          "examples": [
+            {
+              "field": "intent",
+              "reason": "Field is required"
+            }
+          ]
+        },
+        "trace_id": {
+          "type": "string",
+          "description": "Trace ID for error correlation",
+          "format": "uuid",
+          "examples": ["550e8400-e29b-41d4-a716-446655440000"]
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Error timestamp",
+          "format": "date-time",
+          "examples": ["2026-01-13T14:30:00Z"]
+        }
+      },
+      "required": ["code", "message"]
+    }
+  },
+  "required": ["error"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Invalid request parameters",
+        "details": {
+          "field": "intent",
+          "reason": "Field is required"
+        },
+        "trace_id": "550e8400-e29b-41d4-a716-446655440000",
+        "timestamp": "2026-01-13T14:30:00Z"
+      }
+    },
+    {
+      "error": {
+        "code": "RATE_LIMIT_EXCEEDED",
+        "message": "Too many requests. Please try again later.",
+        "details": {
+          "limit": 100,
+          "window": "1 minute",
+          "retry_after": 45
+        },
+        "trace_id": "550e8400-e29b-41d4-a716-446655440000"
+      }
+    }
+  ]
+}
