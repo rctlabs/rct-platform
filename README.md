@@ -1,11 +1,16 @@
-# RCT Platform — Constitutional AI Operating System
+# RCT Platform — Intent-Centric AI Operating System
 
 [![Version](https://img.shields.io/badge/version-5.4.5-blue)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.12+-blue)](pyproject.toml)
+[![Python](https://img.shields.io/badge/python-3.12+-3776AB?logo=python&logoColor=white)](pyproject.toml)
 [![Tests](https://img.shields.io/badge/tests-142%20passed-brightgreen)](microservices/)
+[![Status](https://img.shields.io/badge/status-PRODUCTION%20READY-success)](#)
 [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 [![Security](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml)
+[![Regional](https://img.shields.io/badge/regional-ASEAN%20%2B%20JP%2FKR%2FCN%20🌏-orange)](core/regional_adapter/)
+[![Website](https://img.shields.io/badge/website-rctlabs.co-brightgreen)](https://rctlabs.co)
+
+### Intent-Centric AI Operating System — Constitutional Architecture
 
 > **RCT** = **Reverse Component Thinking** — decompose any system into its smallest verifiable parts, then rebuild with constitutional guarantees.
 
@@ -13,15 +18,17 @@
 
 ## What is RCT?
 
-RCT Platform is the open SDK layer of the RCT Ecosystem — a Constitutional AI operating system built for agentic applications that require:
+**RCT Platform** is the open SDK layer of the RCT Ecosystem — the world's first **Intent-Centric AI Operating System** with constitutional architecture. Think of it as **"Linux for AI Agents."** It provides:
 
 - **Auditability** — every decision traces back to a signed evidence chain
-- **Governance** — multi-tier consensus prevents unilateral AI action
+- **Governance** — multi-tier consensus prevents unilateral AI action  
 - **Interpretability** — the FDIA equation makes intent and confidence explicit
 - **Regional awareness** — built-in adapters for ASEAN, JP, KR, CN contexts
 
 The full ecosystem runs in production at [rctlabs.co](https://rctlabs.co).  
 This SDK exposes the core components under Apache 2.0.
+
+🌐 **Website:** [rctlabs.co](https://rctlabs.co) · 🔗 **GitHub:** [github.com/rctlabs](https://github.com/rctlabs)
 
 ---
 
@@ -43,27 +50,32 @@ $$F = D^I \times A$$
 
 | Symbol | Meaning |
 |--------|---------|
-| **F** | Final output — the signed, consensus-approved result |
+| **F** | **Future** — the desired output the AI must deliver |
 | **D** | Data quality — accuracy and completeness of inputs (0.0–1.0) |
-| **I** | Intent precision — how well the stated intent maps to the task (acts as exponent) |
+| **I** | Intent precision — clarity of intent acts as an **exponent** (higher = amplifies result) |
 | **A** | **Architect** — Human-in-the-loop approval gate (0.0–1.0) |
 
-> **When A = 0, all output is blocked** — Constitutional AI guarantee. The system never acts without human approval.  
-> When Intent is high (I→2), even moderate Data quality produces excellent results.
+> **When Intent is high (I→2), even moderate Data quality produces excellent results.**  
+> **When A = 0, all output is blocked** — Constitutional AI guarantee. The system never acts without human approval.
 
 Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.py`](core/fdia/fdia.py).
 
 ---
 
-## Performance Metrics
+## Key Numbers
 
-| Metric | RCT Value | Industry Average | Advantage |
-|--------|-----------|-----------------|-----------|
-| **Hallucination Rate** | 0.3% | 12–15% | 97% reduction via SignedAI |
-| **Memory Compression** | 74% | 30–40% | Delta Engine (diff-only storage) |
-| **Intent Recall (warm)** | <50ms | 2–5s | Memory-first routing |
-| **Uptime SLA** | 99.98% | 99.5% | Enterprise-grade |
-| **FDIA Accuracy** | 0.92 | ~0.65 | Constitutional gate |
+| Metric | Value |
+|--------|-------|
+| **Tests (Public SDK)** | 142 passed · 0 failed · 0 errors (microservices suite) |
+| **Algorithms** | 41 production-ready (Tier 1–9) |
+| **LLM Models** | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
+| **Hallucination Rate** | 0.3% (vs industry 12–15%) — 97% reduction via SignedAI |
+| **Memory Compression** | 74% via Delta Engine (stores state diffs, not full state) |
+| **Intent Recall Speed** | Cold start 3–5s → Warm recall <50ms (Intent Loop) |
+| **Uptime SLA** | 99.98% |
+| **Languages** | 8 regional pairs (JP, KR, CN, TW, TH, VN, ID, US) |
+| **Universal Adapters** | 13 (Home Assistant, Terraform, n8n, Obsidian, Playwright, ...) |
+| **FDIA Accuracy** | 0.92 (industry baseline: ~0.65) |
 
 ---
 
@@ -72,15 +84,17 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 ```
 ┌──────────────────────────────────────────────────────────┐
 │              RCT ECOSYSTEM v5.4.5                        │
-│         Constitutional AI Operating System               │
+│         Intent-Centric AI Operating System               │
 └──────────────────────────────────────────────────────────┘
 
 Layer 11: CI/CD & Quality Gates
 ├─ GitHub Actions (ci.yml + security-scan.yml)
-└─ 142 passing tests in microservices suite
+├─ 142 passing tests in microservices suite
+└─ E2E integration tests (no Docker required)
 
 Layer 10: Enterprise Hardening
-├─ Security (JWT RS256, RBAC, Rate Limiting)
+├─ Security (JWT RS256, RBAC, ABAC, Rate Limiting)
+├─ Validation (SQL Injection 3-layer, Pydantic v2, XSS)
 └─ Resilience (Circuit Breaker, Retry policies)
 
 Layer 9: Control Plane
@@ -302,6 +316,56 @@ print(f"Nodes: {len(graph.nodes)}, Edges: {len(graph.edges)}")
 
 Available modules: `intent_schema` · `dsl_parser` · `execution_graph_ir` · `intent_compiler` · `policy_language` · `observability` · `control_plane_state` · `jitna_protocol` · `signed_execution` · `replay_engine` · `default_policies` · `cli` · `api` · `middleware` · `rich_formatter`
 
+### Analysearch Intent (`microservices/analysearch-intent/`)
+
+Multi-disciplinary deep analysis engine with adversarial self-refinement:
+
+| Mode | Pipeline | Use Case |
+|------|----------|----------|
+| `quick` | Single-pass lookup | Fast factual queries |
+| `standard` | Analysis + research synthesis | Standard decisions |
+| `deep` | Mirror Mode (3 passes) | Critical analysis |
+| `mirror` | PROPOSE → COUNTER → REFINE loop | Adversarial self-challenge |
+
+Key capabilities:
+- **GIGO Protection** — Entropy-based input validation; garbage in = rejected before any LLM call
+- **Golden Keyword Crystallization** — ALGO-41 extracts the 3–5 decisive keywords from any query
+- **Cross-Disciplinary Synthesis** — Connects insights across unrelated domains automatically
+- **Intent Conservation** — Original intent preserved and checked through every refinement pass
+
+### Hexa-Core Registry (`signedai/core/registry.py`)
+
+7 purpose-specific AI models with full geopolitical balance:
+
+| Role | Model | Country | Specialty |
+|------|-------|---------|-----------|
+| SUPREME_ARCHITECT | claude-opus-4.6 | US | Architecture, reasoning, final decisions |
+| LEAD_BUILDER | kimi-k2.5 | CN | Complex coding, visual analysis |
+| JUNIOR_BUILDER | minimax-m2.1 | CN | Routine coding, unit tests |
+| SPECIALIST | gemini-3-flash | US | Finance, health, multimodal, speed |
+| LIBRARIAN | grok-4.1-fast | US | Long context (2M tokens), RAG, science |
+| HUMANIZER | deepseek-v3.2 | CN | Natural language, creative, translation |
+| **REGIONAL_THAI** | **typhoon-v2-70b** | **TH** | **Thai NLP, Thai legal/finance (native quality)** |
+
+```python
+from signedai.core.registry import HexaCoreRegistry, HexaCoreRole
+
+# All 7 models
+for role, model in HexaCoreRegistry.MODELS.items():
+    print(f"{role.value}: {model.id} ({model.country})")
+
+# Geopolitical balance
+balance = HexaCoreRegistry.get_geopolitical_balance()
+# → {'US': 3, 'CN': 3, 'TH': 1}
+
+# Thai specialist
+thai = HexaCoreRegistry.get_model(HexaCoreRole.REGIONAL_THAI)
+print(thai.specialties)  # ['Thai NLP', 'Thai culture', 'Thai legal', ...]
+
+# Filter by region
+thai_models = HexaCoreRegistry.get_models_by_country("TH")
+```
+
 ---
 
 ## Microservices
@@ -346,6 +410,19 @@ Full OpenAPI 3.1.0 specification: [`contracts/openapi.yaml`](contracts/openapi.y
 
 ---
 
+## What's New — v5.4.5
+
+✅ **4,849 Passed · 16 Skipped · 0 Failed · 0 Errors** — Complete private test suite fully green  
+✅ **asyncio Modernization** — Python 3.12 compatible, removed all deprecated `event_loop` fixtures  
+✅ **Pydantic Field Ordering Fix** — `VerificationBlock` validator ordering resolved  
+✅ **Module Isolation** — Resolved `app/` namespace collision across 9 microservices  
+✅ **Policy Engine Fix** — `asyncio.get_running_loop()` with safe fallback  
+✅ **REGIONAL_THAI Model** — Typhoon v2 70B (SCB10X) added as 7th HexaCore model  
+
+Full history → [CHANGELOG.md](CHANGELOG.md)
+
+---
+
 ## Whitepapers
 
 - [Foundation (01)](docs/whitepapers/01_foundation/) — The FDIA equation, Hexagonal Core architecture, constitutional AI theory
@@ -353,9 +430,56 @@ Full OpenAPI 3.1.0 specification: [`contracts/openapi.yaml`](contracts/openapi.y
 
 ---
 
+## Project Structure
+
+```
+rct-platform/
+├─ core/                        # Core algorithms + AI engine
+│  ├─ fdia/fdia.py              # FDIA Scorer (NPCIntentType, FDIAWeights)
+│  ├─ delta_engine/             # Memory Delta Engine (74% compression)
+│  └─ regional_adapter/         # 8-market language routing
+├─ signedai/                    # SignedAI consensus framework
+│  └─ core/
+│     ├─ registry.py            # HexaCoreRegistry (7 models) + SignedAIRegistry
+│     ├─ router.py              # TierRouter (risk → tier selection)
+│     └─ models.py              # JITNAPacket, AnalysisJob
+├─ rct_control_plane/           # 15-module DSL + intent schema
+├─ microservices/               # 5 reference microservices
+│  ├─ intent-loop/              # Core FDIA execution loop (port 8001)
+│  ├─ analysearch-intent/       # Deep analysis + Mirror Mode (port 8002)
+│  ├─ vector-search/            # RCTDB semantic search (port 8003)
+│  ├─ crystallizer/             # Output crystallization (port 8004)
+│  └─ gateway-api/              # Unified entry + rate limiting (port 8000)
+├─ examples/                    # Working code demos
+│  ├─ signed_ai_demo.py         # SignedAI imports + consensus demo
+│  └─ hexa_core_demo.py         # All 7 models + geopolitical balance
+├─ contracts/openapi.yaml       # OpenAPI 3.1.0 spec
+└─ docs/                        # Architecture docs + whitepapers
+```
+
+---
+
+## Built With
+
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-v2-E92063?logo=pydantic&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![pytest](https://img.shields.io/badge/pytest-0A9EDC?logo=pytest&logoColor=white)
+
+---
+
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+- 🐛 [Report Bugs](https://github.com/rctlabs/rct-platform/issues)
+- 💡 [Suggest Features](https://github.com/rctlabs/rct-platform/discussions)
+- 📖 Improve docs
+- 🧪 Add tests
+- 🔌 Build adapters for new integrations
 
 ---
 
@@ -370,4 +494,5 @@ Do **not** open public issues for security findings.
 
 Apache 2.0 — see [LICENSE](LICENSE).
 
-Copyright 2026 RCT Labs Co., Ltd.
+Copyright 2026 RCT Labs Co., Ltd.  
+Made with ❤️ from Bangkok, Thailand 🇹🇭

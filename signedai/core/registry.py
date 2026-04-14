@@ -22,13 +22,14 @@ from pydantic import BaseModel, Field
 # ---------------------------------------------------------------------------
 
 class HexaCoreRole(str, Enum):
-    """The 6 core AI roles in RCT OS (Hexa-Core Architecture v2.0)."""
+    """The 7 core AI roles in RCT OS (Hexa-Core Architecture v2.1)."""
     SUPREME_ARCHITECT = "supreme_architect"
     LEAD_BUILDER = "lead_builder"
     JUNIOR_BUILDER = "junior_builder"
     SPECIALIST = "specialist"
     LIBRARIAN = "librarian"
     HUMANIZER = "humanizer"
+    REGIONAL_THAI = "regional_thai"  # G38: Typhoon v2 — Thai NLP specialist (SCB10X)
 
 
 class ModelInfo(BaseModel):
@@ -126,8 +127,20 @@ class HexaCoreRegistry:
             cost_output=0.38,
             context_window=200_000,
             specialties=["Roleplay", "Natural language", "Creative writing", "Translation"],
-            use_cases=["User chat (natural conversation)", "Thai language translation", "Creative content generation", "Empathetic response writing"],
+            use_cases=["User chat (natural conversation)", "General translation", "Creative content generation", "Empathetic response writing"],
             reasoning_rank=2,
+        ),
+        HexaCoreRole.REGIONAL_THAI: ModelInfo(
+            id="scb10x/typhoon-v2-70b-instruct",
+            role=HexaCoreRole.REGIONAL_THAI,
+            provider="SCB10X",
+            country="TH",
+            cost_input=0.40,
+            cost_output=1.20,
+            context_window=128_000,
+            specialties=["Thai NLP", "Thai culture", "Thai legal", "Thai finance", "Translation TH"],
+            use_cases=["Thai language tasks (native quality)", "Thai legal/financial document analysis", "TH-EN translation", "Thai culture-aware dialogue"],
+            reasoning_rank=None,
         ),
     }
 
@@ -168,6 +181,11 @@ class HexaCoreRegistry:
     def get_longest_context(cls) -> ModelInfo:
         """Return the model with the largest context window."""
         return cls.MODELS[HexaCoreRole.LIBRARIAN]
+
+    @classmethod
+    def get_models_by_country(cls, country: str) -> List[ModelInfo]:
+        """Return all models from a given country code (e.g. 'US', 'CN', 'TH')."""
+        return [m for m in cls.MODELS.values() if m.country == country]
 
 
 # ---------------------------------------------------------------------------

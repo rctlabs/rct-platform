@@ -59,24 +59,29 @@ def demo_all_models():
 def demo_geopolitical_balance():
     """Demonstrate geopolitical balance."""
     print_header("GEOPOLITICAL BALANCE")
-    
+
     balance = HexaCoreRegistry.get_geopolitical_balance()
-    
+
     print("Model Distribution:")
-    for country, count in balance.items():
-        print(f"  {country}: {count} models")
-    
+    for country, count in sorted(balance.items()):
+        print(f"  {country}: {count} model{'s' if count > 1 else ''}")
+
     print("\nWest (US) Models:")
-    us_models = HexaCoreRegistry.get_models_by_country("US")
-    for model in us_models:
+    for model in HexaCoreRegistry.get_models_by_country("US"):
         print(f"  • {model.id} ({model.role.value})")
-    
+
     print("\nEast (CN) Models:")
-    cn_models = HexaCoreRegistry.get_models_by_country("CN")
-    for model in cn_models:
+    for model in HexaCoreRegistry.get_models_by_country("CN"):
         print(f"  • {model.id} ({model.role.value})")
-    
-    print(f"\n✅ Balance: {balance['US']} West + {balance['CN']} East = Perfect parity")
+
+    print("\nRegional (TH) Models:")
+    for model in HexaCoreRegistry.get_models_by_country("TH"):
+        print(f"  • {model.id} ({model.role.value})")
+
+    us_count = balance.get("US", 0)
+    cn_count = balance.get("CN", 0)
+    th_count = balance.get("TH", 0)
+    print(f"\n✅ Geopolitical Balance: {us_count} West + {cn_count} East + {th_count} Regional Thai = {sum(balance.values())} total")
 
 
 def demo_signedai_routing():
@@ -182,9 +187,14 @@ def demo_ranking_summary():
     print(f"  • Librarian: {librarian.id} ({librarian.context_window:,} tokens)")
     print()
     
-    print("Cost Champion:")
+    print("Cost Champion (Coding):")
     junior = HexaCoreRegistry.get_cheapest_coder()
     print(f"  • Junior Builder: ${junior.cost_input}/{junior.cost_output} per 1M tokens")
+    print()
+
+    print("Thai NLP #1 (Regional Specialist):")
+    thai = HexaCoreRegistry.get_model(HexaCoreRole.REGIONAL_THAI)
+    print(f"  • Regional Thai: {thai.id} ({thai.context_window:,} tokens)")
 
 
 def main():
