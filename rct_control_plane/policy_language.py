@@ -419,7 +419,7 @@ class PolicyEvaluator:
         graph: Optional[ExecutionGraph]
     ) -> Dict[str, Any]:
         """Build evaluation context from intent and graph"""
-        context = {
+        context: Dict[str, Any] = {
             "intent_id": str(intent.id),
             "intent_type": intent.intent_type,
             "priority": intent.priority,
@@ -445,7 +445,7 @@ class PolicyEvaluator:
             context["estimated_duration_seconds"] = graph.total_estimated_duration_seconds
             
             # Count node types
-            node_type_counts = {}
+            node_type_counts: Dict[str, int] = {}
             for node in graph.nodes.values():
                 node_type = node.node_type.value
                 node_type_counts[node_type] = node_type_counts.get(node_type, 0) + 1

@@ -34,7 +34,8 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m pytest --cov=microservices --cov-report=xml -v
+          python -m pytest --cov=microservices --cov=core --cov=signedai --cov=rct_control_plane \
+            --cov-report=xml --cov-fail-under=55 -v
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
@@ -69,11 +70,7 @@ jobs:
             -lll --exit-zero
 
       - name: Mypy type check
-        # continue-on-error: true is intentional for v1.0.0-alpha.
-        # 22 pre-existing type errors are tracked and will be resolved before v1.0.0 stable.
-        # Errors are in: dsl_parser.py (6), policy_language.py (7), intent_compiler.py (3),
-        # signedai/core/router.py (1), cli.py (2). None are security-critical.
-        # This gate will be hardened (continue-on-error removed) before stable release.
-        continue-on-error: true
+        # All 22 pre-existing type errors resolved in fixdata-maintenancedata-1504.
+        # Gate is now hard — any new type error will fail CI.
         run: |
           mypy core/ signedai/ rct_control_plane/ --ignore-missing-imports

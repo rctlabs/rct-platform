@@ -172,7 +172,7 @@ def print_table(headers: List[str], rows: List[List[str]]) -> None:
         click.echo(row_line)
 
 
-def print_tree(node: Dict[str, Any], indent: int = 0) -> None:
+def print_tree(node: Union[Dict[str, Any], List[Any]], indent: int = 0) -> None:
     """Print data as tree."""
     prefix = "  " * indent
     
@@ -579,7 +579,7 @@ def list(limit: int, offset: int, output: str):
                         "intent_id": intent_id,
                         "intent_type": intent_data["intent"]["intent_type"],
                         "priority": intent_data["intent"]["priority"],
-                        "phase": ctx.get_state(intent_id).phase.value if ctx.get_state(intent_id) else "UNKNOWN",
+                        "phase": (state := ctx.get_state(intent_id)) and state.phase.value or "UNKNOWN",
                         "created_at": intent_data["created_at"]
                     }
                     for intent_id, intent_data in paginated
