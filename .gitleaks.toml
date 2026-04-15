@@ -4,20 +4,20 @@ title = "rct-platform Gitleaks Configuration"
 # Allowlist for known false positives in documentation and example files.
 # rct-platform is a PUBLIC SDK repo — it does not contain real credentials.
 # Any credential-looking string here is an intentional placeholder / example.
+#
+# IMPORTANT: Do NOT add entire directories to `paths` — allowlist specific
+# files or use pattern-regex targeting instead. Broad directory ignores hide
+# real credentials that may be accidentally committed to docs/ or examples/.
 # ─────────────────────────────────────────────────────────────────────────────
 
 [allowlist]
-description = "Documentation, example, and env-template false positives"
+description = "Known safe false positives — specific files and placeholder patterns only"
 
-# Paths whose findings are entirely ignored
+# Specific files whose findings are entirely ignored (not directories)
 paths = [
-    # Environment variable template — values are placeholders, not real keys
+    # Environment variable template — values are explicit placeholders
     '''.env.example''',
-    # Documentation pages — may contain example key formats
-    '''docs/''',
-    # Code examples — contain placeholder credentials for illustration
-    '''examples/''',
-    # Changelog and contributing docs
+    # Changelog and repo meta docs — no credential-like content expected
     '''CHANGELOG.md''',
     '''CONTRIBUTING.md''',
     '''SECURITY.md''',
@@ -35,4 +35,9 @@ regexes = [
     '''sk_live_placeholder''',
     # Curl example placeholder
     '''Bearer YOUR_''',
+    # OpenAPI spec Bearer example in contracts/openapi.yaml
+    '''Bearer <token>''',
+    # Example DSN patterns in whitepaper docs (clearly illustrative)
+    '''postgresql://example_user:example_pass@''',
+    '''sqlite:///example\.db''',
 ]

@@ -169,6 +169,7 @@ class AnalysisJob(BaseModel):
 
     artifact_hash: str
     artifact_type: str
+    artifact_content: Optional[str] = None
     artifact_size_bytes: Optional[int] = None
     artifact_language: Optional[str] = None
 

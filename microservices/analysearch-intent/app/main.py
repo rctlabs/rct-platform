@@ -7,13 +7,33 @@ Features Mirror Mode (PROPOSE → COUNTER → REFINE), Cross-Disciplinary Synthe
 GIGO Protection, and Keyword Crystallization.
 """
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .api import routes
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan context manager for startup and shutdown."""
+    # Startup
+    print("=" * 60)
+    print("Analysearch Intent Service")
+    print("Version: v1.0")
+    print("=" * 60)
+    print("✅ Engine initialized")
+    print("✅ Mirror Mode ready")
+    print("✅ GIGO Protection active")
+    print("✅ API endpoints ready")
+    print("=" * 60)
+    yield
+    # Shutdown
+    print("Analysearch Intent - Shutting down...")
+
 app = FastAPI(
     title="Analysearch Intent",
     version="v1.0",
+    lifespan=lifespan,
     description="""
     **Analysis + Research + Intent Engine for RCT System v13.0**
 
@@ -70,21 +90,3 @@ async def root():
 async def health():
     """Health check"""
     return {"status": "healthy", "service": "analysearch-intent"}
-
-
-@app.on_event("startup")
-async def startup_event():
-    print("=" * 60)
-    print("Analysearch Intent Service")
-    print("Version: v1.0")
-    print("=" * 60)
-    print("✅ Engine initialized")
-    print("✅ Mirror Mode ready")
-    print("✅ GIGO Protection active")
-    print("✅ API endpoints ready")
-    print("=" * 60)
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    print("Analysearch Intent - Shutting down...")

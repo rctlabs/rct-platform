@@ -44,7 +44,10 @@ Example:
 import re
 from decimal import Decimal
 from datetime import timedelta
-from typing import Any, Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
+
+if TYPE_CHECKING:
+    from .observability import ControlPlaneObserver
 
 from .execution_graph_ir import (
     DependencyEdge,
@@ -366,7 +369,7 @@ class DSLParser:
     
     def _parse_parameters_block(self, body: str) -> Dict[str, Any]:
         """Parse a parameters { } block"""
-        params = {}
+        params: Dict[str, Any] = {}
         
         for line in body.split('\n'):
             line = line.strip()
@@ -409,7 +412,7 @@ class DSLParser:
         
         # Build node
         node = ExecutionNode(
-            id=node_data.get("id"),
+            id=node_data.get("id") or "",
             node_type=node_data.get("node_type", NodeType.AGENT_CAPABILITY),
             capability=node_data.get("capability"),
             tool_name=node_data.get("tool_name"),

@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 import math
-import hashlib
+import secrets
 import logging
 
 logger = logging.getLogger(__name__)
@@ -401,9 +401,9 @@ class MirrorModeEngine:
 
     def create_session(self, query: str) -> MirrorState:
         """Create new Mirror Mode session"""
-        session_id = hashlib.md5(
-            f"{query}-{datetime.now().isoformat()}".encode()
-        ).hexdigest()[:12]
+        # Use secrets.token_hex for non-guessable session IDs (not hashlib.md5,
+        # which is weak for security purposes even as an identifier).
+        session_id = secrets.token_hex(6)  # 12 hex chars
 
         return MirrorState(
             session_id=session_id,

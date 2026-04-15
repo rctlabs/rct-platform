@@ -2,7 +2,7 @@
 Pydantic Models for Vector Search API - ALGO-16
 """
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import List, Dict, Any, Optional
 
 
@@ -30,8 +30,8 @@ class IndexRequest(BaseModel):
             raise ValueError("Cannot be empty")
         return v
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "vectors": [
                     [0.1, 0.2, 0.3],
@@ -44,6 +44,7 @@ class IndexRequest(BaseModel):
                 ]
             }
         }
+    )
 
 
 class IndexResponse(BaseModel):
@@ -52,14 +53,15 @@ class IndexResponse(BaseModel):
     total_vectors: int = Field(..., description="Total vectors in index")
     time_ms: float = Field(..., description="Processing time in milliseconds")
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "indexed_count": 2,
                 "total_vectors": 1002,
                 "time_ms": 12.5
             }
         }
+    )
 
 
 class SearchRequest(BaseModel):
@@ -92,8 +94,8 @@ class SearchRequest(BaseModel):
             raise ValueError(f"Metric must be one of {allowed}")
         return v
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "query_vector": [0.1, 0.2, 0.3],
                 "k": 10,
@@ -101,6 +103,7 @@ class SearchRequest(BaseModel):
                 "filter": {"category": "tech"}
             }
         }
+    )
 
 
 class SearchResult(BaseModel):
@@ -112,14 +115,15 @@ class SearchResult(BaseModel):
         description="Vector metadata"
     )
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "id": "vec_001",
                 "score": 0.985,
                 "metadata": {"category": "tech", "source": "doc1"}
             }
         }
+    )
 
 
 class SearchResponse(BaseModel):
@@ -133,8 +137,8 @@ class SearchResponse(BaseModel):
         description="Processing time in milliseconds"
     )
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "results": [
                     {
@@ -151,6 +155,7 @@ class SearchResponse(BaseModel):
                 "time_ms": 8.3
             }
         }
+    )
 
 
 class BatchSearchRequest(BaseModel):
@@ -179,8 +184,8 @@ class BatchSearchRequest(BaseModel):
             raise ValueError(f"Metric must be one of {allowed}")
         return v
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "query_vectors": [
                     [0.1, 0.2, 0.3],
@@ -190,6 +195,7 @@ class BatchSearchRequest(BaseModel):
                 "metric": "cosine"
             }
         }
+    )
 
 
 class BatchSearchResponse(BaseModel):
@@ -213,14 +219,15 @@ class VectorResponse(BaseModel):
         description="Vector metadata"
     )
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "id": "vec_001",
                 "vector": [0.1, 0.2, 0.3],
                 "metadata": {"category": "tech"}
             }
         }
+    )
 
 
 class UpdateRequest(BaseModel):
@@ -234,13 +241,14 @@ class UpdateRequest(BaseModel):
         description="New or updated metadata"
     )
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "vector": [0.15, 0.25, 0.35],
                 "metadata": {"category": "updated", "version": 2}
             }
         }
+    )
 
 
 class UpdateResponse(BaseModel):
@@ -248,13 +256,14 @@ class UpdateResponse(BaseModel):
     updated: bool = Field(..., description="Whether update was successful")
     vector_id: str = Field(..., description="ID of updated vector")
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "updated": True,
                 "vector_id": "vec_001"
             }
         }
+    )
 
 
 class DeleteResponse(BaseModel):
@@ -263,14 +272,15 @@ class DeleteResponse(BaseModel):
     vector_id: str = Field(..., description="ID of deleted vector")
     remaining_count: int = Field(..., description="Remaining vectors in index")
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "deleted": True,
                 "vector_id": "vec_001",
                 "remaining_count": 9999
             }
         }
+    )
 
 
 class ClearResponse(BaseModel):
@@ -278,13 +288,14 @@ class ClearResponse(BaseModel):
     cleared: bool = Field(..., description="Whether clear was successful")
     deleted_count: int = Field(..., description="Number of deleted vectors")
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "cleared": True,
                 "deleted_count": 10000
             }
         }
+    )
 
 
 class StatsResponse(BaseModel):
@@ -297,8 +308,8 @@ class StatsResponse(BaseModel):
     uptime_seconds: float = Field(..., description="Service uptime")
     backend: str = Field(..., description="Backend type (faiss/qdrant)")
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "total_vectors": 10000,
                 "dimension": 768,
@@ -309,6 +320,7 @@ class StatsResponse(BaseModel):
                 "backend": "faiss"
             }
         }
+    )
 
 
 class HealthResponse(BaseModel):
@@ -318,8 +330,8 @@ class HealthResponse(BaseModel):
     dimension: int = Field(..., description="Vector dimension")
     backend: str = Field(..., description="Backend type")
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "status": "healthy",
                 "vector_count": 10000,
@@ -327,6 +339,7 @@ class HealthResponse(BaseModel):
                 "backend": "faiss"
             }
         }
+    )
 
 
 class ServiceInfo(BaseModel):
@@ -338,8 +351,8 @@ class ServiceInfo(BaseModel):
     backend: str = Field(..., description="Vector backend")
     dimension: int = Field(..., description="Vector dimension")
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "service": "Vector Search Service",
                 "version": "1.0.0",
@@ -349,3 +362,4 @@ class ServiceInfo(BaseModel):
                 "dimension": 768
             }
         }
+    )

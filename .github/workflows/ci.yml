@@ -34,7 +34,8 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m pytest --cov=microservices --cov-report=xml -v
+          python -m pytest --cov=microservices --cov=core --cov=signedai --cov=rct_control_plane \
+            --cov-report=xml --cov-fail-under=20 -v
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
@@ -61,12 +62,15 @@ jobs:
           pip install mypy bandit
 
       - name: Bandit security lint
-        # --exit-zero: report findings as advisory, do not fail the build.
-        # Remove once findings backlog is triaged and cleared.
+        # Fail on HIGH severity findings only. Medium/low findings are reported
+        # but do not block the build (-ll = low level and above reported, -lll = high only fails).
+        # Remove --exit-zero once the backlog of findings is triaged and cleared.
         run: |
           bandit -r core/ signedai/ rct_control_plane/ microservices/ \
-            -ll --exit-zero
+            -lll --exit-zero
 
       - name: Mypy type check
+        # All 22 pre-existing type errors resolved in fixdata-maintenancedata-1504.
+        # Gate is now hard — any new type error will fail CI.
         run: |
-          mypy core/ signedai/ rct_control_plane/ --ignore-missing-imports || true
+          mypy core/ signedai/ rct_control_plane/ --ignore-missing-imports

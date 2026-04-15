@@ -72,6 +72,7 @@ class TestLoopMetrics:
         except Exception:
             pass  # LoopMetrics may not exist in all versions
 
+    @pytest.mark.skip(reason="LoopMetrics class not yet implemented in public SDK reference service")
     def test_placeholder(self):
         assert True  # always passes if LoopMetrics not found
 

@@ -29,6 +29,9 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://rctlabs.co"
+
+[project.scripts]
+rct = "rct_control_plane.cli:main"
 Repository = "https://github.com/rctlabs/rct-platform"
 Documentation = "https://rctlabs.co/docs"
 "Bug Tracker" = "https://github.com/rctlabs/rct-platform/issues"

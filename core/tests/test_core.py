@@ -1,0 +1,304 @@
+"""
+Tests for core/ — fdia scoring engine, memory_delta engine, regional_adapter.
+All pure-function unit tests: no external I/O, no network calls.
+"""
+
+import pytest
+
+# ---------------------------------------------------------------------------
+# FDIA
+# ---------------------------------------------------------------------------
+from core.fdia.fdia import (
+    DEFAULT_DESIRE_WEIGHTS,
+    INTENT_ALIGNMENT_MATRIX,
+    FDIAScorer,
+    FDIAWeights,
+    NPCAction,
+    NPCIntentType,
+    intent_alignment,
+)
+
+
+class TestFDIAIntentTypes:
+    def test_all_intent_types_present(self):
+        types = list(NPCIntentType)
+        assert len(types) == 6
+
+    def test_default_desire_weights_all_positive(self):
+        for intent_type, weight in DEFAULT_DESIRE_WEIGHTS.items():
+            assert 0.0 <= weight <= 1.0, f"{intent_type} weight out of range"
+
+    def test_alignment_matrix_complete(self):
+        for a in NPCIntentType:
+            for b in NPCIntentType:
+                val = intent_alignment(a, b)
+                assert -1.0 <= val <= 1.0
+
+
+class TestFDIAWeights:
+    def test_defaults_sum_to_one(self):
+        w = FDIAWeights()
+        assert w.validate() is True
+
+    def test_custom_weights_valid(self):
+        w = FDIAWeights(desire=0.25, intent=0.25, alignment=0.25, governance=0.25)
+        assert w.validate() is True
+
+    def test_invalid_weights_fail(self):
+        w = FDIAWeights(desire=0.5, intent=0.5, alignment=0.5, governance=0.5)
+        assert w.validate() is False
+
+    def test_to_dict_keys(self):
+        w = FDIAWeights()
+        d = w.to_dict()
+        assert set(d.keys()) == {"desire", "intent", "alignment", "governance"}
+
+
+class TestFDIAScorer:
+    def setup_method(self):
+        self.scorer = FDIAScorer()
+
+    def _action(self, action_type: str = "trade", agent_type: str = "helper") -> NPCAction:
+        return NPCAction(
+            action_id="a1",
+            action_type=action_type,
+            target_agent="agent_b",
+            metadata={"agent_type": agent_type},
+        )
+
+    def test_score_returns_float_in_range(self):
+        action = self._action()
+        score = self.scorer.score_action(
+            agent_intent=NPCIntentType.ACCUMULATE,
+            action=action,
+            other_agents_intents={},
+            governance_score=1.0,
+        )
+        assert 0.0 <= score <= 1.0
+
+    def test_no_governance_penalty_gives_higher_score(self):
+        action = self._action()
+        score_ok = self.scorer.score_action(
+            agent_intent=NPCIntentType.DISCOVER,
+            action=action,
+            other_agents_intents={},
+            governance_score=1.0,
+        )
+        score_bad = self.scorer.score_action(
+            agent_intent=NPCIntentType.DISCOVER,
+            action=action,
+            other_agents_intents={},
+            governance_score=0.5,
+        )
+        assert score_ok > score_bad
+
+    def test_select_best_action_picks_highest(self):
+        actions = [
+            NPCAction(action_id="a1", action_type="idle"),
+            NPCAction(action_id="a2", action_type="trade", metadata={"agent_type": "helper"}),
+        ]
+        best = self.scorer.select_best_action(
+            agent_intent=NPCIntentType.ACCUMULATE,
+            candidate_actions=actions,
+            other_agents_intents={},
+            governance_score=1.0,
+        )
+        assert best is not None
+        assert best.action_id in ("a1", "a2")
+
+    def test_select_from_empty_list_returns_none(self):
+        best = self.scorer.select_best_action(
+            agent_intent=NPCIntentType.NEUTRAL,
+            candidate_actions=[],
+            other_agents_intents={},
+            governance_score=1.0,
+        )
+        assert best is None
+
+    def test_dominate_vs_protect_low_alignment(self):
+        alignment = intent_alignment(NPCIntentType.DOMINATE, NPCIntentType.PROTECT)
+        assert alignment < 0  # Dominate conflicts with Protect
+
+    def test_belong_vs_belong_high_alignment(self):
+        alignment = intent_alignment(NPCIntentType.BELONG, NPCIntentType.BELONG)
+        assert alignment > 0.7  # Two Belong agents cooperate well
+
+
+# ---------------------------------------------------------------------------
+# MemoryDelta
+# ---------------------------------------------------------------------------
+from core.delta_engine.memory_delta import (
+    AgentMemoryState,
+    MemoryDelta,
+    MemoryDeltaEngine,
+)
+
+
+class TestMemoryDelta:
+    def test_create_delta(self):
+        delta = MemoryDelta(
+            agent_id="npc_01",
+            tick=5,
+            intent_type=NPCIntentType.ACCUMULATE,
+            action_type="trade",
+            outcome="success",
+            changes={"gold": 10},
+        )
+        assert delta.agent_id == "npc_01"
+        assert delta.tick == 5
+
+    def test_to_dict_contains_agent_id(self):
+        delta = MemoryDelta(
+            agent_id="npc_02",
+            tick=1,
+            intent_type=NPCIntentType.PROTECT,
+            action_type="patrol",
+            outcome="success",
+        )
+        d = delta.to_dict()
+        assert d["agent_id"] == "npc_02"
+        assert d["intent_type"] == "PROTECT"
+
+
+class TestMemoryDeltaEngine:
+    def setup_method(self):
+        self.engine = MemoryDeltaEngine()
+
+    def _register(self, agent_id: str = "npc_01"):
+        self.engine.register_agent(
+            agent_id=agent_id,
+            initial_intent=NPCIntentType.DISCOVER,
+            initial_resources={"gold": 100.0, "food": 50.0},
+        )
+
+    def test_register_agent(self):
+        self._register()
+        assert "npc_01" in self.engine.baseline_states
+
+    def test_unregistered_agent_raises(self):
+        with pytest.raises(KeyError):
+            self.engine.record_delta(
+                agent_id="ghost",
+                tick=1,
+                intent_type=NPCIntentType.NEUTRAL,
+                action_type="idle",
+                outcome="success",
+            )
+
+    def test_record_delta(self):
+        self._register()
+        self.engine.record_delta(
+            agent_id="npc_01",
+            tick=1,
+            intent_type=NPCIntentType.DISCOVER,
+            action_type="explore",
+            outcome="success",
+            resource_changes={"gold": -5.0},
+        )
+        assert len(self.engine.deltas["npc_01"]) == 1
+
+    def test_get_state_at_tick_0(self):
+        self._register()
+        state = self.engine.get_state_at_tick("npc_01", 0)
+        assert state.agent_id == "npc_01"
+        assert state.resources["gold"] == 100.0
+
+    def test_get_state_at_tick_after_delta(self):
+        self._register()
+        self.engine.record_delta(
+            agent_id="npc_01",
+            tick=1,
+            intent_type=NPCIntentType.DISCOVER,
+            action_type="trade",
+            outcome="success",
+            resource_changes={"gold": 50.0},
+        )
+        state = self.engine.get_state_at_tick("npc_01", 1)
+        assert state.resources["gold"] == 150.0
+
+    def test_rollback_removes_last_delta(self):
+        self._register()
+        self.engine.record_delta("npc_01", 1, NPCIntentType.DISCOVER, "explore", "success")
+        self.engine.record_delta("npc_01", 2, NPCIntentType.DISCOVER, "trade", "success")
+        self.engine.rollback("npc_01", n_ticks=1)
+        assert len(self.engine.deltas["npc_01"]) == 1
+
+    def test_compression_ratio_non_negative(self):
+        self._register()
+        self.engine.record_delta("npc_01", 1, NPCIntentType.DISCOVER, "explore", "success")
+        ratio = self.engine.compute_compression_ratio()
+        assert ratio >= 0.0
+
+
+# ---------------------------------------------------------------------------
+# RegionalAdapter
+# ---------------------------------------------------------------------------
+from core.regional_adapter.regional_adapter import (
+    DetectedLanguage,
+    LanguageDetector,
+    RegionalModelCache,
+    RegionalModelRouter,
+)
+
+
+class TestLanguageDetector:
+    def setup_method(self):
+        self.detector = LanguageDetector()
+
+    def test_detect_english(self):
+        result = self.detector.detect("Hello, this is a test sentence in English.")
+        assert result.code == "en"
+
+    def test_detect_thai(self):
+        result = self.detector.detect("สวัสดีครับ ยินดีต้อนรับ")
+        assert result.code == "th"
+
+    def test_detect_japanese(self):
+        result = self.detector.detect("こんにちは、元気ですか")
+        assert result.code == "ja"
+
+    def test_detect_empty_defaults_to_en(self):
+        result = self.detector.detect("")
+        assert result.code == "en"
+        assert result.confidence == 0.0
+
+    def test_detect_returns_detected_language(self):
+        result = self.detector.detect("test")
+        assert isinstance(result, DetectedLanguage)
+
+    def test_confidence_in_range(self):
+        result = self.detector.detect("Hello world this is a longer English sentence.")
+        assert 0.0 <= result.confidence <= 1.0
+
+
+class TestRegionalModelRouter:
+    def setup_method(self):
+        self.router = RegionalModelRouter()
+
+    def test_route_english(self):
+        model_id = self.router.route(language="en", region="US")
+        assert model_id
+
+    def test_route_thai(self):
+        model_id = self.router.route(language="th", region="TH")
+        assert model_id  # Should return Thai-specialised model
+
+    def test_route_returns_string(self):
+        result = self.router.route(language="en", region="US")
+        assert isinstance(result, str)
+
+
+class TestRegionalModelCache:
+    def test_cache_instantiates(self):
+        cache = RegionalModelCache(max_size=10)
+        assert cache is not None
+
+    def test_cache_put_and_get(self):
+        cache = RegionalModelCache(max_size=10)
+        cache.put("en|US", "model-abc")
+        result = cache.get("en|US")
+        assert result == "model-abc"
+
+    def test_cache_miss_returns_none(self):
+        cache = RegionalModelCache(max_size=5)
+        assert cache.get("zh|CN") is None

@@ -129,17 +129,19 @@ def create_resource_quota_policy(max_memory_gb: float = 16.0, max_cpu_cores: int
     """
     return PolicyRule(
         name="Resource Quota Policy",
-        description=f"Notify when resources exceed {max_cpu_cores} cores or {max_memory_gb}GB memory",
+        description=f"Notify when graph estimated cost or node count suggests resource quota may be exceeded ({max_cpu_cores} cores / {max_memory_gb}GB memory)",
         scope=PolicyScope.GRAPH,
         priority=PolicyPriority.MEDIUM,
         conditions=[
-            # This would need graph-level resource aggregation
-            # For now, just a placeholder condition
+            # Evaluated against ExecutionGraph.total_estimated_cost (USD proxy).
+            # A separate per-node resource aggregator is needed for precise
+            # memory/CPU enforcement; until that is available we use node count
+            # and estimated cost as observable proxies.
             PolicyCondition(
-                field="node_count",
+                field="estimated_cost_usd",
                 operator=ConditionOperator.GREATER_THAN,
-                value=100,  # Proxy for resource usage
-                description="High node count indicates resource-intensive operation"
+                value=float(max_memory_gb) * float(max_cpu_cores),  # heuristic threshold
+                description=f"Estimated cost exceeds resource-proxy threshold for {max_cpu_cores} cores / {max_memory_gb}GB"
             )
         ],
         action=PolicyAction.NOTIFY,

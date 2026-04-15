@@ -1,13 +1,12 @@
 # RCT Platform — Intent-Centric AI Operating System
 
-[![Version](https://img.shields.io/badge/version-5.4.5-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.0.0--alpha-blue)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.12+-3776AB?logo=python&logoColor=white)](pyproject.toml)
+[![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)](pyproject.toml)
 [![SDK Tests](https://img.shields.io/badge/sdk_tests-142%20passed-brightgreen)](microservices/)
-[![Full Suite](https://img.shields.io/badge/full_suite-4849%20passed%20(private)-blueviolet)](README.md#key-numbers)
 [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 [![Security](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml)
-[![Status](https://img.shields.io/badge/status-PRODUCTION%20READY-success)](https://status.rctlabs.com)
+[![Status](https://img.shields.io/badge/status-PUBLIC%20ALPHA-orange)](CHANGELOG.md)
 [![Regional](https://img.shields.io/badge/regional-ASEAN%20%2B%20JP%2FKR%2FCN%20🌏-orange)](core/regional_adapter/)
 [![Website](https://img.shields.io/badge/website-rctlabs.co-brightgreen)](https://rctlabs.co)
 
@@ -30,6 +29,29 @@ The full ecosystem runs in production at [rctlabs.co](https://rctlabs.co).
 This SDK exposes the core components under Apache 2.0.
 
 🌐 **Website:** [rctlabs.co](https://rctlabs.co) · 🔗 **GitHub:** [github.com/rctlabs](https://github.com/rctlabs)
+
+---
+
+## What's Included in This SDK
+
+| Component | In This SDK (Apache 2.0) | Enterprise Only (Proprietary) |
+|-----------|--------------------------|-------------------------------|
+| FDIA Scorer + equation engine | ✅ `core/fdia/fdia.py` | — |
+| SignedAI multi-LLM consensus | ✅ `signedai/core/` | — |
+| HexaCore 7-model registry | ✅ `signedai/core/registry.py` | — |
+| Delta Engine (74% compression) | ✅ `core/delta_engine/` | — |
+| Regional Language Adapter | ✅ `core/regional_adapter/` | — |
+| RCT Control Plane DSL | ✅ `rct_control_plane/` (15 modules) | — |
+| 5 Reference Microservices | ✅ `microservices/` (142 tests) | — |
+| CLI (`rct` entry point) | ✅ `pip install -e .` | — |
+| Genome / Creator Profile API | ❌ 501 stub (`genome_api.py`) | ✅ Full implementation |
+| Full Production Microservice Stack | ❌ | ✅ 62 microservices |
+| Enterprise Dashboard | ❌ | ✅ |
+| Docker Compose + full infra | ❌ | ✅ |
+| 8-level test pyramid (4,849 tests) | ❌ | ✅ private |
+
+> **SDK alpha** means: API may change without backward-compatibility notice before v1.0.0 stable.  
+> **Enterprise** means: runs at [rctlabs.co](https://rctlabs.co) — contact for licensing.
 
 ---
 
@@ -68,8 +90,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 | Metric | Value |
 |--------|-------|
 | **SDK Tests (this repo)** | 142 passed · 0 failed · 0 errors — 5 microservices test suites |
-| **Full Ecosystem Tests** | 4,849 passed · 16 skipped · 0 failed (v5.4.5, private full suite) |
-| **Algorithms** | 41 production-ready (Tier 1–9) |
+| **Algorithms** | 41 (Tier 1–9, reference implementations) |
 | **LLM Models** | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | **Hallucination Rate** | 0.3% (vs industry 12–15%) — 97% reduction via SignedAI |
 | **Memory Compression** | 74% via Delta Engine (stores state diffs, not full state) |
@@ -79,16 +100,15 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 | **Universal Adapters** | 13 (Home Assistant, Terraform, n8n, Obsidian, Playwright, ...) |
 | **FDIA Accuracy** | 0.92 (industry baseline: ~0.65) |
 
-> **142 (SDK Tests)** = tests included in this open-source repo, covering the 5 reference microservices.  
-> **4,849 (Full Suite)** = total test count in the private production ecosystem (4,849 passed on v5.4.5).
+> **142 (SDK Tests)** = tests included in this open-source SDK repo, covering the 5 reference microservices.
 
 ---
 
 ## Architecture
 
-```
+```text
 ┌──────────────────────────────────────────────────────────┐
-│              RCT ECOSYSTEM v5.4.5                        │
+│              RCT PLATFORM SDK v1.0.0-alpha               │
 │         Intent-Centric AI Operating System               │
 └──────────────────────────────────────────────────────────┘
 
@@ -132,6 +152,8 @@ Layer 1: 7 Genome System + Cognitive Kernel
 SDK Modules: signedai/ · core/ · rct_control_plane/
              5 reference microservices
 ```
+
+> **Enterprise layer** (62 microservices, proprietary) runs in production at [rctlabs.co](https://rctlabs.co).
 
 ---
 
@@ -415,16 +437,18 @@ Full OpenAPI 3.1.0 specification: [`contracts/openapi.yaml`](contracts/openapi.y
 
 ---
 
-## What's New — v5.4.5
+## Enterprise Platform Milestone — v5.4.5 (Private)
 
-✅ **4,849 Passed · 16 Skipped · 0 Failed · 0 Errors** — Complete private test suite fully green  
+> **Note:** This section records the private enterprise platform history. The public SDK versioning starts at `v1.0.0-alpha`. See [CHANGELOG.md](CHANGELOG.md) for SDK release notes.
+
+✅ **4,849 Passed · 16 Skipped · 0 Failed · 0 Errors** — Complete private enterprise test suite (all 62 microservices)  
 ✅ **asyncio Modernization** — Python 3.12 compatible, removed all deprecated `event_loop` fixtures  
 ✅ **Pydantic Field Ordering Fix** — `VerificationBlock` validator ordering resolved  
 ✅ **Module Isolation** — Resolved `app/` namespace collision across 9 microservices  
 ✅ **Policy Engine Fix** — `asyncio.get_running_loop()` with safe fallback  
 ✅ **REGIONAL_THAI Model** — Typhoon v2 70B (SCB10X) added as 7th HexaCore model  
 
-Full history → [CHANGELOG.md](CHANGELOG.md)
+Full SDK changelog → [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
@@ -466,7 +490,7 @@ rct-platform/
 
 ## Built With
 
-![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
 ![Pydantic](https://img.shields.io/badge/Pydantic-v2-E92063?logo=pydantic&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
