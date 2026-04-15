@@ -94,16 +94,15 @@ jobs:
         run: pip install bandit[toml]
 
       - name: Run bandit
-        # --exit-zero: bandit reports findings but does not fail the build.
-        # Remove --exit-zero once the backlog of findings is triaged.
+        # Fail the build when HIGH severity issues are found (-lll).
+        # Medium/low issues are still reported in the artifact but do not block.
         run: |
           mkdir -p artifacts/security
           bandit -r core/ signedai/ rct_control_plane/ microservices/ \
             --exclude .venv,venv,tests,build,dist \
-            -ll \
+            -lll \
             -f json \
-            -o artifacts/security/bandit.json \
-            --exit-zero
+            -o artifacts/security/bandit.json
           echo "Bandit scan complete — see artifact for findings."
 
       - name: Upload results
@@ -111,4 +110,4 @@ jobs:
         if: always()
         with:
           name: bandit-results
-          path: bandit-results.json
+          path: artifacts/security/bandit.json

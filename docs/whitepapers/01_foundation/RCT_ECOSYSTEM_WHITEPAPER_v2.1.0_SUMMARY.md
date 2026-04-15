@@ -593,10 +593,10 @@ Enterprise customers demand provable reliability before adoption.
 
 ### Repository Access
 
-- **GitHub:** https://github.com/ittirit720/Rct_ecosystem_Private
-- **Branch:** enterprise-refactor
+- **GitHub:** https://github.com/rctlabs/rct-platform
+- **Branch:** main
 - **License:** Apache 2.0
-- **Status:** PRODUCTION-READY (v2.1.0)
+- **Status:** PUBLIC ALPHA (v1.0.0-alpha) — enterprise runtime available separately
 
 ### Contact Information
 
@@ -606,9 +606,9 @@ The Architect / Survivor Architect
 Bangkok, Thailand
 
 **Email:** ittirit720@gmail.com  
-**GitHub:** https://github.com/ittirit720  
-**LinkedIn:** [To be updated]  
-**Twitter:** [To be updated]
+**GitHub:** https://github.com/rctlabs  
+**LinkedIn:** https://linkedin.com/company/rctlabs  
+**Twitter:** https://twitter.com/rctlabs
 
 ---
 
