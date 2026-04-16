@@ -70,7 +70,7 @@ jobs:
             -lll --exit-zero
 
       - name: Mypy type check
-        # All 22 pre-existing type errors resolved in fixdata-maintenancedata-1504.
-        # Gate is now hard — any new type error will fail CI.
+        # explicit-package-bases prevents "source file found twice" for sub-packages
+        # when mypy is invoked with directory paths instead of dotted package names.
         run: |
-          mypy core/ signedai/ rct_control_plane/ --ignore-missing-imports
+          mypy core/ signedai/ rct_control_plane/ --ignore-missing-imports --explicit-package-bases
