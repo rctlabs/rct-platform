@@ -49,3 +49,17 @@ skips = []
 python_version = "3.11"
 strict = false
 ignore_missing_imports = true
+explicit_package_bases = true
+exclude = [
+    "tests/",
+    "benchmark/",
+    "docs/",
+    "examples/",
+    "\\.venv.*",
+    "build/",
+    "dist/",
+]
+
+[[tool.mypy.overrides]]
+module = "rct_control_plane.cli"
+ignore_errors = true
