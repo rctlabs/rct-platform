@@ -304,7 +304,12 @@ class ControlPlaneAPI:
             Checks: IntentCompiler, DSLParser, PolicyEvaluator, Observer,
                     in-memory stores, Python runtime, feature flags.
             """
-            import resource as _resource
+            try:
+                import resource as _resource
+                _has_resource = True
+            except ImportError:
+                _resource = None  # type: ignore[assignment]
+                _has_resource = False
 
             now = datetime.utcnow().isoformat()
             uptime = time.time() - self._start_time
@@ -408,8 +413,11 @@ class ControlPlaneAPI:
 
             # Memory usage
             try:
-                mem_bytes = _resource.getrusage(_resource.RUSAGE_SELF).ru_maxrss * 1024
-                mem_mb = round(mem_bytes / 1024 / 1024, 2)
+                if _has_resource and _resource is not None:
+                    mem_bytes = _resource.getrusage(_resource.RUSAGE_SELF).ru_maxrss * 1024  # type: ignore[union-attr]
+                    mem_mb = round(mem_bytes / 1024 / 1024, 2)
+                else:
+                    mem_mb = -1.0
             except Exception:
                 mem_mb = -1.0
 
@@ -809,4 +817,4 @@ app = create_app()
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)  # nosec B104

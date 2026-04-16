@@ -213,17 +213,36 @@ class FDIAScorer:
         self,
         agent_intent: NPCIntentType,
         action: NPCAction,
-        world_resources: Dict[str, float],
+        world_resources: Optional[Dict[str, float]] = None,
         agent_reputation: float = 1.0,
         other_intents: Optional[List[NPCIntentType]] = None,
         governance_penalty: float = 0.0,
+        # Legacy API aliases (backward-compatible)
+        other_agents_intents: Optional[Dict] = None,
+        governance_score: Optional[float] = None,
     ) -> float:
         """
         Compute FDIA score for *action* given agent's intent and world context.
 
         Returns a float in [0.0, 1.0].
+
+        Backward-compatible aliases:
+            other_agents_intents  → passed in legacy dict form; values used as intents
+            governance_score      → 0.0-1.0 compliance score; converted to governance_penalty
         """
         assert self.weights.validate(), "FDIAWeights must sum to 1.0"
+
+        # Resolve backward-compatible kwargs
+        if world_resources is None:
+            world_resources = {}
+        if other_agents_intents is not None and other_intents is None:
+            # Extract NPCIntentType values from the dict
+            other_intents = [
+                v for v in other_agents_intents.values()
+                if isinstance(v, NPCIntentType)
+            ]
+        if governance_score is not None:
+            governance_penalty = max(0.0, min(1.0, 1.0 - governance_score))
 
         desire_score      = self._compute_desire(agent_intent, action, world_resources)
         intent_score      = self._compute_intent_compatibility(agent_intent, action)
@@ -356,6 +375,36 @@ class FDIAScorer:
         penalty=1.0 → score 0.0 (fully penalised)
         """
         return max(0.0, 1.0 - max(0.0, min(1.0, penalty)))
+
+    def select_best_action(
+        self,
+        agent_intent: NPCIntentType,
+        candidate_actions: List[NPCAction],
+        other_agents_intents: Optional[Dict] = None,
+        governance_score: float = 1.0,
+        world_resources: Optional[Dict[str, float]] = None,
+        agent_reputation: float = 1.0,
+    ) -> Optional[NPCAction]:
+        """
+        Return the highest-scoring action from *candidate_actions*, or None if list is empty.
+        """
+        if not candidate_actions:
+            return None
+        ranked = self.rank_actions(
+            agent_intent=agent_intent,
+            actions=candidate_actions,
+            world_resources=world_resources or {},
+            agent_reputation=agent_reputation,
+            other_intents=[
+                v for v in (other_agents_intents or {}).values()
+                if isinstance(v, NPCIntentType)
+            ] or None,
+            governance_penalties={
+                a.action_id: max(0.0, min(1.0, 1.0 - governance_score))
+                for a in candidate_actions
+            },
+        )
+        return ranked[0][0] if ranked else None
 
     # --- bulk scoring -------------------------------------------------------
 

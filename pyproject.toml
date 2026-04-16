@@ -37,7 +37,7 @@ Documentation = "https://rctlabs.co/docs"
 "Bug Tracker" = "https://github.com/rctlabs/rct-platform/issues"
 
 [tool.pytest.ini_options]
-testpaths = ["microservices"]
+testpaths = ["microservices", "core/tests", "rct_control_plane/tests", "signedai/tests", "tests"]
 python_files = ["test_*.py", "*_test.py"]
 addopts = "-v --tb=short --continue-on-collection-errors --import-mode=importlib"
 

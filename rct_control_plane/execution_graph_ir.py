@@ -244,7 +244,9 @@ class ExecutionGraph:
     metadata: Dict[str, Any] = field(default_factory=dict)
     
     def add_node(self, node: ExecutionNode) -> None:
-        """Add a node to the graph"""
+        """Add a node to the graph. Raises ValueError if node already exists."""
+        if node.id in self.nodes:
+            raise ValueError(f"Node {node.id!r} already exists in graph")
         self.nodes[node.id] = node
         self._update_entry_exit_nodes()
     
@@ -360,10 +362,9 @@ class ExecutionGraph:
             List of validation error messages (empty if valid)
         """
         errors = []
-        
-        # Check for empty graph
+
+        # Empty graph is considered valid (no nodes = no errors)
         if not self.nodes:
-            errors.append("Graph has no nodes")
             return errors
         
         # Check for cycles

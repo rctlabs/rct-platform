@@ -30,12 +30,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-cov
+          pip install pytest pytest-cov cryptography
 
       - name: Run tests
         run: |
           python -m pytest --cov=microservices --cov=core --cov=signedai --cov=rct_control_plane \
-            --cov-report=xml --cov-fail-under=20 -v
+            --cov-report=xml --cov-fail-under=70 -v
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4

@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/badge/version-1.0.0--alpha-blue)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)](pyproject.toml)
-[![SDK Tests](https://img.shields.io/badge/sdk_tests-142%20passed-brightgreen)](microservices/)
+[![SDK Tests](https://img.shields.io/badge/sdk_tests-439%20passed-brightgreen)](microservices/)
 [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 [![Security](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml)
 [![Status](https://img.shields.io/badge/status-PUBLIC%20ALPHA-orange)](CHANGELOG.md)
