@@ -1,6 +1,7 @@
 """
 Tests for rct_control_plane — execution_graph_ir, dsl_parser, intent_schema,
-control_plane_state. All public API surfaces with no external I/O dependencies.
+control_plane_state, policy_language, intent_compiler.
+All public API surfaces with no external I/O dependencies.
 """
 
 import pytest
@@ -290,3 +291,354 @@ class TestControlPlaneState:
         state = ControlPlaneState(intent_id="i4")
         result = state.transition_to(ControlPlanePhase.FAILED)
         assert result == TransitionResult.SUCCESS
+
+
+# ---------------------------------------------------------------------------
+# policy_language — PolicyCondition, PolicyRule, PolicyEvaluator
+# ---------------------------------------------------------------------------
+from rct_control_plane.policy_language import (
+    ConditionOperator,
+    PolicyAction,
+    PolicyCondition,
+    PolicyEvaluator,
+    PolicyEvaluationResult,
+    PolicyPriority,
+    PolicyRule,
+    PolicyScope,
+)
+from rct_control_plane.execution_graph_ir import ExecutionGraph
+
+
+class TestPolicyCondition:
+    """Tests for individual PolicyCondition evaluation."""
+
+    def test_equals_operator(self):
+        cond = PolicyCondition(field="risk", operator=ConditionOperator.EQUALS, value="HIGH")
+        assert cond.evaluate({"risk": "HIGH"}) is True
+        assert cond.evaluate({"risk": "LOW"}) is False
+
+    def test_not_equals_operator(self):
+        cond = PolicyCondition(field="tier", operator=ConditionOperator.NOT_EQUALS, value="FREE")
+        assert cond.evaluate({"tier": "PRO"}) is True
+        assert cond.evaluate({"tier": "FREE"}) is False
+
+    def test_greater_than_operator(self):
+        cond = PolicyCondition(field="cost_usd", operator=ConditionOperator.GREATER_THAN, value=Decimal("100"))
+        assert cond.evaluate({"cost_usd": Decimal("200")}) is True
+        assert cond.evaluate({"cost_usd": Decimal("50")}) is False
+
+    def test_less_or_equal_operator(self):
+        cond = PolicyCondition(field="count", operator=ConditionOperator.LESS_OR_EQUAL, value=10)
+        assert cond.evaluate({"count": 10}) is True
+        assert cond.evaluate({"count": 11}) is False
+
+    def test_in_operator(self):
+        cond = PolicyCondition(field="intent_type", operator=ConditionOperator.IN, value=["DEPLOY", "TRANSFORM"])
+        assert cond.evaluate({"intent_type": "DEPLOY"}) is True
+        assert cond.evaluate({"intent_type": "REFACTOR"}) is False
+
+    def test_not_in_operator(self):
+        cond = PolicyCondition(field="env", operator=ConditionOperator.NOT_IN, value=["staging", "production"])
+        assert cond.evaluate({"env": "dev"}) is True
+        assert cond.evaluate({"env": "production"}) is False
+
+    def test_contains_operator(self):
+        cond = PolicyCondition(field="tags", operator=ConditionOperator.CONTAINS, value="security")
+        assert cond.evaluate({"tags": "security-audit"}) is True
+        assert cond.evaluate({"tags": "build-test"}) is False
+
+    def test_matches_regex_operator(self):
+        cond = PolicyCondition(field="name", operator=ConditionOperator.MATCHES, value=r"^deploy-\d+")
+        assert cond.evaluate({"name": "deploy-123"}) is True
+        assert cond.evaluate({"name": "build-123"}) is False
+
+    def test_missing_field_returns_false(self):
+        cond = PolicyCondition(field="nonexistent", operator=ConditionOperator.EQUALS, value="x")
+        assert cond.evaluate({"other": "y"}) is False
+
+    def test_condition_to_dict(self):
+        cond = PolicyCondition(field="cost", operator=ConditionOperator.GREATER_THAN, value=Decimal("50"), description="Cost cap")
+        d = cond.to_dict()
+        assert d["field"] == "cost"
+        assert d["operator"] == ">"
+        assert d["description"] == "Cost cap"
+
+
+class TestPolicyRule:
+    """Tests for PolicyRule evaluation with AND logic."""
+
+    def test_single_condition_triggers(self):
+        rule = PolicyRule(
+            name="cost_rule",
+            conditions=[PolicyCondition(field="cost", operator=ConditionOperator.GREATER_THAN, value=100)],
+            action=PolicyAction.REJECT,
+        )
+        assert rule.evaluate({"cost": 200}) is True
+
+    def test_disabled_rule_never_triggers(self):
+        rule = PolicyRule(
+            name="disabled",
+            conditions=[PolicyCondition(field="x", operator=ConditionOperator.EQUALS, value=1)],
+            enabled=False,
+        )
+        assert rule.evaluate({"x": 1}) is False
+
+    def test_and_logic_all_must_pass(self):
+        rule = PolicyRule(
+            name="multi",
+            conditions=[
+                PolicyCondition(field="a", operator=ConditionOperator.EQUALS, value=1),
+                PolicyCondition(field="b", operator=ConditionOperator.EQUALS, value=2),
+            ],
+        )
+        assert rule.evaluate({"a": 1, "b": 2}) is True
+        assert rule.evaluate({"a": 1, "b": 3}) is False
+
+    def test_rule_to_dict_roundtrip(self):
+        rule = PolicyRule(name="test", description="desc", action=PolicyAction.ESCALATE, priority=PolicyPriority.HIGH)
+        d = rule.to_dict()
+        restored = PolicyRule.from_dict(d)
+        assert restored.name == "test"
+        assert restored.action == PolicyAction.ESCALATE
+
+
+class TestPolicyEvaluator:
+    """Tests for PolicyEvaluator.evaluate_intent()."""
+
+    def _make_intent(self, intent_type=IntentType.REFACTOR, user_tier="PRO", risk=RiskProfile.LOW, cost=None):
+        budget = BudgetSpec(max_cost_usd=cost) if cost else BudgetSpec()
+        return IntentObject(
+            goal="test goal",
+            intent_type=intent_type,
+            scope=ScopeObject(scope_type=ScopeType.MODULE, target="auth/"),
+            context=ContextBundle(user_id="u1", user_tier=user_tier),
+            risk_profile=risk,
+            budget=budget,
+        )
+
+    def test_no_rules_approves(self):
+        ev = PolicyEvaluator()
+        result = ev.evaluate_intent(self._make_intent())
+        assert result.decision == PolicyAction.APPROVE
+        assert len(result.triggered_rules) == 0
+
+    def test_reject_rule_blocks(self):
+        ev = PolicyEvaluator()
+        ev.add_rule(PolicyRule(
+            name="block_deploy",
+            conditions=[PolicyCondition(field="intent_type", operator=ConditionOperator.EQUALS, value=IntentType.DEPLOY)],
+            action=PolicyAction.REJECT,
+            priority=PolicyPriority.CRITICAL,
+        ))
+        result = ev.evaluate_intent(self._make_intent(intent_type=IntentType.DEPLOY))
+        assert result.decision == PolicyAction.REJECT
+        assert len(result.violations) == 1
+
+    def test_escalate_rule_wins(self):
+        ev = PolicyEvaluator()
+        ev.add_rule(PolicyRule(
+            name="escalate_systemic",
+            conditions=[PolicyCondition(field="risk_profile", operator=ConditionOperator.EQUALS, value=RiskProfile.SYSTEMIC)],
+            action=PolicyAction.ESCALATE,
+            priority=PolicyPriority.HIGH,
+            action_metadata={"escalate_to": "security_team"},
+        ))
+        result = ev.evaluate_intent(self._make_intent(risk=RiskProfile.SYSTEMIC))
+        assert result.decision == PolicyAction.ESCALATE
+        assert result.escalated is True
+
+    def test_require_approval_accumulates(self):
+        ev = PolicyEvaluator()
+        ev.add_rule(PolicyRule(
+            name="approval_needed",
+            conditions=[PolicyCondition(field="user_tier", operator=ConditionOperator.EQUALS, value="FREE")],
+            action=PolicyAction.REQUIRE_APPROVAL,
+            priority=PolicyPriority.MEDIUM,
+        ))
+        result = ev.evaluate_intent(self._make_intent(user_tier="FREE"))
+        assert result.requires_approval is True
+        assert result.is_approved() is False
+
+    def test_notify_adds_warning(self):
+        ev = PolicyEvaluator()
+        ev.add_rule(PolicyRule(
+            name="warn_refactor",
+            description="Refactor warning",
+            conditions=[PolicyCondition(field="intent_type", operator=ConditionOperator.EQUALS, value=IntentType.REFACTOR)],
+            action=PolicyAction.NOTIFY,
+            priority=PolicyPriority.LOW,
+        ))
+        result = ev.evaluate_intent(self._make_intent())
+        assert len(result.warnings) == 1
+
+    def test_priority_ordering_reject_first(self):
+        ev = PolicyEvaluator()
+        ev.add_rule(PolicyRule(
+            name="low_notify",
+            conditions=[PolicyCondition(field="user_tier", operator=ConditionOperator.EQUALS, value="PRO")],
+            action=PolicyAction.NOTIFY,
+            priority=PolicyPriority.LOW,
+        ))
+        ev.add_rule(PolicyRule(
+            name="critical_reject",
+            conditions=[PolicyCondition(field="user_tier", operator=ConditionOperator.EQUALS, value="PRO")],
+            action=PolicyAction.REJECT,
+            priority=PolicyPriority.CRITICAL,
+        ))
+        result = ev.evaluate_intent(self._make_intent())
+        assert result.decision == PolicyAction.REJECT
+
+    def test_build_context_includes_graph_metrics(self):
+        ev = PolicyEvaluator()
+        intent = self._make_intent()
+        graph = ExecutionGraph(intent_id="g1")
+        ctx = ev._build_context(intent, graph)
+        assert "node_count" in ctx
+        assert "estimated_cost_usd" in ctx
+
+    def test_evaluation_result_to_dict(self):
+        result = PolicyEvaluationResult(intent_id="i1", decision=PolicyAction.REJECT)
+        d = result.to_dict()
+        assert d["decision"] == "reject"
+        assert d["intent_id"] == "i1"
+
+    def test_remove_rule(self):
+        ev = PolicyEvaluator()
+        rule = PolicyRule(name="temp")
+        ev.add_rule(rule)
+        assert len(ev.rules) == 1
+        ev.remove_rule(rule.rule_id)
+        assert len(ev.rules) == 0
+
+    def test_clear_rules(self):
+        ev = PolicyEvaluator()
+        ev.add_rule(PolicyRule(name="a"))
+        ev.add_rule(PolicyRule(name="b"))
+        ev.clear_rules()
+        assert len(ev.rules) == 0
+
+    def test_get_enabled_rules(self):
+        ev = PolicyEvaluator()
+        ev.add_rule(PolicyRule(name="on", enabled=True))
+        ev.add_rule(PolicyRule(name="off", enabled=False))
+        assert len(ev.get_enabled_rules()) == 1
+
+    def test_evaluation_result_approved_when_no_violations(self):
+        result = PolicyEvaluationResult(intent_id="x")
+        assert result.is_approved() is True
+
+    def test_graph_scope_rule_skipped_without_graph(self):
+        ev = PolicyEvaluator()
+        ev.add_rule(PolicyRule(
+            name="graph_only",
+            scope=PolicyScope.GRAPH,
+            conditions=[PolicyCondition(field="node_count", operator=ConditionOperator.GREATER_THAN, value=5)],
+            action=PolicyAction.REJECT,
+        ))
+        result = ev.evaluate_intent(self._make_intent(), graph=None)
+        assert result.decision == PolicyAction.APPROVE
+
+    def test_evaluation_has_time_ms(self):
+        ev = PolicyEvaluator()
+        result = ev.evaluate_intent(self._make_intent())
+        assert result.evaluation_time_ms >= 0
+
+
+# ---------------------------------------------------------------------------
+# intent_compiler — IntentCompiler, quick_compile
+# ---------------------------------------------------------------------------
+from rct_control_plane.intent_compiler import (
+    CompilationResult,
+    IntentCompiler,
+    LexicalResult,
+    quick_compile,
+)
+
+
+class TestIntentCompiler:
+    """Tests for IntentCompiler full pipeline."""
+
+    def setup_method(self):
+        self.compiler = IntentCompiler()
+
+    def test_compile_refactor_intent(self):
+        result = self.compiler.compile("Refactor the auth module to use clean architecture", user_id="u1", user_tier="PRO")
+        assert result.success is True
+        assert result.intent.intent_type == IntentType.REFACTOR
+
+    def test_compile_deploy_intent(self):
+        result = self.compiler.compile("Deploy the application to production", user_id="u1", user_tier="PRO")
+        assert result.success is True
+        assert result.intent.intent_type == IntentType.DEPLOY
+
+    def test_compile_build_app_intent(self):
+        result = self.compiler.compile("Build a REST API for inventory management", user_id="u1", user_tier="PRO")
+        assert result.success is True
+        assert result.intent.intent_type == IntentType.BUILD_APP
+
+    def test_compile_extracts_cost_constraint(self):
+        result = self.compiler.compile("Refactor the module with max cost $2.50", user_id="u1", user_tier="PRO")
+        assert result.success is True
+        assert result.intent.budget.max_cost_usd == Decimal("2.50")
+
+    def test_compile_extracts_time_constraint(self):
+        result = self.compiler.compile("Optimize search within 2 hours", user_id="u1", user_tier="PRO")
+        assert result.success is True
+        assert result.intent.budget.max_time is not None
+        assert result.intent.budget.max_time.total_seconds() == 7200
+
+    def test_compile_critical_priority(self):
+        result = self.compiler.compile("Urgently deploy the fix immediately", user_id="u1", user_tier="PRO")
+        assert result.success is True
+        assert result.intent.priority == IntentPriority.CRITICAL
+
+    def test_compile_high_risk_deploy(self):
+        result = self.compiler.compile("Deploy the system-wide migration", user_id="u1", user_tier="PRO")
+        assert result.success is True
+        assert result.intent.risk_profile == RiskProfile.SYSTEMIC
+
+    def test_compile_increments_counter(self):
+        initial = self.compiler.compiled_count
+        self.compiler.compile("Refactor code", user_id="u1", user_tier="PRO")
+        assert self.compiler.compiled_count == initial + 1
+
+    def test_compile_sets_compilation_time(self):
+        result = self.compiler.compile("Test something", user_id="u1", user_tier="PRO")
+        assert result.compilation_time_ms >= 0
+
+    def test_lex_extracts_keywords(self):
+        lexical = self.compiler.lex("Refactor and optimize the module")
+        assert "refactor" in lexical.keywords
+        assert "optimize" in lexical.keywords or "improve performance" in lexical.keywords
+
+    def test_lex_extracts_cost_value(self):
+        lexical = self.compiler.lex("keep cost under $5.00")
+        assert "max_cost" in lexical.constraints
+        assert lexical.constraints["max_cost"] == Decimal("5.00")
+
+    def test_lex_extracts_time_value(self):
+        lexical = self.compiler.lex("finish within 30 minutes")
+        assert "max_time" in lexical.constraints
+
+    def test_suggest_template_refactor(self):
+        intent = IntentObject(
+            goal="refactor",
+            intent_type=IntentType.REFACTOR,
+            scope=ScopeObject(scope_type=ScopeType.MODULE, target="."),
+            context=ContextBundle(user_id="u", user_tier="PRO"),
+        )
+        assert self.compiler.suggest_template(intent) == "refactor_template"
+
+    def test_suggest_template_unknown_returns_generic(self):
+        intent = IntentObject(
+            goal="test",
+            intent_type=IntentType.TEST,
+            scope=ScopeObject(scope_type=ScopeType.MODULE, target="."),
+            context=ContextBundle(user_id="u", user_tier="PRO"),
+        )
+        assert self.compiler.suggest_template(intent) == "generic_template"
+
+    def test_quick_compile_convenience(self):
+        result = quick_compile("Refactor the code")
+        assert result.success is True
+        assert result.intent.intent_type == IntentType.REFACTOR

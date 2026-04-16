@@ -370,6 +370,14 @@ class RegionalModelRouter:
         self._record_latency(t0)
         raise RegionalModelNotFound(language, region)
 
+    def route(self, language: str, region: str) -> str:
+        """
+        Convenience wrapper — resolve model for (language, region) and return model_id string.
+
+        Raises RegionalModelNotFound if no model can be resolved.
+        """
+        return self.resolve(language, region).model_id
+
     def get_supported_languages(self) -> List[str]:
         """Return list of supported language codes."""
         return sorted(set(e.language for e in self._models))

@@ -315,6 +315,15 @@ class SignedAIRegistry:
         return cls.TIERS[tier]
 
     @classmethod
+    def get_tier_config(cls, tier) -> TierConfig:
+        """Alias for get_tier(). Accepts SignedAITier or TierLevel (models.py) enum."""
+        # TierLevel uses hyphens ("tier-4"); SignedAITier uses underscores ("tier_4")
+        if not isinstance(tier, SignedAITier):
+            normalized = str(tier.value).replace("-", "_")
+            tier = SignedAITier(normalized)
+        return cls.get_tier(tier)
+
+    @classmethod
     def get_tier_by_risk(cls, risk: RiskLevel) -> TierConfig:
         """Return the appropriate tier config for *risk*."""
         mapping = {

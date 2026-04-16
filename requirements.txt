@@ -22,6 +22,9 @@ pytest-cov>=4.1.0      # Coverage reporting (used in CI: --cov=microservices)
 httpx>=0.25.0  # For TestClient
 numpy>=1.24.0  # Required by microservices/vector-search/conftest.py (FakeFaissIndex)
 
+# Cryptography - required by rct_control_plane/signed_execution.py (ED25519 signing)
+cryptography>=41.0.0
+
 # Optional: Production deployment
 gunicorn>=21.2.0  # For production WSGI serving
 

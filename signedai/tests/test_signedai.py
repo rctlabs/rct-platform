@@ -216,3 +216,93 @@ class TestSignedAIRegistry:
         config = reg.get_tier_config(TierLevel.TIER_4)
         assert config is not None
         assert "signers" in config or hasattr(config, "signers")
+
+
+# ---------------------------------------------------------------------------
+# HexaCoreRegistry — extended coverage
+# ---------------------------------------------------------------------------
+
+
+class TestHexaCoreRegistryExtended:
+    def test_get_cheapest_coder_is_junior_builder(self):
+        result = HexaCoreRegistry.get_cheapest_coder()
+        assert result.role == HexaCoreRole.JUNIOR_BUILDER
+
+    def test_get_longest_context_is_librarian(self):
+        result = HexaCoreRegistry.get_longest_context()
+        assert result.role == HexaCoreRole.LIBRARIAN
+        assert result.context_window >= 2_000_000
+
+    def test_estimate_cost_returns_float(self):
+        cost = HexaCoreRegistry.estimate_cost(HexaCoreRole.SUPREME_ARCHITECT, input_tokens=1000, output_tokens=500)
+        assert isinstance(cost, float)
+        assert cost > 0
+
+    def test_geopolitical_balance_sums_to_seven(self):
+        balance = HexaCoreRegistry.get_geopolitical_balance()
+        total = sum(balance.values())
+        assert total == 7
+        assert "US" in balance
+        assert "CN" in balance
+        assert "TH" in balance
+
+    def test_get_smartest_is_supreme_architect(self):
+        result = HexaCoreRegistry.get_smartest()
+        assert result.role == HexaCoreRole.SUPREME_ARCHITECT
+
+
+# ---------------------------------------------------------------------------
+# SignedAIRegistry — consensus & tier tests
+# ---------------------------------------------------------------------------
+from signedai.core.registry import (
+    ConsensusResult,
+    RiskLevel as RegistryRiskLevel,
+    SignedAITier,
+    TierConfig,
+)
+
+
+class TestSignedAIRegistryExtended:
+    def test_all_four_tiers_exist(self):
+        for tier in SignedAITier:
+            config = SignedAIRegistry.get_tier(tier)
+            assert config.tier == tier
+
+    def test_tier_s_has_one_signer(self):
+        config = SignedAIRegistry.get_tier(SignedAITier.TIER_S)
+        assert len(config.signers) == 1
+
+    def test_tier_8_has_chairman_veto(self):
+        config = SignedAIRegistry.get_tier(SignedAITier.TIER_8)
+        assert config.chairman_veto is True
+
+    def test_get_tier_by_risk_mapping(self):
+        config = SignedAIRegistry.get_tier_by_risk(RegistryRiskLevel.LOW)
+        assert config.tier == SignedAITier.TIER_S
+        config = SignedAIRegistry.get_tier_by_risk(RegistryRiskLevel.CRITICAL)
+        assert config.tier == SignedAITier.TIER_8
+
+    def test_calculate_consensus_passes(self):
+        result = SignedAIRegistry.calculate_consensus(
+            tier=SignedAITier.TIER_4, votes_for=3, votes_against=1
+        )
+        assert result.consensus_reached is True
+        assert result.confidence > 0
+
+    def test_calculate_consensus_fails_insufficient_votes(self):
+        result = SignedAIRegistry.calculate_consensus(
+            tier=SignedAITier.TIER_4, votes_for=1, votes_against=3
+        )
+        assert result.consensus_reached is False
+
+    def test_chairman_veto_overrides(self):
+        result = SignedAIRegistry.calculate_consensus(
+            tier=SignedAITier.TIER_8, votes_for=2, votes_against=4, chairman_override=True
+        )
+        assert result.consensus_reached is True
+
+    def test_chairman_veto_blocks(self):
+        result = SignedAIRegistry.calculate_consensus(
+            tier=SignedAITier.TIER_8, votes_for=6, votes_against=0, chairman_override=False
+        )
+        assert result.consensus_reached is False

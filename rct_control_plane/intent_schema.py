@@ -14,13 +14,14 @@ Key Components:
 """
 
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from enum import Enum
 from typing import Any, Dict, List, Optional
 from uuid import UUID, uuid4
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator, field_serializer
+from pydantic import ConfigDict
 
 
 # ============================================================================
@@ -82,18 +83,19 @@ class ConstraintType(str, Enum):
 
 class ScopeObject(BaseModel):
     """Defines what resources/code the intent operates on"""
+    model_config = ConfigDict(use_enum_values=True)
+
     scope_type: ScopeType
     target: str                             # Path, URL, identifier
     includes: List[str] = Field(default_factory=list)  # Include patterns
     excludes: List[str] = Field(default_factory=list)  # Exclude patterns
     metadata: Dict[str, Any] = Field(default_factory=dict)
 
-    class Config:
-        use_enum_values = True
-
 
 class BudgetSpec(BaseModel):
     """Financial and resource budget specifications"""
+    model_config = ConfigDict()
+
     max_cost_usd: Optional[Decimal] = None
     max_time: Optional[timedelta] = None
     max_cpu_hours: Optional[float] = None
@@ -101,51 +103,55 @@ class BudgetSpec(BaseModel):
     max_tokens: Optional[int] = None
     max_api_calls: Optional[int] = None
 
-    @validator('max_cost_usd', pre=True)
+    @field_validator('max_cost_usd', mode='before')
+    @classmethod
     def validate_cost(cls, v):
         if v is not None and v < 0:
             raise ValueError("max_cost_usd must be non-negative")
         return v
 
-    @validator('max_time', pre=True)
+    @field_validator('max_time', mode='before')
+    @classmethod
     def validate_time(cls, v):
         if v is not None and isinstance(v, (int, float)):
             return timedelta(seconds=v)
         return v
 
-    class Config:
-        json_encoders = {
-            Decimal: str,
-            timedelta: lambda v: v.total_seconds()
-        }
+    @field_serializer('max_cost_usd')
+    def serialize_decimal(self, v: Optional[Decimal]) -> Optional[str]:
+        return str(v) if v is not None else None
+
+    @field_serializer('max_time')
+    def serialize_timedelta(self, v: Optional[timedelta]) -> Optional[float]:
+        return v.total_seconds() if v is not None else None
 
 
 class IntentConstraint(BaseModel):
     """Individual constraint on intent execution"""
+    model_config = ConfigDict(use_enum_values=True)
+
     constraint_type: ConstraintType
     value: Any                              # Constraint value (depends on type)
     operator: str = "LTE"                   # LTE, GTE, EQ, NEQ
     strict: bool = True                     # Strict enforcement vs. warning
     reason: Optional[str] = None            # Why this constraint exists
 
-    class Config:
-        use_enum_values = True
-
 
 class ContextBundle(BaseModel):
     """Execution context for intent"""
+    model_config = ConfigDict()
+
     user_id: str
     user_tier: str                          # FREE, PRO, ENTERPRISE, INTERNAL
     organization_id: Optional[str] = None
     request_id: str = Field(default_factory=lambda: str(uuid4()))
     trace_id: str = Field(default_factory=lambda: str(uuid4()))
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     metadata: Dict[str, Any] = Field(default_factory=dict)
 
-    class Config:
-        json_encoders = {
-            datetime: lambda v: v.isoformat()
-        }
+    @field_serializer('timestamp')
+    def serialize_timestamp(self, v: datetime) -> str:
+        return v.isoformat()
 
 
 class IntentObject(BaseModel):
@@ -171,17 +177,19 @@ class IntentObject(BaseModel):
     
     # Metadata
     natural_language_input: Optional[str] = None  # Original NL input
-    compiled_at: datetime = Field(default_factory=datetime.utcnow)
+    compiled_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     compiler_version: str = "1.0.0"
     metadata: Dict[str, Any] = Field(default_factory=dict)
 
-    @validator('template_confidence')
+    @field_validator('template_confidence')
+    @classmethod
     def validate_confidence(cls, v):
         if not 0.0 <= v <= 1.0:
             raise ValueError("template_confidence must be between 0.0 and 1.0")
         return v
 
-    @validator('goal')
+    @field_validator('goal')
+    @classmethod
     def validate_goal(cls, v):
         if not v or len(v.strip()) == 0:
             raise ValueError("goal cannot be empty")
@@ -189,18 +197,19 @@ class IntentObject(BaseModel):
             raise ValueError("goal too long (max 500 characters)")
         return v.strip()
 
-    class Config:
-        use_enum_values = True
-        json_encoders = {
-            UUID: str,
-            datetime: lambda v: v.isoformat(),
-            Decimal: str,
-            timedelta: lambda v: v.total_seconds()
-        }
+    @field_serializer('id')
+    def serialize_uuid(self, v: UUID) -> str:
+        return str(v)
+
+    @field_serializer('compiled_at')
+    def serialize_compiled_at(self, v: datetime) -> str:
+        return v.isoformat()
+
+    model_config = ConfigDict(use_enum_values=True)
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization"""
-        return self.dict()
+        return self.model_dump()
 
     def add_constraint(
         self,

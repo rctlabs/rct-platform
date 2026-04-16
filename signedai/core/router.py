@@ -100,7 +100,7 @@ class TierRouter:
         if job.artifact_type in ("config", "schema"):
             score += 1
 
-        artifact_lower = job.artifact_content.lower()
+        artifact_lower = (job.artifact_content or "").lower()
 
         # Names that suggest sensitive / identity-related logic
         sensitive_tokens = (

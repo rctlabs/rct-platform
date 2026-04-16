@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1-alpha] - 2026-04-16
+
+### Fixed
+- `FDIAScorer.score_action()` now accepts legacy `other_agents_intents` (dict) and `governance_score` kwargs; `world_resources` is now optional (default `{}`)
+- `FDIAScorer` — added `select_best_action()` method returning highest-scoring action or `None`
+- `RegionalModelRouter` — added `route(language, region)` convenience method returning `model_id` string
+- `ExecutionGraph.add_node()` now raises `ValueError` when duplicate node ID is added
+- `ExecutionGraph.validate()` now treats empty graph as valid (no error)
+- `TierRouter._calculate_risk_level()` guards against `artifact_content=None` (no more `AttributeError`)
+- `SignedAIRegistry` — added `get_tier_config()` alias accepting both `SignedAITier` and `TierLevel` enums
+- `rct_control_plane/api.py` — suppressed false-positive Bandit B104 on dev-server bind
+
+### Added
+- `rct_control_plane/tests/test_formatters_dsl.py` — 42 tests for `rich_formatter.py` (full coverage) and `dsl_parser.py`
+
+### Changed
+- CI `--cov-fail-under` raised from `20` → `70` (actual coverage: 71%)
+- Test suite: 141 → **439 passed**, 0 failures
+- Coverage: 28% → **71%**
+- `pyproject.toml` testpaths now includes all test directories
+
 ## [1.0.0-alpha] - 2026-04-13
 
 ### Added
