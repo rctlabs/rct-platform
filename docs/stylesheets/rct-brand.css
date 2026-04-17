@@ -1,0 +1,189 @@
+/*
+ * RCT Platform Docs — Brand Alignment CSS
+ * Overrides MkDocs Material default variables with RCT design tokens.
+ * Source tokens: rctlabs-website/styles/tokens.css
+ *
+ * Primary:   #D4A853 (rct-gold / Amber)
+ * Accent:    #C4745B (rct-terracotta)
+ * BG Light:  #FAF6F0 (warm-cream)
+ * BG Dark:   #1A1A1A (warm-charcoal)
+ * Code bg:   #F0EBE3 (warm tint light) / #252118 (dark)
+ */
+
+/* ─── Light mode ─────────────────────────────────────────── */
+[data-md-color-scheme="default"] {
+  /* Primary amber gold */
+  --md-primary-fg-color:        #D4A853;
+  --md-primary-fg-color--light: #E8C97A;
+  --md-primary-fg-color--dark:  #C49A48;
+  --md-primary-bg-color:        #1A1714;  /* dark text on amber */
+  --md-primary-bg-color--light: #2D2416;
+
+  /* Accent terracotta */
+  --md-accent-fg-color:         #C4745B;
+  --md-accent-fg-color--transparent: rgba(196, 116, 91, 0.1);
+  --md-accent-bg-color:         #FAF6F0;
+
+  /* Page background — warm cream */
+  --md-default-bg-color:        #FAF6F0;
+  --md-default-bg-color--light: #FFFFFF;
+  --md-default-bg-color--lighter: #F7F2EC;
+  --md-default-bg-color--lightest: #F5EFE8;
+
+  /* Text */
+  --md-default-fg-color:        #1A1714;
+  --md-default-fg-color--light: rgba(26, 23, 20, 0.7);
+  --md-default-fg-color--lighter: rgba(26, 23, 20, 0.5);
+  --md-default-fg-color--lightest: rgba(26, 23, 20, 0.2);
+
+  /* Code blocks — warm tint */
+  --md-code-bg-color:           #F0EBE3;
+  --md-code-fg-color:           #2D2416;
+
+  /* Typeset links */
+  --md-typeset-a-color:         #C49A48;
+
+  /* Footer */
+  --md-footer-bg-color:         #2D2416;
+  --md-footer-bg-color--dark:   #1A1714;
+  --md-footer-fg-color:         rgba(250, 246, 240, 0.9);
+  --md-footer-fg-color--light:  rgba(250, 246, 240, 0.6);
+  --md-footer-fg-color--lighter: rgba(250, 246, 240, 0.38);
+}
+
+/* ─── Dark mode (slate scheme) ───────────────────────────── */
+[data-md-color-scheme="slate"] {
+  /* Primary amber gold */
+  --md-primary-fg-color:        #D4A853;
+  --md-primary-fg-color--light: #E8C97A;
+  --md-primary-fg-color--dark:  #C49A48;
+  --md-primary-bg-color:        #1A1714;
+  --md-primary-bg-color--light: #2D2416;
+
+  /* Accent terracotta */
+  --md-accent-fg-color:         #D98F75;
+  --md-accent-fg-color--transparent: rgba(217, 143, 117, 0.1);
+
+  /* Page background — warm dark */
+  --md-default-bg-color:        #1A1714;
+  --md-default-bg-color--light: #252118;
+  --md-default-bg-color--lighter: #2D2820;
+  --md-default-bg-color--lightest: #38332A;
+
+  /* Text — warm cream */
+  --md-default-fg-color:        #FAF6F0;
+  --md-default-fg-color--light: rgba(250, 246, 240, 0.7);
+  --md-default-fg-color--lighter: rgba(250, 246, 240, 0.5);
+  --md-default-fg-color--lightest: rgba(250, 246, 240, 0.2);
+
+  /* Code blocks */
+  --md-code-bg-color:           #252118;
+  --md-code-fg-color:           #F0EBE3;
+
+  /* Typeset links */
+  --md-typeset-a-color:         #E8C97A;
+}
+
+/* ─── Typography tweaks ──────────────────────────────────── */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.md-typeset code {
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+/* ─── Header / nav bar ───────────────────────────────────── */
+.md-header {
+  background-color: #2D2416;
+  box-shadow: 0 1px 0 rgba(212, 168, 83, 0.15);
+}
+
+[data-md-color-scheme="default"] .md-header {
+  background-color: #2D2416;
+}
+
+/* ─── Admonition color overrides ─────────────────────────── */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: #D4A853;
+}
+.md-typeset .tip > .admonition-title,
+.md-typeset .tip > summary {
+  background-color: rgba(212, 168, 83, 0.12);
+}
+.md-typeset .tip > .admonition-title::before,
+.md-typeset .tip > summary::before {
+  background-color: #D4A853;
+}
+
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-color: #C4745B;
+}
+.md-typeset .warning > .admonition-title,
+.md-typeset .warning > summary {
+  background-color: rgba(196, 116, 91, 0.12);
+}
+.md-typeset .warning > .admonition-title::before,
+.md-typeset .warning > summary::before {
+  background-color: #C4745B;
+}
+
+/* ─── Search bar ─────────────────────────────────────────── */
+.md-search__input {
+  background-color: rgba(212, 168, 83, 0.08);
+}
+
+.md-search__input:focus {
+  outline: 1px solid #D4A853;
+}
+
+/* ─── Buttons (md-button) ────────────────────────────────── */
+.md-typeset .md-button {
+  border-color: #D4A853;
+  color: #D4A853;
+}
+
+.md-typeset .md-button:hover,
+.md-typeset .md-button:focus {
+  background-color: #D4A853;
+  color: #1A1714;
+  border-color: #D4A853;
+}
+
+.md-typeset .md-button--primary {
+  background-color: #D4A853;
+  color: #1A1714;
+  border-color: #D4A853;
+}
+
+.md-typeset .md-button--primary:hover {
+  background-color: #C49A48;
+  border-color: #C49A48;
+}
+
+/* ─── Tables ─────────────────────────────────────────────── */
+.md-typeset table:not([class]) th {
+  background-color: rgba(212, 168, 83, 0.15);
+  color: #2D2416;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: rgba(212, 168, 83, 0.2);
+  color: #FAF6F0;
+}
+
+/* ─── Navigation active state ────────────────────────────── */
+.md-nav__link--active,
+.md-nav__link:is(:focus, :hover) {
+  color: #D4A853;
+}
+
+/* ─── Progress / version badge ───────────────────────────── */
+.md-version__current {
+  color: #D4A853;
+}
