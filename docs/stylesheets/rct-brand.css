@@ -104,11 +104,40 @@
 }
 
 /* ─── Header / nav bar ───────────────────────────────────── */
-/* Background is controlled by --md-primary-fg-color in :root (= #1F1B15)  */
-/* Text/icons are controlled by --md-primary-bg-color in :root (= #F5EFE8) */
-/* Contrast: 12:1 ✅ WCAG AAA — no direct background override needed       */
+/* --md-primary-fg-color (#1F1B15) = header BG                             */
+/* --md-primary-bg-color (#F5EFE8) = text/icon ON header — contrast 12:1 ✅ */
 .md-header {
+  background-color: #1F1B15;
   box-shadow: 0 1px 0 rgba(212, 168, 83, 0.2);
+}
+
+/* ─── Navigation tabs bar (navigation.tabs) ─────────────── */
+/* Explicitly set to match header — prevents Material from using accent     */
+/* color (#D4A853) as tabs background in some palette configurations.       */
+.md-tabs {
+  background-color: #1F1B15;
+  border-bottom: 1px solid rgba(212, 168, 83, 0.15);
+}
+
+.md-tabs__link {
+  color: rgba(245, 239, 232, 0.65);
+  opacity: 1;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  color: #F5EFE8;
+  opacity: 1;
+}
+
+.md-tabs__link--active {
+  color: #D4A853;
+}
+
+/* Active tab underline indicator */
+.md-tabs__indicator {
+  background-color: #D4A853;
+  height: 2px;
 }
 
 /* ─── Admonition color overrides ─────────────────────────── */
@@ -139,8 +168,21 @@
 }
 
 /* ─── Search bar ─────────────────────────────────────────── */
-.md-search__input {
-  background-color: rgba(212, 168, 83, 0.08);
+/* Light mode: warm tint on cream bg */
+[data-md-color-scheme="default"] .md-search__input {
+  background-color: rgba(26, 23, 20, 0.06);
+  color: #1A1714;
+}
+
+/* Dark mode / header: visible on dark bg */
+.md-header .md-search__input,
+[data-md-color-scheme="slate"] .md-search__input {
+  background-color: rgba(245, 239, 232, 0.1);
+  color: #F5EFE8;
+}
+
+.md-search__input::placeholder {
+  color: rgba(245, 239, 232, 0.45);
 }
 
 .md-search__input:focus {
