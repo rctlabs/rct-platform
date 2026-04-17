@@ -24,7 +24,7 @@ Example:
 
 import re
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import Any, Dict, List, Optional, Tuple
 from uuid import UUID, uuid4
@@ -175,7 +175,7 @@ class IntentCompiler:
         Returns:
             CompilationResult with structured intent or errors
         """
-        start_time = datetime.utcnow()
+        start_time = datetime.now(timezone.utc)
         result = CompilationResult(success=True)
         
         # Emit event: INTENT_RECEIVED
@@ -249,7 +249,7 @@ class IntentCompiler:
             result.add_error(f"Compilation failed: {str(e)}")
         
         finally:
-            end_time = datetime.utcnow()
+            end_time = datetime.now(timezone.utc)
             result.compilation_time_ms = (end_time - start_time).total_seconds() * 1000
             # Track all compilations (success or failure)
             if result.success:

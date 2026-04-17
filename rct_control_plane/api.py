@@ -17,7 +17,7 @@ from uuid import UUID
 
 from fastapi import FastAPI, HTTPException, Query, status, Header
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from .intent_compiler import IntentCompiler, CompilationResult
 from .dsl_parser import DSLParser
@@ -33,26 +33,41 @@ from .default_policies import get_default_policies
 
 class IntentCompileRequest(BaseModel):
     """Request to compile an intent"""
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "natural_language": "Refactor the authentication module using clean architecture",
+                "user_id": "user-123",
+                "user_tier": "PRO",
+                "organization_id": "org-456",
+                "metadata": {"source": "web_ui"},
+            }
+        }
+    )
+
     natural_language: str = Field(..., description="Natural language intent description", min_length=1)
     user_id: str = Field(..., description="User identifier")
     user_tier: str = Field(..., description="User tier (FREE, PRO, ENTERPRISE, INTERNAL)")
     organization_id: Optional[str] = Field(None, description="Organization identifier")
     metadata: Optional[Dict[str, Any]] = Field(default_factory=dict, description="Additional metadata")
 
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "natural_language": "Refactor the authentication module using clean architecture",
-                "user_id": "user-123",
-                "user_tier": "PRO",
-                "organization_id": "org-456",
-                "metadata": {"source": "web_ui"}
-            }
-        }
-
 
 class IntentCompileResponse(BaseModel):
     """Response from intent compilation"""
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "success": True,
+                "intent_id": "550e8400-e29b-41d4-a716-446655440000",
+                "intent": {"intent_type": "REFACTOR", "priority": "MEDIUM"},
+                "validation": {"is_valid": True, "errors": [], "warnings": []},
+                "errors": [],
+                "warnings": [],
+                "compilation_time_ms": 145.3,
+            }
+        }
+    )
+
     success: bool
     intent_id: Optional[str] = None
     intent: Optional[Dict[str, Any]] = None
@@ -61,32 +76,20 @@ class IntentCompileResponse(BaseModel):
     warnings: List[str] = Field(default_factory=list)
     compilation_time_ms: float
 
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "success": True,
-                "intent_id": "550e8400-e29b-41d4-a716-446655440000",
-                "intent": {"intent_type": "REFACTOR", "priority": "MEDIUM"},
-                "validation": {"is_valid": True, "errors": [], "warnings": []},
-                "errors": [],
-                "warnings": [],
-                "compilation_time_ms": 145.3
-            }
-        }
-
 
 class GraphBuildRequest(BaseModel):
     """Request to build execution graph"""
-    dsl_text: str = Field(..., description="DSL text defining the execution graph")
-    intent_id: str = Field(..., description="Associated intent ID")
-
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "dsl_text": 'intent "refactor" { node n1 { node_type = "agent_capability" } }',
-                "intent_id": "550e8400-e29b-41d4-a716-446655440000"
+                "intent_id": "550e8400-e29b-41d4-a716-446655440000",
             }
         }
+    )
+
+    dsl_text: str = Field(..., description="DSL text defining the execution graph")
+    intent_id: str = Field(..., description="Associated intent ID")
 
 
 class GraphBuildResponse(BaseModel):
@@ -103,20 +106,21 @@ class GraphBuildResponse(BaseModel):
 
 class PolicyEvaluateRequest(BaseModel):
     """Request to evaluate policies"""
-    intent_id: str = Field(..., description="Intent ID to evaluate")
-    intent: Dict[str, Any] = Field(..., description="Intent object as dict")
-    graph: Optional[Dict[str, Any]] = Field(None, description="Optional execution graph")
-    use_default_policies: bool = Field(True, description="Whether to use default policies")
-
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "intent_id": "550e8400-e29b-41d4-a716-446655440000",
                 "intent": {"intent_type": "REFACTOR"},
                 "graph": None,
-                "use_default_policies": True
+                "use_default_policies": True,
             }
         }
+    )
+
+    intent_id: str = Field(..., description="Intent ID to evaluate")
+    intent: Dict[str, Any] = Field(..., description="Intent object as dict")
+    graph: Optional[Dict[str, Any]] = Field(None, description="Optional execution graph")
+    use_default_policies: bool = Field(True, description="Whether to use default policies")
 
 
 class PolicyEvaluateResponse(BaseModel):
@@ -284,7 +288,7 @@ class ControlPlaneAPI:
             return HealthResponse(
                 status="healthy",
                 version="1.0.0",
-                timestamp=datetime.utcnow().isoformat()
+                timestamp=datetime.now(timezone.utc).isoformat()
             )
         
         @self.app.get("/health", response_model=HealthResponse)
@@ -293,7 +297,7 @@ class ControlPlaneAPI:
             return HealthResponse(
                 status="healthy",
                 version="1.0.0",
-                timestamp=datetime.utcnow().isoformat()
+                timestamp=datetime.now(timezone.utc).isoformat()
             )
         
         @self.app.get("/health/detailed", response_model=DetailedHealthResponse)
@@ -311,7 +315,7 @@ class ControlPlaneAPI:
                 _resource = None  # type: ignore[assignment]
                 _has_resource = False
 
-            now = datetime.utcnow().isoformat()
+            now = datetime.now(timezone.utc).isoformat()
             uptime = time.time() - self._start_time
 
             service_checks: List[ServiceCheckResult] = []

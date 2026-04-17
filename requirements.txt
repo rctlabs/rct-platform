@@ -3,9 +3,9 @@
 # Do NOT add "python>=X.Y" here — it is not a valid pip package name.
 
 # FastAPI and ASGI server
-fastapi>=0.104.0
+fastapi>=0.136.0
 uvicorn[standard]>=0.24.0
-pydantic>=2.0.0
+pydantic>=2.13.1
 
 # CLI
 click>=8.1.0
