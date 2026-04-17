@@ -104,39 +104,50 @@
 }
 
 /* ─── Header / nav bar ───────────────────────────────────── */
-/* --md-primary-fg-color (#1F1B15) = header BG                             */
-/* --md-primary-bg-color (#F5EFE8) = text/icon ON header — contrast 12:1 ✅ */
-.md-header {
-  background-color: #1F1B15;
-  box-shadow: 0 1px 0 rgba(212, 168, 83, 0.2);
+/* !important needed: Material 9.x slate scheme overrides --md-primary-fg  */
+/* with a higher-specificity internal selector in dark mode.               */
+.md-header,
+[data-md-color-scheme="default"] .md-header,
+[data-md-color-scheme="slate"] .md-header {
+  background-color: #1F1B15 !important;
+  box-shadow: 0 1px 0 rgba(212, 168, 83, 0.25) !important;
+}
+
+/* Header icon / title text */
+.md-header__title,
+.md-header__button,
+.md-header__button.md-icon {
+  color: #F5EFE8 !important;
 }
 
 /* ─── Navigation tabs bar (navigation.tabs) ─────────────── */
-/* Explicitly set to match header — prevents Material from using accent     */
-/* color (#D4A853) as tabs background in some palette configurations.       */
-.md-tabs {
-  background-color: #1F1B15;
-  border-bottom: 1px solid rgba(212, 168, 83, 0.15);
+/* !important required — Material's CSS custom property cascade overrides  */
+/* :root values with body[data-md-color-*] selectors at higher specificity */
+.md-tabs,
+[data-md-color-scheme="default"] .md-tabs,
+[data-md-color-scheme="slate"] .md-tabs {
+  background-color: #1F1B15 !important;
+  border-bottom: 1px solid rgba(212, 168, 83, 0.2) !important;
 }
 
 .md-tabs__link {
-  color: rgba(245, 239, 232, 0.65);
-  opacity: 1;
+  color: rgba(245, 239, 232, 0.6) !important;
+  opacity: 1 !important;
 }
 
-.md-tabs__link--active,
 .md-tabs__link:hover {
-  color: #F5EFE8;
-  opacity: 1;
+  color: #F5EFE8 !important;
+  opacity: 1 !important;
 }
 
 .md-tabs__link--active {
-  color: #D4A853;
+  color: #D4A853 !important;
+  opacity: 1 !important;
 }
 
-/* Active tab underline indicator */
+/* Active tab amber underline indicator */
 .md-tabs__indicator {
-  background-color: #D4A853;
+  background-color: #D4A853 !important;
   height: 2px;
 }
 
