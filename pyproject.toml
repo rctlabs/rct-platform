@@ -8,7 +8,12 @@ version = "1.0.1a0"
 description = "RCT Platform — Constitutional AI Operating System SDK"
 readme = "README.md"
 license = { text = "Apache-2.0" }
-authors = [{name = "RCT Labs", email = "team@rctlabs.co"}]
+authors = [
+    {name = "Ittirit Saengow", email = "ittirit720@gmail.com"},
+]
+maintainers = [
+    {name = "RCT Labs", email = "founder@rctlabs.co"},
+]
 requires-python = ">=3.10"
 keywords = ["ai", "constitutional-ai", "intent-loop", "signedai", "fdia", "rct"]
 classifiers = [

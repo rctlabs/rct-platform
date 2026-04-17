@@ -3,7 +3,7 @@
 **Intent-Centric AI Operating System — Constitutional Architecture**
 
 [![CI](https://img.shields.io/github/actions/workflow/status/rctlabs/rct-platform/ci.yml?branch=main&label=CI&logo=github)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/rctlabs/rct-platform/branch/main/graph/badge.svg)](https://codecov.io/gh/rctlabs/rct-platform)
+[![codecov](https://codecov.io/gh/rctlabs/rct-platform/graph/badge.svg?token=IE08MVKA6C)](https://app.codecov.io/gh/rctlabs/rct-platform)
 [![Version](https://img.shields.io/badge/version-1.0.1a0-blue)](https://github.com/rctlabs/rct-platform/blob/main/CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](https://github.com/rctlabs/rct-platform/blob/main/LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10+-3776AB)](https://pypi.org/project/rct-platform/)

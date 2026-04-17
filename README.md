@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 [![Security](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml)
-[![codecov](https://codecov.io/gh/rctlabs/rct-platform/branch/main/graph/badge.svg)](https://codecov.io/gh/rctlabs/rct-platform)
+[![codecov](https://codecov.io/gh/rctlabs/rct-platform/graph/badge.svg?token=IE08MVKA6C)](https://app.codecov.io/gh/rctlabs/rct-platform)
 [![Version](https://img.shields.io/badge/version-1.0.1a0-blue)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)](pyproject.toml)
@@ -519,9 +519,28 @@ Do **not** open public issues for security findings.
 
 ---
 
+## 👤 Creator
+
+**Ittirit Saengow (อิทธิฤทธิ์ แซ่โง้ว)**  
+*Architect & Sole Creator of RCT Platform and the RCT Ecosystem*
+
+Built the entire RCT Ecosystem independently — from the FDIA equation through 591 tests, Constitutional AI architecture, SignedAI multi-LLM consensus, and this open SDK. A Thai developer building trust-layer AI infrastructure for the Intelligence Age.
+
+| | |
+|---|---|
+| **GitHub** | [@ittirit720](https://github.com/ittirit720) |
+| **Email** | ittirit720@gmail.com |
+| **Org** | founder@rctlabs.co |
+| **Website** | [rctlabs.co](https://rctlabs.co) |
+| **Location** | Bangkok, Thailand 🇹🇭 |
+
+> *"Design the system so it cannot misbehave — not just configure it to be safe."*
+
+---
+
 ## License
 
 Apache 2.0 — see [LICENSE](LICENSE).
 
-Copyright 2026 RCT Labs Co., Ltd.  
+Copyright 2026 Ittirit Saengow (อิทธิฤทธิ์ แซ่โง้ว) — RCT Labs  
 Made with ❤️ from Bangkok, Thailand 🇹🇭
