@@ -9,18 +9,19 @@ copyright: Copyright &copy; 2026 RCT Labs — Apache 2.0
 
 theme:
   name: material
+  custom_dir: docs/overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: deep purple
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: deep purple
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -34,12 +35,13 @@ theme:
     - content.code.copy
     - content.code.annotate
     - toc.integrate
+  logo: assets/RCTicon.svg
+  favicon: assets/RCTicon.svg
   icon:
     repo: fontawesome/brands/github
-    logo: material/robot-happy
   font:
     text: Inter
-    code: JetBrains Mono
+    code: Space Mono
 
 exclude_docs: |
   whitepapers/**
@@ -73,6 +75,9 @@ markdown_extensions:
   - tables
   - attr_list
   - md_in_html
+
+extra_css:
+  - stylesheets/rct-brand.css
 
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
