@@ -1,0 +1,60 @@
+# Codecov configuration for rct-platform
+# docs: https://docs.codecov.com/docs/codecovyml-reference
+
+codecov:
+  # Notify after both CI runs (Python 3.11 uploads)
+  require_ci_to_pass: true
+  # Wait max 60s for all coverage reports
+  notify:
+    after_n_builds: 1
+    wait_for_ci: true
+
+coverage:
+  # Overall coverage target
+  status:
+    project:
+      default:
+        target: 70%
+        threshold: 2%
+        if_not_found: success
+        if_ci_failed: error
+        informational: false
+    patch:
+      default:
+        target: 60%
+        threshold: 5%
+        if_not_found: success
+        if_ci_failed: error
+        informational: false
+
+  # Coverage precision (decimal places)
+  precision: 2
+  round: down
+  range: "60...100"
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+comment:
+  layout: "reach,diff,flags,files,footer"
+  behavior: default
+  require_changes: false
+  require_base: no
+  require_head: yes
+  show_carryforward_flags: false
+
+# Ignore non-source paths from coverage
+ignore:
+  - "tests/**"
+  - "benchmark/**"
+  - "docs/**"
+  - "scripts/**"
+  - "examples/**"
+  - "**/__pycache__/**"
+  - "**/conftest.py"
+  - "setup.py"

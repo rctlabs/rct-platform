@@ -89,8 +89,10 @@ extra:
       link: https://github.com/rctlabs
     - icon: fontawesome/solid/globe
       link: https://rctlabs.co
-  # mike version provider removed — not installed, not yet in use
-  # Re-add when versioned docs (v1, v2 branches) are needed
+  # Explicitly disable version switcher — prevents 404 /versions.json spam
+  # Re-enable when mike versioned docs (v1, v2 branches) are ready
+  version:
+    provider: none
 
 nav:
   - Home: index.md
