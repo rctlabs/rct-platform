@@ -4,7 +4,9 @@
 fastapi==0.128.0
 uvicorn[standard]==0.40.0
 pydantic==2.12.5
-python-multipart==0.0.21
+# CVE fix: >=0.0.24 resolves GHSA-jxdc-fh5p-qg7m (Arbitrary File Write, HIGH)
+#          and GHSA-c3h9-896r-86jm (DoS via large multipart preamble, Moderate)
+python-multipart>=0.0.24
 
 # Vector backends
 faiss-cpu==1.9.0
@@ -12,7 +14,8 @@ qdrant-client==1.12.1
 numpy==2.2.1
 
 # Testing
-pytest==9.0.2
+# CVE fix: >=8.1.0 resolves GHSA-cmfg-87vq-g5g4 (vulnerable tmpdir handling, Moderate)
+pytest>=8.1.0
 pytest-asyncio==1.3.0
 httpx==0.28.1
 

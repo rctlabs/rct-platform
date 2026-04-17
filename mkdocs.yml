@@ -1,0 +1,105 @@
+site_name: RCT Platform
+site_description: Intent-Centric AI Operating System — Constitutional Architecture SDK
+site_author: RCT Labs
+site_url: https://rctlabs.co/docs
+repo_url: https://github.com/rctlabs/rct-platform
+repo_name: rctlabs/rct-platform
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; 2026 RCT Labs — Apache 2.0
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+    - toc.integrate
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/robot-happy
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+exclude_docs: |
+  whitepapers/**
+  testing/**
+
+plugins:
+  - search:
+      lang: en
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - admonition
+  - pymdownx.details
+  - toc:
+      permalink: true
+  - tables
+  - attr_list
+  - md_in_html
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rctlabs
+    - icon: fontawesome/solid/globe
+      link: https://rctlabs.co
+  version:
+    provider: mike
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quickstart.md
+  - Core Concepts:
+    - FDIA Engine: concepts/fdia.md
+    - Architecture: concepts/architecture.md
+    - SignedAI Consensus: concepts/signedai.md
+    - Intent Loop: concepts/intent-loop.md
+  - API Reference:
+    - Control Plane: api/control-plane.md
+    - Microservices: api/microservices.md
+  - Testing: testing.md
+  - Changelog: changelog.md
+  - Contributing: contributing.md
