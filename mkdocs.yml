@@ -79,7 +79,8 @@ extra_css:
   - stylesheets/rct-brand.css
 
 extra_javascript:
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  # polyfill.io removed — domain was compromised June 2024 (supply chain attack)
+  # MathJax served from jsDelivr CDN (safe, no polyfill needed for modern browsers)
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 extra:
@@ -88,8 +89,8 @@ extra:
       link: https://github.com/rctlabs
     - icon: fontawesome/solid/globe
       link: https://rctlabs.co
-  version:
-    provider: mike
+  # mike version provider removed — not installed, not yet in use
+  # Re-add when versioned docs (v1, v2 branches) are needed
 
 nav:
   - Home: index.md
