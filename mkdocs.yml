@@ -9,7 +9,6 @@ copyright: Copyright &copy; 2026 RCT Labs — Apache 2.0
 
 theme:
   name: material
-  custom_dir: docs/overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
