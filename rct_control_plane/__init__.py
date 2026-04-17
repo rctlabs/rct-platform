@@ -8,6 +8,8 @@ will be added in future releases.
 Apache 2.0 — RCT Labs (https://rctlabs.co)
 """
 
+__version__ = "1.0.1a0"
+
 from .intent_schema import (
     IntentType,
     IntentPriority,
@@ -37,6 +39,7 @@ from .dsl_parser import (
 )
 
 __all__ = [
+    "__version__",
     # intent_schema
     "IntentType",
     "IntentPriority",

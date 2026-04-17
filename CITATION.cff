@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+title: RCT Platform
+message: "If you use RCT Platform in research or publications, please cite this software."
+type: software
+authors:
+  - family-names: RCT Labs
+    name-particle: ""
+repository-code: "https://github.com/rctlabs/rct-platform"
+url: "https://github.com/rctlabs/rct-platform"
+license: Apache-2.0
+version: 1.0.1a0
+date-released: 2026-04-17
+abstract: >-
+  Public SDK for the RCT intent-centric AI operating system, including FDIA,
+  SignedAI, control-plane components, and reference microservices.

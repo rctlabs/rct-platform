@@ -1,13 +1,17 @@
 # RCT Platform — Public SDK Testing Canonical
 
-**Version:** 1.0.0-alpha  
-**Last Updated:** 2026-04-15  
-**Total SDK Tests:** 142 passed · 0 failed · 0 errors  
+**Version:** 1.0.1a0  
+**Last Updated:** 2026-04-17  
+**Total SDK Tests:** 591 passed · 0 failed · 89% coverage  
 **CI Status:** [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 
 ---
 
 ## 1. Test Matrix
+
+This matrix tracks the reference microservice slice of the SDK test suite. The
+repository-wide total shown above also includes tests under `core/tests`,
+`signedai/tests`, `rct_control_plane/tests`, and top-level `tests/`.
 
 | Microservice | Test File(s) | Tests | Scope |
 |---|---|---|---|
@@ -87,7 +91,7 @@ pytest --import-mode=importlib microservices/ -v
 
 ## 5. Scope Boundary
 
-These 142 tests cover the **public SDK layer** only:
+These 142 microservice tests are one subset of the **public SDK layer** test suite:
 
 - ✅ 5 reference microservices
 - ✅ Core SDK modules (FDIA, SignedAI, control plane objects)
@@ -103,7 +107,7 @@ These 142 tests cover the **public SDK layer** only:
 
 | Gate | Tool | Threshold |
 |---|---|---|
-| Tests | pytest | All 142 must pass to merge |
+| Tests | pytest | Repository CI must stay green across the full SDK suite |
 | Type check | mypy | Errors fail the build |
 | SAST | bandit | HIGH severity findings fail the build |
 | Secret scan | gitleaks | Any real credential fails the build |

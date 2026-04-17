@@ -4,10 +4,11 @@ build-backend = "setuptools.backends.legacy:build"
 
 [project]
 name = "rct-platform"
-version = "1.0.0a1"
+version = "1.0.1a0"
 description = "RCT Platform — Constitutional AI Operating System SDK"
 readme = "README.md"
 license = { text = "Apache-2.0" }
+authors = [{name = "RCT Labs", email = "team@rctlabs.co"}]
 requires-python = ">=3.10"
 keywords = ["ai", "constitutional-ai", "intent-loop", "signedai", "fdia", "rct"]
 classifiers = [
@@ -25,6 +26,9 @@ dependencies = [
     "pydantic>=2.0",
     "fastapi>=0.110",
     "uvicorn[standard]>=0.29",
+    "click>=8.1.0",
+    "rich>=13.7.0",
+    "cryptography>=41.0.0",
 ]
 
 [project.urls]

@@ -42,6 +42,7 @@ jobs:
         if: matrix.python-version == '3.11'
         with:
           file: ./coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
 
   lint:
@@ -62,12 +63,9 @@ jobs:
           pip install mypy bandit
 
       - name: Bandit security lint
-        # Fail on HIGH severity findings only. Medium/low findings are reported
-        # but do not block the build (-ll = low level and above reported, -lll = high only fails).
-        # Remove --exit-zero once the backlog of findings is triaged and cleared.
+        # Fail CI on HIGH severity findings. Medium/low are reported but allowed.
         run: |
-          bandit -r core/ signedai/ rct_control_plane/ microservices/ \
-            -lll --exit-zero
+          bandit -r core/ signedai/ rct_control_plane/ microservices/ -lll
 
       - name: Mypy type check
         # explicit-package-bases prevents "source file found twice" for sub-packages

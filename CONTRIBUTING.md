@@ -4,7 +4,8 @@ Thank you for your interest in contributing to the RCT Platform!
 
 ## Code of Conduct
 
-By participating in this project, you agree to uphold a respectful and inclusive environment for all contributors.
+By participating in this project, you agree to follow the standards in
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## How to Contribute
 

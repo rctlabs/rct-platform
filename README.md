@@ -1,13 +1,12 @@
 # RCT Platform — Intent-Centric AI Operating System
 
-[![Version](https://img.shields.io/badge/version-1.0.0--alpha-blue)](CHANGELOG.md)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)](pyproject.toml)
-[![SDK Tests](https://img.shields.io/badge/sdk_tests-439%20passed-brightgreen)](microservices/)
 [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 [![Security](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml)
+[![codecov](https://codecov.io/gh/rctlabs/rct-platform/branch/main/graph/badge.svg)](https://codecov.io/gh/rctlabs/rct-platform)
+[![Version](https://img.shields.io/badge/version-1.0.1a0-blue)](CHANGELOG.md)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)](pyproject.toml)
 [![Status](https://img.shields.io/badge/status-PUBLIC%20ALPHA-orange)](CHANGELOG.md)
-[![Regional](https://img.shields.io/badge/regional-ASEAN%20%2B%20JP%2FKR%2FCN%20🌏-orange)](core/regional_adapter/)
 [![Website](https://img.shields.io/badge/website-rctlabs.co-brightgreen)](https://rctlabs.co)
 
 ## Intent-Centric AI Operating System — Constitutional Architecture
@@ -89,7 +88,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 | Metric | Value |
 |--------|-------|
-| **SDK Tests (this repo)** | 142 passed · 0 failed · 0 errors — 5 microservices test suites |
+| **SDK Tests (this repo)** | 591 passed · 0 failed · 89% coverage — full SDK test suite |
 | **Algorithms** | 41 (Tier 1–9, reference implementations) |
 | **LLM Models** | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | **Hallucination Rate** | 0.3% (vs industry 12–15%) — 97% reduction via SignedAI |
@@ -100,7 +99,8 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 | **Universal Adapters** | 13 (Home Assistant, Terraform, n8n, Obsidian, Playwright, ...) |
 | **FDIA Accuracy** | 0.92 (industry baseline: ~0.65) |
 
-> **142 (SDK Tests)** = tests included in this open-source SDK repo, covering the 5 reference microservices.
+> **591 tests** currently pass across the public SDK suite. Of these, **142 tests**
+> cover the 5 reference microservices directly.
 
 ---
 
@@ -108,13 +108,13 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
-│              RCT PLATFORM SDK v1.0.0-alpha               │
+│               RCT PLATFORM SDK v1.0.1a0                  │
 │         Intent-Centric AI Operating System               │
 └──────────────────────────────────────────────────────────┘
 
 Layer 11: CI/CD & Quality Gates
 ├─ GitHub Actions (ci.yml + security-scan.yml)
-├─ 142 passing tests in microservices suite
+├─ 591 passing tests · 89% coverage · Python 3.10/3.11/3.12
 └─ E2E integration tests (no Docker required)
 
 Layer 10: Enterprise Hardening

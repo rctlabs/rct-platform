@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.1-alpha] - 2026-04-16
+## [1.0.1a0] - 2026-04-17
 
 ### Fixed
 - `FDIAScorer.score_action()` now accepts legacy `other_agents_intents` (dict) and `governance_score` kwargs; `world_resources` is now optional (default `{}`)
@@ -24,8 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - CI `--cov-fail-under` raised from `20` → `70` (actual coverage: 71%)
-- Test suite: 141 → **439 passed**, 0 failures
-- Coverage: 28% → **71%**
+- Test suite: 141 → **591 passed**, 0 failures
+- Coverage: 28% → **89%**
 - `pyproject.toml` testpaths now includes all test directories
 
 ## [1.0.0-alpha] - 2026-04-13
