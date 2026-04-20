@@ -12,13 +12,13 @@
         <meta name="author" content="Ittirit Saengow (RCT Labs)">
       
       
-        <link rel="canonical" href="https://rctlabs.co/docs/concepts/intent-loop/">
+        <link rel="canonical" href="https://rctlabs.co/docs/architecture/KERNEL_RFC_005_SYSCALL/">
       
       
-        <link rel="prev" href="../signedai/">
+        <link rel="prev" href="../KERNEL_RFC_004_IPC/">
       
       
-        <link rel="next" href="../governance/">
+        <link rel="next" href="../KERNEL_RFC_006_FAULT_ISOLATION/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Intent Loop - RCT Platform</title>
+        <title>RFC-005 Syscall & Capabilities - RCT Platform</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#intent-loop" class="md-skip">
+        <a href="#rfc-005-syscall-interface-capability-model" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Intent Loop
+              RFC-005 Syscall & Capabilities
             
           </span>
         </div>
@@ -269,13 +269,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../jitna/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../concepts/jitna/" class="md-tabs__link">
           
   
   
@@ -311,11 +309,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION/" class="md-tabs__link">
           
   
   
@@ -616,31 +616,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
@@ -658,7 +653,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -676,7 +671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../jitna/" class="md-nav__link">
+      <a href="../../concepts/jitna/" class="md-nav__link">
         
   
   
@@ -704,7 +699,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fdia/" class="md-nav__link">
+      <a href="../../concepts/fdia/" class="md-nav__link">
         
   
   
@@ -732,7 +727,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rct-7-thinking/" class="md-nav__link">
+      <a href="../../concepts/rct-7-thinking/" class="md-nav__link">
         
   
   
@@ -760,7 +755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../concepts/architecture/" class="md-nav__link">
         
   
   
@@ -788,7 +783,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../signedai/" class="md-nav__link">
+      <a href="../../concepts/signedai/" class="md-nav__link">
         
   
   
@@ -813,37 +808,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Intent Loop
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../concepts/intent-loop/" class="md-nav__link">
         
   
   
@@ -859,87 +827,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-7-state-pipeline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The 7-State Pipeline
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The 7-State Pipeline">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#state-transitions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        State Transitions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#performance-characteristics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Performance Characteristics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#intentstate-usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        IntentState Usage
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#observability" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Observability
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -952,7 +839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../governance/" class="md-nav__link">
+      <a href="../../concepts/governance/" class="md-nav__link">
         
   
   
@@ -1099,26 +986,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -1136,7 +1028,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1154,7 +1046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION/" class="md-nav__link">
+      <a href="../RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION/" class="md-nav__link">
         
   
   
@@ -1182,7 +1074,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/KERNEL_RFC_002_PROCESS_MODEL/" class="md-nav__link">
+      <a href="../KERNEL_RFC_002_PROCESS_MODEL/" class="md-nav__link">
         
   
   
@@ -1210,7 +1102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/KERNEL_RFC_003_SCHEDULER/" class="md-nav__link">
+      <a href="../KERNEL_RFC_003_SCHEDULER/" class="md-nav__link">
         
   
   
@@ -1238,7 +1130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/KERNEL_RFC_004_IPC/" class="md-nav__link">
+      <a href="../KERNEL_RFC_004_IPC/" class="md-nav__link">
         
   
   
@@ -1263,10 +1155,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../architecture/KERNEL_RFC_005_SYSCALL/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-005 Syscall & Capabilities
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1282,6 +1201,237 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Motivation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Specification
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-syscallcode-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. SyscallCode Enumeration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-kernelcapability-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. KernelCapability Token
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. KernelCapability Token">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capability-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capability Checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-capabilityregistry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. CapabilityRegistry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. CapabilityRegistry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-grant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default Grant
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-syscallresult" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. SyscallResult
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-kernelsyscallinterface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. KernelSyscallInterface
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. KernelSyscallInterface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syscall-execution-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syscall Execution Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syscall-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syscall Implementations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-audit-log-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Audit Log &amp; Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-cross-component-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Cross-Component Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Coverage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interaction-with-other-rfcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interaction with Other RFCs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backward-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backward Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1294,7 +1444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/KERNEL_RFC_006_FAULT_ISOLATION/" class="md-nav__link">
+      <a href="../KERNEL_RFC_006_FAULT_ISOLATION/" class="md-nav__link">
         
   
   
@@ -1737,129 +1887,345 @@
   
 
 
-<h1 id="intent-loop">Intent Loop<a class="headerlink" href="#intent-loop" title="Permanent link">&para;</a></h1>
-<p><strong>The 7-state pipeline that processes every user intent from receipt to commitment.</strong></p>
+<h1 id="rfc-005-syscall-interface-capability-model">RFC-005: Syscall Interface &amp; Capability Model<a class="headerlink" href="#rfc-005-syscall-interface-capability-model" title="Permanent link">&para;</a></h1>
+<p><strong>Status:</strong> Draft<br />
+<strong>Authors:</strong> RCT Kernel Team<br />
+<strong>Created:</strong> 2026-02-26<br />
+<strong>Layer:</strong> OS Primitive (API Boundary)<br />
+<strong>Implements:</strong> <code>core/kernel/syscall.py</code> (Plan 29)<br />
+<strong>Test Evidence:</strong> <code>tests/kernel/test_syscall.py</code> (34 tests)<br />
+<strong>Depends on:</strong> RFC-002 (ProcessTable), RFC-003 (Scheduler), RFC-004 (IPC/MessageBus)</p>
 <hr />
-<h2 id="the-7-state-pipeline">The 7-State Pipeline<a class="headerlink" href="#the-7-state-pipeline" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>RECEIVED → VALIDATED → MEMORY_CHECK → COMPUTING
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>         → VERIFYING → COMMITTING   → COMPLETED
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                     ↓
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                               (or REJECTED at any gate)
-</span></code></pre></div>
-<h3 id="state-transitions">State Transitions<a class="headerlink" href="#state-transitions" title="Permanent link">&para;</a></h3>
+<h2 id="abstract">Abstract<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
+<p>This RFC formalizes the Kernel Syscall Interface — the single API boundary
+through which all agent-to-kernel interactions must flow. Every operation that
+modifies kernel state (resource allocation, agent spawn, memory commit, message
+send) goes through capability-checked, quota-validated, audit-logged syscalls.</p>
+<p>Direct WorldState mutation is <strong>no longer permitted by convention.</strong> All state
+changes are mediated by the syscall layer.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>Without a formal syscall boundary:</p>
+<ul>
+<li><strong>No access control</strong> — any agent can modify any resource without permission</li>
+<li><strong>No quota enforcement</strong> — agents can allocate unlimited resources</li>
+<li><strong>No audit trail</strong> — state changes are invisible to governance</li>
+<li><strong>No latency tracking</strong> — impossible to profile kernel operations</li>
+</ul>
+<p>The Syscall Interface solves all four problems by interposing a capability-checked
+gateway between agents and kernel state.</p>
+<h2 id="specification">Specification<a class="headerlink" href="#specification" title="Permanent link">&para;</a></h2>
+<h3 id="1-syscallcode-enumeration">1. SyscallCode Enumeration<a class="headerlink" href="#1-syscallcode-enumeration" title="Permanent link">&para;</a></h3>
+<p>10 syscall codes covering all kernel operations:</p>
 <table>
 <thead>
 <tr>
-<th>State</th>
-<th>What Happens</th>
-<th>Gate</th>
+<th>Code</th>
+<th>Description</th>
+<th>Modifies State?</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>RECEIVED</strong></td>
-<td>JITNAPacket arrives at control plane</td>
-<td>—</td>
+<td><code>SYS_ALLOC</code></td>
+<td>Reserve resources from world pool</td>
+<td>Yes</td>
 </tr>
 <tr>
-<td><strong>VALIDATED</strong></td>
-<td>FDIA score computed: <code>F = D^I × A</code></td>
-<td>Score &lt; threshold → REJECTED</td>
+<td><code>SYS_RELEASE</code></td>
+<td>Release resources back to pool</td>
+<td>Yes</td>
 </tr>
 <tr>
-<td><strong>MEMORY_CHECK</strong></td>
-<td>Delta Engine queried for similar past intents</td>
-<td>Cache hit → skip COMPUTING</td>
+<td><code>SYS_SPAWN</code></td>
+<td>Spawn a new agent process</td>
+<td>Yes</td>
 </tr>
 <tr>
-<td><strong>COMPUTING</strong></td>
-<td>Multi-step DSL graph executed</td>
-<td>Error → REJECTED</td>
+<td><code>SYS_TERMINATE</code></td>
+<td>Terminate an agent process</td>
+<td>Yes</td>
 </tr>
 <tr>
-<td><strong>VERIFYING</strong></td>
-<td>SignedAI consensus across N models</td>
-<td>Consensus &lt; threshold → REJECTED</td>
+<td><code>SYS_COMMIT_DELTA</code></td>
+<td>Commit memory delta</td>
+<td>Yes</td>
 </tr>
 <tr>
-<td><strong>COMMITTING</strong></td>
-<td>ED25519-signed result written to RCTDB</td>
-<td>Write failure → REJECTED</td>
+<td><code>SYS_ROLLBACK</code></td>
+<td>Rollback memory state</td>
+<td>Yes</td>
 </tr>
 <tr>
-<td><strong>COMPLETED</strong></td>
-<td>Result returned + delta stored in memory</td>
-<td>—</td>
+<td><code>SYS_QUERY</code></td>
+<td>Query resource availability</td>
+<td>No (read-only)</td>
+</tr>
+<tr>
+<td><code>SYS_SEND_MSG</code></td>
+<td>Send IPC message</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>SYS_CHECKPOINT</code></td>
+<td>Force memory checkpoint</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>SYS_GET_STATE</code></td>
+<td>Read own agent state</td>
+<td>No (read-only)</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="performance-characteristics">Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permanent link">&para;</a></h2>
+<h3 id="2-kernelcapability-token">2. KernelCapability Token<a class="headerlink" href="#2-kernelcapability-token" title="Permanent link">&para;</a></h3>
+<p>Per-agent permission token controlling syscall access:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@dataclass</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">KernelCapability</span><span class="p">:</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">pid</span><span class="p">:</span> <span class="nb">int</span>                              <span class="c1"># Owner PID</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">allowed_syscalls</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">SyscallCode</span><span class="p">]</span>    <span class="c1"># Permitted syscall codes</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">resource_quotas</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>     <span class="c1"># {resource_id: max_amount}</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">expires_at_tick</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>        <span class="c1"># None = never expires</span>
+</span></code></pre></div>
+<h4 id="capability-checks">Capability Checks<a class="headerlink" href="#capability-checks" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Existence</strong> — PID must have a registered capability token</li>
+<li><strong>Expiry</strong> — Token must not be expired (tick &gt; expires_at_tick)</li>
+<li><strong>Syscall permission</strong> — Requested syscall code must be in <code>allowed_syscalls</code></li>
+<li><strong>Quota</strong> — Requested resource amount must be within <code>resource_quotas</code></li>
+</ol>
+<p>If any check fails, the syscall returns <code>SyscallResult(success=False)</code> with
+a diagnostic <code>error</code> string.</p>
+<h3 id="3-capabilityregistry">3. CapabilityRegistry<a class="headerlink" href="#3-capabilityregistry" title="Permanent link">&para;</a></h3>
+<p>Central registry managing all agent capabilities:</p>
 <table>
 <thead>
 <tr>
-<th>Path</th>
-<th>Latency</th>
-<th>When</th>
+<th>Operation</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Cold Start</strong></td>
-<td>3–5 seconds</td>
-<td>Full computation + SignedAI consensus</td>
+<td><code>grant(pid, syscalls, quotas, expires)</code></td>
+<td>Grant capabilities (replaces existing)</td>
 </tr>
 <tr>
-<td><strong>Warm Recall</strong></td>
-<td>&lt;50ms</td>
-<td>Memory hit (semantic similarity &gt; 0.95)</td>
+<td><code>grant_default(pid, resources)</code></td>
+<td>Full access with default quotas (200.0 per resource)</td>
 </tr>
 <tr>
-<td><strong>Cost Trend</strong></td>
-<td>→ $0</td>
-<td>As memory fills with past intents</td>
+<td><code>revoke(pid)</code></td>
+<td>Revoke all capabilities for PID</td>
+</tr>
+<tr>
+<td><code>check(pid, code, tick)</code></td>
+<td>Validate capability for syscall at tick</td>
+</tr>
+<tr>
+<td><code>revoke_expired(tick)</code></td>
+<td>Bulk revoke expired tokens</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition tip">
-<p class="admonition-title">Memory Cache Effect</p>
-<p>Once an intent pattern appears in the Delta Engine, subsequent calls with &gt;95% semantic similarity skip COMPUTING and VERIFYING entirely — jumping straight from MEMORY_CHECK to COMPLETED. This is why cost decreases as the system learns.</p>
-</div>
-<hr />
-<h2 id="intentstate-usage">IntentState Usage<a class="headerlink" href="#intentstate-usage" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.intent_schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntentObject</span><span class="p">,</span> <span class="n">IntentState</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">intent</span> <span class="o">=</span> <span class="n">IntentObject</span><span class="p">(</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">intent_text</span><span class="o">=</span><span class="s2">&quot;Deploy authentication service to staging&quot;</span><span class="p">,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">domain</span><span class="o">=</span><span class="s2">&quot;backend-engineering&quot;</span><span class="p">,</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">architect_constraint</span><span class="o">=</span><span class="s2">&quot;No production database changes&quot;</span><span class="p">,</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">requirements</span><span class="o">=</span><span class="s2">&quot;All tests pass, &lt;500ms p99 response time&quot;</span><span class="p">,</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">)</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># Compile through the loop</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.intent_compiler</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntentCompiler</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">compiler</span> <span class="o">=</span> <span class="n">IntentCompiler</span><span class="p">()</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">result</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;State: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">state</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>            <span class="c1"># → IntentState.COMPLETED</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duration: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">duration_ms</span><span class="si">}</span><span class="s2">ms&quot;</span><span class="p">)</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;From cache: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">cache_hit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<h4 id="default-grant">Default Grant<a class="headerlink" href="#default-grant" title="Permanent link">&para;</a></h4>
+<p><code>grant_default()</code> provides full access to all 10 syscall codes with a
+per-resource quota of 200.0 units. This is the standard grant for newly
+spawned agents.</p>
+<h3 id="4-syscallresult">4. SyscallResult<a class="headerlink" href="#4-syscallresult" title="Permanent link">&para;</a></h3>
+<p>Standardized return type for every kernel syscall:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@dataclass</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">SyscallResult</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span>                    <span class="c1"># Whether syscall succeeded</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">syscall_code</span><span class="p">:</span> <span class="n">SyscallCode</span>        <span class="c1"># Which syscall was called</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">pid</span><span class="p">:</span> <span class="nb">int</span>                         <span class="c1"># Caller&#39;s PID</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">tick</span><span class="p">:</span> <span class="nb">int</span>                        <span class="c1"># Tick at call time</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">payload</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>          <span class="c1"># Syscall-specific return data</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>             <span class="c1"># Error message (None if success)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">latency_us</span><span class="p">:</span> <span class="nb">int</span>                  <span class="c1"># Execution time in microseconds</span>
 </span></code></pre></div>
-<hr />
-<h2 id="observability">Observability<a class="headerlink" href="#observability" title="Permanent link">&para;</a></h2>
-<p>Every state transition is emitted as a structured log event:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;intent_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int_abc123&quot;</span><span class="p">,</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;tick&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1714230000</span><span class="p">,</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;from_state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VALIDATED&quot;</span><span class="p">,</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;to_state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEMORY_CHECK&quot;</span><span class="p">,</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">&quot;fdia_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.847</span><span class="p">,</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">&quot;cache_hit&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="nt">&quot;duration_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
+<p>Every syscall updates <code>latency_us</code> using <code>time.perf_counter_ns()</code> for
+sub-microsecond precision.</p>
+<h3 id="5-kernelsyscallinterface">5. KernelSyscallInterface<a class="headerlink" href="#5-kernelsyscallinterface" title="Permanent link">&para;</a></h3>
+<p>The unified gateway class. Constructor dependencies:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">KernelSyscallInterface</span><span class="p">(</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">world</span><span class="p">:</span> <span class="n">WorldState</span><span class="p">,</span>                  <span class="c1"># Resource pools</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">process_table</span><span class="p">:</span> <span class="n">ProcessTable</span><span class="p">,</span>        <span class="c1"># Agent registry (RFC-002)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">memory_engine</span><span class="p">:</span> <span class="n">MemoryDeltaEngine</span><span class="p">,</span>   <span class="c1"># Memory delta layer</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">message_bus</span><span class="p">:</span> <span class="n">KernelMessageBus</span><span class="p">,</span>      <span class="c1"># IPC layer (RFC-004, optional)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">capability_registry</span><span class="p">:</span> <span class="n">CapabilityRegistry</span>  <span class="c1"># Permission management</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">)</span>
 </span></code></pre></div>
-<p>Events are collected by <code>rct_control_plane/observability.py</code> and can be streamed to any OTEL-compatible backend.</p>
+<h4 id="syscall-execution-pipeline">Syscall Execution Pipeline<a class="headerlink" href="#syscall-execution-pipeline" title="Permanent link">&para;</a></h4>
+<p>Every syscall follows the same pipeline:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Agent → sys_*(pid, ..., tick)
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  ├── 1. Capability check (allowed_syscalls, expiry)
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  ├── 2. Quota check (resource_quotas)
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  ├── 3. Execute operation
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  ├── 4. Record latency
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  └── 5. Append to audit log → SyscallResult
+</span></code></pre></div>
+<h4 id="syscall-implementations">Syscall Implementations<a class="headerlink" href="#syscall-implementations" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Syscall</th>
+<th>Parameters</th>
+<th>Returns in Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sys_alloc</code></td>
+<td>pid, resource_id, amount, tick</td>
+<td>resource_id, amount, reserved</td>
+</tr>
+<tr>
+<td><code>sys_release</code></td>
+<td>pid, resource_id, amount, tick</td>
+<td>resource_id, amount</td>
+</tr>
+<tr>
+<td><code>sys_query</code></td>
+<td>pid, resource_id, tick</td>
+<td>available, capacity, utilization</td>
+</tr>
+<tr>
+<td><code>sys_spawn</code></td>
+<td>pid, child_agent_id, intent, role, tick</td>
+<td>child_pid, child_agent_id</td>
+</tr>
+<tr>
+<td><code>sys_terminate</code></td>
+<td>pid, target_pid, tick</td>
+<td>target_pid</td>
+</tr>
+<tr>
+<td><code>sys_commit_delta</code></td>
+<td>pid, agent_id, tick, **delta_kwargs</td>
+<td>agent_id</td>
+</tr>
+<tr>
+<td><code>sys_rollback</code></td>
+<td>pid, to_tick, tick</td>
+<td>rolled_back_to</td>
+</tr>
+<tr>
+<td><code>sys_send_msg</code></td>
+<td>pid, receiver_pid, intent, payload, tick</td>
+<td>receiver_pid, status</td>
+</tr>
+<tr>
+<td><code>sys_checkpoint</code></td>
+<td>pid, tick</td>
+<td>total_deltas</td>
+</tr>
+<tr>
+<td><code>sys_get_state</code></td>
+<td>pid, tick</td>
+<td>AgentDescriptor.to_dict()</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-audit-log-metrics">6. Audit Log &amp; Metrics<a class="headerlink" href="#6-audit-log-metrics" title="Permanent link">&para;</a></h3>
+<p>All syscall results are appended to <code>_audit_log: List[SyscallResult]</code>.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_audit_log</span><span class="p">(</span><span class="n">pid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_syscall_metrics</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</span></code></pre></div>
+<p>Metrics tracked:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>total_calls</code></td>
+<td>Total syscalls executed</td>
+</tr>
+<tr>
+<td><code>denied_calls</code></td>
+<td>Capability/quota denials</td>
+</tr>
+<tr>
+<td><code>by_code</code></td>
+<td>Per-syscall-code execution counts</td>
+</tr>
+<tr>
+<td><code>denied_by_code</code></td>
+<td>Per-syscall-code denial counts</td>
+</tr>
+<tr>
+<td><code>avg_latency_us</code></td>
+<td>Average syscall latency (microseconds)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-cross-component-integration">7. Cross-Component Integration<a class="headerlink" href="#7-cross-component-integration" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>┌──────────────┐     ┌─────────────────────┐     ┌───────────────┐
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>│  Agent Code  │────▶│ KernelSyscallInterface │────▶│  WorldState   │
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>└──────────────┘     │                     │     │  ProcessTable │
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>                     │  1. Check Capability│     │  MemoryEngine │
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>                     │  2. Check Quota     │     │  MessageBus   │
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>                     │  3. Execute         │     └───────────────┘
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>                     │  4. Audit Log       │
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>                     └─────────────────────┘
+</span></code></pre></div>
+<h2 id="test-coverage">Test Coverage<a class="headerlink" href="#test-coverage" title="Permanent link">&para;</a></h2>
+<p>34 tests in <code>tests/kernel/test_syscall.py</code> covering:</p>
+<ul>
+<li>All 10 syscall codes execution (success path)</li>
+<li>Capability denial for each syscall code</li>
+<li>Quota exceeded rejection (SYS_ALLOC)</li>
+<li>Expired capability token handling</li>
+<li>SYS_SPAWN creates child with correct parent PID</li>
+<li>SYS_TERMINATE cleans up mailbox (IPC integration)</li>
+<li>SYS_SEND_MSG delivers through MessageBus</li>
+<li>Audit log recording for every syscall</li>
+<li>Latency measurement (non-zero latency_us)</li>
+<li>Metrics accumulation (total_calls, denied_calls, by_code)</li>
+<li>CapabilityRegistry grant/revoke/check operations</li>
+<li>Bulk expired capability revocation</li>
+</ul>
+<h2 id="interaction-with-other-rfcs">Interaction with Other RFCs<a class="headerlink" href="#interaction-with-other-rfcs" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>RFC</th>
+<th>Relationship</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RFC-002</td>
+<td>SYS_SPAWN/SYS_TERMINATE modify ProcessTable</td>
+</tr>
+<tr>
+<td>RFC-003</td>
+<td>SYS_GET_STATE reads scheduler-relevant agent state</td>
+</tr>
+<tr>
+<td>RFC-004</td>
+<td>SYS_SEND_MSG wraps KernelMessageBus.send() with capability check</td>
+</tr>
+<tr>
+<td>RFC-006</td>
+<td>Fault Isolation may revoke capabilities for faulted agents</td>
+</tr>
+<tr>
+<td>RFC-001</td>
+<td>JITNA negotiation uses SYS_SEND_MSG for message transport</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility">Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Full backward compatibility.</strong> The syscall interface is an additive layer.
+  Existing code that directly accesses WorldState will continue to work, but
+  new code SHOULD use syscalls for audit and access control.</li>
+<li>No existing function signatures are changed.</li>
+</ul>
 
 
 
@@ -1895,7 +2261,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../signedai/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SignedAI Consensus">
+          <a href="../KERNEL_RFC_004_IPC/" class="md-footer__link md-footer__link--prev" aria-label="Previous: RFC-004 IPC Message Bus">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1905,20 +2271,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                SignedAI Consensus
+                RFC-004 IPC Message Bus
               </div>
             </div>
           </a>
         
         
           
-          <a href="../governance/" class="md-footer__link md-footer__link--next" aria-label="Next: Governance">
+          <a href="../KERNEL_RFC_006_FAULT_ISOLATION/" class="md-footer__link md-footer__link--next" aria-label="Next: RFC-006 Fault Isolation">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Governance
+                RFC-006 Fault Isolation
               </div>
             </div>
             <div class="md-footer__button md-icon">

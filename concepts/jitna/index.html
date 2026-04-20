@@ -12,13 +12,13 @@
         <meta name="author" content="Ittirit Saengow (RCT Labs)">
       
       
-        <link rel="canonical" href="https://rctlabs.co/docs/concepts/intent-loop/">
+        <link rel="canonical" href="https://rctlabs.co/docs/concepts/jitna/">
       
       
-        <link rel="prev" href="../signedai/">
+        <link rel="prev" href="../../getting-started/quickstart/">
       
       
-        <link rel="next" href="../governance/">
+        <link rel="next" href="../fdia/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Intent Loop - RCT Platform</title>
+        <title>JITNA Protocol - RCT Platform</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#intent-loop" class="md-skip">
+        <a href="#jitna-just-in-time-nodal-assembly" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Intent Loop
+              JITNA Protocol
             
           </span>
         </div>
@@ -275,7 +275,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../jitna/" class="md-tabs__link">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -673,10 +673,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../jitna/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JITNA Protocol
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -692,6 +719,209 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-three-layer-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Three-Layer Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-2-the-6-field-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 2: The 6-Field Language
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layer 2: The 6-Field Language">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-software-engineering-intent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Software Engineering Intent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-data-analysis-intent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Data Analysis Intent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-1-the-protocol-rfc-001-v20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 1: The Protocol (RFC-001 v2.0)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-negotiation-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Negotiation Pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jitna-vs-tool-calling-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JITNA vs Tool-Calling APIs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-the-rct-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration with the RCT Ecosystem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration with the RCT Ecosystem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jitna-fdia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JITNA + FDIA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jitna-signedai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JITNA + SignedAI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jitna-rctdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JITNA + RCTDB
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-the-9-codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security: The 9 Codex
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security: The 9 Codex">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#security-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Levels
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Further Reading
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -813,37 +1043,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Intent Loop
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../intent-loop/" class="md-nav__link">
         
   
   
@@ -859,87 +1062,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-7-state-pipeline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The 7-State Pipeline
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The 7-State Pipeline">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#state-transitions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        State Transitions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#performance-characteristics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Performance Characteristics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#intentstate-usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        IntentState Usage
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#observability" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Observability
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1737,129 +1859,342 @@
   
 
 
-<h1 id="intent-loop">Intent Loop<a class="headerlink" href="#intent-loop" title="Permanent link">&para;</a></h1>
-<p><strong>The 7-state pipeline that processes every user intent from receipt to commitment.</strong></p>
+<h1 id="jitna-just-in-time-nodal-assembly">JITNA — Just In Time Nodal Assembly<a class="headerlink" href="#jitna-just-in-time-nodal-assembly" title="Permanent link">&para;</a></h1>
+<p><strong>"The HTTP of Agentic AI"</strong></p>
+<p>JITNA is the open communication protocol of the RCT Ecosystem. It defines how AI agents discover each other, negotiate tasks, execute work, and verify results — without any permanent agent hierarchy or pre-configured workflows.</p>
+<p>The name captures the core design principle:</p>
+<table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Word</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>J</strong></td>
+<td>Just</td>
+<td>เพียงแค่</td>
+</tr>
+<tr>
+<td><strong>I</strong></td>
+<td>In</td>
+<td>ใน</td>
+</tr>
+<tr>
+<td><strong>T</strong></td>
+<td>Time</td>
+<td>เวลา / ทันเวลา</td>
+</tr>
+<tr>
+<td><strong>N</strong></td>
+<td>Nodal</td>
+<td>ของโหนด / node-based</td>
+</tr>
+<tr>
+<td><strong>A</strong></td>
+<td>Assembly</td>
+<td>การประกอบ / การรวมตัว</td>
+</tr>
+</tbody>
+</table>
+<p>Agents are <strong>assembled into working groups just in time</strong> based on the intent of the current task, then dissolved when the task completes.</p>
 <hr />
-<h2 id="the-7-state-pipeline">The 7-State Pipeline<a class="headerlink" href="#the-7-state-pipeline" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>RECEIVED → VALIDATED → MEMORY_CHECK → COMPUTING
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>         → VERIFYING → COMMITTING   → COMPLETED
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                     ↓
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                               (or REJECTED at any gate)
+<h2 id="the-three-layer-architecture">The Three-Layer Architecture<a class="headerlink" href="#the-three-layer-architecture" title="Permanent link">&para;</a></h2>
+<p>JITNA is not a single class or file. It is a three-layer system where each layer has a distinct role:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌──────────────────────────────────────────────────────────────────┐
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│  Layer 1 — JITNA PROTOCOL (RFC-001 v2.0)                        │
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│  Technical name: &quot;Just-In-Time Network Actuation&quot;               │
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│  Role: Wire format for AI-to-AI communication                   │
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│  File: rct_control_plane/jitna_protocol.py                      │
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│  Structure: header + intent + payload + validation              │
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│  Security: Ed25519 signatures, The 9 Codex                      │
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├──────────────────────────────────────────────────────────────────┤
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│  Layer 2 — JITNA LANGUAGE (6-field templates)                   │
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│  Role: Structured intent communication format                   │
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│  Fields: I / D / Δ / A / R / M                                  │
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│  Used for: prompts, memory tagging, vault metadata, RCTDB        │
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│  Templates: 50+ workflow templates available                    │
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>├──────────────────────────────────────────────────────────────────┤
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│  Layer 3 — JITNA INTAKE (user-facing)                           │
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│  Role: Simplified front-door for user intent                    │
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│  File: microservices/intent-loop/loop_engine.py                 │
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│  Structure: intent (str) + context (dict) + compute_hash()      │
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>└──────────────────────────────────────────────────────────────────┘
 </span></code></pre></div>
-<h3 id="state-transitions">State Transitions<a class="headerlink" href="#state-transitions" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>State</th>
-<th>What Happens</th>
-<th>Gate</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>RECEIVED</strong></td>
-<td>JITNAPacket arrives at control plane</td>
-<td>—</td>
-</tr>
-<tr>
-<td><strong>VALIDATED</strong></td>
-<td>FDIA score computed: <code>F = D^I × A</code></td>
-<td>Score &lt; threshold → REJECTED</td>
-</tr>
-<tr>
-<td><strong>MEMORY_CHECK</strong></td>
-<td>Delta Engine queried for similar past intents</td>
-<td>Cache hit → skip COMPUTING</td>
-</tr>
-<tr>
-<td><strong>COMPUTING</strong></td>
-<td>Multi-step DSL graph executed</td>
-<td>Error → REJECTED</td>
-</tr>
-<tr>
-<td><strong>VERIFYING</strong></td>
-<td>SignedAI consensus across N models</td>
-<td>Consensus &lt; threshold → REJECTED</td>
-</tr>
-<tr>
-<td><strong>COMMITTING</strong></td>
-<td>ED25519-signed result written to RCTDB</td>
-<td>Write failure → REJECTED</td>
-</tr>
-<tr>
-<td><strong>COMPLETED</strong></td>
-<td>Result returned + delta stored in memory</td>
-<td>—</td>
-</tr>
-</tbody>
-</table>
 <hr />
-<h2 id="performance-characteristics">Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permanent link">&para;</a></h2>
+<h2 id="layer-2-the-6-field-language">Layer 2: The 6-Field Language<a class="headerlink" href="#layer-2-the-6-field-language" title="Permanent link">&para;</a></h2>
+<p>The JITNA Language provides a canonical 6-field schema for structuring any intent:</p>
 <table>
 <thead>
 <tr>
-<th>Path</th>
-<th>Latency</th>
-<th>When</th>
+<th>Field</th>
+<th>Name</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Cold Start</strong></td>
-<td>3–5 seconds</td>
-<td>Full computation + SignedAI consensus</td>
+<td><strong>I</strong></td>
+<td>Intent</td>
+<td>เป้าหมายหลัก — what the agent ultimately wants to achieve</td>
 </tr>
 <tr>
-<td><strong>Warm Recall</strong></td>
-<td>&lt;50ms</td>
-<td>Memory hit (semantic similarity &gt; 0.95)</td>
+<td><strong>D</strong></td>
+<td>Data</td>
+<td>ข้อมูล/ความเป็นจริง — facts and context currently available</td>
 </tr>
 <tr>
-<td><strong>Cost Trend</strong></td>
-<td>→ $0</td>
-<td>As memory fills with past intents</td>
+<td><strong>Δ</strong></td>
+<td>Delta</td>
+<td>ช่องว่าง — the gap or desired change between current and goal state</td>
+</tr>
+<tr>
+<td><strong>A</strong></td>
+<td>Approach</td>
+<td>แนวทาง — the algorithm or strategy to apply</td>
+</tr>
+<tr>
+<td><strong>R</strong></td>
+<td>Reflection</td>
+<td>บทเรียน — lessons learned, feedback, or post-execution review</td>
+</tr>
+<tr>
+<td><strong>M</strong></td>
+<td>Memory</td>
+<td>สิ่งที่ต้องจำ — long-term context to persist across sessions</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition tip">
-<p class="admonition-title">Memory Cache Effect</p>
-<p>Once an intent pattern appears in the Delta Engine, subsequent calls with &gt;95% semantic similarity skip COMPUTING and VERIFYING entirely — jumping straight from MEMORY_CHECK to COMPLETED. This is why cost decreases as the system learns.</p>
+<h3 id="example-software-engineering-intent">Example: Software Engineering Intent<a class="headerlink" href="#example-software-engineering-intent" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">intent</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="s2">&quot;Refactor the authentication module to clean architecture&quot;</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="s2">&quot;Current implementation is 800-line monolith with mixed concerns&quot;</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s2">&quot;Δ&quot;</span><span class="p">:</span> <span class="s2">&quot;Separate domain logic from infrastructure — no API breaking changes&quot;</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="s2">&quot;Apply Hexagonal Architecture pattern with dependency inversion&quot;</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="s2">&quot;Previous refactor attempt failed due to missing interface contracts&quot;</span><span class="p">,</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="s2">&quot;All existing tests must pass; cyclomatic complexity must drop below 10&quot;</span><span class="p">,</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="example-data-analysis-intent">Example: Data Analysis Intent<a class="headerlink" href="#example-data-analysis-intent" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">intent</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="s2">&quot;Identify anomalies in the trading dataset for Q1 2026&quot;</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="s2">&quot;5M rows of tick data; 3% missing values; timezone normalized to UTC+7&quot;</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="s2">&quot;Δ&quot;</span><span class="p">:</span> <span class="s2">&quot;Surface top-20 anomaly events with confidence scores above 0.85&quot;</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="s2">&quot;Isolation Forest + DBSCAN ensemble; weighted by volume spike detection&quot;</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="s2">&quot;Previous IQR method produced 60</span><span class="si">% f</span><span class="s2">alse positives on illiquid hours&quot;</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="s2">&quot;Model threshold 0.85 confirmed by domain expert on 2026-03-10&quot;</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">SignedAI Semantic Layer vs JITNA Language</p>
+<p>The <code>JITNAPacket</code> in <code>signedai/core/models.py</code> uses a different field mapping
+(D=Domain, A=Assumptions, R=Requirements, M=Metrics). That is the <strong>SignedAI
+Semantic Layer</strong> — a verification-focused variant used inside the consensus
+engine. The canonical JITNA Language fields (D=Data, A=Approach, R=Reflection,
+M=Memory) are the primary schema for prompts, memory, and vault tagging.</p>
 </div>
 <hr />
-<h2 id="intentstate-usage">IntentState Usage<a class="headerlink" href="#intentstate-usage" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.intent_schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntentObject</span><span class="p">,</span> <span class="n">IntentState</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">intent</span> <span class="o">=</span> <span class="n">IntentObject</span><span class="p">(</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">intent_text</span><span class="o">=</span><span class="s2">&quot;Deploy authentication service to staging&quot;</span><span class="p">,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">domain</span><span class="o">=</span><span class="s2">&quot;backend-engineering&quot;</span><span class="p">,</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">architect_constraint</span><span class="o">=</span><span class="s2">&quot;No production database changes&quot;</span><span class="p">,</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">requirements</span><span class="o">=</span><span class="s2">&quot;All tests pass, &lt;500ms p99 response time&quot;</span><span class="p">,</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">)</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># Compile through the loop</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.intent_compiler</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntentCompiler</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">compiler</span> <span class="o">=</span> <span class="n">IntentCompiler</span><span class="p">()</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">result</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;State: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">state</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>            <span class="c1"># → IntentState.COMPLETED</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duration: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">duration_ms</span><span class="si">}</span><span class="s2">ms&quot;</span><span class="p">)</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;From cache: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">cache_hit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<h2 id="layer-1-the-protocol-rfc-001-v20">Layer 1: The Protocol (RFC-001 v2.0)<a class="headerlink" href="#layer-1-the-protocol-rfc-001-v20" title="Permanent link">&para;</a></h2>
+<p>Every JITNA communication uses a standardized packet:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># From rct_control_plane/jitna_protocol.py</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@dataclass</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">JITNAPacket</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">packet_id</span><span class="p">:</span> <span class="nb">str</span>           <span class="c1"># UUID v4</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">source_agent_id</span><span class="p">:</span> <span class="nb">str</span>     <span class="c1"># Sender identity</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">target_agent_id</span><span class="p">:</span> <span class="nb">str</span>     <span class="c1"># Receiver identity</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">message_type</span><span class="p">:</span> <span class="nb">str</span>        <span class="c1"># JITNAMessageType enum</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">payload</span><span class="p">:</span> <span class="n">Dict</span>            <span class="c1"># Intent content</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">timestamp</span><span class="p">:</span> <span class="nb">str</span>           <span class="c1"># ISO 8601</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">schema_version</span><span class="p">:</span> <span class="nb">str</span>      <span class="c1"># &quot;2.0&quot;</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">priority</span><span class="p">:</span> <span class="nb">int</span>            <span class="c1"># 1–5 (1 = highest)</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">correlation_id</span><span class="p">:</span> <span class="nb">str</span>      <span class="c1"># For chaining packets</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">signature</span><span class="p">:</span> <span class="nb">str</span>           <span class="c1"># Ed25519 (RFC 8032)</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="n">status</span><span class="p">:</span> <span class="nb">str</span>              <span class="c1"># JITNAStatus enum</span>
+</span></code></pre></div>
+<p>The full specification is in <a href="../../architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION/">RFC-001</a>.</p>
+<hr />
+<h2 id="the-negotiation-pattern">The Negotiation Pattern<a class="headerlink" href="#the-negotiation-pattern" title="Permanent link">&para;</a></h2>
+<p>JITNA agents do not blindly execute instructions — they <strong>negotiate</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Agent A: PROPOSE  → &quot;I need you to analyze this dataset&quot;
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Agent B: COUNTER  → &quot;I can do it, but I need the schema first&quot;
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Agent A: ACCEPT   → &quot;Here is the schema&quot; [attaches schema]
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Agent B: ACCEPT   → &quot;Executing analysis&quot;
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Agent B: COMPLETE → &quot;Analysis complete&quot; [attaches results + signature]
+</span></code></pre></div>
+<p>Or when an agent cannot fulfill the request:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Agent A: PROPOSE  → &quot;Translate this medical document to Thai&quot;
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Agent B: REJECT   → &quot;Not qualified for medical translation&quot;
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Agent A: PROPOSE  → [redirects to Agent C, a medical specialist]
 </span></code></pre></div>
 <hr />
-<h2 id="observability">Observability<a class="headerlink" href="#observability" title="Permanent link">&para;</a></h2>
-<p>Every state transition is emitted as a structured log event:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;intent_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int_abc123&quot;</span><span class="p">,</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;tick&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1714230000</span><span class="p">,</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;from_state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VALIDATED&quot;</span><span class="p">,</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;to_state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEMORY_CHECK&quot;</span><span class="p">,</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">&quot;fdia_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.847</span><span class="p">,</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">&quot;cache_hit&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="nt">&quot;duration_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
+<h2 id="jitna-vs-tool-calling-apis">JITNA vs Tool-Calling APIs<a class="headerlink" href="#jitna-vs-tool-calling-apis" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Tool-Calling APIs</th>
+<th>JITNA Protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Communication model</td>
+<td>Request → Response</td>
+<td>PROPOSE → COUNTER → ACCEPT/REJECT</td>
+</tr>
+<tr>
+<td>Agent autonomy</td>
+<td>None (tools are passive)</td>
+<td>Full (agents can negotiate and refuse)</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td>None built-in</td>
+<td>Ed25519 signed packets</td>
+</tr>
+<tr>
+<td>Replay support</td>
+<td>Not supported</td>
+<td>SHA-256 checkpoint chain</td>
+</tr>
+<tr>
+<td>Multi-agent consensus</td>
+<td>Not supported</td>
+<td>SignedAI integration (Tier S/4/6/8)</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>Hardcoded list</td>
+<td>Dynamic registry with capability matching</td>
+</tr>
+<tr>
+<td>Standardization</td>
+<td>Vendor-specific</td>
+<td>Open RFC (Apache 2.0)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="integration-with-the-rct-ecosystem">Integration with the RCT Ecosystem<a class="headerlink" href="#integration-with-the-rct-ecosystem" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>User Intent
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    │
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    ▼
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>FDIA Validation (F = D^I × A)   ← Validates intent quality
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    │
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    ▼
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>Agent Assembly (JITNA Layer 1)  ← Routes to correct agent set
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    │
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    ▼
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>Negotiation (PROPOSE/COUNTER)   ← Agents agree on approach
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    │
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    ▼
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>Execution (Layer 3 Intake)      ← Specialist processes the task
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    │
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    ▼
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>SignedAI Verification           ← Multi-model consensus
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>    │
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>    ▼
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>RCTDB Commit                    ← Permanent audit trail
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>    │
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>    ▼
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>Output
 </span></code></pre></div>
-<p>Events are collected by <code>rct_control_plane/observability.py</code> and can be streamed to any OTEL-compatible backend.</p>
+<h3 id="jitna-fdia">JITNA + FDIA<a class="headerlink" href="#jitna-fdia" title="Permanent link">&para;</a></h3>
+<p>Every packet's <code>intent</code> field is scored by the FDIA equation (<code>F = D^I × A</code>). If the score falls below threshold, the transaction is blocked before any agent begins work.</p>
+<h3 id="jitna-signedai">JITNA + SignedAI<a class="headerlink" href="#jitna-signedai" title="Permanent link">&para;</a></h3>
+<p>For high-criticality tasks, JITNA routes through SignedAI consensus. Multiple models independently process the task and must reach agreement (Tier 4: 75%, Tier 6: 67%, Tier 8: 75%) before the result is committed.</p>
+<h3 id="jitna-rctdb">JITNA + RCTDB<a class="headerlink" href="#jitna-rctdb" title="Permanent link">&para;</a></h3>
+<p>Every completed JITNA transaction is committed to RCTDB — the 8-dimensional universal memory schema. Any transaction can be replayed from any point. The Delta Engine compresses stored state by 74%.</p>
+<hr />
+<h2 id="security-the-9-codex">Security: The 9 Codex<a class="headerlink" href="#security-the-9-codex" title="Permanent link">&para;</a></h2>
+<p>All JITNA implementations enforce <strong>The 9 Codex</strong> — nine constitutional security rules:</p>
+<ol>
+<li>Never execute commands that modify system security settings</li>
+<li>Always validate digital signatures before execution</li>
+<li>Respect resource constraints and limits</li>
+<li>Log all operations for audit trail</li>
+<li>Never expose sensitive data in responses</li>
+<li>Validate all input parameters for safety</li>
+<li>Implement graceful failure modes</li>
+<li>Enforce time-based expiration of commands</li>
+<li>Maintain principle of least privilege</li>
+</ol>
+<h3 id="security-levels">Security Levels<a class="headerlink" href="#security-levels" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Name</th>
+<th>Operations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>SAFE</td>
+<td>Read-only, no system changes</td>
+</tr>
+<tr>
+<td>2</td>
+<td>RESTRICTED</td>
+<td>Limited changes, sandboxed</td>
+</tr>
+<tr>
+<td>3</td>
+<td>MODERATE</td>
+<td>Standard operations, monitored</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ELEVATED</td>
+<td>Administrative, enhanced logging</td>
+</tr>
+<tr>
+<td>5</td>
+<td>CRITICAL</td>
+<td>System-critical, multi-factor auth</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="key-files">Key Files<a class="headerlink" href="#key-files" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Layer</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rct_control_plane/jitna_protocol.py</code></td>
+<td>1 — Protocol</td>
+<td><code>JITNAPacket</code>, <code>JITNAValidator</code>, <code>JITNANormalizer</code>, <code>JITNAProtocolRegistry</code></td>
+</tr>
+<tr>
+<td><code>signedai/core/models.py</code></td>
+<td>1 — Semantic</td>
+<td><code>JITNAPacket</code> for SignedAI verification context (different field semantics)</td>
+</tr>
+<tr>
+<td><code>microservices/intent-loop/loop_engine.py</code></td>
+<td>3 — Intake</td>
+<td>User-facing <code>JITNAPacket</code>, <code>LoopMetrics</code>, <code>IntentLoopEngine</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="further-reading">Further Reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION/">RFC-001: Open JITNA Protocol Specification</a></li>
+<li><a href="../signedai/">SignedAI Consensus</a> — verification layer using JITNA packets</li>
+<li><a href="../intent-loop/">Intent Loop</a> — Layer 3 intake and the evolutionary intelligence loop</li>
+<li><a href="../fdia/">FDIA Engine</a> — intent scoring that gates every JITNA transaction</li>
+</ul>
 
 
 
@@ -1895,7 +2230,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../signedai/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SignedAI Consensus">
+          <a href="../../getting-started/quickstart/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Quick Start">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1905,20 +2240,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                SignedAI Consensus
+                Quick Start
               </div>
             </div>
           </a>
         
         
           
-          <a href="../governance/" class="md-footer__link md-footer__link--next" aria-label="Next: Governance">
+          <a href="../fdia/" class="md-footer__link md-footer__link--next" aria-label="Next: FDIA Engine">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Governance
+                FDIA Engine
               </div>
             </div>
             <div class="md-footer__button md-icon">

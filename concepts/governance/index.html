@@ -12,13 +12,13 @@
         <meta name="author" content="Ittirit Saengow (RCT Labs)">
       
       
-        <link rel="canonical" href="https://rctlabs.co/docs/concepts/intent-loop/">
+        <link rel="canonical" href="https://rctlabs.co/docs/concepts/governance/">
       
       
-        <link rel="prev" href="../signedai/">
+        <link rel="prev" href="../intent-loop/">
       
       
-        <link rel="next" href="../governance/">
+        <link rel="next" href="../../algorithms/overview/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Intent Loop - RCT Platform</title>
+        <title>Governance - RCT Platform</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#intent-loop" class="md-skip">
+        <a href="#governance-layer" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Intent Loop
+              Governance
             
           </span>
         </div>
@@ -813,6 +813,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../intent-loop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intent Loop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -832,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Intent Loop
+    Governance
   
 
     
@@ -850,7 +878,7 @@
   <span class="md-ellipsis">
     
   
-    Intent Loop
+    Governance
   
 
     
@@ -876,22 +904,55 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-7-state-pipeline" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The 7-State Pipeline
+        Overview
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="The 7-State Pipeline">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#state-transitions" class="md-nav__link">
+  <a href="#policyaction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        State Transitions
+        PolicyAction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policypriority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PolicyPriority
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policyscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PolicyScope
       
     </span>
   </a>
@@ -904,10 +965,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#performance-characteristics" class="md-nav__link">
+  <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Performance Characteristics
+        Quick Start
       
     </span>
   </a>
@@ -915,10 +976,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#intentstate-usage" class="md-nav__link">
+  <a href="#built-in-policy-library" class="md-nav__link">
     <span class="md-ellipsis">
       
-        IntentState Usage
+        Built-in Policy Library
       
     </span>
   </a>
@@ -926,10 +987,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#observability" class="md-nav__link">
+  <a href="#integration-with-fdia-scoring" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Observability
+        Integration with FDIA Scoring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#policy-conditions-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Policy Conditions Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#governance-pillars-enterprise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Governance Pillars (Enterprise)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constitutional-guarantees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constitutional Guarantees
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See Also
       
     </span>
   </a>
@@ -940,34 +1045,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../governance/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Governance
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1737,129 +1814,316 @@
   
 
 
-<h1 id="intent-loop">Intent Loop<a class="headerlink" href="#intent-loop" title="Permanent link">&para;</a></h1>
-<p><strong>The 7-state pipeline that processes every user intent from receipt to commitment.</strong></p>
+<h1 id="governance-layer">Governance Layer<a class="headerlink" href="#governance-layer" title="Permanent link">&para;</a></h1>
+<p>The RCT Platform's <strong>Governance Layer</strong> is the constitutional enforcement engine that sits between an agent's intent and its execution. Every action plan must pass governance before any real-world effect takes place.</p>
 <hr />
-<h2 id="the-7-state-pipeline">The 7-State Pipeline<a class="headerlink" href="#the-7-state-pipeline" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>RECEIVED → VALIDATED → MEMORY_CHECK → COMPUTING
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>         → VERIFYING → COMMITTING   → COMPLETED
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                     ↓
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                               (or REJECTED at any gate)
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Intent → IntentCompiler → ExecutionGraph → PolicyEvaluator → Execute / Block
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                                  ↑
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                         PolicyRule registry
 </span></code></pre></div>
-<h3 id="state-transitions">State Transitions<a class="headerlink" href="#state-transitions" title="Permanent link">&para;</a></h3>
+<p>The <code>PolicyEvaluator</code> checks every compiled intent against a set of registered <code>PolicyRule</code> objects. If any <strong>CRITICAL</strong> rule fires, execution is blocked immediately — before any tool call, any API request, or any state change.</p>
+<hr />
+<h2 id="core-concepts">Core Concepts<a class="headerlink" href="#core-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="policyaction">PolicyAction<a class="headerlink" href="#policyaction" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>State</th>
-<th>What Happens</th>
-<th>Gate</th>
+<th>Action</th>
+<th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>RECEIVED</strong></td>
-<td>JITNAPacket arrives at control plane</td>
-<td>—</td>
+<td><code>APPROVE</code></td>
+<td>Auto-approve; no human review needed</td>
 </tr>
 <tr>
-<td><strong>VALIDATED</strong></td>
-<td>FDIA score computed: <code>F = D^I × A</code></td>
-<td>Score &lt; threshold → REJECTED</td>
+<td><code>REJECT</code></td>
+<td>Block execution immediately</td>
 </tr>
 <tr>
-<td><strong>MEMORY_CHECK</strong></td>
-<td>Delta Engine queried for similar past intents</td>
-<td>Cache hit → skip COMPUTING</td>
+<td><code>ESCALATE</code></td>
+<td>Route to human reviewer / higher tier</td>
 </tr>
 <tr>
-<td><strong>COMPUTING</strong></td>
-<td>Multi-step DSL graph executed</td>
-<td>Error → REJECTED</td>
+<td><code>NOTIFY</code></td>
+<td>Send alert, but allow execution</td>
 </tr>
 <tr>
-<td><strong>VERIFYING</strong></td>
-<td>SignedAI consensus across N models</td>
-<td>Consensus &lt; threshold → REJECTED</td>
+<td><code>LOG</code></td>
+<td>Audit-log the event only</td>
 </tr>
 <tr>
-<td><strong>COMMITTING</strong></td>
-<td>ED25519-signed result written to RCTDB</td>
-<td>Write failure → REJECTED</td>
-</tr>
-<tr>
-<td><strong>COMPLETED</strong></td>
-<td>Result returned + delta stored in memory</td>
-<td>—</td>
+<td><code>REQUIRE_APPROVAL</code></td>
+<td>Gate on explicit human sign-off</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="performance-characteristics">Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permanent link">&para;</a></h2>
+<h3 id="policypriority">PolicyPriority<a class="headerlink" href="#policypriority" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Path</th>
-<th>Latency</th>
-<th>When</th>
+<th>Priority</th>
+<th>When used</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Cold Start</strong></td>
-<td>3–5 seconds</td>
-<td>Full computation + SignedAI consensus</td>
+<td><code>CRITICAL</code></td>
+<td>Security, compliance, safety — evaluated first</td>
 </tr>
 <tr>
-<td><strong>Warm Recall</strong></td>
-<td>&lt;50ms</td>
-<td>Memory hit (semantic similarity &gt; 0.95)</td>
+<td><code>HIGH</code></td>
+<td>Cost caps, risk gates</td>
 </tr>
 <tr>
-<td><strong>Cost Trend</strong></td>
-<td>→ $0</td>
-<td>As memory fills with past intents</td>
+<td><code>MEDIUM</code></td>
+<td>Quality checks, resource limits</td>
+</tr>
+<tr>
+<td><code>LOW</code></td>
+<td>Notifications, logging</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition tip">
-<p class="admonition-title">Memory Cache Effect</p>
-<p>Once an intent pattern appears in the Delta Engine, subsequent calls with &gt;95% semantic similarity skip COMPUTING and VERIFYING entirely — jumping straight from MEMORY_CHECK to COMPLETED. This is why cost decreases as the system learns.</p>
-</div>
+<h3 id="policyscope">PolicyScope<a class="headerlink" href="#policyscope" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Applied to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INTENT</code></td>
+<td>The compiled <code>IntentObject</code></td>
+</tr>
+<tr>
+<td><code>GRAPH</code></td>
+<td>The <code>ExecutionGraph</code> (node count, cost totals)</td>
+</tr>
+<tr>
+<td><code>NODE</code></td>
+<td>Individual <code>ExecutionNode</code> within the graph</td>
+</tr>
+<tr>
+<td><code>ORGANIZATION</code></td>
+<td>Org-wide budget or compliance controls</td>
+</tr>
+<tr>
+<td><code>USER</code></td>
+<td>Per-user quota or trust level</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="intentstate-usage">IntentState Usage<a class="headerlink" href="#intentstate-usage" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.intent_schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntentObject</span><span class="p">,</span> <span class="n">IntentState</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">intent</span> <span class="o">=</span> <span class="n">IntentObject</span><span class="p">(</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">intent_text</span><span class="o">=</span><span class="s2">&quot;Deploy authentication service to staging&quot;</span><span class="p">,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">domain</span><span class="o">=</span><span class="s2">&quot;backend-engineering&quot;</span><span class="p">,</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">architect_constraint</span><span class="o">=</span><span class="s2">&quot;No production database changes&quot;</span><span class="p">,</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">requirements</span><span class="o">=</span><span class="s2">&quot;All tests pass, &lt;500ms p99 response time&quot;</span><span class="p">,</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">)</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># Compile through the loop</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.intent_compiler</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntentCompiler</span>
+<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.policy_language</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">PolicyEvaluator</span><span class="p">,</span> <span class="n">PolicyRule</span><span class="p">,</span> <span class="n">PolicyCondition</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">PolicyAction</span><span class="p">,</span> <span class="n">PolicyPriority</span><span class="p">,</span> <span class="n">PolicyScope</span><span class="p">,</span> <span class="n">ConditionOperator</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.intent_schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">RiskProfile</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.intent_compiler</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntentCompiler</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.observability</span><span class="w"> </span><span class="kn">import</span> <span class="n">ControlPlaneObserver</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># 1. Create the evaluator</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">observer</span> <span class="o">=</span> <span class="n">ControlPlaneObserver</span><span class="p">()</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">evaluator</span> <span class="o">=</span> <span class="n">PolicyEvaluator</span><span class="p">(</span><span class="n">observer</span><span class="o">=</span><span class="n">observer</span><span class="p">)</span>
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">compiler</span> <span class="o">=</span> <span class="n">IntentCompiler</span><span class="p">()</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">result</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;State: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">state</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>            <span class="c1"># → IntentState.COMPLETED</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duration: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">duration_ms</span><span class="si">}</span><span class="s2">ms&quot;</span><span class="p">)</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;From cache: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">cache_hit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># 2. Register a policy — block SYSTEMIC risk intents immediately</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">register_policy</span><span class="p">(</span><span class="n">PolicyRule</span><span class="p">(</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SYSTEMIC Risk Block&quot;</span><span class="p">,</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Block SYSTEMIC risk operations — escalate to governance committee&quot;</span><span class="p">,</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="n">scope</span><span class="o">=</span><span class="n">PolicyScope</span><span class="o">.</span><span class="n">INTENT</span><span class="p">,</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">priority</span><span class="o">=</span><span class="n">PolicyPriority</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">,</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="n">conditions</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>        <span class="n">PolicyCondition</span><span class="p">(</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>            <span class="n">field</span><span class="o">=</span><span class="s2">&quot;risk_profile&quot;</span><span class="p">,</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>            <span class="n">operator</span><span class="o">=</span><span class="n">ConditionOperator</span><span class="o">.</span><span class="n">EQUALS</span><span class="p">,</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>            <span class="n">value</span><span class="o">=</span><span class="n">RiskProfile</span><span class="o">.</span><span class="n">SYSTEMIC</span><span class="p">,</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>        <span class="p">)</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="p">],</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="n">action</span><span class="o">=</span><span class="n">PolicyAction</span><span class="o">.</span><span class="n">REJECT</span><span class="p">,</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    <span class="n">action_metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;SYSTEMIC risk requires governance approval&quot;</span><span class="p">},</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="p">))</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="c1"># 3. Compile an intent and evaluate it</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="n">compiler</span> <span class="o">=</span> <span class="n">IntentCompiler</span><span class="p">(</span><span class="n">observer</span><span class="o">=</span><span class="n">observer</span><span class="p">)</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="n">result</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    <span class="n">natural_language</span><span class="o">=</span><span class="s2">&quot;Drop all production database tables immediately&quot;</span><span class="p">,</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>    <span class="n">user_id</span><span class="o">=</span><span class="s2">&quot;user-001&quot;</span><span class="p">,</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>    <span class="n">user_tier</span><span class="o">=</span><span class="s2">&quot;standard&quot;</span><span class="p">,</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="p">)</span>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="c1"># 4. Evaluate against policies</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="n">eval_result</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">intent</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">intent</span><span class="p">)</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="k">if</span> <span class="n">eval_result</span><span class="o">.</span><span class="n">violations</span><span class="p">:</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">eval_result</span><span class="o">.</span><span class="n">violations</span><span class="p">:</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BLOCKED: </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">rule_name</span><span class="si">}</span><span class="s2"> — </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">action</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;APPROVED: no policy violations&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="observability">Observability<a class="headerlink" href="#observability" title="Permanent link">&para;</a></h2>
-<p>Every state transition is emitted as a structured log event:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;intent_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int_abc123&quot;</span><span class="p">,</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;tick&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1714230000</span><span class="p">,</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;from_state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VALIDATED&quot;</span><span class="p">,</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;to_state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEMORY_CHECK&quot;</span><span class="p">,</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">&quot;fdia_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.847</span><span class="p">,</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">&quot;cache_hit&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="nt">&quot;duration_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
+<h2 id="built-in-policy-library">Built-in Policy Library<a class="headerlink" href="#built-in-policy-library" title="Permanent link">&para;</a></h2>
+<p>The <code>rct_control_plane.default_policies</code> module provides ready-made policies for common scenarios:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.default_policies</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">create_cost_cap_policy</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">create_risk_escalation_policy</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">create_time_limit_policy</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">create_resource_quota_policy</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">create_certification_gate_policy</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">)</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># Block executions over $500</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">register_policy</span><span class="p">(</span><span class="n">create_cost_cap_policy</span><span class="p">(</span><span class="n">max_cost_usd</span><span class="o">=</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;500.00&quot;</span><span class="p">)))</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1"># Escalate SYSTEMIC risk operations</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">register_policy</span><span class="p">(</span><span class="n">create_risk_escalation_policy</span><span class="p">())</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c1"># Require manual approval for DEPLOY intents taking &gt; 1 hour</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">register_policy</span><span class="p">(</span><span class="n">create_time_limit_policy</span><span class="p">(</span><span class="n">max_seconds</span><span class="o">=</span><span class="mi">3600</span><span class="p">))</span>
 </span></code></pre></div>
-<p>Events are collected by <code>rct_control_plane/observability.py</code> and can be streamed to any OTEL-compatible backend.</p>
+<hr />
+<h2 id="integration-with-fdia-scoring">Integration with FDIA Scoring<a class="headerlink" href="#integration-with-fdia-scoring" title="Permanent link">&para;</a></h2>
+<p>Governance and FDIA work together in a constitutional pipeline:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>User request
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>     │
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>     ▼
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>RCT-7 Step 1–6 (Observe → Reconstruct)
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>     │
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>     ▼
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>FDIAScorer.rank_actions()    ← score every candidate action
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>     │
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>     ▼
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>FDIA gate: score ≥ 0.60?
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>     │ NO  → REJECT (constitutional floor)
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>     │ YES
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>     ▼
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>PolicyEvaluator.evaluate()   ← check all registered rules
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>     │
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>     ▼
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>RCT-7 Step 7 (Compare with Intent)
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>     │
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>     ▼
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>SignedAI Tier consensus (if applicable)
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>     │
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>     ▼
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>Execute (signed JITNA packet)
+</span></code></pre></div>
+<p>The FDIA gate score threshold of <strong>0.60</strong> is the minimum constitutional floor.
+Domain-specific deployments may raise this threshold:</p>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Threshold</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>General purpose</td>
+<td>0.60</td>
+</tr>
+<tr>
+<td>Financial trading</td>
+<td>0.70</td>
+</tr>
+<tr>
+<td>Healthcare (clinical)</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>Autonomous vehicle</td>
+<td>0.90</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="policy-conditions-reference">Policy Conditions Reference<a class="headerlink" href="#policy-conditions-reference" title="Permanent link">&para;</a></h2>
+<p><code>PolicyCondition</code> supports these operators on intent fields:</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>==</code></td>
+<td><code>risk_profile == SYSTEMIC</code></td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td><code>intent_type != DOCUMENT</code></td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td><code>estimated_cost_usd &gt; 500.00</code></td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td><code>estimated_duration_seconds &gt;= 3600</code></td>
+</tr>
+<tr>
+<td><code>in</code></td>
+<td><code>intent_type in [DEPLOY, BUILD_APP]</code></td>
+</tr>
+<tr>
+<td><code>contains</code></td>
+<td><code>goal contains "production"</code></td>
+</tr>
+<tr>
+<td><code>matches</code></td>
+<td><code>natural_language_input matches ".*drop.*table.*"</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="governance-pillars-enterprise">Governance Pillars (Enterprise)<a class="headerlink" href="#governance-pillars-enterprise" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Pillar</th>
+<th>Target</th>
+<th>Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Governance Interrupt RTO</td>
+<td>100 % intercept rate, p95 &lt; 10 ms</td>
+<td>Pillar 2</td>
+</tr>
+<tr>
+<td>Deterministic Integrity</td>
+<td>100 % reproducible</td>
+<td>Pillar 4</td>
+</tr>
+</tbody>
+</table>
+<p>Run a governance evaluation:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>-m<span class="w"> </span>rct.governance.evaluate<span class="w"> </span>--pillar<span class="w"> </span><span class="m">2</span><span class="w"> </span>--verbose
+</span></code></pre></div>
+<hr />
+<h2 id="constitutional-guarantees">Constitutional Guarantees<a class="headerlink" href="#constitutional-guarantees" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>No execution without FDIA approval</strong> — score &lt; threshold → REJECT before any tool call</li>
+<li><strong>No SYSTEMIC risk without escalation</strong> — all SYSTEMIC intents are automatically escalated</li>
+<li><strong>100 % audit trail</strong> — every governance decision is logged with <code>ControlPlaneObserver</code></li>
+<li><strong>Deterministic replay</strong> — governance decisions are reproducible; any past decision can be replayed with identical outcome</li>
+</ol>
+<hr />
+<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../fdia/">FDIA Engine</a></li>
+<li><a href="../rct-7-thinking/">RCT-7 Thinking Protocol</a></li>
+<li><a href="../signedai/">SignedAI Consensus</a></li>
+</ul>
 
 
 
@@ -1895,7 +2159,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../signedai/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SignedAI Consensus">
+          <a href="../intent-loop/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Intent Loop">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1905,20 +2169,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                SignedAI Consensus
+                Intent Loop
               </div>
             </div>
           </a>
         
         
           
-          <a href="../governance/" class="md-footer__link md-footer__link--next" aria-label="Next: Governance">
+          <a href="../../algorithms/overview/" class="md-footer__link md-footer__link--next" aria-label="Next: 41 Algorithms Overview">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Governance
+                41 Algorithms Overview
               </div>
             </div>
             <div class="md-footer__button md-icon">
