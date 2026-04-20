@@ -158,7 +158,7 @@ Every deployment intent is permanently auditable:
 rct audit abc-123 --verify
 
 # Replay a governance evaluation for a specific past deploy
-python benchmark/enterprise_pillars.py --pillar 4 --verbose
+python -m rct.audit.replay --pillar 4 --verbose
 # → Confirms deterministic replay guarantee
 ```
 
@@ -186,17 +186,16 @@ Add RCT governance as a CI stage:
 - name: RCT Governance Gate
   run: |
     python -c "
-    from examples.cli_walkthrough import run_walkthrough
+    from rct.governance import GovernanceGate
     import sys
-    run_walkthrough('Deploy ${{ env.SERVICE }} to production')
-    " || exit 1
+    gate = GovernanceGate(fdia_threshold=0.70)
+    gate.evaluate('Deploy ${{ env.SERVICE }} to production') or sys.exit(1)
+    "
 ```
 
 ---
 
 ## See Also
 
-- [CLI Walkthrough](../../examples/cli_walkthrough.py)
 - [Governance Layer](../concepts/governance.md)
-- [`benchmark/enterprise_pillars.py`](../../benchmark/enterprise_pillars.py) — Pillar 2 (Governance Interrupt)
 - [Finance Use Case](finance.md)

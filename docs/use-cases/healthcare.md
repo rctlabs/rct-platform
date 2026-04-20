@@ -180,7 +180,7 @@ rct audit    <id>               # → full chain with attending physician vote
 
 ## See Also
 
-- [FDIA Engine](../concepts/fdia-engine.md)
+- [FDIA Engine](../concepts/fdia.md)
 - [Governance Layer](../concepts/governance.md)
-- [SignedAI Consensus](../signedai/consensus.md)
+- [SignedAI Consensus](../concepts/signedai.md)
 - [Finance Use Case](finance.md)

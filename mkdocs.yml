@@ -106,6 +106,10 @@ nav:
     - Architecture: concepts/architecture.md
     - SignedAI Consensus: concepts/signedai.md
     - Intent Loop: concepts/intent-loop.md
+    - Governance: concepts/governance.md
+  - Algorithms:
+    - 41 Algorithms Overview: algorithms/overview.md
+    - Tier 9 — Autonomous Pipeline: algorithms/tier9-autonomy.md
   - Architecture:
     - RFC-001 JITNA Protocol Spec: architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION.md
     - RFC-002 Agent Process Model: architecture/KERNEL_RFC_002_PROCESS_MODEL.md
@@ -113,7 +117,12 @@ nav:
     - RFC-004 IPC Message Bus: architecture/KERNEL_RFC_004_IPC.md
     - RFC-005 Syscall & Capabilities: architecture/KERNEL_RFC_005_SYSCALL.md
     - RFC-006 Fault Isolation: architecture/KERNEL_RFC_006_FAULT_ISOLATION.md
-    - 36 Algorithms Mapping Table: MASTER_36_ALGORITHMS_MAPPING_TABLE_2026_01_18.md
+  - Use Cases:
+    - DevOps & CI/CD: use-cases/devops.md
+    - Finance & Risk: use-cases/finance.md
+    - Game AI & NPC: use-cases/game-ai.md
+    - Healthcare: use-cases/healthcare.md
+    - Supply Chain: use-cases/supply-chain.md
   - API Reference:
     - Control Plane: api/control-plane.md
     - Microservices: api/microservices.md

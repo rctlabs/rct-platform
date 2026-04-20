@@ -188,17 +188,15 @@ Domain-specific deployments may raise this threshold:
 
 ## Governance Pillars (Enterprise)
 
-See [`benchmark/enterprise_pillars.py`](../../benchmark/enterprise_pillars.py) for a runnable benchmark:
-
 | Pillar | Target | Test |
 |---|---|---|
 | Governance Interrupt RTO | 100 % intercept rate, p95 < 10 ms | Pillar 2 |
 | Deterministic Integrity | 100 % reproducible | Pillar 4 |
 
-Run the benchmark:
+Run a governance evaluation:
 
 ```bash
-python benchmark/enterprise_pillars.py --pillar 2 --verbose
+python -m rct.governance.evaluate --pillar 2 --verbose
 ```
 
 ---

@@ -119,7 +119,7 @@ rct audit    <id> --verify  # cryptographic chain verification
 The audit chain uses Ed25519-signed JITNA packets. Any past decision can be replayed with:
 
 ```bash
-python benchmark/enterprise_pillars.py --pillar 4 --verbose
+python -m rct.audit.replay --pillar 4 --verbose
 # → Confirms 100% deterministic replay (Pillar 4)
 ```
 
@@ -139,6 +139,5 @@ python benchmark/enterprise_pillars.py --pillar 4 --verbose
 ## See Also
 
 - [Governance Layer](../concepts/governance.md)
-- [SignedAI Consensus](../signedai/consensus.md)
-- [FDIA Engine](../concepts/fdia-engine.md)
-- [`benchmark/enterprise_pillars.py`](../../benchmark/enterprise_pillars.py)
+- [SignedAI Consensus](../concepts/signedai.md)
+- [FDIA Engine](../concepts/fdia.md)

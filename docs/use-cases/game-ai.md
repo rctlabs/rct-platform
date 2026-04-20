@@ -93,10 +93,10 @@ governance_penalty = 0.30 if check_aggression("aggressor_01", engine) else 0.0
 
 ## Running the Demo
 
-A full runnable simulation is in [`examples/simulation_demo.py`](../../examples/simulation_demo.py):
+Run a simulation:
 
 ```bash
-python examples/simulation_demo.py --ticks 15 --agents 6 --verbose
+python -m rct.simulation.run --ticks 15 --agents 6 --verbose
 ```
 
 ---
@@ -113,7 +113,5 @@ The `MemoryDeltaEngine` keeps a baseline snapshot at `checkpoint_interval` ticks
 
 ## See Also
 
-- [FDIA Engine](../concepts/fdia-engine.md)
+- [FDIA Engine](../concepts/fdia.md)
 - [RCT-7 Thinking Protocol](../concepts/rct-7-thinking.md)
-- [`examples/simulation_demo.py`](../../examples/simulation_demo.py)
-- [`benchmark/enterprise_pillars.py`](../../benchmark/enterprise_pillars.py) — Pillar 3 (Memory Compression)

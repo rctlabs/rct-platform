@@ -117,10 +117,10 @@ print(f"Bottleneck nodes: {bottlenecks}")
 
 ## Multi-Tier Cascade Simulation
 
-Run the full simulation with [`examples/simulation_demo.py`](../../examples/simulation_demo.py):
+Run a simulation:
 
 ```bash
-python examples/simulation_demo.py --ticks 20 --agents 5 --verbose
+python -m rct.simulation.run --ticks 20 --agents 5 --verbose
 ```
 
 The EPSILON agent uses `DISCOVER` intent and will `explore` (reroute) when capacity drops, while DELTA (`DOMINATE`) will attempt to capture remaining capacity.
@@ -172,7 +172,6 @@ evaluator.register_policy(PolicyRule(
 
 ## See Also
 
-- [FDIA Engine](../concepts/fdia-engine.md)
+- [FDIA Engine](../concepts/fdia.md)
 - [Game AI Use Case](game-ai.md) — multi-agent tick simulation patterns
-- [`examples/simulation_demo.py`](../../examples/simulation_demo.py)
 - [Governance Layer](../concepts/governance.md)

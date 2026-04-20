@@ -226,7 +226,7 @@ $$F = D^I \times A$$
 > **A = 0 is a constitutional veto.** No plan executes without the Architect approval gate.
 
 ```python
-from core.fdia.fdia import FDIAScorer, NPCAction, NPCIntentType
+from core.fdia.fdia import FDIAScorer, NPCAction, NPCIntentType  # from concepts/fdia.md
 
 scorer = FDIAScorer()
 score = scorer.score_action(
