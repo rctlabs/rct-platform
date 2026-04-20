@@ -7,6 +7,36 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.0.2a0] — 2026-04-20
+
+### Added
+- `docs/algorithms/overview.md` — public reference for all 41 algorithms (Tier 1–9) with scores, formulas, and use cases (Layer 1 safe — no internal file paths or implementation status)
+- `docs/algorithms/tier9-autonomy.md` — Tier 9 Autonomous Pipeline showcase: ALGO-37→40→37/38→39→41, plain-text → production module in ~2 seconds
+- `rct_control_plane/tests/test_security_extended.py` — 11 security boundary tests
+- `tests/security/test_api_security.py` — 19 API security tests
+- JITNA (Just-In-Time Node Assembly) — complete documentation and `signedai/` implementation
+- `docs/use-cases/` — 5 pages: DevOps, Finance, Game AI, Healthcare, Supply Chain
+- MkDocs navigation: **Algorithms** tab, **Use Cases** tab, Governance added to Core Concepts
+
+### Removed
+- `docs/MASTER_36_ALGORITHMS_MAPPING_TABLE_2026_01_18.md` — internal audit document exposed kernel file paths, implementation gap labels, and bash commands not suitable for a public repo; superseded by `docs/algorithms/overview.md`
+
+### Fixed
+- 19 broken documentation links across 7 files:
+  - `fdia-engine.md` → `fdia.md` (governance.md, rct-7-thinking.md, use-cases/*)
+  - `signedai/consensus.md` → `concepts/signedai.md`
+  - Removed broken references to `benchmark/enterprise_pillars.py`, `examples/cli_walkthrough.py`, `examples/simulation_demo.py`, `benchmark/MemoryRAG_Benchmark_Design_v1.md`
+- 14 previously skipped tests resolved — all now execute and pass
+- MkDocs builds with **0 warnings** (was 19 WARNING lines)
+
+### Changed
+- Test suite: 591 passed · 14 skipped → **723 passed · 0 skipped · 0 failed**
+- Coverage: 89% → **87%** (measured across 9,382 statements; broader scope)
+- CI `--cov-fail-under` raised: 70 → **85**
+- Algorithm reference: 36 (stale) → **41** (complete, Tier 1–9)
+
+---
+
 ## [1.0.1a0] — 2026-04-17
 
 ### Fixed
@@ -54,5 +84,6 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+[1.0.2a0]: https://github.com/rctlabs/rct-platform/compare/v1.0.1a0...v1.0.2a0
 [1.0.1a0]: https://github.com/rctlabs/rct-platform/compare/v1.0.0-alpha...v1.0.1a0
 [1.0.0-alpha]: https://github.com/rctlabs/rct-platform/releases/tag/v1.0.0-alpha
