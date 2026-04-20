@@ -277,4 +277,3 @@ T9  — Execution kernel        (dispatch + audit)
 - [Intent Loop](intent-loop.md) — the runtime loop that applies RCT-7 repeatedly
 - [Architecture](architecture.md) — where RCT-7 sits in the full OS layer stack
 - [SignedAI Consensus](signedai.md) — the constitutional tier that wraps the execution gate
-- [RCT Benchmark](../../benchmark/MemoryRAG_Benchmark_Design_v1.md) — reproducible benchmarks including RCT-7 cases

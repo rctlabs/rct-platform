@@ -212,7 +212,6 @@ python -m rct.governance.evaluate --pillar 2 --verbose
 
 ## See Also
 
-- [FDIA Engine](fdia-engine.md)
+- [FDIA Engine](fdia.md)
 - [RCT-7 Thinking Protocol](rct-7-thinking.md)
-- [SignedAI Consensus](../signedai/consensus.md)
-- [`benchmark/enterprise_pillars.py`](../../benchmark/enterprise_pillars.py) — Governance Interrupt benchmark
+- [SignedAI Consensus](signedai.md)
