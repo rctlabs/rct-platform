@@ -88,7 +88,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 | Metric | Value |
 |--------|-------|
-| **SDK Tests (this repo)** | 591 passed · 0 failed · 89% coverage — full SDK test suite |
+| **SDK Tests (this repo)** | 723 passed · 0 failed · 89% coverage — full SDK test suite |
 | **Algorithms** | 41 (Tier 1–9, reference implementations) |
 | **LLM Models** | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | **Hallucination Rate** | 0.3% (vs industry 12–15%) — 97% reduction via SignedAI |
@@ -99,7 +99,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 | **Universal Adapters** | 13 (Home Assistant, Terraform, n8n, Obsidian, Playwright, ...) |
 | **FDIA Accuracy** | 0.92 (industry baseline: ~0.65) |
 
-> **591 tests** currently pass across the public SDK suite. Of these, **142 tests**
+> **723 tests** currently pass across the public SDK suite. Of these, **142 tests**
 > cover the 5 reference microservices directly.
 
 ---
@@ -114,7 +114,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 Layer 11: CI/CD & Quality Gates
 ├─ GitHub Actions (ci.yml + security-scan.yml)
-├─ 591 passing tests · 89% coverage · Python 3.10/3.11/3.12
+├─ 723 passing tests · 89% coverage · Python 3.10/3.11/3.12
 └─ E2E integration tests (no Docker required)
 
 Layer 10: Enterprise Hardening

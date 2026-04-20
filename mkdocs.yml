@@ -107,7 +107,13 @@ nav:
     - SignedAI Consensus: concepts/signedai.md
     - Intent Loop: concepts/intent-loop.md
   - Architecture:
-    - RFC-001 JITNA Spec: architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION.md
+    - RFC-001 JITNA Protocol Spec: architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION.md
+    - RFC-002 Agent Process Model: architecture/KERNEL_RFC_002_PROCESS_MODEL.md
+    - RFC-003 Tick Scheduler: architecture/KERNEL_RFC_003_SCHEDULER.md
+    - RFC-004 IPC Message Bus: architecture/KERNEL_RFC_004_IPC.md
+    - RFC-005 Syscall & Capabilities: architecture/KERNEL_RFC_005_SYSCALL.md
+    - RFC-006 Fault Isolation: architecture/KERNEL_RFC_006_FAULT_ISOLATION.md
+    - 36 Algorithms Mapping Table: MASTER_36_ALGORITHMS_MAPPING_TABLE_2026_01_18.md
   - API Reference:
     - Control Plane: api/control-plane.md
     - Microservices: api/microservices.md
