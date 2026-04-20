@@ -5,7 +5,7 @@ import pytest
 import asyncio
 import json
 from datetime import datetime
-from loop_engine import IntentState, JITNAPacket, IntentResult, IntentLoopEngine
+from loop_engine import IntentState, JITNAPacket, IntentResult, IntentLoopEngine, LoopMetrics, LoopMetrics
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -66,15 +66,41 @@ class TestJITNAPacket:
 
 class TestLoopMetrics:
     def test_metrics_have_total_processed(self):
-        try:
-            m = LoopMetrics()
-            assert hasattr(m, 'total_processed') or hasattr(m, 'processed_count') or True
-        except Exception:
-            pass  # LoopMetrics may not exist in all versions
+        m = LoopMetrics()
+        assert hasattr(m, 'total_processed')
+        assert m.total_processed == 0
 
-    @pytest.mark.skip(reason="LoopMetrics class not yet implemented in public SDK reference service")
     def test_placeholder(self):
-        assert True  # always passes if LoopMetrics not found
+        m = LoopMetrics()
+        assert m.cache_hits == 0
+        assert m.cache_misses == 0
+        assert m.avg_latency_ms == 0.0
+        assert m.error_count == 0
+
+    def test_cache_hit_rate_zero_on_init(self):
+        m = LoopMetrics()
+        assert m.cache_hit_rate == 0.0
+
+    def test_cache_hit_rate_calculated_correctly(self):
+        m = LoopMetrics(cache_hits=3, cache_misses=1)
+        assert m.cache_hit_rate == 0.75
+
+    def test_last_updated_is_datetime(self):
+        m = LoopMetrics()
+        assert isinstance(m.last_updated, datetime)
+        assert m.error_count == 0
+
+    def test_cache_hit_rate_zero_on_init(self):
+        m = LoopMetrics()
+        assert m.cache_hit_rate == 0.0
+
+    def test_cache_hit_rate_calculated_correctly(self):
+        m = LoopMetrics(cache_hits=3, cache_misses=1)
+        assert m.cache_hit_rate == 0.75
+
+    def test_last_updated_is_datetime(self):
+        m = LoopMetrics()
+        assert isinstance(m.last_updated, datetime)
 
 
 # ─────────────────────────────────────────────────────────────────────────────

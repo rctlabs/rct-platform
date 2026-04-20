@@ -100,11 +100,14 @@ nav:
     - Installation: getting-started/installation.md
     - Quick Start: getting-started/quickstart.md
   - Core Concepts:
+    - JITNA Protocol: concepts/jitna.md
     - FDIA Engine: concepts/fdia.md
     - RCT-7 Thinking: concepts/rct-7-thinking.md
     - Architecture: concepts/architecture.md
     - SignedAI Consensus: concepts/signedai.md
     - Intent Loop: concepts/intent-loop.md
+  - Architecture:
+    - RFC-001 JITNA Spec: architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION.md
   - API Reference:
     - Control Plane: api/control-plane.md
     - Microservices: api/microservices.md

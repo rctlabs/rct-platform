@@ -326,11 +326,20 @@ RECEIVED → VALIDATED (FDIA) → MEMORY_CHECK → COMPUTING
 
 ### JITNA Protocol (RFC-001 v2.0)
 
-Standard wire format for AI-to-AI intent communication in the RCT ecosystem.
+> **Just In Time Nodal Assembly** — agents are assembled into working groups just in time based on intent, then dissolved when the task completes.
+
+Full documentation: [docs/concepts/jitna.md](docs/concepts/jitna.md) | [RFC-001 Specification](docs/architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION.md)
+
+JITNA is a three-layer system:
+- **Layer 1 — Protocol** (`rct_control_plane/jitna_protocol.py`): RFC-001 wire format, Ed25519 signed packets, The 9 Codex
+- **Layer 2 — Language** (6-field I/D/Δ/A/R/M templates): 50+ workflow templates for structured intent expression
+- **Layer 3 — Intake** (`microservices/intent-loop/loop_engine.py`): user-facing JITNAPacket + LoopMetrics
 
 ```python
 from signedai.core.models import JITNAPacket
 
+# SignedAI Semantic Layer — verification-focused variant
+# (D=Domain, A=Assumptions, R=Requirements, M=Metrics)
 packet = JITNAPacket(
     I="Refactor authentication module",
     D="Backend engineering",
@@ -341,7 +350,7 @@ packet = JITNAPacket(
 )
 ```
 
-The 6-field schema (I, D, Δ, A, R, M) is the constitutional wire format for cross-agent intent negotiation. Implemented as `JITNAPacket` in `signedai/core/models.py`.
+The canonical 6-field JITNA Language schema uses I=Intent, D=**Data**, Δ=Delta, A=**Approach**, R=**Reflection**, M=**Memory** — the SignedAI variant above uses different field semantics for verification context. See [docs/concepts/jitna.md](docs/concepts/jitna.md) for the full disambiguation.
 
 ### Regional Adapter (`core/regional_adapter/regional_adapter.py`)
 
