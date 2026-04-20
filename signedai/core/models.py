@@ -66,10 +66,25 @@ class AnalysisStatus(str, Enum):
 
 class JITNAPacket(BaseModel):
     """
-    JITNA Intent Packet — 6-field structured intent representation.
+    SignedAI Semantic Layer — JITNA-shaped intent packet for verification context.
 
-    JITNA (Joint Intent Transfer & Negotiation Architecture) is the standard
-    wire format for AI-to-AI intent communication in the RCT ecosystem.
+    This class follows the JITNA 6-field structure (I, D, Δ, A, R, M) but maps
+    each field to SignedAI's verification-specific semantics:
+
+        I = Intent        — primary goal statement (same as canonical JITNA Language)
+        D = Domain        — context/scope for this analysis (≠ "Data" in JITNA Language)
+        Δ = Delta         — desired change or gap (same as canonical JITNA Language)
+        A = Assumptions   — preconditions assumed true (≠ "Approach" in JITNA Language)
+        R = Requirements  — non-negotiable constraints (≠ "Reflection" in JITNA Language)
+        M = Metrics       — success criteria (≠ "Memory" in JITNA Language)
+
+    NOTE: The canonical JITNA Language (D=Data, A=Approach, R=Reflection, M=Memory)
+    is defined in the JITNA Protocol RFC-001 and documented in docs/concepts/jitna.md.
+    This class is a *verification-focused variant* used inside the SignedAI consensus
+    engine. The canonical JITNA Protocol wire format is in
+    rct_control_plane/jitna_protocol.py.
+
+    JITNA = Just In Time Nodal Assembly (canonical public name, per RCT Labs Architect).
     """
     I: str = Field(..., description="Intent — primary goal statement")
     D: str = Field(..., description="Domain — context/scope")

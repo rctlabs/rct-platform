@@ -49,7 +49,7 @@ $$F = D^I \times A$$
 
 | Metric | Value |
 |--------|-------|
-| SDK Tests | **591 passed · 0 failed · 89% coverage** |
+| SDK Tests | **723 passed · 0 failed · 87% coverage** |
 | Algorithms | 41 (Tier 1–9 reference implementations) |
 | LLM Models | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | Hallucination Rate | **0.3%** (vs industry 12–15%) — 97% reduction |

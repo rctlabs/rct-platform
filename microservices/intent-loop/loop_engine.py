@@ -68,6 +68,40 @@ class MemoryHit:
 
 
 @dataclass
+class LoopMetrics:
+    """Runtime metrics for the Intent Loop Engine."""
+    total_processed: int = 0
+    cache_hits: int = 0
+    cache_misses: int = 0
+    avg_latency_ms: float = 0.0
+    error_count: int = 0
+    last_updated: datetime = field(default_factory=datetime.now)
+
+    @property
+    def cache_hit_rate(self) -> float:
+        """Fraction of requests served from cache (0.0–1.0)."""
+        total = self.cache_hits + self.cache_misses
+        return self.cache_hits / total if total > 0 else 0.0
+
+
+@dataclass
+class LoopMetrics:
+    """Runtime metrics for the Intent Loop Engine."""
+    total_processed: int = 0
+    cache_hits: int = 0
+    cache_misses: int = 0
+    avg_latency_ms: float = 0.0
+    error_count: int = 0
+    last_updated: datetime = field(default_factory=datetime.now)
+
+    @property
+    def cache_hit_rate(self) -> float:
+        """Fraction of requests served from cache (0.0–1.0)."""
+        total = self.cache_hits + self.cache_misses
+        return self.cache_hits / total if total > 0 else 0.0
+
+
+@dataclass
 class IntentResult:
     """Result from intent processing"""
     intent_hash: str

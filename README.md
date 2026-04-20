@@ -88,7 +88,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 | Metric | Value |
 |--------|-------|
-| **SDK Tests (this repo)** | 591 passed · 0 failed · 89% coverage — full SDK test suite |
+| **SDK Tests (this repo)** | 723 passed · 0 failed · 89% coverage — full SDK test suite |
 | **Algorithms** | 41 (Tier 1–9, reference implementations) |
 | **LLM Models** | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | **Hallucination Rate** | 0.3% (vs industry 12–15%) — 97% reduction via SignedAI |
@@ -99,7 +99,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 | **Universal Adapters** | 13 (Home Assistant, Terraform, n8n, Obsidian, Playwright, ...) |
 | **FDIA Accuracy** | 0.92 (industry baseline: ~0.65) |
 
-> **591 tests** currently pass across the public SDK suite. Of these, **142 tests**
+> **723 tests** currently pass across the public SDK suite. Of these, **142 tests**
 > cover the 5 reference microservices directly.
 
 ---
@@ -114,7 +114,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 Layer 11: CI/CD & Quality Gates
 ├─ GitHub Actions (ci.yml + security-scan.yml)
-├─ 591 passing tests · 89% coverage · Python 3.10/3.11/3.12
+├─ 723 passing tests · 89% coverage · Python 3.10/3.11/3.12
 └─ E2E integration tests (no Docker required)
 
 Layer 10: Enterprise Hardening
@@ -157,27 +157,56 @@ SDK Modules: signedai/ · core/ · rct_control_plane/
 
 ---
 
-## Quick Start
+## Quick Install (No API Keys Required)
 
 ```bash
-# 1. Clone
+# 1. Clone & install
 git clone https://github.com/rctlabs/rct-platform.git
 cd rct-platform
+pip install -e .
 
-# 2. Install
-pip install -r requirements.txt
+# 2. Run the 5-minute offline demo — zero API keys needed
+python examples/quickdemo.py
 
-# 3. Configure
+# 3. Run the FDIA benchmark (target: 0.92 accuracy)
+python benchmark/fdia_benchmark.py --verbose
+
+# 4. Try the CLI
+rct compile 'Protect resources from hostile agents'
+rct governance
+rct timeline
+```
+
+**Expected output (quickdemo.py):**
+```
+✅  Best action: act_001 (cooperate) — highest FDIA score
+Consensus: PASSED ✅ (threshold: 4/6)
+Final decision: EXECUTE — all 7 gates cleared, FDIA ≥ threshold, intent signed
+Memory compression ratio: 5.0× (baseline + 4 deltas vs 5 full-state copies)
+```
+
+**Expected output (fdia_benchmark.py):**
+```
+RCT FDIA Score       : 0.9167
+Industry Baseline    : 0.6500
+Delta vs Baseline    : +0.2667 (+41.0%)
+✅  Benchmark PASSED
+```
+
+## Quick Start (With API Keys)
+
+```bash
+# 1. Configure API keys
 cp .env.example .env
 # Edit .env with your API keys
 
-# 4. Run tests
+# 2. Run tests
 python -m pytest microservices/ -q
 
-# 5. Try the SignedAI demo
+# 3. Try the SignedAI demo
 python examples/signed_ai_demo.py
 
-# 6. Try the Hexa-Core demo
+# 4. Try the Hexa-Core demo
 python examples/hexa_core_demo.py
 ```
 
@@ -297,11 +326,20 @@ RECEIVED → VALIDATED (FDIA) → MEMORY_CHECK → COMPUTING
 
 ### JITNA Protocol (RFC-001 v2.0)
 
-Standard wire format for AI-to-AI intent communication in the RCT ecosystem.
+> **Just In Time Nodal Assembly** — agents are assembled into working groups just in time based on intent, then dissolved when the task completes.
+
+Full documentation: [docs/concepts/jitna.md](docs/concepts/jitna.md) | [RFC-001 Specification](docs/architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION.md)
+
+JITNA is a three-layer system:
+- **Layer 1 — Protocol** (`rct_control_plane/jitna_protocol.py`): RFC-001 wire format, Ed25519 signed packets, The 9 Codex
+- **Layer 2 — Language** (6-field I/D/Δ/A/R/M templates): 50+ workflow templates for structured intent expression
+- **Layer 3 — Intake** (`microservices/intent-loop/loop_engine.py`): user-facing JITNAPacket + LoopMetrics
 
 ```python
 from signedai.core.models import JITNAPacket
 
+# SignedAI Semantic Layer — verification-focused variant
+# (D=Domain, A=Assumptions, R=Requirements, M=Metrics)
 packet = JITNAPacket(
     I="Refactor authentication module",
     D="Backend engineering",
@@ -312,7 +350,7 @@ packet = JITNAPacket(
 )
 ```
 
-The 6-field schema (I, D, Δ, A, R, M) is the constitutional wire format for cross-agent intent negotiation. Implemented as `JITNAPacket` in `signedai/core/models.py`.
+The canonical 6-field JITNA Language schema uses I=Intent, D=**Data**, Δ=Delta, A=**Approach**, R=**Reflection**, M=**Memory** — the SignedAI variant above uses different field semantics for verification context. See [docs/concepts/jitna.md](docs/concepts/jitna.md) for the full disambiguation.
 
 ### Regional Adapter (`core/regional_adapter/regional_adapter.py`)
 
