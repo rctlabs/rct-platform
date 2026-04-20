@@ -157,27 +157,56 @@ SDK Modules: signedai/ · core/ · rct_control_plane/
 
 ---
 
-## Quick Start
+## Quick Install (No API Keys Required)
 
 ```bash
-# 1. Clone
+# 1. Clone & install
 git clone https://github.com/rctlabs/rct-platform.git
 cd rct-platform
+pip install -e .
 
-# 2. Install
-pip install -r requirements.txt
+# 2. Run the 5-minute offline demo — zero API keys needed
+python examples/quickdemo.py
 
-# 3. Configure
+# 3. Run the FDIA benchmark (target: 0.92 accuracy)
+python benchmark/fdia_benchmark.py --verbose
+
+# 4. Try the CLI
+rct compile 'Protect resources from hostile agents'
+rct governance
+rct timeline
+```
+
+**Expected output (quickdemo.py):**
+```
+✅  Best action: act_001 (cooperate) — highest FDIA score
+Consensus: PASSED ✅ (threshold: 4/6)
+Final decision: EXECUTE — all 7 gates cleared, FDIA ≥ threshold, intent signed
+Memory compression ratio: 5.0× (baseline + 4 deltas vs 5 full-state copies)
+```
+
+**Expected output (fdia_benchmark.py):**
+```
+RCT FDIA Score       : 0.9167
+Industry Baseline    : 0.6500
+Delta vs Baseline    : +0.2667 (+41.0%)
+✅  Benchmark PASSED
+```
+
+## Quick Start (With API Keys)
+
+```bash
+# 1. Configure API keys
 cp .env.example .env
 # Edit .env with your API keys
 
-# 4. Run tests
+# 2. Run tests
 python -m pytest microservices/ -q
 
-# 5. Try the SignedAI demo
+# 3. Try the SignedAI demo
 python examples/signed_ai_demo.py
 
-# 6. Try the Hexa-Core demo
+# 4. Try the Hexa-Core demo
 python examples/hexa_core_demo.py
 ```
 

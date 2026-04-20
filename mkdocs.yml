@@ -101,6 +101,7 @@ nav:
     - Quick Start: getting-started/quickstart.md
   - Core Concepts:
     - FDIA Engine: concepts/fdia.md
+    - RCT-7 Thinking: concepts/rct-7-thinking.md
     - Architecture: concepts/architecture.md
     - SignedAI Consensus: concepts/signedai.md
     - Intent Loop: concepts/intent-loop.md
