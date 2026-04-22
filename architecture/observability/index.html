@@ -12,13 +12,13 @@
         <meta name="author" content="Ittirit Saengow (RCT Labs)">
       
       
-        <link rel="canonical" href="https://rctlabs.co/docs/architecture/KERNEL_RFC_006_FAULT_ISOLATION/">
+        <link rel="canonical" href="https://rctlabs.co/docs/architecture/observability/">
       
       
-        <link rel="prev" href="../KERNEL_RFC_005_SYSCALL/">
+        <link rel="prev" href="../KERNEL_RFC_006_FAULT_ISOLATION/">
       
       
-        <link rel="next" href="../observability/">
+        <link rel="next" href="../../benchmark/methodology/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>RFC-006 Fault Isolation - RCT Platform</title>
+        <title>Observability Guide - RCT Platform</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rfc-006-fault-isolation-recovery-domains" class="md-skip">
+        <a href="#observability-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              RFC-006 Fault Isolation
+              Observability Guide
             
           </span>
         </div>
@@ -1231,6 +1231,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../KERNEL_RFC_006_FAULT_ISOLATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-006 Fault Isolation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1250,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    RFC-006 Fault Isolation
+    Observability Guide
   
 
     
@@ -1268,7 +1296,7 @@
   <span class="md-ellipsis">
     
   
-    RFC-006 Fault Isolation
+    Observability Guide
   
 
     
@@ -1294,10 +1322,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#abstract" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Abstract
+        Overview
       
     </span>
   </a>
@@ -1305,33 +1333,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#motivation" class="md-nav__link">
+  <a href="#health-endpoints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Motivation
+        Health Endpoints
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#specification" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Specification
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Specification">
+    <nav class="md-nav" aria-label="Health Endpoints">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-faultseverity-classification" class="md-nav__link">
+  <a href="#liveness-get-health" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. FaultSeverity Classification
+        Liveness — GET /health
       
     </span>
   </a>
@@ -1339,132 +1356,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-exception-to-severity-mapping" class="md-nav__link">
+  <a href="#readiness-get-healthdetailed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Exception-to-Severity Mapping
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Exception-to-Severity Mapping">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#classification-algorithm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Classification Algorithm
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-recovery-policies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Recovery Policies
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Recovery Policies">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#recoverable" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RECOVERABLE
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#quarantine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        QUARANTINE
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#exile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        EXILE
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-faultrecord-structured-fault-log" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. FaultRecord (Structured Fault Log)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-faultisolationmanager-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. FaultIsolationManager API
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-integration-with-simulationengine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Integration with SimulationEngine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#7-health-metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Health Metrics
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-custom-fault-maps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. Custom Fault Maps
+        Readiness — GET /health/detailed
       
     </span>
   </a>
@@ -1477,10 +1372,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#test-coverage" class="md-nav__link">
+  <a href="#cli-metrics-rct-metrics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test Coverage
+        CLI Metrics — rct metrics
       
     </span>
   </a>
@@ -1488,10 +1383,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#interaction-with-other-rfcs" class="md-nav__link">
+  <a href="#prometheus-integration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Interaction with Other RFCs
+        Prometheus Integration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prometheus Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheus-scrape-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prometheus scrape config
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grafana-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grafana Dashboard
       
     </span>
   </a>
@@ -1499,10 +1433,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#backward-compatibility" class="md-nav__link">
+  <a href="#kubernetes-probe-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Backward Compatibility
+        Kubernetes Probe Configuration
       
     </span>
   </a>
@@ -1510,10 +1444,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#core-invariant" class="md-nav__link">
+  <a href="#audit-trail" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Core Invariant
+        Audit Trail
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structured-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structured Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-local-monitoring-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting Up Local Monitoring Stack
       
     </span>
   </a>
@@ -1524,34 +1480,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../observability/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Observability Guide
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -2094,262 +2022,274 @@
   
 
 
-<h1 id="rfc-006-fault-isolation-recovery-domains">RFC-006: Fault Isolation &amp; Recovery Domains<a class="headerlink" href="#rfc-006-fault-isolation-recovery-domains" title="Permanent link">&para;</a></h1>
-<p><strong>Status:</strong> Draft<br />
-<strong>Authors:</strong> RCT Kernel Team<br />
-<strong>Created:</strong> 2026-02-26<br />
-<strong>Layer:</strong> OS Primitive (Reliability)<br />
-<strong>Implements:</strong> <code>core/kernel/fault_isolation.py</code> (Plan 30)<br />
-<strong>Test Evidence:</strong> <code>tests/kernel/test_fault_isolation.py</code> (26 tests)<br />
-<strong>Depends on:</strong> RFC-002 (ProcessTable — state transitions for recovery)</p>
+<h1 id="observability-guide">Observability Guide<a class="headerlink" href="#observability-guide" title="Permanent link">&para;</a></h1>
+<p><strong>Metrics, tracing, and health monitoring for RCT Platform deployments.</strong></p>
 <hr />
-<h2 id="abstract">Abstract<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
-<p>This RFC formalizes the Fault Isolation Manager — the kernel component that
-ensures a single agent crash never kills the simulation tick. It classifies
-exceptions into three severity levels (RECOVERABLE, QUARANTINE, EXILE), applies
-automatic recovery policies, and maintains structured fault logs.</p>
-<p>The core invariant: <strong>process isolation guarantees that any individual agent
-failure is contained and does not propagate to other agents or the kernel.</strong></p>
-<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
-<p>In a multi-agent simulation, exceptions are inevitable:
-- Division by zero in FDIA scoring
-- Key lookup failures on shared resources
-- Timeout in LLM integration calls
-- Stack overflow from recursive agent strategies</p>
-<p>Without fault isolation, any exception crashes the entire simulation tick,
-affecting all agents. The Fault Isolation Manager provides per-agent containment
-with graduated recovery policies.</p>
-<h2 id="specification">Specification<a class="headerlink" href="#specification" title="Permanent link">&para;</a></h2>
-<h3 id="1-faultseverity-classification">1. FaultSeverity Classification<a class="headerlink" href="#1-faultseverity-classification" title="Permanent link">&para;</a></h3>
-<p>Three severity levels with distinct recovery policies:</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>RCT Platform exposes observability through three layers:</p>
 <table>
 <thead>
 <tr>
-<th>Severity</th>
-<th>Recovery Policy</th>
-<th>Agent State After</th>
+<th>Layer</th>
+<th>What it measures</th>
+<th>Endpoint / Method</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>RECOVERABLE</code></td>
-<td>Skip action this tick, resume next tick</td>
-<td>READY (unchanged)</td>
+<td><strong>Health probes</strong></td>
+<td>Liveness + readiness</td>
+<td><code>GET /health</code>, <code>GET /health/detailed</code></td>
 </tr>
 <tr>
-<td><code>QUARANTINE</code></td>
-<td>Block agent for N ticks (default: 3)</td>
-<td>BLOCKED (timed)</td>
+<td><strong>FDIA metrics</strong></td>
+<td>Scoring throughput, avg score, tier distribution</td>
+<td><code>GET /metrics</code></td>
 </tr>
 <tr>
-<td><code>EXILE</code></td>
-<td>Immediately terminate agent</td>
-<td>TERMINATED</td>
-</tr>
-</tbody>
-</table>
-<h3 id="2-exception-to-severity-mapping">2. Exception-to-Severity Mapping<a class="headerlink" href="#2-exception-to-severity-mapping" title="Permanent link">&para;</a></h3>
-<p>Default classification by Python exception type:</p>
-<table>
-<thead>
-<tr>
-<th>Severity</th>
-<th>Exception Types</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>RECOVERABLE</code></td>
-<td>ValueError, KeyError, IndexError, TypeError, AttributeError, ArithmeticError</td>
-</tr>
-<tr>
-<td><code>QUARANTINE</code></td>
-<td>RuntimeError, TimeoutError, OSError</td>
-</tr>
-<tr>
-<td><code>EXILE</code></td>
-<td>RecursionError, MemoryError, SystemError</td>
+<td><strong>Audit trail</strong></td>
+<td>Full signed decision chain per intent</td>
+<td><code>GET /audit/{intent_id}</code></td>
 </tr>
 </tbody>
 </table>
-<h4 id="classification-algorithm">Classification Algorithm<a class="headerlink" href="#classification-algorithm" title="Permanent link">&para;</a></h4>
-<ol>
-<li><strong>Exact type match</strong> — check <code>type(exception)</code> against fault map</li>
-<li><strong>Inheritance check</strong> — check <code>isinstance()</code> in severity order (EXILE first, then QUARANTINE, then RECOVERABLE)</li>
-<li><strong>Fallback</strong> — unknown exception types default to <code>QUARANTINE</code></li>
-</ol>
-<p>Classification is deterministic and does not depend on exception message content.</p>
-<h3 id="3-recovery-policies">3. Recovery Policies<a class="headerlink" href="#3-recovery-policies" title="Permanent link">&para;</a></h3>
-<h4 id="recoverable">RECOVERABLE<a class="headerlink" href="#recoverable" title="Permanent link">&para;</a></h4>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>if agent.state == RUNNING:
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    process_table.set_ready(pid)    # RUNNING → READY
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a># Agent remains READY, will be scheduled next tick
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a># Action for THIS tick is skipped (no side effects)
+<hr />
+<h2 id="health-endpoints">Health Endpoints<a class="headerlink" href="#health-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="liveness-get-health">Liveness — <code>GET /health</code><a class="headerlink" href="#liveness-get-health" title="Permanent link">&para;</a></h3>
+<p>Fast probe suitable for Kubernetes <code>livenessProbe</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>http://localhost:8000/health
 </span></code></pre></div>
-<p><strong>Rationale:</strong> Transient errors (key not found, bad value) are likely to
-resolve next tick when world state changes.</p>
-<h4 id="quarantine">QUARANTINE<a class="headerlink" href="#quarantine" title="Permanent link">&para;</a></h4>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>until_tick = current_tick + quarantine_ticks  # default: 3
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>if agent.state == RUNNING:
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    process_table.block(pid, until_tick=until_tick)
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>elif agent.state == READY:
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    process_table.transition_state(pid, RUNNING)
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    process_table.block(pid, until_tick=until_tick)
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;healthy&quot;</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-21T10:00:00+00:00&quot;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
 </span></code></pre></div>
-<p><strong>Rationale:</strong> Non-transient errors (runtime failures, timeouts) need cooling
-period. Agent is blocked for <code>quarantine_ticks</code> before re-entering the ready
-queue. Auto-unblocked by <code>ProcessTable.unblock_expired()</code> during scheduler
-<code>build_schedule()</code> (RFC-003).</p>
-<h4 id="exile">EXILE<a class="headerlink" href="#exile" title="Permanent link">&para;</a></h4>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>process_table.terminate(pid, tick, reason=&quot;severe_fault&quot;)
+<p>HTTP 200 = healthy. HTTP 503 = degraded.</p>
+<h3 id="readiness-get-healthdetailed">Readiness — <code>GET /health/detailed</code><a class="headerlink" href="#readiness-get-healthdetailed" title="Permanent link">&para;</a></h3>
+<p>Full component check suitable for Kubernetes <code>readinessProbe</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>http://localhost:8000/health/detailed
 </span></code></pre></div>
-<p><strong>Rationale:</strong> Catastrophic errors (stack overflow, memory exhaustion) indicate
-an agent that cannot safely continue. Immediate termination prevents cascading
-failures.</p>
-<h3 id="4-faultrecord-structured-fault-log">4. FaultRecord (Structured Fault Log)<a class="headerlink" href="#4-faultrecord-structured-fault-log" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@dataclass</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">FaultRecord</span><span class="p">:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">pid</span><span class="p">:</span> <span class="nb">int</span>                   <span class="c1"># Faulted agent&#39;s PID</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">agent_id</span><span class="p">:</span> <span class="nb">str</span>              <span class="c1"># Application-level agent name</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">tick</span><span class="p">:</span> <span class="nb">int</span>                  <span class="c1"># Tick at which fault occurred</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">phase</span><span class="p">:</span> <span class="nb">str</span>                 <span class="c1"># Simulation phase (OBSERVE, DECIDE, ACT)</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">exception_type</span><span class="p">:</span> <span class="nb">str</span>        <span class="c1"># e.g. &quot;ValueError&quot;, &quot;RuntimeError&quot;</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>               <span class="c1"># First 200 chars of exception message</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">traceback_hash</span><span class="p">:</span> <span class="nb">str</span>        <span class="c1"># MD5 hash of traceback (12-char hex)</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">severity</span><span class="p">:</span> <span class="n">FaultSeverity</span>    <span class="c1"># Classified severity</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">recovery_action</span><span class="p">:</span> <span class="nb">str</span>       <span class="c1"># What recovery was applied</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;healthy&quot;</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.2a0&quot;</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&quot;components&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;fdia_engine&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">&quot;delta_engine&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">&quot;signedai_registry&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">&quot;intent_compiler&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nt">&quot;dsl_parser&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">&quot;policy_engine&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-21T10:00:00+00:00&quot;</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">}</span>
 </span></code></pre></div>
-<p><strong>Traceback hashing</strong> enables grouping duplicate faults across agents and ticks
-without storing full tracebacks (privacy + space efficiency).</p>
-<h3 id="5-faultisolationmanager-api">5. FaultIsolationManager API<a class="headerlink" href="#5-faultisolationmanager-api" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">FaultIsolationManager</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="bp">self</span><span class="p">,</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="n">process_table</span><span class="p">:</span> <span class="n">ProcessTable</span><span class="p">,</span>       <span class="c1"># For state transitions</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">quarantine_ticks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>         <span class="c1"># QUARANTINE duration</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">fault_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Type</span><span class="p">,</span> <span class="n">FaultSeverity</span><span class="p">]</span>  <span class="c1"># Custom mapping (optional)</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="p">)</span>
+<p>Any component with <code>"error"</code> status causes the overall <code>status</code> to become <code>"degraded"</code>.</p>
+<hr />
+<h2 id="cli-metrics-rct-metrics">CLI Metrics — <code>rct metrics</code><a class="headerlink" href="#cli-metrics-rct-metrics" title="Permanent link">&para;</a></h2>
+<p>The CLI exposes runtime metrics from the in-memory control plane:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rct<span class="w"> </span>metrics
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>rct<span class="w"> </span>metrics<span class="w"> </span>--output<span class="w"> </span>json
 </span></code></pre></div>
+<p><strong>Table output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Metric                        Value
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>────────────────────────────────────────
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Intents processed             1,247
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>FDIA avg score                0.8734
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>FDIA min score                0.1200
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>FDIA max score                0.9980
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Warm recall hit rate          89.3%
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>Consensus tier S2 calls       187
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>Consensus tier S4 calls       847
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>Consensus tier S5 calls       213
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>Policy violations (blocked)   2
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>Active intents                5
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>Uptime                        14d 06h 23m
+</span></code></pre></div>
+<p><strong>JSON output</strong> (for dashboards):</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;intents_processed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1247</span><span class="p">,</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">&quot;fdia_avg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8734</span><span class="p">,</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">&quot;warm_recall_hit_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.893</span><span class="p">,</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">&quot;policy_violations&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="nt">&quot;uptime_seconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1231380</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
+</span></code></pre></div>
+<hr />
+<h2 id="prometheus-integration">Prometheus Integration<a class="headerlink" href="#prometheus-integration" title="Permanent link">&para;</a></h2>
+<p>The Control Plane exposes a Prometheus-compatible metrics endpoint when the
+<code>ENABLE_PROMETHEUS=1</code> environment variable is set.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">ENABLE_PROMETHEUS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>rct<span class="w"> </span>serve<span class="w"> </span>--port<span class="w"> </span><span class="m">8000</span>
+</span></code></pre></div>
+<p>Metrics are available at <code>GET /metrics</code> in Prometheus text format.</p>
+<h3 id="key-metrics">Key metrics<a class="headerlink" href="#key-metrics" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Method</th>
+<th>Metric name</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>on_agent_fault(pid, agent_id, tick, phase, exception)</code></td>
-<td>Classify + recover + log</td>
+<td><code>rct_intents_total</code></td>
+<td>Counter</td>
+<td>Total intents processed</td>
 </tr>
 <tr>
-<td><code>get_fault_log(pid=None)</code></td>
-<td>Structured fault records (filterable by PID)</td>
+<td><code>rct_fdia_score</code></td>
+<td>Histogram</td>
+<td>FDIA score distribution (buckets: 0.1 steps)</td>
 </tr>
 <tr>
-<td><code>get_fault_count(pid)</code></td>
-<td>Total faults for one agent</td>
+<td><code>rct_warm_recall_total</code></td>
+<td>Counter</td>
+<td>Number of warm (cached) recalls</td>
 </tr>
 <tr>
-<td><code>get_total_faults()</code></td>
-<td>Total faults across all agents</td>
+<td><code>rct_cold_start_total</code></td>
+<td>Counter</td>
+<td>Number of cold-start (full compute) recalls</td>
 </tr>
 <tr>
-<td><code>get_fault_summary()</code></td>
-<td>Count by severity (RECOVERABLE/QUARANTINE/EXILE)</td>
+<td><code>rct_consensus_tier_calls</code></td>
+<td>Counter</td>
+<td>Calls per SignedAI tier (label: <code>tier</code>)</td>
 </tr>
 <tr>
-<td><code>get_healthy_ratio()</code></td>
-<td>Fraction of alive agents with zero faults</td>
+<td><code>rct_policy_violations_total</code></td>
+<td>Counter</td>
+<td>Constitutional blocks (A=0 events)</td>
+</tr>
+<tr>
+<td><code>rct_processing_duration_ms</code></td>
+<td>Histogram</td>
+<td>Intent processing latency</td>
 </tr>
 </tbody>
 </table>
-<h3 id="6-integration-with-simulationengine">6. Integration with SimulationEngine<a class="headerlink" href="#6-integration-with-simulationengine" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Inside SimulationEngine._run_tick():</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">for</span> <span class="n">pid</span> <span class="ow">in</span> <span class="n">execution_order</span><span class="p">:</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="c1"># ... agent OBSERVE → DECIDE → ACT ...</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="k">pass</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="n">fault_manager</span><span class="o">.</span><span class="n">on_agent_fault</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">tick</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="c1"># Simulation continues with next agent</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="c1"># No tick-level crash</span>
+<h3 id="prometheus-scrape-config">Prometheus scrape config<a class="headerlink" href="#prometheus-scrape-config" title="Permanent link">&para;</a></h3>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># prometheus.yml</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">scrape_configs</span><span class="p">:</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rct-platform</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;localhost:8000&quot;</span><span class="p p-Indicator">]</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/metrics</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15s</span>
 </span></code></pre></div>
-<h3 id="7-health-metrics">7. Health Metrics<a class="headerlink" href="#7-health-metrics" title="Permanent link">&para;</a></h3>
-<p><code>get_healthy_ratio()</code> computes:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>healthy_ratio = count(alive agents with 0 faults) / count(all alive agents)
-</span></code></pre></div>
-<p>This metric is included in SimulationResult for post-run analysis:
-- 1.0 = all alive agents are fault-free
-- &lt; 0.5 = majority of agents have experienced faults (potential systemic issue)</p>
-<h3 id="8-custom-fault-maps">8. Custom Fault Maps<a class="headerlink" href="#8-custom-fault-maps" title="Permanent link">&para;</a></h3>
-<p>The default fault map can be overridden for domain-specific exception handling:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">custom_map</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">MyDomainError</span><span class="p">:</span> <span class="n">FaultSeverity</span><span class="o">.</span><span class="n">RECOVERABLE</span><span class="p">,</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">ExternalAPIError</span><span class="p">:</span> <span class="n">FaultSeverity</span><span class="o">.</span><span class="n">QUARANTINE</span><span class="p">,</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">CriticalStateCorruption</span><span class="p">:</span> <span class="n">FaultSeverity</span><span class="o">.</span><span class="n">EXILE</span><span class="p">,</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">manager</span> <span class="o">=</span> <span class="n">FaultIsolationManager</span><span class="p">(</span><span class="n">process_table</span><span class="p">,</span> <span class="n">fault_map</span><span class="o">=</span><span class="n">custom_map</span><span class="p">)</span>
-</span></code></pre></div>
-<p>Custom maps are merged with defaults — explicit entries override defaults for
-the same exception type.</p>
-<h2 id="test-coverage">Test Coverage<a class="headerlink" href="#test-coverage" title="Permanent link">&para;</a></h2>
-<p>26 tests in <code>tests/kernel/test_fault_isolation.py</code> covering:</p>
+<hr />
+<h2 id="grafana-dashboard">Grafana Dashboard<a class="headerlink" href="#grafana-dashboard" title="Permanent link">&para;</a></h2>
+<p>Import the sample dashboard from <code>docs/assets/grafana-dashboard.json</code>
+(included in v1.1.0+ releases) or build your own using the metrics above.</p>
+<p><strong>Recommended panels:</strong></p>
 <ul>
-<li>Classification of all default exception types</li>
-<li>RECOVERABLE recovery (agent stays READY)</li>
-<li>QUARANTINE recovery (agent BLOCKED for N ticks)</li>
-<li>EXILE recovery (agent TERMINATED)</li>
-<li>Fault record structure and serialization</li>
-<li>Traceback hash determinism (same exception → same hash)</li>
-<li>Fault count per agent tracking</li>
-<li>Total fault summary by severity</li>
-<li>Healthy ratio calculation (0 faults, some faults, all faulted)</li>
-<li>Custom fault map override</li>
-<li>Unknown exception defaults to QUARANTINE</li>
-<li>Multiple faults for same agent (escalation tracking)</li>
+<li><strong>Intent throughput</strong> — <code>rate(rct_intents_total[5m])</code></li>
+<li><strong>FDIA score heatmap</strong> — <code>histogram_quantile(0.95, rct_fdia_score)</code> </li>
+<li><strong>Warm vs cold recall</strong> — <code>rct_warm_recall_total / (rct_warm_recall_total + rct_cold_start_total)</code></li>
+<li><strong>Policy violations</strong> — <code>increase(rct_policy_violations_total[1h])</code></li>
 </ul>
-<h2 id="interaction-with-other-rfcs">Interaction with Other RFCs<a class="headerlink" href="#interaction-with-other-rfcs" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="kubernetes-probe-configuration">Kubernetes Probe Configuration<a class="headerlink" href="#kubernetes-probe-configuration" title="Permanent link">&para;</a></h2>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># k8s deployment snippet</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">livenessProbe</span><span class="p">:</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/health</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8000</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="nt">readinessProbe</span><span class="p">:</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/health/detailed</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8000</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">  </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">  </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span></code></pre></div>
+<hr />
+<h2 id="audit-trail">Audit Trail<a class="headerlink" href="#audit-trail" title="Permanent link">&para;</a></h2>
+<p>Every intent generates a signed audit chain accessible via:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>rct<span class="w"> </span>audit<span class="w"> </span>INTENT_ID
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>rct<span class="w"> </span>audit<span class="w"> </span>INTENT_ID<span class="w"> </span>--output<span class="w"> </span>json
+</span></code></pre></div>
+<p>The audit record contains:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">&quot;intent_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-...&quot;</span><span class="p">,</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alice&quot;</span><span class="p">,</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nt">&quot;intent_text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Deploy microservice to staging&quot;</span><span class="p">,</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-21T10:00:00+00:00&quot;</span><span class="p">,</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span><span class="nt">&quot;completed_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-21T10:00:02+00:00&quot;</span><span class="p">,</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">  </span><span class="nt">&quot;fdia_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8734</span><span class="p">,</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span><span class="nt">&quot;data_quality&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.92</span><span class="p">,</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">  </span><span class="nt">&quot;intent_precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.88</span><span class="p">,</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">  </span><span class="nt">&quot;architect_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.95</span><span class="p">,</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">  </span><span class="nt">&quot;consensus_tier&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;S4&quot;</span><span class="p">,</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">  </span><span class="nt">&quot;consensus_models&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;claude-opus&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kimi-k2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;minimax-m2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;gemini-flash&quot;</span><span class="p">],</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">  </span><span class="nt">&quot;policy_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COMPLIANT&quot;</span><span class="p">,</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">  </span><span class="nt">&quot;audit_hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha256:abc123...&quot;</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The <code>audit_hash</code> is a SHA-256 of the complete record — enables tamper detection.</p>
+<hr />
+<h2 id="structured-logging">Structured Logging<a class="headerlink" href="#structured-logging" title="Permanent link">&para;</a></h2>
+<p>The Control Plane emits structured JSON logs by default:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-21T10:00:00+00:00&quot;</span><span class="p">,</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rct-control-plane&quot;</span><span class="p">,</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">&quot;intent_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-...&quot;</span><span class="p">,</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;intent_compiled&quot;</span><span class="p">,</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="nt">&quot;fdia_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8734</span><span class="p">,</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span><span class="nt">&quot;duration_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.4</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Log level configuration:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Environment variable</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nv">RCT_LOG_LEVEL</span><span class="o">=</span>DEBUG<span class="w"> </span>rct<span class="w"> </span>serve
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># CLI flag</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>rct<span class="w"> </span>serve<span class="w"> </span>--verbose
+</span></code></pre></div>
 <table>
 <thead>
 <tr>
-<th>RFC</th>
-<th>Relationship</th>
+<th>Level</th>
+<th>When to use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>RFC-002</td>
-<td>Uses ProcessTable for state transitions (READY/BLOCKED/TERMINATED)</td>
+<td><code>DEBUG</code></td>
+<td>Development — shows all internal events</td>
 </tr>
 <tr>
-<td>RFC-003</td>
-<td>Blocked agents excluded from next scheduler pass; unblocked by scheduler</td>
+<td><code>INFO</code></td>
+<td>Production — intent lifecycle events</td>
 </tr>
 <tr>
-<td>RFC-004</td>
-<td>Exiled agents' mailboxes should be deregistered (future integration)</td>
+<td><code>WARNING</code></td>
+<td>Degraded component, low FDIA score</td>
 </tr>
 <tr>
-<td>RFC-005</td>
-<td>Fault Isolation may revoke capabilities for faulted agents (future)</td>
+<td><code>ERROR</code></td>
+<td>Policy violations, consensus failures</td>
 </tr>
 </tbody>
 </table>
-<h2 id="backward-compatibility">Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Full backward compatibility.</strong> FaultIsolationManager wraps existing
-  try/except patterns — no changes to exception handling semantics.</li>
-<li>Simulations that do not use FaultIsolationManager continue to propagate
-  exceptions normally (existing behavior preserved).</li>
-</ul>
-<h2 id="core-invariant">Core Invariant<a class="headerlink" href="#core-invariant" title="Permanent link">&para;</a></h2>
-<p><strong>A single agent crash NEVER kills the simulation tick.</strong></p>
-<p>This is the defining property of the Fault Isolation layer. It is validated
-by test cases that inject exceptions of every severity level and verify that:
-1. The faulted agent is correctly recovered/quarantined/exiled
-2. All other agents in the same tick execute normally
-3. SimulationEngine completes the tick without raising</p>
+<hr />
+<h2 id="setting-up-local-monitoring-stack">Setting Up Local Monitoring Stack<a class="headerlink" href="#setting-up-local-monitoring-stack" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Start full local stack with Prometheus + Grafana</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.dev.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.monitoring.yml<span class="w"> </span>up
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># Prometheus UI: http://localhost:9090</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># Grafana: http://localhost:3000 (admin/admin)</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>docker-compose.monitoring.yml</code> is planned for v1.1.0. For v1.0.2a0,
+use <code>rct metrics</code> and the REST endpoints for observability.</p>
+</div>
 
 
 
@@ -2385,7 +2325,7 @@ by test cases that inject exceptions of every severity level and verify that:
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../KERNEL_RFC_005_SYSCALL/" class="md-footer__link md-footer__link--prev" aria-label="Previous: RFC-005 Syscall &amp; Capabilities">
+          <a href="../KERNEL_RFC_006_FAULT_ISOLATION/" class="md-footer__link md-footer__link--prev" aria-label="Previous: RFC-006 Fault Isolation">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2395,20 +2335,20 @@ by test cases that inject exceptions of every severity level and verify that:
                 Previous
               </span>
               <div class="md-ellipsis">
-                RFC-005 Syscall & Capabilities
+                RFC-006 Fault Isolation
               </div>
             </div>
           </a>
         
         
           
-          <a href="../observability/" class="md-footer__link md-footer__link--next" aria-label="Next: Observability Guide">
+          <a href="../../benchmark/methodology/" class="md-footer__link md-footer__link--next" aria-label="Next: Methodology &amp; Reproducibility">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Observability Guide
+                Methodology & Reproducibility
               </div>
             </div>
             <div class="md-footer__button md-icon">

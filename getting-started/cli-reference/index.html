@@ -12,13 +12,13 @@
         <meta name="author" content="Ittirit Saengow (RCT Labs)">
       
       
-        <link rel="canonical" href="https://rctlabs.co/docs/use-cases/devops/">
+        <link rel="canonical" href="https://rctlabs.co/docs/getting-started/cli-reference/">
       
       
-        <link rel="prev" href="../../benchmark/hallucination-methodology/">
+        <link rel="prev" href="../quickstart/">
       
       
-        <link rel="next" href="../finance/">
+        <link rel="next" href="../../concepts/jitna/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>DevOps & CI/CD - RCT Platform</title>
+        <title>CLI Reference - RCT Platform</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#use-case-devops-infrastructure-automation" class="md-skip">
+        <a href="#cli-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              DevOps & CI/CD
+              CLI Reference
             
           </span>
         </div>
@@ -249,11 +249,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../getting-started/installation/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../installation/" class="md-tabs__link">
           
   
   
@@ -349,13 +351,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../use-cases/devops/" class="md-tabs__link">
           
   
   
@@ -521,26 +521,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -558,7 +563,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -576,7 +581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -604,7 +609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/quickstart/" class="md-nav__link">
+      <a href="../quickstart/" class="md-nav__link">
         
   
   
@@ -629,10 +634,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../getting-started/cli-reference/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -648,6 +680,208 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#global-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Global Options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rct-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct version
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-compile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct compile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-evaluate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct evaluate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct audit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct reset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-intent-submit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct intent submit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rct-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rct health
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shell-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shell Completion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment Variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1404,31 +1638,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -1446,7 +1675,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1461,37 +1690,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    DevOps & CI/CD
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../use-cases/devops/" class="md-nav__link">
         
   
   
@@ -1507,114 +1709,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-problem-with-unconstrained-automation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Problem with Unconstrained Automation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#full-deployment-pipeline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Full Deployment Pipeline
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#equivalent-cli-commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Equivalent CLI Commands
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fdia-scoring-for-deployment-actions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        FDIA Scoring for Deployment Actions
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#governance-policy-matrix-for-devops" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Governance Policy Matrix for DevOps
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#audit-rollback" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Audit &amp; Rollback
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#integration-with-cicd" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Integration with CI/CD
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        See Also
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1627,7 +1721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../finance/" class="md-nav__link">
+      <a href="../../use-cases/finance/" class="md-nav__link">
         
   
   
@@ -1655,7 +1749,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../game-ai/" class="md-nav__link">
+      <a href="../../use-cases/game-ai/" class="md-nav__link">
         
   
   
@@ -1683,7 +1777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../healthcare/" class="md-nav__link">
+      <a href="../../use-cases/healthcare/" class="md-nav__link">
         
   
   
@@ -1711,7 +1805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../supply-chain/" class="md-nav__link">
+      <a href="../../use-cases/supply-chain/" class="md-nav__link">
         
   
   
@@ -1955,222 +2049,382 @@
   
 
 
-<h1 id="use-case-devops-infrastructure-automation">Use Case: DevOps &amp; Infrastructure Automation<a class="headerlink" href="#use-case-devops-infrastructure-automation" title="Permanent link">&para;</a></h1>
-<p>The RCT Control Plane provides a <strong>constitutional deployment pipeline</strong> — every infrastructure change is compiled into a structured IntentObject, scored by FDIA, evaluated by governance policies, and executed only after passing all gates.</p>
-<hr />
-<h2 id="the-problem-with-unconstrained-automation">The Problem with Unconstrained Automation<a class="headerlink" href="#the-problem-with-unconstrained-automation" title="Permanent link">&para;</a></h2>
-<p>Standard CI/CD pipelines execute whatever the pipeline file says. A misconfiguration, a typo, or a compromised pipeline step can take down production instantly. RCT adds a mandatory governance layer:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git push → CI build → RCT compile → FDIA score → Policy evaluate → (Human approve?) → Deploy
-</span></code></pre></div>
-<p>No step in the deployment path can bypass the governance evaluation.</p>
-<hr />
-<h2 id="full-deployment-pipeline">Full Deployment Pipeline<a class="headerlink" href="#full-deployment-pipeline" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.intent_compiler</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntentCompiler</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.policy_language</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">PolicyEvaluator</span><span class="p">,</span> <span class="n">PolicyRule</span><span class="p">,</span> <span class="n">PolicyCondition</span><span class="p">,</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">PolicyAction</span><span class="p">,</span> <span class="n">PolicyPriority</span><span class="p">,</span> <span class="n">PolicyScope</span><span class="p">,</span> <span class="n">ConditionOperator</span><span class="p">,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">)</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.default_policies</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">create_cost_cap_policy</span><span class="p">,</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">create_risk_escalation_policy</span><span class="p">,</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">)</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rct_control_plane.observability</span><span class="w"> </span><span class="kn">import</span> <span class="n">ControlPlaneObserver</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">observer</span> <span class="o">=</span> <span class="n">ControlPlaneObserver</span><span class="p">()</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">compiler</span> <span class="o">=</span> <span class="n">IntentCompiler</span><span class="p">(</span><span class="n">observer</span><span class="o">=</span><span class="n">observer</span><span class="p">)</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">evaluator</span> <span class="o">=</span> <span class="n">PolicyEvaluator</span><span class="p">(</span><span class="n">observer</span><span class="o">=</span><span class="n">observer</span><span class="p">)</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="c1"># ── Policies ──────────────────────────────────────────────────────────────</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="c1"># Block production deploys that cost more than $200 (compute cost estimate)</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">register_policy</span><span class="p">(</span><span class="n">create_cost_cap_policy</span><span class="p">(</span><span class="n">max_cost_usd</span><span class="o">=</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;200.00&quot;</span><span class="p">)))</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="c1"># Escalate SYSTEMIC risk operations (full infra migrations)</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">register_policy</span><span class="p">(</span><span class="n">create_risk_escalation_policy</span><span class="p">())</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="c1"># Require approval for any production deployment</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">register_policy</span><span class="p">(</span><span class="n">PolicyRule</span><span class="p">(</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Production Deploy Gate&quot;</span><span class="p">,</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;All production deployments require ops lead approval&quot;</span><span class="p">,</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>    <span class="n">scope</span><span class="o">=</span><span class="n">PolicyScope</span><span class="o">.</span><span class="n">INTENT</span><span class="p">,</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    <span class="n">priority</span><span class="o">=</span><span class="n">PolicyPriority</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="n">conditions</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>        <span class="n">PolicyCondition</span><span class="p">(</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>            <span class="n">field</span><span class="o">=</span><span class="s2">&quot;goal&quot;</span><span class="p">,</span>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>            <span class="n">operator</span><span class="o">=</span><span class="n">ConditionOperator</span><span class="o">.</span><span class="n">CONTAINS</span><span class="p">,</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>            <span class="n">value</span><span class="o">=</span><span class="s2">&quot;production&quot;</span><span class="p">,</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>        <span class="p">)</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>    <span class="p">],</span>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>    <span class="n">action</span><span class="o">=</span><span class="n">PolicyAction</span><span class="o">.</span><span class="n">REQUIRE_APPROVAL</span><span class="p">,</span>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>    <span class="n">action_metadata</span><span class="o">=</span><span class="p">{</span>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>        <span class="s2">&quot;approver_role&quot;</span><span class="p">:</span> <span class="s2">&quot;ops-lead&quot;</span><span class="p">,</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>        <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Production environment gate&quot;</span><span class="p">,</span>
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>        <span class="s2">&quot;sla_minutes&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>    <span class="p">},</span>
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="p">))</span>
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>
-</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="c1"># ── Compile intent ─────────────────────────────────────────────────────────</span>
-</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>
-</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="n">result</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>    <span class="n">natural_language</span><span class="o">=</span><span class="s2">&quot;Deploy service payment-api v2.3.1 to production at 14:00 UTC&quot;</span><span class="p">,</span>
-</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>    <span class="n">user_id</span><span class="o">=</span><span class="s2">&quot;ci-bot-007&quot;</span><span class="p">,</span>
-</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>    <span class="n">user_tier</span><span class="o">=</span><span class="s2">&quot;enterprise&quot;</span><span class="p">,</span>
-</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="p">)</span>
-</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>
-</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="n">intent</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">intent</span>
-</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intent compiled: </span><span class="si">{</span><span class="n">intent</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intent type    : </span><span class="si">{</span><span class="n">intent</span><span class="o">.</span><span class="n">intent_type</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># → DEPLOY</span>
-</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Risk profile   : </span><span class="si">{</span><span class="n">intent</span><span class="o">.</span><span class="n">risk_profile</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a><span class="c1"># ── Evaluate ───────────────────────────────────────────────────────────────</span>
-</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>
-</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a><span class="n">eval_result</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">intent</span><span class="o">=</span><span class="n">intent</span><span class="p">)</span>
-</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>
-</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">eval_result</span><span class="o">.</span><span class="n">violations</span><span class="p">:</span>
-</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">rule_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">action_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>
-</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a><span class="c1"># Execution only proceeds if no REJECT violations</span>
-</span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a><span class="n">blocking</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">eval_result</span><span class="o">.</span><span class="n">violations</span> <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;reject&quot;</span><span class="p">]</span>
-</span><span id="__span-1-68"><a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">blocking</span><span class="p">:</span>
-</span><span id="__span-1-69"><a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;→ Proceeding to SignedAI approval workflow&quot;</span><span class="p">)</span>
-</span><span id="__span-1-70"><a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a><span class="k">else</span><span class="p">:</span>
-</span><span id="__span-1-71"><a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;→ Deploy blocked by governance&quot;</span><span class="p">)</span>
+<h1 id="cli-reference">CLI Reference<a class="headerlink" href="#cli-reference" title="Permanent link">&para;</a></h1>
+<p>The <code>rct</code> command-line tool is the primary interface to the RCT Control Plane SDK.</p>
+<p><strong>Install the CLI:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w">      </span><span class="c1"># from source (alpha)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>rct<span class="w"> </span>--help
 </span></code></pre></div>
 <hr />
-<h2 id="equivalent-cli-commands">Equivalent CLI Commands<a class="headerlink" href="#equivalent-cli-commands" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Compile the deployment intent</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>rct<span class="w"> </span>compile<span class="w"> </span><span class="s2">&quot;Deploy service payment-api v2.3.1 to production at 14:00 UTC&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span>--user-id<span class="w"> </span>ci-bot-007
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Build the execution graph</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>rct<span class="w"> </span>build<span class="w"> </span>--intent-id<span class="w"> </span>&lt;id&gt;
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># Run governance evaluation</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>rct<span class="w"> </span>evaluate<span class="w"> </span>--intent-id<span class="w"> </span>&lt;id&gt;
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># Check status</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>rct<span class="w"> </span>status<span class="w"> </span>&lt;id&gt;
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1"># After human approval — audit the approval chain</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>rct<span class="w"> </span>audit<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--verify
-</span></code></pre></div>
-<p>See the full interactive walkthrough:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python<span class="w"> </span>examples/cli_walkthrough.py<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>--intent<span class="w"> </span><span class="s2">&quot;Deploy service payment-api v2.3.1 to production at 14:00 UTC&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span>--verbose
-</span></code></pre></div>
-<hr />
-<h2 id="fdia-scoring-for-deployment-actions">FDIA Scoring for Deployment Actions<a class="headerlink" href="#fdia-scoring-for-deployment-actions" title="Permanent link">&para;</a></h2>
-<p>The IntentCompiler maps deployment intents to <code>IntentType.DEPLOY</code>, which is scored with:</p>
+<h2 id="global-options">Global Options<a class="headerlink" href="#global-options" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Scenario</th>
-<th>Agent intent (internal)</th>
-<th>Expected best action</th>
+<th>Flag</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Standard deploy</td>
-<td><code>ACCUMULATE</code> (deliver value)</td>
-<td><code>cooperate</code> (collaborate with ops)</td>
+<td><code>--output json</code></td>
+<td>Output as JSON (default: table)</td>
 </tr>
 <tr>
-<td>Risky deploy (SYSTEMIC)</td>
-<td><code>ACCUMULATE</code></td>
-<td><code>explore</code> (canary/blue-green)</td>
+<td><code>--output table</code></td>
+<td>Output as rich table</td>
 </tr>
 <tr>
-<td>Emergency rollback</td>
-<td><code>PROTECT</code></td>
-<td><code>defend</code> (rollback immediately)</td>
+<td><code>--output tree</code></td>
+<td>Tree view (for graph commands)</td>
 </tr>
 <tr>
-<td>Database migration</td>
-<td><code>DISCOVER</code></td>
-<td><code>explore</code> (dry-run first)</td>
+<td><code>--verbose</code></td>
+<td>Enable debug logging</td>
+</tr>
+<tr>
+<td><code>--version</code></td>
+<td>Print version and exit</td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>Show help and exit</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="governance-policy-matrix-for-devops">Governance Policy Matrix for DevOps<a class="headerlink" href="#governance-policy-matrix-for-devops" title="Permanent link">&para;</a></h2>
+<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
+<h3 id="rct-version"><code>rct version</code><a class="headerlink" href="#rct-version" title="Permanent link">&para;</a></h3>
+<p>Print SDK version, Python version, and component status.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>rct<span class="w"> </span>version
+</span></code></pre></div>
+<p><strong>Output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>RCT Platform SDK v1.0.2a0
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Python 3.11.x
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  ✓ core.fdia          — FDIA Scorer + equation engine
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  ✓ core.delta_engine  — Memory Delta Engine (74% compression)
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  ✓ signedai.core      — SignedAI consensus registry
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  ✓ rct_control_plane  — DSL compiler, graph builder, API server
+</span></code></pre></div>
+<hr />
+<h3 id="rct-serve"><code>rct serve</code><a class="headerlink" href="#rct-serve" title="Permanent link">&para;</a></h3>
+<p>Start the Control Plane REST API server.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rct<span class="w"> </span>serve<span class="w"> </span><span class="o">[</span>--port<span class="w"> </span>PORT<span class="o">]</span><span class="w"> </span><span class="o">[</span>--reload<span class="o">]</span><span class="w"> </span><span class="o">[</span>--workers<span class="w"> </span>N<span class="o">]</span>
+</span></code></pre></div>
 <table>
 <thead>
 <tr>
-<th>Environment</th>
-<th>Policy</th>
-<th>Gate</th>
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Dev / staging</td>
-<td><code>LOG</code></td>
-<td>No gate — only audit</td>
+<td><code>--port</code></td>
+<td><code>8000</code></td>
+<td>Port to listen on</td>
 </tr>
 <tr>
-<td>Production (minor)</td>
-<td><code>NOTIFY</code></td>
-<td>Slack alert</td>
+<td><code>--reload</code></td>
+<td>off</td>
+<td>Auto-reload on code changes (dev mode)</td>
 </tr>
 <tr>
-<td>Production (major)</td>
-<td><code>REQUIRE_APPROVAL</code></td>
-<td>Ops lead</td>
+<td><code>--workers</code></td>
+<td><code>1</code></td>
+<td>Number of Uvicorn worker processes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rct<span class="w"> </span>serve<span class="w"> </span>--port<span class="w"> </span><span class="m">8000</span><span class="w"> </span>--reload
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># → http://localhost:8000</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># → Docs: http://localhost:8000/docs</span>
+</span></code></pre></div>
+<hr />
+<h3 id="rct-compile"><code>rct compile</code><a class="headerlink" href="#rct-compile" title="Permanent link">&para;</a></h3>
+<p>Compile a natural language intent into an intent record.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>rct<span class="w"> </span>compile<span class="w"> </span>TEXT<span class="w"> </span><span class="o">[</span>--user-id<span class="w"> </span>USER_ID<span class="o">]</span><span class="w"> </span><span class="o">[</span>--context<span class="w"> </span>JSON<span class="o">]</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TEXT</code></td>
+<td>required</td>
+<td>The intent text to compile</td>
 </tr>
 <tr>
-<td>Full infra migration</td>
-<td><code>ESCALATE</code></td>
-<td>CTO + CAB committee</td>
+<td><code>--user-id</code></td>
+<td><code>"anonymous"</code></td>
+<td>User identifier for audit trail</td>
 </tr>
 <tr>
-<td>Emergency rollback</td>
-<td><code>APPROVE</code></td>
-<td>Auto-approved (fast path)</td>
+<td><code>--context</code></td>
+<td><code>"{}"</code></td>
+<td>JSON context blob</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>rct<span class="w"> </span>compile<span class="w"> </span><span class="s2">&quot;Refactor authentication module&quot;</span><span class="w"> </span>--user-id<span class="w"> </span>alice
+</span></code></pre></div>
+<p><strong>Output (table):</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>┌────────────┬──────────────────────────────────┐
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>│ Field      │ Value                            │
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>├────────────┼──────────────────────────────────┤
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>│ Intent ID  │ a1b2c3d4-...                     │
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>│ Status     │ compiled                         │
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>│ FDIA Score │ 0.8734                           │
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>│ Tier       │ S4                               │
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>└────────────┴──────────────────────────────────┘
+</span></code></pre></div>
+<hr />
+<h3 id="rct-build"><code>rct build</code><a class="headerlink" href="#rct-build" title="Permanent link">&para;</a></h3>
+<p>Build a DSL execution graph from a compiled intent.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>rct<span class="w"> </span>build<span class="w"> </span>--intent-id<span class="w"> </span>ID<span class="w"> </span><span class="o">[</span>--dsl-file<span class="w"> </span>FILE<span class="o">]</span><span class="w"> </span><span class="o">[</span>--output<span class="w"> </span>FILE<span class="o">]</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--intent-id</code></td>
+<td>required</td>
+<td>Intent ID from <code>rct compile</code></td>
+</tr>
+<tr>
+<td><code>--dsl-file</code></td>
+<td>auto</td>
+<td>Path to a <code>.dsl</code> file (optional)</td>
+</tr>
+<tr>
+<td><code>--output</code></td>
+<td>stdout</td>
+<td>Write graph JSON to file</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>rct<span class="w"> </span>compile<span class="w"> </span><span class="s2">&quot;Deploy microservice to staging&quot;</span><span class="w"> </span>--user-id<span class="w"> </span>devops<span class="w"> </span><span class="p">|</span><span class="w"> </span>rct<span class="w"> </span>build<span class="w"> </span>--intent-id<span class="w"> </span>-
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>rct<span class="w"> </span>build<span class="w"> </span>--intent-id<span class="w"> </span>a1b2c3d4<span class="w"> </span>--output<span class="w"> </span>graph.json
+</span></code></pre></div>
+<hr />
+<h3 id="rct-evaluate"><code>rct evaluate</code><a class="headerlink" href="#rct-evaluate" title="Permanent link">&para;</a></h3>
+<p>Evaluate a compiled + built intent through policy and governance checks.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>rct<span class="w"> </span>evaluate<span class="w"> </span>--intent-id<span class="w"> </span>ID<span class="w"> </span><span class="o">[</span>--architect-score<span class="w"> </span>FLOAT<span class="o">]</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--intent-id</code></td>
+<td>required</td>
+<td>Intent ID to evaluate</td>
+</tr>
+<tr>
+<td><code>--architect-score</code></td>
+<td><code>1.0</code></td>
+<td>Override Architect gate (0.0–1.0)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">A=0 blocks output</p>
+<p>Passing <code>--architect-score 0.0</code> will cause FDIA = 0 and block all output.
+This is the constitutional safety guarantee — not a bug.</p>
+</div>
+<p><strong>Example:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>rct<span class="w"> </span>evaluate<span class="w"> </span>--intent-id<span class="w"> </span>a1b2c3d4<span class="w"> </span>--architect-score<span class="w"> </span><span class="m">0</span>.9
+</span></code></pre></div>
+<hr />
+<h3 id="rct-status"><code>rct status</code><a class="headerlink" href="#rct-status" title="Permanent link">&para;</a></h3>
+<p>Show current state of a compiled intent.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>rct<span class="w"> </span>status<span class="w"> </span>INTENT_ID
+</span></code></pre></div>
+<p><strong>Example:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>rct<span class="w"> </span>status<span class="w"> </span>a1b2c3d4-5678-...
+</span></code></pre></div>
+<p><strong>Output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Intent   : a1b2c3d4-5678-...
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>State    : COMPLETED
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>Created  : 2026-04-21T10:00:00+00:00
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>FDIA     : 0.8734
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>Policy   : COMPLIANT
+</span></code></pre></div>
+<hr />
+<h3 id="rct-list"><code>rct list</code><a class="headerlink" href="#rct-list" title="Permanent link">&para;</a></h3>
+<p>List recent intents.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>rct<span class="w"> </span>list<span class="w"> </span><span class="o">[</span>--limit<span class="w"> </span>N<span class="o">]</span><span class="w"> </span><span class="o">[</span>--status<span class="w"> </span>STATUS<span class="o">]</span><span class="w"> </span><span class="o">[</span>--user-id<span class="w"> </span>USER_ID<span class="o">]</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--limit</code></td>
+<td><code>10</code></td>
+<td>Max intents to show</td>
+</tr>
+<tr>
+<td><code>--status</code></td>
+<td>all</td>
+<td>Filter by state (e.g., <code>COMPLETED</code>, <code>FAILED</code>)</td>
+</tr>
+<tr>
+<td><code>--user-id</code></td>
+<td>all</td>
+<td>Filter by user</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="audit-rollback">Audit &amp; Rollback<a class="headerlink" href="#audit-rollback" title="Permanent link">&para;</a></h2>
-<p>Every deployment intent is permanently auditable:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Verify a past deployment decision</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>rct<span class="w"> </span>audit<span class="w"> </span>abc-123<span class="w"> </span>--verify
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Replay a governance evaluation for a specific past deploy</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>python<span class="w"> </span>-m<span class="w"> </span>rct.audit.replay<span class="w"> </span>--pillar<span class="w"> </span><span class="m">4</span><span class="w"> </span>--verbose
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># → Confirms deterministic replay guarantee</span>
+<h3 id="rct-audit"><code>rct audit</code><a class="headerlink" href="#rct-audit" title="Permanent link">&para;</a></h3>
+<p>Display full audit trail for an intent.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>rct<span class="w"> </span>audit<span class="w"> </span>INTENT_ID<span class="w"> </span><span class="o">[</span>--output<span class="w"> </span>json<span class="o">]</span>
 </span></code></pre></div>
-<p>The delta engine records every deployment state change. If a deployment fails, the control plane can replay the pre-deployment state:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">core.delta_engine.memory_delta</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryDeltaEngine</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">engine</span> <span class="o">=</span> <span class="n">MemoryDeltaEngine</span><span class="p">()</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># ... register and record deployment ticks ...</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># Rollback to state before the bad deploy</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">pre_deploy_state</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">get_state_at_tick</span><span class="p">(</span><span class="s2">&quot;infra_agent&quot;</span><span class="p">,</span> <span class="n">tick</span><span class="o">=</span><span class="n">deploy_tick</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">engine</span><span class="o">.</span><span class="n">rollback</span><span class="p">(</span><span class="s2">&quot;infra_agent&quot;</span><span class="p">,</span> <span class="n">n_ticks</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<p><strong>Example:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>rct<span class="w"> </span>audit<span class="w"> </span>a1b2c3d4<span class="w"> </span>--output<span class="w"> </span>json
+</span></code></pre></div>
+<p>Outputs the complete signed audit chain including FDIA score, SignedAI consensus
+tier, and policy decisions.</p>
+<hr />
+<h3 id="rct-metrics"><code>rct metrics</code><a class="headerlink" href="#rct-metrics" title="Permanent link">&para;</a></h3>
+<p>Display runtime metrics for the Control Plane.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>rct<span class="w"> </span>metrics<span class="w"> </span><span class="o">[</span>--output<span class="w"> </span>json<span class="o">]</span>
+</span></code></pre></div>
+<p><strong>Sample output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Metric                   Value
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>────────────────────────────────────
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Intents processed        1,247
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>FDIA avg score           0.8734
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>Warm recall hits         89.3%
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>Consensus tier S4 calls  847
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>Policy violations        2
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>Uptime                   14d 06h
 </span></code></pre></div>
 <hr />
-<h2 id="integration-with-cicd">Integration with CI/CD<a class="headerlink" href="#integration-with-cicd" title="Permanent link">&para;</a></h2>
-<p>Add RCT governance as a CI stage:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># .github/workflows/deploy.yml</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RCT Governance Gate</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="no">python -c &quot;</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="no">from rct.governance import GovernanceGate</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="no">import sys</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="no">gate = GovernanceGate(fdia_threshold=0.70)</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="no">gate.evaluate(&#39;Deploy ${{ env.SERVICE }} to production&#39;) or sys.exit(1)</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="no">&quot;</span>
+<h3 id="rct-reset"><code>rct reset</code><a class="headerlink" href="#rct-reset" title="Permanent link">&para;</a></h3>
+<p>Reset in-memory state (development/testing only).</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>rct<span class="w"> </span>reset<span class="w"> </span><span class="o">[</span>--force<span class="o">]</span>
+</span></code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Destructive Action</p>
+<p><code>rct reset</code> clears all in-memory intent state. Use <code>--force</code> to skip confirmation.
+Persisted audit logs are <strong>not</strong> deleted.</p>
+</div>
+<hr />
+<h3 id="rct-intent-submit"><code>rct intent submit</code><a class="headerlink" href="#rct-intent-submit" title="Permanent link">&para;</a></h3>
+<p>Submit an intent directly via JSON (low-level).</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>rct<span class="w"> </span>intent<span class="w"> </span>submit<span class="w"> </span>--intent<span class="w"> </span>TEXT<span class="w"> </span>--context<span class="w"> </span>JSON
+</span></code></pre></div>
+<p><strong>Example:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>rct<span class="w"> </span>intent<span class="w"> </span>submit<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span>--intent<span class="w"> </span><span class="s2">&quot;Analyze security posture of auth module&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span>--context<span class="w"> </span><span class="s1">&#39;{&quot;repo&quot;: &quot;rct-platform&quot;, &quot;branch&quot;: &quot;main&quot;}&#39;</span>
 </span></code></pre></div>
 <hr />
-<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../../concepts/governance/">Governance Layer</a></li>
-<li><a href="../finance/">Finance Use Case</a></li>
-</ul>
+<h3 id="rct-health"><code>rct health</code><a class="headerlink" href="#rct-health" title="Permanent link">&para;</a></h3>
+<p>Check Control Plane and component health.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>rct<span class="w"> </span>health<span class="w"> </span><span class="o">[</span>--detailed<span class="o">]</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>(none)</em></td>
+<td>Lightweight liveness check</td>
+</tr>
+<tr>
+<td><code>--detailed</code></td>
+<td>Full subsystem health (FDIA, Delta, SignedAI, compiler)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>rct<span class="w"> </span>health<span class="w"> </span>--detailed
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Component               Status
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>────────────────────────────────
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>fdia_engine             ✓ ok
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>delta_engine            ✓ ok
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>signedai_registry       ✓ ok
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>intent_compiler         ✓ ok
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>dsl_parser              ✓ ok
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>policy_engine           ✓ ok
+</span></code></pre></div>
+<hr />
+<h2 id="shell-completion">Shell Completion<a class="headerlink" href="#shell-completion" title="Permanent link">&para;</a></h2>
+<p>Enable tab-completion for <code>bash</code>, <code>zsh</code>, or <code>fish</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># bash</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span><span class="nv">_RCT_COMPLETE</span><span class="o">=</span>bash_source<span class="w"> </span>rct<span class="k">)</span><span class="s2">&quot;</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="c1"># zsh</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span><span class="nv">_RCT_COMPLETE</span><span class="o">=</span>zsh_source<span class="w"> </span>rct<span class="k">)</span><span class="s2">&quot;</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="c1"># fish</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="nb">eval</span><span class="w"> </span><span class="o">(</span>env<span class="w"> </span><span class="nv">_RCT_COMPLETE</span><span class="o">=</span>fish_source<span class="w"> </span>rct<span class="o">)</span>
+</span></code></pre></div>
+<hr />
+<h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RCT_PORT</code></td>
+<td><code>8000</code></td>
+<td>Default port for <code>rct serve</code></td>
+</tr>
+<tr>
+<td><code>RCT_LOG_LEVEL</code></td>
+<td><code>INFO</code></td>
+<td>Logging level (<code>DEBUG</code>, <code>INFO</code>, <code>WARNING</code>)</td>
+</tr>
+<tr>
+<td><code>RCT_STATE_DIR</code></td>
+<td><code>.rct_state/</code></td>
+<td>Directory for persisted intent state</td>
+</tr>
+<tr>
+<td><code>RCT_ARCHITECT_SCORE</code></td>
+<td><code>1.0</code></td>
+<td>Default Architect gate value</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -2206,7 +2460,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../benchmark/hallucination-methodology/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Hallucination Rate Methodology">
+          <a href="../quickstart/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Quick Start">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2216,20 +2470,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Hallucination Rate Methodology
+                Quick Start
               </div>
             </div>
           </a>
         
         
           
-          <a href="../finance/" class="md-footer__link md-footer__link--next" aria-label="Next: Finance &amp; Risk">
+          <a href="../../concepts/jitna/" class="md-footer__link md-footer__link--next" aria-label="Next: JITNA Protocol">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Finance & Risk
+                JITNA Protocol
               </div>
             </div>
             <div class="md-footer__button md-icon">

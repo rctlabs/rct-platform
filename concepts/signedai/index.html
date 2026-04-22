@@ -335,6 +335,26 @@
     
     
       <li class="md-tabs__item">
+        <a href="../../benchmark/methodology/" class="md-tabs__link">
+          
+  
+  
+  Benchmark
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
         <a href="../../use-cases/devops/" class="md-tabs__link">
           
   
@@ -592,6 +612,34 @@
     
   
     Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/cli-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
   
 
     
@@ -1320,6 +1368,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/observability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1357,7 +1433,7 @@
   <span class="md-ellipsis">
     
   
-    Use Cases
+    Benchmark
   
 
     
@@ -1370,6 +1446,121 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Benchmark
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../benchmark/methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methodology & Reproducibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../benchmark/hallucination-methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hallucination Rate Methodology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use Cases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1546,10 +1737,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
             
   
   
@@ -1567,8 +1758,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1767,26 +1958,26 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>S</strong> (Signature)</td>
-<td>1 model</td>
+<td><strong>TIER_S</strong></td>
+<td>1 signer</td>
 <td>Low-risk, idempotent reads</td>
 <td>&lt;50ms</td>
 </tr>
 <tr>
-<td><strong>S4</strong></td>
-<td>4 models</td>
+<td><strong>TIER_4</strong></td>
+<td>4 signers</td>
 <td>Medium-risk, write operations</td>
 <td>200–500ms</td>
 </tr>
 <tr>
-<td><strong>S6</strong></td>
-<td>6 models</td>
+<td><strong>TIER_6</strong></td>
+<td>6 signers</td>
 <td>High-risk, financial/legal</td>
 <td>500ms–2s</td>
 </tr>
 <tr>
-<td><strong>S8</strong></td>
-<td>8 models</td>
+<td><strong>TIER_8</strong></td>
+<td>6 signers + chairman veto</td>
 <td>Critical, irreversible actions</td>
 <td>2–5s</td>
 </tr>
@@ -1842,20 +2033,18 @@
 </table>
 <hr />
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">signedai.core.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignedAIRegistry</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="p">,</span> <span class="n">SignedAITier</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">signedai.core.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignedAIRegistry</span><span class="p">,</span> <span class="n">SignedAITier</span><span class="p">,</span> <span class="n">RiskLevel</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">registry</span> <span class="o">=</span> <span class="n">SignedAIRegistry</span><span class="p">()</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Get tier config for a risk level</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">tier</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">get_tier_for_risk</span><span class="p">(</span><span class="n">RiskLevel</span><span class="o">.</span><span class="n">HIGH</span><span class="p">)</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">config</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">get_tier_config</span><span class="p">(</span><span class="n">tier</span><span class="p">)</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tier: </span><span class="si">{</span><span class="n">tier</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>             <span class="c1"># → S6</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Models required: </span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">model_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Consensus threshold: </span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">consensus_threshold</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># Also accepts enum aliases</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">config_alt</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">get_tier_config</span><span class="p">(</span><span class="n">SignedAITier</span><span class="o">.</span><span class="n">S6</span><span class="p">)</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">assert</span> <span class="n">config</span> <span class="o">==</span> <span class="n">config_alt</span>  <span class="c1"># both lookups work</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># All methods are class methods — no instance needed</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">tier_config</span> <span class="o">=</span> <span class="n">SignedAIRegistry</span><span class="o">.</span><span class="n">get_tier_by_risk</span><span class="p">(</span><span class="n">RiskLevel</span><span class="o">.</span><span class="n">HIGH</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tier: </span><span class="si">{</span><span class="n">tier_config</span><span class="o">.</span><span class="n">tier</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>              <span class="c1"># → tier_6</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Signers: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tier_config</span><span class="o">.</span><span class="n">signers</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>         <span class="c1"># → 6</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Required votes: </span><span class="si">{</span><span class="n">tier_config</span><span class="o">.</span><span class="n">required_votes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="c1"># → 4</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chairman veto: </span><span class="si">{</span><span class="n">tier_config</span><span class="o">.</span><span class="n">chairman_veto</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># → False</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Access by explicit tier enum</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">config_t6</span> <span class="o">=</span> <span class="n">SignedAIRegistry</span><span class="o">.</span><span class="n">get_tier_config</span><span class="p">(</span><span class="n">SignedAITier</span><span class="o">.</span><span class="n">TIER_6</span><span class="p">)</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">assert</span> <span class="n">tier_config</span> <span class="o">==</span> <span class="n">config_t6</span>  <span class="c1"># same tier</span>
 </span></code></pre></div>
 <hr />
 <h2 id="jitna-packet-cross-agent-wire-format">JITNA Packet — Cross-Agent Wire Format<a class="headerlink" href="#jitna-packet-cross-agent-wire-format" title="Permanent link">&para;</a></h2>
