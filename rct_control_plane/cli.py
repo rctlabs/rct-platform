@@ -22,6 +22,7 @@ Output Formats:
     --output tree   : Tree view (for graphs)
 """
 
+import os
 import sys
 import json
 import time
@@ -64,6 +65,26 @@ from rct_control_plane.observability import ControlPlaneObserver
 
 # Preserve builtin list before it gets shadowed by the CLI 'list' command
 _list = list
+
+
+def _configure_encoding() -> None:
+    """Ensure stdout/stderr can handle Unicode on Windows consoles with legacy encodings.
+
+    Windows terminals using Code Page 874 (Thai), 932 (Japanese), etc. cannot encode
+    characters such as the right-arrow (U+2192) or check-mark (U+2713), causing
+    UnicodeEncodeError before the server process even starts.  This function
+    reconfigures the streams to UTF-8 with ``errors='replace'`` so unrepresentable
+    characters are shown as ``?`` instead of crashing the process.
+
+    Safe to call on all platforms; on Linux/macOS it is a no-op because
+    the streams are already UTF-8.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            try:
+                stream.reconfigure(encoding="utf-8", errors="replace")
+            except Exception:
+                pass  # read-only or already configured — ignore
 
 
 class OutputFormat(str, Enum):
@@ -217,7 +238,7 @@ def cli():
     
     Command-line interface for Control Plane operations.
     """
-    pass
+    _configure_encoding()
 
 
 @cli.command(name="version")

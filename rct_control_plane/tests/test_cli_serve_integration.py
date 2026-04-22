@@ -12,6 +12,7 @@ No extra dependencies beyond the stdlib and uvicorn (already in requirements.txt
 from __future__ import annotations
 
 import json
+import os
 import socket
 import subprocess
 import sys
@@ -66,6 +67,12 @@ def rct_server():
 
     # Spawn via ``python -m rct_control_plane.cli serve`` so it works even
     # when the ``rct`` entry-point is not on PATH (e.g. bare CI env).
+    #
+    # Force UTF-8 I/O so the server process does not crash on Windows
+    # consoles that use legacy encodings such as CP874 (Thai) where
+    # characters like \u2192 cannot be encoded and raise UnicodeEncodeError
+    # before the server even binds to its port.
+    _env = {**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"}
     proc = subprocess.Popen(
         [
             sys.executable, "-m", "rct_control_plane.cli",
@@ -75,6 +82,7 @@ def rct_server():
         ],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
+        env=_env,
     )
 
     # Wait up to 12 s for the server to accept connections
