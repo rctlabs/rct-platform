@@ -1,0 +1,102 @@
+services:
+  # --- Gateway API ---
+  # Main entry point: routes intents from clients to internal services
+  gateway-api:
+    build:
+      context: .
+      dockerfile: microservices/gateway-api/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - RCT_LOG_LEVEL=DEBUG
+      - RCT_ENV=development
+    volumes:
+      - ./microservices/gateway-api:/app/microservices/gateway-api:ro
+      - ./core:/app/core:ro
+    depends_on:
+      - intent-loop
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # --- Intent Loop ---
+  # Self-optimizing intent processing engine (cold start → warm recall)
+  intent-loop:
+    build:
+      context: .
+      dockerfile: microservices/intent-loop/Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - RCT_LOG_LEVEL=DEBUG
+      - RCT_ENV=development
+    volumes:
+      - ./microservices/intent-loop:/app/microservices/intent-loop:ro
+      - ./core:/app/core:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # --- Analysearch Intent ---
+  # Intent analysis and semantic search over agent memory
+  analysearch:
+    build:
+      context: .
+      dockerfile: microservices/analysearch-intent/Dockerfile
+    ports:
+      - "8002:8002"
+    environment:
+      - RCT_LOG_LEVEL=DEBUG
+      - RCT_ENV=development
+    volumes:
+      - ./microservices/analysearch-intent:/app/microservices/analysearch-intent:ro
+      - ./core:/app/core:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # --- Vector Search ---
+  # Fast semantic similarity search over compressed delta states
+  vector-search:
+    build:
+      context: .
+      dockerfile: microservices/vector-search/Dockerfile
+    ports:
+      - "8003:8003"
+    environment:
+      - RCT_LOG_LEVEL=DEBUG
+      - RCT_ENV=development
+    volumes:
+      - ./microservices/vector-search:/app/microservices/vector-search:ro
+      - ./core:/app/core:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # --- Crystallizer ---
+  # Pattern crystallization: hardens repeated intent patterns into optimized paths
+  crystallizer:
+    build:
+      context: .
+      dockerfile: microservices/crystallizer/Dockerfile
+    ports:
+      - "8004:8004"
+    environment:
+      - RCT_LOG_LEVEL=DEBUG
+      - RCT_ENV=development
+    volumes:
+      - ./microservices/crystallizer:/app/microservices/crystallizer:ro
+      - ./core:/app/core:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8004/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3

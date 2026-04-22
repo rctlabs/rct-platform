@@ -3,7 +3,7 @@
 [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 [![Security](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/security-scan.yml)
 [![codecov](https://codecov.io/gh/rctlabs/rct-platform/graph/badge.svg?token=IE08MVKA6C)](https://app.codecov.io/gh/rctlabs/rct-platform)
-[![Version](https://img.shields.io/badge/version-1.0.1a0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.0.2a0-blue)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)](pyproject.toml)
 [![Status](https://img.shields.io/badge/status-PUBLIC%20ALPHA-orange)](CHANGELOG.md)
@@ -108,7 +108,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
-│               RCT PLATFORM SDK v1.0.1a0                  │
+│               RCT PLATFORM SDK v1.0.2a0                  │
 │         Intent-Centric AI Operating System               │
 └──────────────────────────────────────────────────────────┘
 
@@ -557,12 +557,34 @@ Do **not** open public issues for security findings.
 
 ---
 
-## 👤 Creator
+## 👤 About the Author
 
 **Ittirit Saengow (อิทธิฤทธิ์ แซ่โง้ว)**  
 *Architect & Sole Creator of RCT Platform and the RCT Ecosystem*
 
-Built the entire RCT Ecosystem independently — from the FDIA equation through 591 tests, Constitutional AI architecture, SignedAI multi-LLM consensus, and this open SDK. A Thai developer building trust-layer AI infrastructure for the Intelligence Age.
+> *"I'm a solo developer from Klong Toei, Bangkok. I believe AI governance should be a mathematical guarantee — not a setting you can turn off."*
+
+### Origin Story
+
+In June 2025, I started asking a question no one had answered clearly: **Why does AI safety depend on configuration files instead of math?**
+
+On August 11, 2025 — a personal turning point — I wrote the first version of the FDIA equation on paper:
+
+```
+F = D^I × A
+```
+
+The insight: when `A = 0`, the output `F = 0` **by the properties of multiplication** — no code path can bypass it. That's a constitutional guarantee, not a setting.
+
+Over the next 10 months, working alone from a room in **Klong Toei, Bangkok**, I built that equation into:
+- A 11-layer constitutional AI operating system
+- 41 production algorithms (Tier 1–9)
+- The JITNA Protocol (RFC-001) — an open standard for AI-to-AI communication
+- SignedAI: multi-LLM consensus with ED25519 cryptographic attestation
+- **723 passing tests**, 89% coverage, zero failures
+- A 450+ page whitepaper documenting every decision
+
+This is not a research paper. It runs in production at [rctlabs.co](https://rctlabs.co).
 
 | | |
 |---|---|
@@ -570,9 +592,23 @@ Built the entire RCT Ecosystem independently — from the FDIA equation through 
 | **Email** | ittirit720@gmail.com |
 | **Org** | founder@rctlabs.co |
 | **Website** | [rctlabs.co](https://rctlabs.co) |
-| **Location** | Bangkok, Thailand 🇹🇭 |
+| **Location** | Klong Toei, Bangkok, Thailand 🇹🇭 |
+| **Started** | June 2025 |
+| **Turning Point** | August 11, 2025 |
 
-> *"Design the system so it cannot misbehave — not just configure it to be safe."*
+### Timeline
+
+| Period | Milestone |
+|--------|-----------|
+| Jun 2025 | First FDIA equation written |
+| Aug 11, 2025 | Commitment to build RCT OS |
+| Oct 2025 | JITNA Protocol RFC-001 drafted |
+| Dec 2025 | Foundation whitepaper (~100 pages) |
+| Jan 2026 | 41 algorithms complete, 4,849 enterprise tests |
+| Feb 2026 | 3,053 Python files, Level 4 Virtuoso stress test |
+| Apr 2026 | Public SDK — 723 tests, 89% coverage, Apache 2.0 |
+
+> See [ROADMAP.md](ROADMAP.md) for what comes next.
 
 ---
 

@@ -99,6 +99,7 @@ nav:
   - Getting Started:
     - Installation: getting-started/installation.md
     - Quick Start: getting-started/quickstart.md
+    - CLI Reference: getting-started/cli-reference.md
   - Core Concepts:
     - JITNA Protocol: concepts/jitna.md
     - FDIA Engine: concepts/fdia.md
@@ -117,6 +118,10 @@ nav:
     - RFC-004 IPC Message Bus: architecture/KERNEL_RFC_004_IPC.md
     - RFC-005 Syscall & Capabilities: architecture/KERNEL_RFC_005_SYSCALL.md
     - RFC-006 Fault Isolation: architecture/KERNEL_RFC_006_FAULT_ISOLATION.md
+    - Observability Guide: architecture/observability.md
+  - Benchmark:
+    - Methodology & Reproducibility: benchmark/methodology.md
+    - Hallucination Rate Methodology: benchmark/hallucination-methodology.md
   - Use Cases:
     - DevOps & CI/CD: use-cases/devops.md
     - Finance & Risk: use-cases/finance.md

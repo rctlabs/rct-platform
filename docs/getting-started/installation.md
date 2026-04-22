@@ -11,17 +11,14 @@
 
 ## From PyPI
 
+!!! warning "Alpha Release — Source Install Required"
+    `rct-platform` v1.0.2a0 is in **Public Alpha** and has not yet been published to PyPI.
+    Use the **From Source** method below to install.
+    PyPI publishing is planned for v1.0.0 stable.
+
 ```bash
+# Will be available on PyPI at stable release:
 pip install rct-platform
-```
-
-Verify the installation:
-
-```bash
-python -c "import core; print(core.__version__)"
-# → 1.0.1a0
-
-rct --help
 ```
 
 ---
@@ -51,7 +48,7 @@ pip install -r requirements-dev.txt
 
 ```bash
 pytest --tb=short -q
-# → 591 passed, 14 skipped
+# → 723 passed in ~3s
 ```
 
 ---
@@ -73,3 +70,19 @@ rct --help
 rct compile intent.json
 rct graph build --policy default
 ```
+
+---
+
+## Interactive Playground (No Install)
+
+Run the FDIA + SignedAI demos directly in your browser via Google Colab — no local install required:
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rctlabs/rct-platform/blob/main/notebooks/rct_playground.ipynb)
+
+The notebook walks through:
+1. FDIA equation scoring (`F = D^I × A`)
+2. SignedAI tier routing
+3. Delta Engine compression concept
+4. Tier 9 full pipeline
+
+> **Note:** The Colab notebook is included in the `notebooks/` directory of this repository.
