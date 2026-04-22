@@ -230,6 +230,132 @@ class TestMemoryDeltaEngine:
         assert ratio >= 0.0
 
 
+class TestMemoryDeltaEngineStyleB:
+    """
+    Tests for ``register_agent()`` Style B — passing a pre-built
+    ``AgentMemoryState`` object as the second argument.
+
+    This call style was added to fix a mismatch between docs/demos and the
+    original positional-only API.  These tests cover the ``isinstance``
+    branch that was previously uncovered.
+    """
+
+    def setup_method(self):
+        self.engine = MemoryDeltaEngine()
+
+    def test_register_agent_style_b_basic(self):
+        """Style B: intent field, resources, and reputation are copied correctly."""
+        state = AgentMemoryState(
+            agent_id="npc_b",
+            tick=3,  # non-zero tick: baseline must be normalised to tick=0
+            intent_type=NPCIntentType.PROTECT,
+            resources={"gold": 200.0, "energy": 80.0},
+            reputation=0.9,
+        )
+        self.engine.register_agent("npc_b", state)
+
+        assert "npc_b" in self.engine.baseline_states
+        baseline = self.engine.baseline_states["npc_b"]
+        assert baseline.intent_type == NPCIntentType.PROTECT
+        assert baseline.resources["gold"] == 200.0
+        assert baseline.reputation == 0.9
+        assert baseline.tick == 0  # always reset to 0
+
+    def test_register_agent_style_b_copies_all_fields(self):
+        """Style B must deep-copy relationships, action_history, and violation_count."""
+        state = AgentMemoryState(
+            agent_id="npc_b",
+            tick=10,
+            intent_type=NPCIntentType.BELONG,
+            resources={"gold": 50.0},
+            relationships={"ally_x": 0.8, "enemy_y": -0.5},
+            action_history=["trade", "explore", "rest"],
+            violation_count=2,
+        )
+        self.engine.register_agent("npc_b", state)
+        baseline = self.engine.baseline_states["npc_b"]
+
+        assert baseline.relationships == {"ally_x": 0.8, "enemy_y": -0.5}
+        assert baseline.action_history == ["trade", "explore", "rest"]
+        assert baseline.violation_count == 2
+
+    def test_register_agent_style_b_isolates_baseline_from_original(self):
+        """Mutating the original state after registration must not affect the baseline."""
+        state = AgentMemoryState(
+            agent_id="npc_b",
+            tick=0,
+            intent_type=NPCIntentType.NEUTRAL,
+            resources={"gold": 100.0},
+        )
+        self.engine.register_agent("npc_b", state)
+
+        # Mutate original — baseline must be an independent copy
+        state.resources["gold"] = 9999.0
+        assert self.engine.baseline_states["npc_b"].resources["gold"] == 100.0
+
+    def test_register_agent_style_b_allows_subsequent_deltas(self):
+        """After Style B registration, ``record_delta`` must work normally."""
+        state = AgentMemoryState(
+            agent_id="npc_b",
+            tick=0,
+            intent_type=NPCIntentType.ACCUMULATE,
+            resources={"gold": 100.0},
+        )
+        self.engine.register_agent("npc_b", state)
+        self.engine.record_delta(
+            agent_id="npc_b",
+            tick=1,
+            intent_type=NPCIntentType.ACCUMULATE,
+            action_type="trade",
+            outcome="success",
+            resource_changes={"gold": 50.0},
+        )
+        result = self.engine.get_state_at_tick("npc_b", 1)
+        assert result.resources["gold"] == 150.0
+
+    def test_register_agent_style_b_creates_checkpoint(self):
+        """Style B registration must create a tick-0 checkpoint (same as Style A)."""
+        state = AgentMemoryState(
+            agent_id="npc_b",
+            tick=0,
+            intent_type=NPCIntentType.DISCOVER,
+            resources={"energy": 100.0},
+        )
+        self.engine.register_agent("npc_b", state)
+
+        assert 0 in self.engine._checkpoints.get("npc_b", {})
+
+    def test_register_agent_style_a_and_b_produce_equivalent_baseline(self):
+        """
+        Style A and Style B called with identical data must produce identical
+        baseline states (except possibly for minor field ordering).
+        """
+        # Style A
+        engine_a = MemoryDeltaEngine()
+        engine_a.register_agent(
+            "hero",
+            NPCIntentType.DISCOVER,
+            initial_resources={"gold": 100.0},
+            initial_reputation=0.8,
+        )
+        # Style B — build the equivalent AgentMemoryState
+        engine_b = MemoryDeltaEngine()
+        state_b = AgentMemoryState(
+            agent_id="hero",
+            tick=0,
+            intent_type=NPCIntentType.DISCOVER,
+            resources={"gold": 100.0},
+            reputation=0.8,
+        )
+        engine_b.register_agent("hero", state_b)
+
+        bl_a = engine_a.baseline_states["hero"]
+        bl_b = engine_b.baseline_states["hero"]
+        assert bl_a.intent_type == bl_b.intent_type
+        assert bl_a.resources == bl_b.resources
+        assert bl_a.reputation == bl_b.reputation
+
+
 # ---------------------------------------------------------------------------
 # RegionalAdapter
 # ---------------------------------------------------------------------------

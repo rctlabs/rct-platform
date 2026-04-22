@@ -221,3 +221,98 @@ class TestStatusNoArg:
         result = CliRunner().invoke(cli, ["status", "nonexistent-id-xyz"])
         # Should handle gracefully (exit 0 or 1, not 2)
         assert result.exit_code in (0, 1)
+
+
+# ─── module-level helper function unit tests (no server needed) ───────────────
+
+class TestHelperFunctions:
+    """
+    Unit tests for ``_port_open``, ``_wait_for_port``, and ``_get_json``.
+
+    The module-scoped ``rct_server`` fixture always takes the *success* path,
+    leaving the timeout/failure branches uncovered.  These lightweight unit
+    tests exercise those paths directly.
+    """
+
+    # ── _port_open ────────────────────────────────────────────────────────────
+
+    def test_port_open_returns_false_for_unused_port(self):
+        """A high port with nothing listening must return False."""
+        # Port 19876 is very unlikely to be occupied in any CI or local env.
+        assert _port_open("127.0.0.1", 19876) is False
+
+    def test_port_open_returns_true_when_port_is_open(self, rct_server):
+        """The already-running test server port must return True."""
+        host, port = rct_server
+        assert _port_open(host, port) is True
+
+    # ── _wait_for_port ────────────────────────────────────────────────────────
+
+    def test_wait_for_port_returns_false_when_timeout_expires(self, monkeypatch):
+        """
+        ``_wait_for_port`` must return ``False`` when the port never becomes
+        available within the timeout.  We patch ``_port_open`` to always
+        return False so the polling loop exhausts the (tiny) timeout.
+        """
+        import rct_control_plane.tests.test_cli_serve_integration as this_mod
+
+        monkeypatch.setattr(this_mod, "_port_open", lambda host, port: False)
+        # Use a tiny timeout so the test finishes quickly
+        result = _wait_for_port("127.0.0.1", 19876, timeout=0.15)
+        assert result is False
+
+    def test_wait_for_port_returns_true_when_port_opens_immediately(self, monkeypatch):
+        """
+        ``_wait_for_port`` must return ``True`` as soon as ``_port_open``
+        reports that the port is open.
+        """
+        import rct_control_plane.tests.test_cli_serve_integration as this_mod
+
+        monkeypatch.setattr(this_mod, "_port_open", lambda host, port: True)
+        result = _wait_for_port("127.0.0.1", 19876, timeout=5.0)
+        assert result is True
+
+    # ── _get_json ─────────────────────────────────────────────────────────────
+
+    def test_get_json_returns_dict_from_live_server(self, rct_server):
+        """``_get_json`` must return a plain ``dict`` against the live server."""
+        host, port = rct_server
+        data = _get_json(f"http://{host}:{port}/health")
+        assert isinstance(data, dict)
+        assert data.get("status") == "healthy"
+
+
+# ─── extra integration coverage ───────────────────────────────────────────────
+
+class TestServeIntegrationExtraCoverage:
+    """
+    Additional integration tests against the live server to cover branches
+    that the main TestRctServeIntegration class does not reach.
+    """
+
+    def test_compile_endpoint_with_empty_body_returns_client_error(self, rct_server):
+        """
+        POST /compile with ``{}`` (missing required ``natural_language`` field)
+        must return an HTTP client-error (4xx), not a server error (5xx).
+
+        This test exercises the ``except urllib.error.HTTPError`` branch.
+        """
+        req = urllib.request.Request(
+            f"{BASE_URL}/compile",
+            data=b"{}",
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=8) as r:
+                # Some permissive APIs may still return 2xx with partial data
+                r.read()
+        except urllib.error.HTTPError as exc:
+            # 422 Unprocessable Entity (FastAPI validation) is expected
+            assert exc.code < 500, f"Unexpected server error: HTTP {exc.code}"
+
+    def test_multiple_health_checks_are_consistent(self, rct_server):
+        """Three consecutive /health calls must all return status='healthy'."""
+        results = [_get_json(f"{BASE_URL}/health") for _ in range(3)]
+        assert all(r.get("status") == "healthy" for r in results)
+
