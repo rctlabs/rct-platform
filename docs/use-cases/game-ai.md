@@ -26,7 +26,7 @@ Agents compete over food, ore, and energy pools. ACCUMULATE-intent agents will p
 
 ```python
 from core.fdia.fdia import FDIAScorer, FDIAWeights, NPCAction, NPCIntentType
-from core.delta_engine.memory_delta import MemoryDeltaEngine
+from core.delta_engine.memory_delta import MemoryDeltaEngine, AgentMemoryState
 
 scorer = FDIAScorer(weights=FDIAWeights())
 engine = MemoryDeltaEngine()
@@ -43,9 +43,14 @@ agents = [
     for i in range(6)
 ]
 
-# Register all agents
+# Register all agents with AgentMemoryState
 for a in agents:
-    engine.register_agent(a["id"], a["intent"], a["resources"])
+    engine.register_agent(a["id"], AgentMemoryState(
+        agent_id=a["id"],
+        tick=0,
+        intent_type=a["intent"],
+        resources=a["resources"],
+    ))
 
 # Run one tick
 world = {"gold": 2000.0, "ore": 1500.0, "food": 1200.0}

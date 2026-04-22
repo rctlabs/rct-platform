@@ -57,7 +57,7 @@ actions = [
 ]
 best = scorer.select_best_action(
     agent_intent=NPCIntentType.ACCUMULATE,
-    actions=actions,
+    candidate_actions=actions,
     world_resources={"gold": 100.0},
     agent_reputation=0.9,
 )
@@ -70,11 +70,12 @@ print(f"Best action: {best.action_id}")
 
 ```python
 class NPCIntentType(str, Enum):
-    DISCOVER   = "DISCOVER"   # Exploration-focused
-    PROTECT    = "PROTECT"    # Defense-focused
-    ACCUMULATE = "ACCUMULATE" # Resource-focused
-    NEGOTIATE  = "NEGOTIATE"  # Cooperation-focused
-    EXECUTE    = "EXECUTE"    # Task-completion
+    PROTECT    = "PROTECT"    # Protect family/faction/territory
+    ACCUMULATE = "ACCUMULATE" # Gather resources/wealth
+    BELONG     = "BELONG"     # Join groups, form alliances
+    DISCOVER   = "DISCOVER"   # Explore, learn, research
+    DOMINATE   = "DOMINATE"   # Control others, assert authority
+    NEUTRAL    = "NEUTRAL"    # No strong drive; reactive
 ```
 
 ---

@@ -21,10 +21,10 @@ SignedAI is RCT's hallucination prevention framework. Before any AI output is co
 
 | Tier | Models | Use Case | Latency |
 |------|--------|----------|---------|
-| **S** (Signature) | 1 model | Low-risk, idempotent reads | <50ms |
-| **S4** | 4 models | Medium-risk, write operations | 200–500ms |
-| **S6** | 6 models | High-risk, financial/legal | 500ms–2s |
-| **S8** | 8 models | Critical, irreversible actions | 2–5s |
+| **TIER_S** | 1 signer | Low-risk, idempotent reads | <50ms |
+| **TIER_4** | 4 signers | Medium-risk, write operations | 200–500ms |
+| **TIER_6** | 6 signers | High-risk, financial/legal | 500ms–2s |
+| **TIER_8** | 6 signers + chairman veto | Critical, irreversible actions | 2–5s |
 
 ---
 
@@ -45,20 +45,18 @@ SignedAI is RCT's hallucination prevention framework. Before any AI output is co
 ## Usage
 
 ```python
-from signedai.core.registry import SignedAIRegistry, RiskLevel, SignedAITier
+from signedai.core.registry import SignedAIRegistry, SignedAITier, RiskLevel
 
-registry = SignedAIRegistry()
+# All methods are class methods — no instance needed
+tier_config = SignedAIRegistry.get_tier_by_risk(RiskLevel.HIGH)
+print(f"Tier: {tier_config.tier.value}")              # → tier_6
+print(f"Signers: {len(tier_config.signers)}")         # → 6
+print(f"Required votes: {tier_config.required_votes}")# → 4
+print(f"Chairman veto: {tier_config.chairman_veto}")  # → False
 
-# Get tier config for a risk level
-tier = registry.get_tier_for_risk(RiskLevel.HIGH)
-config = registry.get_tier_config(tier)
-print(f"Tier: {tier.name}")             # → S6
-print(f"Models required: {config.model_count}")
-print(f"Consensus threshold: {config.consensus_threshold}")
-
-# Also accepts enum aliases
-config_alt = registry.get_tier_config(SignedAITier.S6)
-assert config == config_alt  # both lookups work
+# Access by explicit tier enum
+config_t6 = SignedAIRegistry.get_tier_config(SignedAITier.TIER_6)
+assert tier_config == config_t6  # same tier
 ```
 
 ---

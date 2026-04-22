@@ -30,18 +30,23 @@ print(f"FDIA score: {score:.4f}")
 ## 2. SignedAI Consensus — Multi-LLM Verification
 
 ```python
-from signedai.core.registry import SignedAIRegistry, RiskLevel
+from signedai.core.registry import SignedAIRegistry, SignedAITier, RiskLevel
 
-registry = SignedAIRegistry()
+# All methods are class methods — no instance needed
+tier_config = SignedAIRegistry.get_tier_by_risk(RiskLevel.HIGH)
+print(f"Tier: {tier_config.tier.value}")              # → tier_6
+print(f"Signers: {len(tier_config.signers)}")         # → 6
+print(f"Required votes: {tier_config.required_votes}")# → 4
+print(f"Chairman veto: {tier_config.chairman_veto}")  # → False
 
-# Route a decision to the appropriate tier based on risk level
-tier = registry.get_tier_for_risk(RiskLevel.HIGH)
-print(f"Routing to: {tier.name}")         # → SignedAITier.S8
-
-# Get all models in a tier
-models = registry.get_models_for_tier(tier)
-for m in models:
-    print(f"  {m.model_id}: {m.provider}")
+# Calculate consensus result for a vote
+result = SignedAIRegistry.calculate_consensus(
+    tier=SignedAITier.TIER_6,
+    votes_for=4,
+    votes_against=2,
+)
+print(f"Consensus reached: {result.consensus_reached}")  # → True
+print(f"Confidence: {result.confidence:.0%}")             # → 67%
 ```
 
 ---

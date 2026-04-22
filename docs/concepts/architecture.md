@@ -8,18 +8,18 @@
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│               RCT PLATFORM SDK v1.0.1a0                  │
+│               RCT PLATFORM SDK v1.0.2a0                  │
 │         Intent-Centric AI Operating System               │
 └──────────────────────────────────────────────────────────┘
 
 Layer 11: CI/CD & Quality Gates
 ├─ GitHub Actions (ci.yml + security-scan.yml)
-├─ 591 passing tests · 89% coverage · Python 3.10/3.11/3.12
+├─ 723 passing tests · 87% coverage · Python 3.10/3.11/3.12
 └─ Bandit 0 HIGH · mypy 32 files clean
 
 Layer 10: Enterprise Hardening
 ├─ Pre-commit hooks (black, isort, bandit)
-├─ Semantic versioning (1.0.1a0)
+├─ Semantic versioning (1.0.2a0)
 └─ CITATION.cff · CODE_OF_CONDUCT.md · CONTRIBUTING.md
 
 Layer 9: Regional & Compliance

@@ -3,13 +3,30 @@ title: RCT Platform
 message: "If you use RCT Platform in research or publications, please cite this software."
 type: software
 authors:
-  - family-names: RCT Labs
-    name-particle: ""
+  - family-names: Saengow
+    given-names: Ittirit
+    alias: ittirit720
+    affiliation: RCT Labs
+    email: ittirit720@gmail.com
+    country: TH
 repository-code: "https://github.com/rctlabs/rct-platform"
-url: "https://github.com/rctlabs/rct-platform"
+url: "https://rctlabs.co"
 license: Apache-2.0
-version: 1.0.1a0
-date-released: 2026-04-17
+version: 1.0.2a0
+date-released: 2026-04-21
+keywords:
+  - constitutional-ai
+  - ai-governance
+  - intent-centric
+  - multi-agent
+  - fdia
+  - signedai
+  - jitna-protocol
+  - asean
 abstract: >-
-  Public SDK for the RCT intent-centric AI operating system, including FDIA,
-  SignedAI, control-plane components, and reference microservices.
+  RCT Platform is the open SDK for an intent-centric constitutional AI operating
+  system. It implements the FDIA equation (F = D^I x A), the JITNA Protocol
+  (RFC-001), SignedAI multi-LLM consensus with ED25519 attestation, and the
+  HexaCore 7-model registry. Designed for verifiable, auditable AI decisions
+  with a built-in human-in-the-loop guarantee: when A = 0, all output is blocked
+  by construction. Built by a solo developer from Bangkok, Thailand.

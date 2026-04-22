@@ -32,9 +32,9 @@ curl http://localhost:8000/
 ```json
 {
   "service": "rct-control-plane",
-  "version": "1.0.1a0",
+  "version": "1.0.2a0",
   "status": "running",
-  "timestamp": "2026-04-17T10:00:00+00:00"
+  "timestamp": "2026-04-21T10:00:00+00:00"
 }
 ```
 
@@ -74,8 +74,8 @@ curl http://localhost:8000/health/detailed
     "signedai_registry": "ok",
     "intent_compiler": "ok"
   },
-  "timestamp": "2026-04-17T10:00:00+00:00",
-  "version": "1.0.1a0"
+  "timestamp": "2026-04-21T10:00:00+00:00",
+  "version": "1.0.2a0"
 }
 ```
 
