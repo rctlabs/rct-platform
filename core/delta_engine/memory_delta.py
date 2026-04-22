@@ -134,20 +134,49 @@ class MemoryDeltaEngine:
     def register_agent(
         self,
         agent_id: str,
-        initial_intent: NPCIntentType,
+        initial_intent: "NPCIntentType | AgentMemoryState",
         initial_resources: Optional[Dict[str, float]] = None,
         initial_reputation: float = 1.0,
     ) -> None:
-        """Register a new agent with its initial state."""
-        self.baseline_states[agent_id] = AgentMemoryState(
-            agent_id=agent_id,
-            tick=0,
-            intent_type=initial_intent,
-            resources=dict(initial_resources or {}),
-            reputation=initial_reputation,
-        )
+        """Register a new agent with its initial state.
+
+        Two call styles are supported:
+
+        Style A — positional (preferred):
+            engine.register_agent("hero", NPCIntentType.DISCOVER,
+                                  {"energy": 100.0}, reputation=0.8)
+
+        Style B — AgentMemoryState object (convenience):
+            engine.register_agent("hero", AgentMemoryState(
+                agent_id="hero", tick=0,
+                intent_type=NPCIntentType.DISCOVER,
+                resources={"energy": 100.0}, reputation=0.8))
+        """
+        # Style B: caller passed a pre-built AgentMemoryState as second arg
+        if isinstance(initial_intent, AgentMemoryState):
+            snapshot = initial_intent
+            baseline = AgentMemoryState(
+                agent_id=agent_id,
+                tick=0,
+                intent_type=snapshot.intent_type,
+                resources=dict(snapshot.resources),
+                reputation=snapshot.reputation,
+                relationships=dict(snapshot.relationships),
+                action_history=list(snapshot.action_history),
+                violation_count=snapshot.violation_count,
+            )
+        else:
+            # Style A: positional NPCIntentType
+            baseline = AgentMemoryState(
+                agent_id=agent_id,
+                tick=0,
+                intent_type=initial_intent,
+                resources=dict(initial_resources or {}),
+                reputation=initial_reputation,
+            )
+        self.baseline_states[agent_id] = baseline
         self.deltas[agent_id] = []
-        self._checkpoints[agent_id] = {0: copy.deepcopy(self.baseline_states[agent_id])}
+        self._checkpoints[agent_id] = {0: copy.deepcopy(baseline)}
 
     # --- recording ----------------------------------------------------------
 
