@@ -22,6 +22,7 @@ Output Formats:
     --output tree   : Tree view (for graphs)
 """
 
+import os
 import sys
 import json
 import time
@@ -64,6 +65,26 @@ from rct_control_plane.observability import ControlPlaneObserver
 
 # Preserve builtin list before it gets shadowed by the CLI 'list' command
 _list = list
+
+
+def _configure_encoding() -> None:
+    """Ensure stdout/stderr can handle Unicode on Windows consoles with legacy encodings.
+
+    Windows terminals using Code Page 874 (Thai), 932 (Japanese), etc. cannot encode
+    characters such as the right-arrow (U+2192) or check-mark (U+2713), causing
+    UnicodeEncodeError before the server process even starts.  This function
+    reconfigures the streams to UTF-8 with ``errors='replace'`` so unrepresentable
+    characters are shown as ``?`` instead of crashing the process.
+
+    Safe to call on all platforms; on Linux/macOS it is a no-op because
+    the streams are already UTF-8.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            try:
+                stream.reconfigure(encoding="utf-8", errors="replace")
+            except Exception:
+                pass  # read-only or already configured — ignore
 
 
 class OutputFormat(str, Enum):
@@ -210,14 +231,84 @@ def format_output(data: Any, format: OutputFormat) -> None:
 # CLI Commands
 
 @click.group()
-@click.version_option(version="2.2.0", prog_name="rct")
+@click.version_option(version="1.0.2a0", prog_name="rct")
 def cli():
     """
     RCT Control Plane CLI
     
     Command-line interface for Control Plane operations.
     """
-    pass
+    _configure_encoding()
+
+
+@cli.command(name="version")
+@click.option("--output", "-o", type=click.Choice(["json", "table"]), default="table", help="Output format")
+def version_cmd(output: str):
+    """Show version and platform information.
+
+    Example:
+        rct version
+        rct version --output json
+    """
+    import importlib.metadata as _meta
+    try:
+        ver = _meta.version("rct-platform")
+    except _meta.PackageNotFoundError:
+        ver = "1.0.2a0"  # fallback for editable installs without dist-info
+
+    info = {
+        "version": ver,
+        "name": "rct-platform",
+        "description": "Constitutional AI Operating System SDK",
+        "python": sys.version.split()[0],
+        "license": "Apache-2.0",
+        "homepage": "https://rctlabs.co",
+        "repository": "https://github.com/rctlabs/rct-platform",
+    }
+    if output == "json":
+        click.echo(json.dumps(info, indent=2))
+    else:
+        click.echo(f"rct-platform  v{info['version']}")
+        click.echo(f"Python        {info['python']}")
+        click.echo(f"License       {info['license']}")
+        click.echo(f"Homepage      {info['homepage']}")
+
+
+@cli.command(name="serve")
+@click.option("--port", "-p", default=8000, show_default=True, type=int, help="Port to bind on.")
+@click.option("--host", default="127.0.0.1", show_default=True, help="Host to bind on.")
+@click.option("--reload", is_flag=True, help="Auto-reload on code changes (dev mode).")
+@click.option("--workers", default=1, show_default=True, type=int, help="Number of Uvicorn worker processes.")
+def serve(port: int, host: str, reload: bool, workers: int):
+    """Start the Control Plane REST API server.
+
+    Example:
+        rct serve --port 8000 --reload
+        rct serve --host 0.0.0.0 --port 8080 --workers 2
+    """
+    try:
+        import uvicorn as _uvicorn
+    except ImportError:
+        click.echo(
+            click.style("Error: uvicorn is not installed. Run: pip install uvicorn[standard]", fg="red"),
+            err=True,
+        )
+        sys.exit(1)
+
+    click.echo(click.style(f"  RCT Control Plane API  →  http://{host}:{port}", fg="green", bold=True))
+    click.echo(f"  Swagger docs   →  http://{host}:{port}/docs")
+    click.echo(f"  Health check   →  http://{host}:{port}/health")
+    if reload:
+        click.echo(click.style("  Dev mode: auto-reload enabled", fg="yellow"))
+    click.echo("")
+
+    _uvicorn.run(
+        "rct_control_plane.api:app",   # string form required for --reload
+        host=host,
+        port=port,
+        reload=reload,
+        workers=1 if reload else workers,  # uvicorn forbids reload + workers>1
+    )
 
 
 @cli.command()
@@ -475,18 +566,40 @@ def evaluate(intent_id: str, use_default_policies: bool, output: str, save: bool
 
 
 @cli.command()
-@click.argument("intent_id")
+@click.argument("intent_id", required=False, default=None)
 @click.option("--output", "-o", type=click.Choice(["json", "table", "tree"]), default="table", help="Output format")
-def status(intent_id: str, output: str):
+def status(intent_id: Optional[str], output: str):
     """
-    Get current state of an intent.
-    
-    Example:
-        rct status abc-123
+    Get current state of an intent, or show system health when called without arguments.
+
+    Examples:
+        rct status               # system overview
+        rct status abc-123       # specific intent
     """
     try:
         ctx = get_context()
-        
+
+        # ── No intent_id → show system overview ──────────────────────────
+        if intent_id is None:
+            recent_ids = _list(ctx.intents.keys())[-3:]
+            overview = {
+                "status": "healthy",
+                "version": "1.0.2a0",
+                "recent_intents": len(ctx.intents),
+                "states_tracked": len(ctx.states),
+                "intents_sample": recent_ids,
+            }
+            if output == "json":
+                print_json(overview)
+            elif _HAS_RICH:
+                render_state_panel(overview)
+            else:
+                click.echo(f"Status: {overview['status']}")
+                click.echo(f"Version: {overview['version']}")
+                click.echo(f"Recent intents: {overview['recent_intents']}")
+            return
+
+        # ── intent_id given → original behaviour ─────────────────────────
         state = ctx.get_state(intent_id)
         if not state:
             click.echo(click.style(f"Error: State for intent {intent_id} not found", fg="red"), err=True)

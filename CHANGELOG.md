@@ -7,13 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.2a0] - 2026-04-20
+## [1.0.2a0] - 2026-04-22
 
 ### Fixed
 - `tests/security/test_api_security.py` — resolved 13 silently-skipped security tests caused by Python's inability to import modules from hyphen-named folders (`microservices/gateway-api/`, `microservices/vector-search/`). Now uses `importlib.util.spec_from_file_location` for gateway-api and `sys.path.insert + importlib.import_module` for vector-search (which has internal relative imports).
 - `TestVectorSearchSecurity` — corrected all route paths to use `/vector/` prefix (was `/vectors/`), matching actual FastAPI router registration.
 - `TestGatewayAPISecurity.test_sql_injection_in_query_field` — updated assertion to accept 404 (no route registered = no SQL exposure; safe by design).
 - `microservices/intent-loop/tests/test_intent_loop.py` — removed `@pytest.mark.skip` from `TestLoopMetrics.test_placeholder`; replaced with 5 real assertions covering field defaults, cache hit rate, and datetime typing.
+- `pyproject.toml` — changed `build-backend` from `setuptools.backends.legacy:build` (requires setuptools ≥68) to standard `setuptools.build_meta`; added `[tool.setuptools.packages.find]` with explicit `include` list so `pip install -e .` works on any setuptools ≥61.
+- `core/delta_engine/memory_delta.py` `register_agent()` — now accepts either `NPCIntentType` (positional) or a full `AgentMemoryState` object as second argument; fixes `AttributeError: 'AgentMemoryState' object has no attribute 'value'` when demos/docs used old calling style.
+- `rct_control_plane/cli.py` — fixed hardcoded `version_option` string from `2.2.0` → `1.0.2a0`.
+- `rct_control_plane/tests/test_cli_api.py` — updated `TestCLIVersion.test_version_flag` assertion to match `1.0.2a0`.
 
 ### Added
 - `microservices/intent-loop/loop_engine.py` — `LoopMetrics` dataclass with `total_processed`, `cache_hits`, `cache_misses`, `avg_latency_ms`, `error_count`, `last_updated`, and `cache_hit_rate` property.
@@ -24,31 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `.github/ISSUE_TEMPLATE/bug_report.md` — Structured bug report template.
 - `.github/ISSUE_TEMPLATE/feature_request.md` — Structured feature request template.
 - `.github/ISSUE_TEMPLATE/config.yml` — Issue chooser config.
-
-### Changed
-- `mkdocs.yml` — Added "JITNA Protocol" as first entry in Core Concepts nav; added "Architecture" section linking to RFC-001.
-- `signedai/core/models.py` — Updated `JITNAPacket` docstring to clarify this is the **SignedAI Semantic Layer** (D=Domain, A=Assumptions, R=Requirements, M=Metrics), distinct from the canonical JITNA Language (D=Data, A=Approach, R=Reflection, M=Memory).
-- `README.md` — Updated JITNA section with canonical name, 3-layer architecture summary, links to new docs. Updated Key Numbers to reflect current test suite.
-- `CI --cov-fail-under` raised from `70` → `85` (actual coverage: 89%).
-- Test suite: 706 passed, 14 skipped → **723 passed, 0 skipped, 0 failed**.
-
-## [1.0.2a0] - 2026-04-20
-
-### Fixed
-- `tests/security/test_api_security.py` — resolved 13 silently-skipped security tests caused by Python's inability to import modules from hyphen-named folders (`microservices/gateway-api/`, `microservices/vector-search/`). Now uses `importlib.util.spec_from_file_location` for gateway-api and `sys.path.insert + importlib.import_module` for vector-search (which has internal relative imports).
-- `TestVectorSearchSecurity` — corrected all route paths to use `/vector/` prefix (was `/vectors/`), matching actual FastAPI router registration.
-- `TestGatewayAPISecurity.test_sql_injection_in_query_field` — updated assertion to accept 404 (no route registered = no SQL exposure; safe by design).
-- `microservices/intent-loop/tests/test_intent_loop.py` — removed `@pytest.mark.skip` from `TestLoopMetrics.test_placeholder`; replaced with 5 real assertions covering field defaults, cache hit rate, and datetime typing.
-
-### Added
-- `microservices/intent-loop/loop_engine.py` — `LoopMetrics` dataclass with `total_processed`, `cache_hits`, `cache_misses`, `avg_latency_ms`, `error_count`, `last_updated`, and `cache_hit_rate` property.
-- `docs/concepts/jitna.md` — Complete JITNA Protocol documentation: 3-layer architecture (Protocol/Language/Intake), 6-field canonical language (I/D/Δ/A/R/M), examples in 3 domains, comparison vs Tool-Calling APIs, FDIA+SignedAI+RCTDB integration map, The 9 Codex security rules.
-- `docs/architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION.md` — Full RFC-001 specification (IETF-style format): wire format, negotiation pattern, adapter interface, security levels, 2 appendix examples.
-- `docs/architecture/` directory created.
-- `examples/jitna_demo.py` — Runnable end-to-end demo of all 3 JITNA layers with graceful fallbacks.
-- `.github/ISSUE_TEMPLATE/bug_report.md` — Structured bug report template.
-- `.github/ISSUE_TEMPLATE/feature_request.md` — Structured feature request template.
-- `.github/ISSUE_TEMPLATE/config.yml` — Issue chooser config.
+- `rct_control_plane/cli.py` `rct serve` command — starts Uvicorn + FastAPI server; supports `--port`, `--host`, `--reload` (dev mode), `--workers`.
+- `rct_control_plane/cli.py` `rct version` command — prints version, Python, license, homepage; supports `--output json`.
+- `rct_control_plane/cli.py` `rct status` — now accepts 0 or 1 args; with no arg shows system overview instead of crashing with missing-argument error.
+- `rct_control_plane/tests/test_cli_serve_integration.py` — real-subprocess integration tests: spawns `rct serve`, hits `/health`, `/`, `/openapi.json`, `/docs`, `/compile`; also unit tests for command registration and `status` no-arg behaviour.
+- `notebooks/rct_playground.ipynb` — setup cell auto-detects Colab / local venv / source; public-repo warning added; cells 12 + 14 use correct `register_agent` positional API.
 
 ### Changed
 - `mkdocs.yml` — Added "JITNA Protocol" as first entry in Core Concepts nav; added "Architecture" section linking to RFC-001.

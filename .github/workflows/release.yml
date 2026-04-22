@@ -9,6 +9,7 @@ jobs:
   release:
     name: Build & Publish
     runs-on: ubuntu-latest
+    environment: pypi          # GitHub Environment — enables protection rules + OIDC scope
     permissions:
       contents: write   # create GitHub Release
       id-token: write   # trusted PyPI publishing (OIDC)
@@ -55,6 +56,15 @@ jobs:
           files: dist/*
           draft: false
           prerelease: ${{ contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc') }}
+
+      - name: Publish to TestPyPI (dry-run)
+        # Validates the distribution against TestPyPI before touching production.
+        # continue-on-error so a TestPyPI outage never blocks a production release.
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+        continue-on-error: true
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
