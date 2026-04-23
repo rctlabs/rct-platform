@@ -1808,15 +1808,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#102a0-2026-04-20" class="md-nav__link">
+  <a href="#102a0-2026-04-22" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.0.2a0 — 2026-04-20
+        1.0.2a0 — 2026-04-22
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1.0.2a0 — 2026-04-20">
+    <nav class="md-nav" aria-label="1.0.2a0 — 2026-04-22">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2006,34 +2006,43 @@
 <p>The format follows <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.
 Versioning follows <a href="https://semver.org/">Semantic Versioning</a>.</p>
 <hr />
-<h2 id="102a0-2026-04-20"><a href="https://github.com/rctlabs/rct-platform/compare/v1.0.1a0...v1.0.2a0">1.0.2a0</a> — 2026-04-20<a class="headerlink" href="#102a0-2026-04-20" title="Permanent link">&para;</a></h2>
+<h2 id="102a0-2026-04-22"><a href="https://github.com/rctlabs/rct-platform/compare/v1.0.1a0...v1.0.2a0">1.0.2a0</a> — 2026-04-22<a class="headerlink" href="#102a0-2026-04-22" title="Permanent link">&para;</a></h2>
 <h3 id="added">Added<a class="headerlink" href="#added" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>docs/algorithms/overview.md</code> — public reference for all 41 algorithms (Tier 1–9) with scores, formulas, and use cases (Layer 1 safe — no internal file paths or implementation status)</li>
-<li><code>docs/algorithms/tier9-autonomy.md</code> — Tier 9 Autonomous Pipeline showcase: ALGO-37→40→37/38→39→41, plain-text → production module in ~2 seconds</li>
+<li><code>docs/algorithms/overview.md</code> — public reference for all 41 algorithms (Tier 1–9) with scores, formulas, and use cases</li>
+<li><code>docs/algorithms/tier9-autonomy.md</code> — Tier 9 Autonomous Pipeline showcase</li>
+<li><code>docs/concepts/jitna.md</code> — Complete JITNA Protocol documentation: 3-layer architecture, 6-field canonical language, The 9 Codex security rules</li>
+<li><code>docs/architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION.md</code> — Full RFC-001 specification (IETF-style)</li>
 <li><code>rct_control_plane/tests/test_security_extended.py</code> — 11 security boundary tests</li>
 <li><code>tests/security/test_api_security.py</code> — 19 API security tests</li>
-<li>JITNA (Just-In-Time Node Assembly) — complete documentation and <code>signedai/</code> implementation</li>
 <li><code>docs/use-cases/</code> — 5 pages: DevOps, Finance, Game AI, Healthcare, Supply Chain</li>
 <li>MkDocs navigation: <strong>Algorithms</strong> tab, <strong>Use Cases</strong> tab, Governance added to Core Concepts</li>
+<li><code>rct_control_plane/cli.py</code> <code>rct serve</code> command — starts Uvicorn + FastAPI server; <code>--port</code>, <code>--host</code>, <code>--reload</code>, <code>--workers</code></li>
+<li><code>rct_control_plane/cli.py</code> <code>rct version</code> command — prints version, Python, license, homepage; <code>--output json</code></li>
+<li><code>rct_control_plane/cli.py</code> <code>rct status</code> — now accepts 0 or 1 args (no-arg shows system overview)</li>
+<li><code>notebooks/rct_playground.ipynb</code> — runnable Colab notebook with FDIA + SignedAI + Delta demos</li>
+<li><code>rct_control_plane/tests/test_cli_coverage_gaps.py</code> — 18 targeted tests for CLI coverage</li>
+<li><code>rct_control_plane/tests/test_cli_serve_integration.py</code> — subprocess integration tests</li>
+<li><code>.github/ISSUE_TEMPLATE/</code> — bug_report.md, feature_request.md, config.yml</li>
 </ul>
 <h3 id="removed">Removed<a class="headerlink" href="#removed" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>docs/MASTER_36_ALGORITHMS_MAPPING_TABLE_2026_01_18.md</code> — internal audit document exposed kernel file paths, implementation gap labels, and bash commands not suitable for a public repo; superseded by <code>docs/algorithms/overview.md</code></li>
+<li><code>docs/MASTER_36_ALGORITHMS_MAPPING_TABLE_2026_01_18.md</code> — internal audit document; superseded by <code>docs/algorithms/overview.md</code></li>
 </ul>
 <h3 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h3>
 <ul>
-<li>19 broken documentation links across 7 files:</li>
-<li><code>fdia-engine.md</code> → <code>fdia.md</code> (governance.md, rct-7-thinking.md, use-cases/*)</li>
-<li><code>signedai/consensus.md</code> → <code>concepts/signedai.md</code></li>
-<li>Removed broken references to <code>benchmark/enterprise_pillars.py</code>, <code>examples/cli_walkthrough.py</code>, <code>examples/simulation_demo.py</code>, <code>benchmark/MemoryRAG_Benchmark_Design_v1.md</code></li>
-<li>14 previously skipped tests resolved — all now execute and pass</li>
-<li>MkDocs builds with <strong>0 warnings</strong> (was 19 WARNING lines)</li>
+<li><code>rct_control_plane/cli.py</code> — fixed hardcoded <code>version_option</code> string <code>2.2.0</code> → <code>1.0.2a0</code></li>
+<li><code>rct_control_plane/cli.py</code> — <code>_configure_encoding()</code>: UTF-8 stdout/stderr on Windows CP874/CP932 consoles (was causing 6 skipped tests)</li>
+<li><code>core/delta_engine/memory_delta.py</code> <code>register_agent()</code> — accepts <code>NPCIntentType</code> or <code>AgentMemoryState</code> (fixes <code>AttributeError</code>)</li>
+<li><code>pyproject.toml</code> — <code>build-backend</code> to standard <code>setuptools.build_meta</code> + explicit <code>packages.find</code></li>
+<li>19 broken documentation links across 7 files</li>
+<li>14 previously skipped tests resolved (0 skipped, all 765 pass)</li>
+<li>MkDocs builds with <strong>0 warnings</strong></li>
 </ul>
 <h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Test suite: 591 passed · 14 skipped → <strong>723 passed · 0 skipped · 0 failed</strong></li>
-<li>Coverage: 89% → <strong>87%</strong> (measured across 9,382 statements; broader scope)</li>
+<li>Test suite: 591 passed · 14 skipped → <strong>765 passed · 0 skipped · 0 failed</strong></li>
+<li>Coverage: 89%+ (measured across 9,382+ statements)</li>
 <li>CI <code>--cov-fail-under</code> raised: 70 → <strong>85</strong></li>
 <li>Algorithm reference: 36 (stale) → <strong>41</strong> (complete, Tier 1–9)</li>
 </ul>
