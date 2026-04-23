@@ -8,7 +8,7 @@ will be added in future releases.
 Apache 2.0 — RCT Labs (https://rctlabs.co)
 """
 
-__version__ = "1.0.1a0"
+__version__ = "1.0.2a0"
 
 from .intent_schema import (
     IntentType,

@@ -114,7 +114,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 Layer 11: CI/CD & Quality Gates
 ├─ GitHub Actions (ci.yml + security-scan.yml)
-├─ 723 passing tests · 89% coverage · Python 3.10/3.11/3.12
+├─ 765 passing tests · 89%+ coverage · Python 3.10/3.11/3.12
 └─ E2E integration tests (no Docker required)
 
 Layer 10: Enterprise Hardening
@@ -581,7 +581,7 @@ Over the next 10 months, working alone from a room in **Klong Toei, Bangkok**, I
 - 41 production algorithms (Tier 1–9)
 - The JITNA Protocol (RFC-001) — an open standard for AI-to-AI communication
 - SignedAI: multi-LLM consensus with ED25519 cryptographic attestation
-- **723 passing tests**, 89% coverage, zero failures
+- **765 passing tests**, 89%+ coverage, zero failures
 - A 450+ page whitepaper documenting every decision
 
 This is not a research paper. It runs in production at [rctlabs.co](https://rctlabs.co).
@@ -606,7 +606,7 @@ This is not a research paper. It runs in production at [rctlabs.co](https://rctl
 | Dec 2025 | Foundation whitepaper (~100 pages) |
 | Jan 2026 | 41 algorithms complete, 4,849 enterprise tests |
 | Feb 2026 | 3,053 Python files, Level 4 Virtuoso stress test |
-| Apr 2026 | Public SDK — 723 tests, 89% coverage, Apache 2.0 |
+| Apr 2026 | Public SDK — 765 tests, 89%+ coverage, Apache 2.0 |
 
 > See [ROADMAP.md](ROADMAP.md) for what comes next.
 

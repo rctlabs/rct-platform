@@ -328,7 +328,7 @@ pip install -r requirements-dev.txt
 
 # Run tests
 pytest --tb=short -q
-# → 723 passed
+# → 765 passed
 
 # Start Control Plane API
 rct serve --port 8000 --reload

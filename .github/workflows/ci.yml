@@ -62,7 +62,17 @@ jobs:
 
       - name: Install tools
         run: |
-          pip install mypy bandit
+          pip install mypy bandit ruff
+
+      - name: Ruff lint
+        run: |
+          ruff check core/ signedai/ rct_control_plane/ microservices/ --output-format=github
+
+      - name: Ruff format check
+        # Report only — does not block CI (legacy codebase has many unformatted files)
+        run: |
+          ruff format --check core/ signedai/ rct_control_plane/ microservices/
+        continue-on-error: true
 
       - name: Bandit security lint
         # Fail CI on HIGH severity findings. Medium/low are reported but allowed.
