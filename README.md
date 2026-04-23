@@ -8,6 +8,9 @@
 [![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)](pyproject.toml)
 [![Status](https://img.shields.io/badge/status-PUBLIC%20ALPHA-orange)](CHANGELOG.md)
 [![Website](https://img.shields.io/badge/website-rctlabs.co-brightgreen)](https://rctlabs.co)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rctlabs/rct-platform/blob/main/notebooks/rct_playground.ipynb)
+[![Open in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rctlabs/rct-platform/main?filepath=notebooks%2Frct_playground.ipynb)
+[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/rctlabs/rct-platform)
 
 ## Intent-Centric AI Operating System — Constitutional Architecture
 
