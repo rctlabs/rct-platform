@@ -28,7 +28,7 @@
 - ✅ Regional Language Adapter — 8 ASEAN language pairs
 - ✅ RCT Control Plane DSL — 15 modules, `rct` CLI entry point
 - ✅ 5 reference microservices (intent-loop, analysearch, vector-search, crystallizer, gateway-api)
-- ✅ 723 passing tests, 89% coverage, Bandit 0 HIGH
+- ✅ 765 passing tests, 89%+ coverage, Bandit 0 HIGH
 - ✅ CI/CD: GitHub Actions (ci.yml + security-scan.yml)
 - ✅ MkDocs documentation site
 - ✅ Whitepaper: 450+ pages, bilingual (EN + TH)
@@ -41,12 +41,13 @@
 
 **Goal: zero-friction first experience — no clone, no install.**
 
-- 📋 `notebooks/rct_playground.ipynb` — runnable Colab notebook (FDIA + SignedAI + Delta demos)
-- 📋 `benchmark/run_benchmark.py` — unified benchmark runner CLI
+- ✅ `notebooks/rct_playground.ipynb` — runnable Colab notebook (FDIA + SignedAI + Delta demos)
+- ✅ `benchmark/run_benchmark.py` — unified benchmark runner CLI
+- ✅ Binder / Colab / Codespaces quick-launch badges in README
+- ✅ Hypothesis property-based tests — mathematical correctness guarantees for FDIA, Delta Engine, SignedAI
 - 📋 `docs/benchmark/hallucination-methodology.md` improvement — 100-prompt public dataset
 - 📋 GitHub Discussions enabled — Q&A, RFC Discussion, Show & Tell categories
 - 📋 API stability guarantees documented for `core/fdia`, `signedai/core`, `core/delta_engine`
-- 📋 Binder / Codespaces quick-launch button in README
 
 ---
 

@@ -4,8 +4,8 @@
 
 | Metric | Value |
 |--------|-------|
-| **Total tests** | 723 passed · 0 skipped · 0 failed |
-| **Coverage** | 87% |
+| **Total tests** | 765 passed · 0 skipped · 0 failed |
+| **Coverage** | 89%+ |
 | **Python versions** | 3.10, 3.11, 3.12 |
 | **Static analysis** | mypy — 32 files clean |
 | **Security scan** | bandit — 0 HIGH findings |

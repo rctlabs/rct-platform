@@ -51,7 +51,7 @@ include = ["core*", "signedai*", "rct_control_plane*", "microservices*"]
 exclude = ["tests*", "*.tests*", "docs*", "examples*", "benchmark*", "notebooks*", "site*"]
 
 [tool.pytest.ini_options]
-testpaths = ["microservices", "core/tests", "rct_control_plane/tests", "signedai/tests", "tests"]
+testpaths = ["microservices", "core/tests", "rct_control_plane/tests", "signedai/tests", "tests", "tests/hypothesis"]
 python_files = ["test_*.py", "*_test.py"]
 addopts = "-v --tb=short --continue-on-collection-errors --import-mode=importlib"
 

@@ -30,12 +30,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-cov cryptography
+          pip install pytest pytest-cov cryptography hypothesis
 
       - name: Run tests
         run: |
           python -m pytest --cov=microservices --cov=core --cov=signedai --cov=rct_control_plane \
             --cov-report=xml --cov-fail-under=85 -v
+
+      - name: Run hypothesis property tests (CI profile — 50 examples)
+        run: |
+          python -m pytest tests/hypothesis/ --hypothesis-profile=ci -v
 
       - name: Upload coverage
         uses: codecov/codecov-action@v5
@@ -62,7 +66,17 @@ jobs:
 
       - name: Install tools
         run: |
-          pip install mypy bandit
+          pip install mypy bandit ruff
+
+      - name: Ruff lint
+        run: |
+          ruff check core/ signedai/ rct_control_plane/ microservices/ --output-format=github
+
+      - name: Ruff format check
+        # Report only — does not block CI (legacy codebase has many unformatted files)
+        run: |
+          ruff format --check core/ signedai/ rct_control_plane/ microservices/
+        continue-on-error: true
 
       - name: Bandit security lint
         # Fail CI on HIGH severity findings. Medium/low are reported but allowed.

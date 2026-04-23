@@ -1,8 +1,8 @@
 # RCT Platform — Public SDK Testing Canonical
 
-**Version:** 1.0.1a0  
-**Last Updated:** 2026-04-17  
-**Total SDK Tests:** 591 passed · 0 failed · 89% coverage  
+**Version:** 1.0.2a0  
+**Last Updated:** 2026-04-22  
+**Total SDK Tests:** 765 passed · 0 failed · 89%+ coverage  
 **CI Status:** [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 
 ---
