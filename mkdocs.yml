@@ -110,6 +110,8 @@ nav:
     - Governance: concepts/governance.md
   - Algorithms:
     - 41 Algorithms Overview: algorithms/overview.md
+    - MOIP — Multi-Objective Intent Planning: algorithms/moip.md
+    - MEE v2 — Meta-Evolution Engine: algorithms/mee.md
     - Tier 9 — Autonomous Pipeline: algorithms/tier9-autonomy.md
   - Architecture:
     - RFC-001 JITNA Protocol Spec: architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION.md
