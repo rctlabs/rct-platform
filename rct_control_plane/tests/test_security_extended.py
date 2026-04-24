@@ -5,8 +5,6 @@ Validates cryptographic integrity, hash chain tamper detection,
 input boundary enforcement, and policy security invariants.
 """
 
-import pytest
-
 from rct_control_plane.jitna_protocol import (
     JITNA_MAX_PAYLOAD_SIZE_BYTES,
     JITNAPacket,
