@@ -5,25 +5,69 @@ signed_execution, middleware, default_policies.
 All pure unit tests with no external I/O.
 """
 
-import pytest
-from datetime import datetime, timezone
+import sys
 from decimal import Decimal
-from uuid import uuid4
+from pathlib import Path
 
-# ===================================================================
-# C-1: Replay Engine
-# ===================================================================
+import pytest
+
+from rct_control_plane.control_plane_state import (
+    ControlPlanePhase,
+    ControlPlaneState,
+    TransitionResult,
+)
+from rct_control_plane.default_policies import (
+    create_approval_workflow_policy,
+    create_certification_gate_policy,
+    create_compliance_check_policy,
+    create_cost_cap_policy,
+    create_custom_policy,
+    create_data_sensitivity_policy,
+    create_resource_quota_policy,
+    create_risk_escalation_policy,
+    create_time_limit_policy,
+    get_default_policies,
+)
+from rct_control_plane.jitna_protocol import (
+    JITNAMessageType,
+    JITNAPacket as ControlPlaneJITNAPacket,
+    JITNAStatus,
+    JITNAValidator,
+)
+from rct_control_plane.jitna_protocol import JITNAPacket as JITNAPacketCP
+from rct_control_plane.middleware import (
+    FeatureFlagStore,
+    FlagDefinition,
+)
+from rct_control_plane.observability import (
+    AuditEntry,
+    AuditTrail,
+    ControlPlaneEvent,
+    ControlPlaneEventType,
+    ControlPlaneObserver,
+)
+from rct_control_plane.policy_language import PolicyAction, PolicyRule
 from rct_control_plane.replay_engine import (
     Checkpoint,
     ReplayEngine,
     ReplayResult,
     compute_execution_hash,
 )
-from rct_control_plane.control_plane_state import (
-    ControlPlanePhase,
-    ControlPlaneState,
-    TransitionResult,
+from rct_control_plane.signed_execution import (
+    SignedExecutionPacket,
+    compute_key_fingerprint,
+    generate_keypair,
+    sign_packet,
+    verify_packet,
 )
+
+# ensure benchmark directory is importable for D-3 tests
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+
+
+# ===================================================================
+# C-1: Replay Engine
+# ===================================================================
 
 
 class TestReplayEngine:
@@ -124,14 +168,6 @@ class TestReplayEngine:
 # ===================================================================
 # C-2: JITNA Protocol — Validator
 # ===================================================================
-from rct_control_plane.jitna_protocol import (
-    JITNA_SCHEMA_VERSION,
-    JITNAMessageType,
-    JITNAPacket as ControlPlaneJITNAPacket,
-    JITNAStatus,
-    JITNAValidationResult,
-    JITNAValidator,
-)
 
 
 class TestJITNAValidator:
@@ -272,13 +308,6 @@ class TestControlPlaneStateExtended:
 # ===================================================================
 # C-4: Observability
 # ===================================================================
-from rct_control_plane.observability import (
-    AuditEntry,
-    AuditTrail,
-    ControlPlaneEvent,
-    ControlPlaneEventType,
-    ControlPlaneObserver,
-)
 
 
 class TestAuditTrail:
@@ -359,7 +388,10 @@ class TestControlPlaneObserver:
     def test_unregister_handler(self):
         obs = ControlPlaneObserver()
         captured = []
-        handler = lambda e: captured.append(e)
+
+        def handler(e):
+            captured.append(e)
+
         obs.register_handler(handler)
         obs.unregister_handler(handler)
         obs.observe_event(ControlPlaneEventType.INTENT_RECEIVED)
@@ -407,14 +439,6 @@ class TestControlPlaneObserver:
 # ===================================================================
 # C-5: Signed Execution
 # ===================================================================
-from rct_control_plane.signed_execution import (
-    SignedExecutionPacket,
-    compute_key_fingerprint,
-    generate_keypair,
-    sign_packet,
-    verify_packet,
-)
-from rct_control_plane.jitna_protocol import JITNAPacket as JITNAPacketCP
 
 
 class TestSignedExecution:
@@ -472,10 +496,6 @@ class TestSignedExecution:
 # ===================================================================
 # D-1: Middleware — FeatureFlagStore
 # ===================================================================
-from rct_control_plane.middleware import (
-    FeatureFlagStore,
-    FlagDefinition,
-)
 
 
 class TestFeatureFlagStore:
@@ -572,19 +592,6 @@ class TestFeatureFlagStore:
 # ===================================================================
 # D-2: Default Policies
 # ===================================================================
-from rct_control_plane.default_policies import (
-    create_approval_workflow_policy,
-    create_certification_gate_policy,
-    create_compliance_check_policy,
-    create_cost_cap_policy,
-    create_custom_policy,
-    create_data_sensitivity_policy,
-    create_resource_quota_policy,
-    create_risk_escalation_policy,
-    create_time_limit_policy,
-    get_default_policies,
-)
-from rct_control_plane.policy_language import PolicyAction, PolicyPriority, PolicyRule
 
 
 class TestDefaultPolicies:
@@ -656,11 +663,6 @@ class TestDefaultPolicies:
 # ===================================================================
 # D-3: Benchmark CLI (import + structure)
 # ===================================================================
-import sys
-from pathlib import Path
-
-# ensure benchmark is importable
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 
 class TestBenchmarkCLI:

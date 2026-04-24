@@ -5,17 +5,11 @@ Tests that verify multiple components work together end-to-end.
 No external APIs or databases required.
 """
 
-import pytest
-from decimal import Decimal
-
 from rct_control_plane.intent_compiler import IntentCompiler
 from rct_control_plane.intent_schema import (
-    BudgetSpec,
     ContextBundle,
     IntentObject,
-    IntentPriority,
     IntentType,
-    RiskProfile,
     ScopeObject,
     ScopeType,
 )
@@ -30,10 +24,9 @@ from rct_control_plane.policy_language import (
 from rct_control_plane.control_plane_state import (
     ControlPlanePhase,
     ControlPlaneState,
-    TransitionResult,
 )
 from rct_control_plane.replay_engine import ReplayEngine, compute_execution_hash
-from rct_control_plane.observability import ControlPlaneEventType, ControlPlaneObserver
+from rct_control_plane.observability import ControlPlaneObserver
 from rct_control_plane.jitna_protocol import (
     JITNAPacket,
     JITNAValidator,
@@ -41,7 +34,6 @@ from rct_control_plane.jitna_protocol import (
 from rct_control_plane.signed_execution import (
     SignedExecutionPacket,
     generate_keypair,
-    verify_packet,
 )
 
 
@@ -89,13 +81,13 @@ class TestStateAndReplayWorkflow:
         engine = ReplayEngine()
 
         # initial checkpoint
-        cp1 = engine.record(state)
+        engine.record(state)
 
         # transition through happy path
         state.transition_to(ControlPlanePhase.INTENT_COMPILED)
-        cp2 = engine.record(state)
+        engine.record(state)
         state.transition_to(ControlPlanePhase.GRAPH_BUILT)
-        cp3 = engine.record(state)
+        engine.record(state)
 
         # verify chain
         chain = engine.verify_chain(state.state_id)

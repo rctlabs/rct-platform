@@ -11,7 +11,6 @@ from ..core.vector_engine import (
     VectorBackendInterface,
     SearchResult,
     VectorRecord,
-    DistanceMetric
 )
 
 logger = logging.getLogger(__name__)

@@ -6,11 +6,14 @@ All public API surfaces with no external I/O dependencies.
 
 import pytest
 from decimal import Decimal
-from uuid import uuid4
 
-# ---------------------------------------------------------------------------
-# execution_graph_ir
-# ---------------------------------------------------------------------------
+from rct_control_plane.control_plane_state import (
+    ControlPlanePhase,
+    ControlPlaneState,
+    TransitionResult,
+    VALID_TRANSITIONS,
+)
+from rct_control_plane.dsl_parser import DSLParser, DSLParseError
 from rct_control_plane.execution_graph_ir import (
     DependencyEdge,
     DependencyType,
@@ -20,6 +23,34 @@ from rct_control_plane.execution_graph_ir import (
     NodeType,
     ResourceRequirement,
 )
+from rct_control_plane.intent_compiler import (
+    IntentCompiler,
+    quick_compile,
+)
+from rct_control_plane.intent_schema import (
+    BudgetSpec,
+    ContextBundle,
+    IntentObject,
+    IntentPriority,
+    IntentType,
+    RiskProfile,
+    ScopeObject,
+    ScopeType,
+)
+from rct_control_plane.policy_language import (
+    ConditionOperator,
+    PolicyAction,
+    PolicyCondition,
+    PolicyEvaluator,
+    PolicyEvaluationResult,
+    PolicyPriority,
+    PolicyRule,
+    PolicyScope,
+)
+
+# ---------------------------------------------------------------------------
+# execution_graph_ir
+# ---------------------------------------------------------------------------
 
 
 class TestExecutionGraph:
@@ -99,7 +130,6 @@ class TestExecutionGraph:
 # ---------------------------------------------------------------------------
 # dsl_parser
 # ---------------------------------------------------------------------------
-from rct_control_plane.dsl_parser import DSLParser, DSLParseError
 
 
 class TestDSLParser:
@@ -182,17 +212,6 @@ intent "multi_phase" {
 # ---------------------------------------------------------------------------
 # intent_schema
 # ---------------------------------------------------------------------------
-from rct_control_plane.intent_schema import (
-    BudgetSpec,
-    ContextBundle,
-    IntentConstraint,
-    IntentObject,
-    IntentPriority,
-    IntentType,
-    RiskProfile,
-    ScopeObject,
-    ScopeType,
-)
 
 
 class TestIntentSchema:
@@ -253,12 +272,6 @@ class TestIntentSchema:
 # ---------------------------------------------------------------------------
 # control_plane_state
 # ---------------------------------------------------------------------------
-from rct_control_plane.control_plane_state import (
-    ControlPlanePhase,
-    ControlPlaneState,
-    TransitionResult,
-    VALID_TRANSITIONS,
-)
 
 
 class TestControlPlaneState:
@@ -296,17 +309,6 @@ class TestControlPlaneState:
 # ---------------------------------------------------------------------------
 # policy_language — PolicyCondition, PolicyRule, PolicyEvaluator
 # ---------------------------------------------------------------------------
-from rct_control_plane.policy_language import (
-    ConditionOperator,
-    PolicyAction,
-    PolicyCondition,
-    PolicyEvaluator,
-    PolicyEvaluationResult,
-    PolicyPriority,
-    PolicyRule,
-    PolicyScope,
-)
-from rct_control_plane.execution_graph_ir import ExecutionGraph
 
 
 class TestPolicyCondition:
@@ -547,12 +549,6 @@ class TestPolicyEvaluator:
 # ---------------------------------------------------------------------------
 # intent_compiler — IntentCompiler, quick_compile
 # ---------------------------------------------------------------------------
-from rct_control_plane.intent_compiler import (
-    CompilationResult,
-    IntentCompiler,
-    LexicalResult,
-    quick_compile,
-)
 
 
 class TestIntentCompiler:

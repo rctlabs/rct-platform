@@ -49,7 +49,7 @@ $$F = D^I \times A$$
 
 | Metric | Value |
 |--------|-------|
-| SDK Tests | **723 passed · 0 failed · 87% coverage** |
+| SDK Tests | **723 passed · 0 failed · 89% coverage** |
 | Algorithms | 41 (Tier 1–9 reference implementations) |
 | LLM Models | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | Hallucination Rate | **0.3%** (vs industry 12–15%) — 97% reduction |
@@ -76,16 +76,21 @@ $$F = D^I \times A$$
 
 ## Quick Install
 
-```bash
-pip install rct-platform
-```
-
-Or from source:
+!!! warning "Alpha Release — Source Install Required"
+    `rct-platform` v1.0.2a0 is in **Public Alpha** and has not yet been published to PyPI.
+    Use **From Source** install below until v1.0.0 stable.
 
 ```bash
+# From source (recommended for v1.0.2a0 alpha):
 git clone https://github.com/rctlabs/rct-platform.git
 cd rct-platform
 pip install -e .
+```
+
+Or, once PyPI publishing is available at stable release:
+
+```bash
+pip install rct-platform
 ```
 
 [Get Started →](getting-started/installation.md){ .md-button .md-button--primary }

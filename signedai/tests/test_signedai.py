@@ -3,26 +3,21 @@ Tests for signedai — models, registry, router.
 All synchronous unit tests; no external API calls needed.
 """
 
-import pytest
 from datetime import datetime, timezone
 
 from signedai.core.models import (
     AnalysisJob,
-    AnalysisRequest,
     AnalysisStatus,
-    Certification,
-    ConsensusResult,
     JITNAPacket,
     RiskLevel,
-    SignerVote,
     TierLevel,
-    Verdict,
 )
 from signedai.core.registry import (
     HexaCoreRegistry,
     HexaCoreRole,
-    ModelInfo,
+    RiskLevel as RegistryRiskLevel,
     SignedAIRegistry,
+    SignedAITier,
 )
 from signedai.core.router import TierRouter
 
@@ -254,12 +249,6 @@ class TestHexaCoreRegistryExtended:
 # ---------------------------------------------------------------------------
 # SignedAIRegistry — consensus & tier tests
 # ---------------------------------------------------------------------------
-from signedai.core.registry import (
-    ConsensusResult,
-    RiskLevel as RegistryRiskLevel,
-    SignedAITier,
-    TierConfig,
-)
 
 
 class TestSignedAIRegistryExtended:

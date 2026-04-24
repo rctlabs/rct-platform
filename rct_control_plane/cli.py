@@ -22,7 +22,6 @@ Output Formats:
     --output tree   : Tree view (for graphs)
 """
 
-import os
 import sys
 import json
 import time
@@ -861,11 +860,11 @@ def reset(force: bool):
                 f"{graph_count} graphs deleted. All metrics reset."
             )
         else:
-            click.echo(click.style(f"✓ Reset complete", fg="green"))
+            click.echo(click.style("✓ Reset complete", fg="green"))
             click.echo(f"  - Deleted {intent_count} intents")
             click.echo(f"  - Deleted {state_count} states")
             click.echo(f"  - Deleted {graph_count} graphs")
-            click.echo(f"  - Reset all metrics")
+            click.echo("  - Reset all metrics")
         
     except click.Abort:
         click.echo("Reset cancelled")
@@ -1201,9 +1200,9 @@ def logs(adapter: Optional[str], tail: int, output: str):
             else:
                 headers = ["Packet", "Action", "Status", "Latency", "Time"]
                 rows = [
-                    [l["packet_id"], l["action"], l["status"],
-                     str(l["latency_ms"]), l["timestamp"]]
-                    for l in log_entries
+                    [entry["packet_id"], entry["action"], entry["status"],
+                     str(entry["latency_ms"]), entry["timestamp"]]
+                    for entry in log_entries
                 ]
                 print_table(headers, rows)
     except Exception as e:

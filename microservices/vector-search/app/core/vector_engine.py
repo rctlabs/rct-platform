@@ -3,7 +3,7 @@ Vector Engine Core - ALGO-16
 Handles vector operations and backend abstraction
 """
 
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any, Optional
 from abc import ABC, abstractmethod
 import numpy as np
 from dataclasses import dataclass
@@ -311,7 +311,7 @@ class VectorEngine:
         Returns:
             Clear result
         """
-        count = self.backend.count()
+        _count = self.backend.count()  # logged below via deleted count
         deleted = self.backend.clear()
         
         logger.warning(f"Cleared {deleted} vectors from index")

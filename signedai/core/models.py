@@ -86,7 +86,7 @@ class JITNAPacket(BaseModel):
 
     JITNA = Just In Time Nodal Assembly (canonical public name, per RCT Labs Architect).
     """
-    I: str = Field(..., description="Intent — primary goal statement")
+    I: str = Field(..., description="Intent — primary goal statement")  # noqa: E741
     D: str = Field(..., description="Domain — context/scope")
     delta: str = Field(..., alias="Δ", description="Delta — desired change")
     A: str = Field(..., description="Assumptions — preconditions")

@@ -11,12 +11,9 @@ Covers:
 from __future__ import annotations
 
 from decimal import Decimal
-import pytest
 
 from rct_control_plane.intent_schema import (
     ContextBundle,
-    BudgetSpec,
-    IntentConstraint,
     IntentObject,
     IntentPriority,
     IntentType,
@@ -27,12 +24,10 @@ from rct_control_plane.intent_schema import (
 from rct_control_plane.intent_templates.refactor_template import (
     RefactorTemplate,
     RefactoringPlan,
-    RefactoringPhase,
 )
 from rct_control_plane.intent_templates.build_app_template import (
     BuildAppTemplate,
     BuildPlan,
-    BuildPhase,
 )
 
 

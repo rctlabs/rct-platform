@@ -1,6 +1,5 @@
 """Tests for Analysearch Intent Engine"""
 
-import pytest
 from app.core.analysearch_engine import (
     AnalysearchEngine,
     AnalysearchMode,
@@ -230,7 +229,7 @@ class TestMirrorMode:
         while not state.converged and state.iterations < state.max_iterations:
             proposal = mirror.propose(state, {}, keywords)
             counter = mirror.counter(state, proposal, synthesis)
-            refined = mirror.refine(state, proposal, counter)
+            mirror.refine(state, proposal, counter)
 
         # Should either converge or hit max iterations
         assert state.converged or state.iterations == state.max_iterations
