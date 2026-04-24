@@ -2,130 +2,138 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://rctlabs.co/docs/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/changelog/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/contributing/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/testing/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
+    </url>
+    <url>
+         <loc>https://rctlabs.co/docs/algorithms/mee/</loc>
+         <lastmod>2026-04-24</lastmod>
+    </url>
+    <url>
+         <loc>https://rctlabs.co/docs/algorithms/moip/</loc>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/algorithms/overview/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/algorithms/tier9-autonomy/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/api/control-plane/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/api/microservices/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/architecture/KERNEL_RFC_002_PROCESS_MODEL/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/architecture/KERNEL_RFC_003_SCHEDULER/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/architecture/KERNEL_RFC_004_IPC/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/architecture/KERNEL_RFC_005_SYSCALL/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/architecture/KERNEL_RFC_006_FAULT_ISOLATION/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/architecture/RFC-001-OPEN-JITNA-PROTOCOL-SPECIFICATION/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/architecture/observability/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/benchmark/hallucination-methodology/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/benchmark/methodology/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/concepts/architecture/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/concepts/fdia/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/concepts/governance/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/concepts/intent-loop/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/concepts/jitna/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/concepts/rct-7-thinking/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/concepts/signedai/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/getting-started/cli-reference/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/getting-started/installation/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/getting-started/quickstart/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/use-cases/devops/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/use-cases/finance/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/use-cases/game-ai/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/use-cases/healthcare/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
     <url>
          <loc>https://rctlabs.co/docs/use-cases/supply-chain/</loc>
-         <lastmod>2026-04-23</lastmod>
+         <lastmod>2026-04-24</lastmod>
     </url>
 </urlset>
