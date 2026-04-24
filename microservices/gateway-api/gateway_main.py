@@ -11,7 +11,7 @@ Services integrated:
 Port: 8000
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import sys
@@ -35,7 +35,7 @@ except ImportError as e:
     genome_available = False
 
 try:
-    from signedai.api import app as signedai_app
+    from signedai.api import app as signedai_app  # noqa: F401
     signedai_available = True
 except ImportError as e:
     print(f"Warning: SignedAI not available: {e}")
@@ -203,7 +203,7 @@ async def health_check():
     if genome_available:
         try:
             from genome_api import get_manager
-            manager = get_manager()
+            get_manager()
             health_status["services"]["genome"] = {
                 "status": "healthy",
                 "genome_version": "4.0"
@@ -267,9 +267,9 @@ if __name__ == "__main__":
     print("\n" + "="*60)
     print("🚀 Starting RCT Gateway API")
     print("="*60)
-    print(f"📍 Gateway URL: http://localhost:8000")
-    print(f"📚 API Docs: http://localhost:8000/docs")
-    print(f"🧬 Genome API: http://localhost:8000/api/genome/health")
+    print("📍 Gateway URL: http://localhost:8000")
+    print("📚 API Docs: http://localhost:8000/docs")
+    print("🧬 Genome API: http://localhost:8000/api/genome/health")
     print("="*60 + "\n")
     
     uvicorn.run(

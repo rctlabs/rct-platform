@@ -13,7 +13,6 @@ Covers:
 
 import sys
 import os
-import pytest
 
 # Ensure project root is on sys.path regardless of working directory
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -29,7 +28,6 @@ from examples.simulation_demo import (
     compute_outcome,
     run_tick,
     run_simulation,
-    summarise,
 )
 
 

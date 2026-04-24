@@ -6,22 +6,19 @@ Provides endpoints for intent compilation, graph building, policy evaluation,
 state management, observability, and deep health checks.
 """
 
-import asyncio
+import asyncio  # noqa: F401
 import os
 import sys
 import time
 from datetime import datetime, timezone
-from decimal import Decimal
 from typing import Any, Dict, List, Optional
-from uuid import UUID
 
-from fastapi import FastAPI, HTTPException, Query, status, Header
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, HTTPException, Query, status
 from pydantic import BaseModel, ConfigDict, Field
 
-from .intent_compiler import IntentCompiler, CompilationResult
+from .intent_compiler import IntentCompiler
 from .dsl_parser import DSLParser
-from .policy_language import PolicyEvaluator, PolicyEvaluationResult
+from .policy_language import PolicyEvaluator
 from .control_plane_state import ControlPlaneState, ControlPlanePhase
 from .observability import ControlPlaneObserver
 from .default_policies import get_default_policies
@@ -383,7 +380,7 @@ class ControlPlaneAPI:
             # --- 5. Finance Layer ---
             t0 = time.perf_counter()
             try:
-                from rct_platform.services.finance import StripePaymentService, WalletService
+                import rct_platform.services.finance  # noqa: F401 — probe import
                 svc_status = "healthy"
                 msg = "Finance layer importable"
             except ImportError as exc:

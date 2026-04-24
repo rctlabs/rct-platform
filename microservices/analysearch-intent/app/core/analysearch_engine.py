@@ -315,7 +315,7 @@ class CrossDisciplinarySynthesizer:
     def _find_intersections(self, disciplines: List[DisciplineInsight]) -> List[Dict]:
         """Find intersection points between disciplines"""
         intersections = []
-        disc_names = [d.discipline for d in disciplines]
+        _disc_names = [d.discipline for d in disciplines]  # reserved for future use
 
         for i, d1 in enumerate(disciplines):
             for j, d2 in enumerate(disciplines):
@@ -507,7 +507,7 @@ class MirrorModeEngine:
         """
         # Calculate refinement quality
         proposal_confidence = proposal.get("confidence", 0.5)
-        challenge_strength = counter.get("challenge_strength", 0.3)
+        _challenge_strength = counter.get("challenge_strength", 0.3)  # reserved
 
         # Confidence increases when challenges are addressed
         refined_confidence = min(
@@ -759,7 +759,7 @@ class AnalysearchEngine:
             counter = self.mirror.counter(state, proposal, synthesis)
 
             # REFINE
-            refined = self.mirror.refine(state, proposal, counter)
+            self.mirror.refine(state, proposal, counter)
 
         return state
 

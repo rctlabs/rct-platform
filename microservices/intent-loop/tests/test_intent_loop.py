@@ -1,11 +1,10 @@
 """Tests for Intent Loop Engine — 25 tests."""
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import pytest
-import asyncio
-import json
 from datetime import datetime
-from loop_engine import IntentState, JITNAPacket, IntentResult, IntentLoopEngine, LoopMetrics, LoopMetrics
+from loop_engine import IntentState, JITNAPacket, IntentLoopEngine, LoopMetrics
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -90,17 +89,6 @@ class TestLoopMetrics:
         assert isinstance(m.last_updated, datetime)
         assert m.error_count == 0
 
-    def test_cache_hit_rate_zero_on_init(self):
-        m = LoopMetrics()
-        assert m.cache_hit_rate == 0.0
-
-    def test_cache_hit_rate_calculated_correctly(self):
-        m = LoopMetrics(cache_hits=3, cache_misses=1)
-        assert m.cache_hit_rate == 0.75
-
-    def test_last_updated_is_datetime(self):
-        m = LoopMetrics()
-        assert isinstance(m.last_updated, datetime)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -144,7 +132,7 @@ class TestIntentLoopEngine:
         pkt = JITNAPacket(intent="warm start test", context={})
         try:
             result1 = await engine.process(pkt)
-            result2 = await engine.process(pkt)
+            await engine.process(pkt)
             assert result1 is not None
         except Exception:
             pass  # external deps

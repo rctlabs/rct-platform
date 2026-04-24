@@ -12,16 +12,13 @@ Reference: TUI-CLI RCT Design — Phase 4A
 
 from __future__ import annotations
 
-from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.tree import Tree
-from rich.text import Text
 from rich.syntax import Syntax
-from rich.align import Align
 from rich import box
 
 

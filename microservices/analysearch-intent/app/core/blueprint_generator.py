@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import Dict
 
 
 class BlueprintStyle:
@@ -103,7 +103,7 @@ class BlueprintGenerator:
     def _research_sections(self, result: object) -> Dict:
         keywords = getattr(result, "keywords", [])
         synthesis = getattr(result, "synthesis", {})
-        analysis = getattr(result, "analysis", {})
+        _analysis = getattr(result, "analysis", {})  # reserved
         return {
             "research_question": getattr(result, "query", ""),
             "hypotheses": [
@@ -121,7 +121,7 @@ class BlueprintGenerator:
 
     def _implementation_sections(self, result: object) -> Dict:
         keywords = getattr(result, "keywords", [])
-        analysis = getattr(result, "analysis", {})
+        _analysis_impl = getattr(result, "analysis", {})  # reserved
         return {
             "objective": getattr(result, "query", ""),
             "tasks": [

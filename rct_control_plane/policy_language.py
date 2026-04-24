@@ -6,14 +6,14 @@ Policies can approve, reject, escalate, or require manual approval for intents.
 """
 
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime
 from decimal import Decimal
 from enum import Enum
-from typing import Any, Dict, List, Optional, Callable
+from typing import Any, Dict, List, Optional
 from uuid import uuid4
 
-from .execution_graph_ir import ExecutionGraph, NodeType
-from .intent_schema import IntentObject, IntentType, RiskProfile
+from .execution_graph_ir import ExecutionGraph
+from .intent_schema import IntentObject
 
 from typing import TYPE_CHECKING
 

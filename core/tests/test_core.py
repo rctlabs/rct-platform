@@ -5,19 +5,30 @@ All pure-function unit tests: no external I/O, no network calls.
 
 import pytest
 
-# ---------------------------------------------------------------------------
-# FDIA
-# ---------------------------------------------------------------------------
+from core.delta_engine.memory_delta import (
+    AgentMemoryState,
+    MemoryDelta,
+    MemoryDeltaEngine,
+)
 from core.fdia.fdia import (
     DEFAULT_DESIRE_WEIGHTS,
-    INTENT_ALIGNMENT_MATRIX,
     FDIAScorer,
     FDIAWeights,
     NPCAction,
     NPCIntentType,
     intent_alignment,
 )
+from core.regional_adapter.regional_adapter import (
+    DetectedLanguage,
+    LanguageDetector,
+    RegionalModelCache,
+    RegionalModelRouter,
+)
 
+
+# ---------------------------------------------------------------------------
+# FDIA
+# ---------------------------------------------------------------------------
 
 class TestFDIAIntentTypes:
     def test_all_intent_types_present(self):
@@ -127,11 +138,6 @@ class TestFDIAScorer:
 # ---------------------------------------------------------------------------
 # MemoryDelta
 # ---------------------------------------------------------------------------
-from core.delta_engine.memory_delta import (
-    AgentMemoryState,
-    MemoryDelta,
-    MemoryDeltaEngine,
-)
 
 
 class TestMemoryDelta:
@@ -359,12 +365,6 @@ class TestMemoryDeltaEngineStyleB:
 # ---------------------------------------------------------------------------
 # RegionalAdapter
 # ---------------------------------------------------------------------------
-from core.regional_adapter.regional_adapter import (
-    DetectedLanguage,
-    LanguageDetector,
-    RegionalModelCache,
-    RegionalModelRouter,
-)
 
 
 class TestLanguageDetector:

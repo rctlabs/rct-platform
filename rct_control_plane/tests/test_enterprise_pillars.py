@@ -13,7 +13,6 @@ Also tests the PillarResult dataclass, run_all_pillars, and JSON output.
 import sys
 import os
 import json
-import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 

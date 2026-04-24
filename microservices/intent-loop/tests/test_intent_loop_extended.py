@@ -2,15 +2,11 @@
 import sys
 import os
 import pytest
-import asyncio
-import hashlib
-import json
-from datetime import datetime
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from loop_engine import (
-    IntentState, JITNAPacket, MemoryHit, IntentResult, IntentLoopEngine
+    IntentState, JITNAPacket, IntentResult, IntentLoopEngine
 )
 
 
@@ -136,7 +132,6 @@ class TestIntentLoopEngineExtended:
 
     @pytest.mark.asyncio
     async def test_different_intents_different_hashes(self):
-        engine = IntentLoopEngine()
         p1 = JITNAPacket(intent="intent alpha")
         p2 = JITNAPacket(intent="intent beta")
         assert p1.compute_hash() != p2.compute_hash()
