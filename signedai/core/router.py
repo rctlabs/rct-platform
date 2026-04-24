@@ -13,12 +13,8 @@ from typing import Dict, List
 
 from .models import (
     AnalysisJob,
-    AnalysisStatus,
-    Certification,
-    ConsensusResult,
     RiskLevel,
     TierLevel,
-    Verdict,
 )
 
 # ---------------------------------------------------------------------------

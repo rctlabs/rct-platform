@@ -6,7 +6,6 @@ input boundary enforcement, and policy security invariants.
 """
 
 import pytest
-from decimal import Decimal
 
 from rct_control_plane.jitna_protocol import (
     JITNA_MAX_PAYLOAD_SIZE_BYTES,
@@ -25,7 +24,6 @@ from rct_control_plane.observability import (
     ControlPlaneEventType,
 )
 from rct_control_plane.replay_engine import (
-    ReplayEngine,
     compute_execution_hash,
 )
 from rct_control_plane.control_plane_state import ControlPlaneState, ControlPlanePhase
