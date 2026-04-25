@@ -544,7 +544,7 @@ intent "observer_test" {
     }
 }
 '''
-        graph = parser.parse(dsl, intent_id="obs-001")
+        parser.parse(dsl, intent_id="obs-001")
         # Observer should have been called once
         mock_observer.observe_event.assert_called_once()
         call_kwargs = mock_observer.observe_event.call_args[1]

@@ -26,7 +26,6 @@ from rct_control_plane.jitna_protocol import (
     JITNAProtocolRegistry,
     JITNA_SCHEMA_VERSION,
     JITNA_MAX_PAYLOAD_SIZE_BYTES,
-    JITNA_VALID_PRIORITIES,
 )
 
 
@@ -409,10 +408,6 @@ class TestJITNAPacketCoverage:
 
     def test_compute_hash_deterministic(self):
         pkt1 = JITNAPacket(
-            source_agent_id="A", target_agent_id="B",
-            message_type="intent_request", timestamp="2026-01-01T00:00:00Z"
-        )
-        pkt2 = JITNAPacket(
             source_agent_id="A", target_agent_id="B",
             message_type="intent_request", timestamp="2026-01-01T00:00:00Z"
         )

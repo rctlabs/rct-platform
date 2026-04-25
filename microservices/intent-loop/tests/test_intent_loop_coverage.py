@@ -24,13 +24,10 @@ from loop_engine import (
     SignedAIVerifier,
     EvolutionCommitter,
     IntentLoopEngine,
-    IntentLoopEngine,
     JITNAPacket,
     MemoryHit,
     SecurityViolation,
     IntentState,
-    IntentResult,
-    LoopMetrics,
 )
 
 
@@ -306,7 +303,7 @@ class TestIntentLoopEngineFullCoverage:
         pkt = JITNAPacket(intent="Cached intent xyz789", context={})
 
         # First call - populates cache
-        result1 = await engine.process(pkt)
+        await engine.process(pkt)
         # Wait for background commit task to complete
         await asyncio.sleep(0.3)
 

@@ -4,9 +4,8 @@ Mock-based tests for QdrantBackend — achieves coverage without a live Qdrant s
 Covers all major methods: initialize, index, search, get, update, delete, clear, count, get_stats
 """
 import sys
-import os
 from pathlib import Path
-from unittest.mock import MagicMock, patch, PropertyMock
+from unittest.mock import MagicMock, patch
 import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent))

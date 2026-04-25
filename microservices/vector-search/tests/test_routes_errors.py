@@ -8,8 +8,7 @@ Uncovered lines: 61-63 (index 500), 90-97 (search 400/500), 122-129 (batch 400/5
 import sys
 import pytest
 from pathlib import Path
-from unittest.mock import MagicMock, patch
-from fastapi import status
+from unittest.mock import MagicMock
 from fastapi.testclient import TestClient
 
 sys.path.insert(0, str(Path(__file__).parent.parent))

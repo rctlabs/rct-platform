@@ -18,8 +18,6 @@ import sys
 import pytest
 import numpy as np
 from pathlib import Path
-from unittest.mock import patch
-import faiss
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
