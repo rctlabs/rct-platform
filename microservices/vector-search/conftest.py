@@ -47,6 +47,11 @@ class FakeFaissIndex:
     def train(self, vectors):
         pass
 
+    def reset(self):
+        """Clear all stored vectors (mirrors faiss.Index.reset)."""
+        self._vectors = []
+        self.ntotal = 0
+
     @property
     def is_trained(self):
         return True
