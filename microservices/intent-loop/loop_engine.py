@@ -501,7 +501,7 @@ class SecurityViolation(Exception):
 
 
 # Example usage
-async def demo():
+async def demo():  # pragma: no cover
     print("=" * 80)
     print("Intent Loop Engine: Evolutionary Compound Intelligence Demo")
     print("=" * 80)
