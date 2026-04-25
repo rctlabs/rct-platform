@@ -6,7 +6,7 @@ codecov:
   require_ci_to_pass: true
   # Wait max 60s for all coverage reports
   notify:
-    after_n_builds: 1
+    after_n_builds: 2
     wait_for_ci: true
 
 coverage:
@@ -14,14 +14,14 @@ coverage:
   status:
     project:
       default:
-        target: 85%
+        target: 90%
         threshold: 2%
         if_not_found: success
         if_ci_failed: error
         informational: false
     patch:
       default:
-        target: 85%
+        target: 90%
         threshold: 5%
         if_not_found: success
         if_ci_failed: error
@@ -48,7 +48,7 @@ comment:
   require_head: yes
   show_carryforward_flags: false
 
-# Ignore non-source paths from coverage
+# Ignore non-source paths and demo/example scripts from coverage
 ignore:
   - "tests/**"
   - "benchmark/**"
@@ -58,3 +58,8 @@ ignore:
   - "**/__pycache__/**"
   - "**/conftest.py"
   - "setup.py"
+  # Demo and example scripts (not production code)
+  - "**/example_usage.py"
+  - "**/demo*.py"
+  - "notebooks/**"
+  - "site/**"
