@@ -58,7 +58,6 @@ ignore:
   - "**/__pycache__/**"
   - "**/conftest.py"
   - "setup.py"
-  # Demo and example scripts (not production code)
   - "**/example_usage.py"
   - "**/demo*.py"
   - "notebooks/**"

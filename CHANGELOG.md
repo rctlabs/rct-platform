@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- README metrics synced to the current public SDK checkpoint: **1,193 passed · 0 skipped · 94% coverage**
+- `docs/testing/TESTING_CANONICAL.md` refreshed as the public single source of truth for test and coverage claims
+- `ROADMAP.md` updated to reflect the current checkpoint and to clarify which launch tasks require GitHub UI configuration
+- `codecov.yml` target raised from `85%` → `90%` to match the current repo floor
+- `.github/workflows/ci.yml` `--cov-fail-under` raised from `85` → `90`
+
+### Added
+- `docs/release/RELEASE_READINESS_CHECKLIST.md` — public release gate checklist for docs sync, CI, security scan, codecov, release notes, website, Discussions, milestones, and provenance
+- `docs/release/PUBLIC_RELEASE_PROVENANCE.md` — public-safe surface and private-to-public provenance note
+- `docs/community/GITHUB_UI_LAUNCH_CHECKLIST.md` — step-by-step GitHub UI launch checklist for Topics, About, Website, Discussions, profile pinning, and milestones
+
 ## [1.0.2a0] - 2026-04-22
 
 ### Fixed

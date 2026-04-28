@@ -18,13 +18,6 @@
 
 ---
 
-## 🇹🇭 ภาษาไทย
-
-> **สำหรับ Developer ไทย:** อ่านเอกสารและบทความอธิบายเต็มรูปแบบที่ **[rctlabs.co/th](https://www.rctlabs.co/th)**  
-> รวมถึง [บทความ FDIA](https://www.rctlabs.co/th/blog/fdia-equation-explained) · [JITNA Protocol](https://www.rctlabs.co/th/blog/jitna-language-release) · [MEE Engine](https://www.rctlabs.co/th/blog/mee-meta-evolution-engine-explained)
-
----
-
 ## What is RCT?
 
 **RCT Platform** is the open SDK layer of the RCT Ecosystem — the world's first **Intent-Centric AI Operating System** with constitutional architecture. Think of it as **"Linux for AI Agents."** It provides:
@@ -41,6 +34,18 @@ This SDK exposes the core components under Apache 2.0.
 
 ---
 
+## Start Here in 5 Minutes
+
+If you're arriving from social media or seeing RCT Platform for the first time, use this path:
+
+1. **Try the offline demo** — run `python examples/quickdemo.py` or open `notebooks/rct_playground.ipynb`
+2. **Verify the claims** — see [`docs/testing/TESTING_CANONICAL.md`](docs/testing/TESTING_CANONICAL.md) for the current authoritative test and coverage checkpoint
+3. **Understand the scope boundary** — compare the open SDK surface vs enterprise-only surface in the table below
+4. **Check release readiness** — see [`docs/release/RELEASE_READINESS_CHECKLIST.md`](docs/release/RELEASE_READINESS_CHECKLIST.md)
+5. **Find support channels** — see [`docs/community/GITHUB_UI_LAUNCH_CHECKLIST.md`](docs/community/GITHUB_UI_LAUNCH_CHECKLIST.md) for Discussions, milestones, About, Topics, and profile setup
+
+---
+
 ## What's Included in This SDK
 
 | Component | In This SDK (Apache 2.0) | Enterprise Only (Proprietary) |
@@ -51,7 +56,7 @@ This SDK exposes the core components under Apache 2.0.
 | Delta Engine (74% compression) | ✅ `core/delta_engine/` | — |
 | Regional Language Adapter | ✅ `core/regional_adapter/` | — |
 | RCT Control Plane DSL | ✅ `rct_control_plane/` (15 modules) | — |
-| 5 Reference Microservices | ✅ `microservices/` (142 tests) | — |
+| 5 Reference Microservices | ✅ `microservices/` (258 passing tests) | — |
 | CLI (`rct` entry point) | ✅ `pip install -e .` | — |
 | Genome / Creator Profile API | ❌ 501 stub (`genome_api.py`) | ✅ Full implementation |
 | Full Production Microservice Stack | ❌ | ✅ 62 microservices |
@@ -98,7 +103,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 | Metric | Value |
 |--------|-------|
-| **SDK Tests (this repo)** | **1,189 passed · 0 failed · 94% coverage** — full SDK test suite |
+| **SDK Tests (this repo)** | **1,193 passed · 0 skipped · 94% coverage** — current verified public SDK checkpoint |
 | **Algorithms** | 41 (Tier 1–9, reference implementations) |
 | **LLM Models** | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | **Hallucination Rate** | 0.3% (vs industry 12–15%) — 97% reduction via SignedAI |
@@ -109,8 +114,11 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 | **Universal Adapters** | 13 (Home Assistant, Terraform, n8n, Obsidian, Playwright, ...) |
 | **FDIA Accuracy** | 0.92 (industry baseline: ~0.65) |
 
-> **1,189 tests** currently pass across the public SDK suite (Python 3.10/3.11/3.12 matrix).  
-> Coverage **94%** — above the required 90% threshold.
+> **1,193 tests** currently pass across the public SDK suite, with **0 expected skips**
+> for optional or infrastructure-dependent paths. Of these, **258 tests** directly cover
+> the 5 reference microservices.
+
+For the current single source of truth, see [`docs/testing/TESTING_CANONICAL.md`](docs/testing/TESTING_CANONICAL.md).
 
 ---
 
@@ -124,7 +132,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 Layer 11: CI/CD & Quality Gates
 ├─ GitHub Actions (ci.yml + security-scan.yml)
-├─ 1,189 passing tests · 94%+ coverage · Python 3.10/3.11/3.12
+├─ 1,193 passing tests · 94% coverage · Python 3.10/3.11/3.12
 └─ E2E integration tests (no Docker required)
 
 Layer 10: Enterprise Hardening
@@ -227,6 +235,15 @@ Tier 6: 6 signers, required=4
 Consensus: True, confidence=75.00%
 Supreme Architect: anthropic/claude-opus-4.6
 ```
+
+## Verify This Repository Quickly
+
+Use these paths when you need evidence, not marketing copy:
+
+- **Current test and coverage checkpoint** — [`docs/testing/TESTING_CANONICAL.md`](docs/testing/TESTING_CANONICAL.md)
+- **Release gate checklist** — [`docs/release/RELEASE_READINESS_CHECKLIST.md`](docs/release/RELEASE_READINESS_CHECKLIST.md)
+- **Public export and provenance policy** — [`docs/release/PUBLIC_RELEASE_PROVENANCE.md`](docs/release/PUBLIC_RELEASE_PROVENANCE.md)
+- **GitHub UI launch tasks** — [`docs/community/GITHUB_UI_LAUNCH_CHECKLIST.md`](docs/community/GITHUB_UI_LAUNCH_CHECKLIST.md)
 
 ---
 
@@ -459,48 +476,6 @@ Each service includes a `Dockerfile` and follows the OpenAPI contract in `contra
 
 ---
 
-## Hallucination Prevention — Demo
-
-See how RCT's constitutional core **intercepts** AI hallucinations before output:
-
-```python
-# Without RCT — standard LLM (hallucination-prone)
-llm_response = "The FDIA theorem was first published in 1987 by..."  # WRONG — hallucinated fact
-
-# With RCT — FDIA + SignedAI consensus gate
-from core.fdia.fdia import FDIAScorer
-from signedai.core.registry import SignedAIRegistry, SignedAITier
-
-# Step 1: FDIA scores the intent
-scorer = FDIAScorer()
-D = 0.40  # Low data quality — uncertain source
-I = 2.0   # High intent precision
-A = 1.0   # Human gate open
-F = D**I * A  # = 0.16 — LOW score → flag for review
-
-# Step 2: SignedAI consensus required (6 models must agree)
-result = SignedAIRegistry.calculate_consensus(SignedAITier.TIER_6, votes_for=3, votes_against=3)
-print(f"Consensus: {result.consensus_reached}")  # False — blocked!
-print(f"Confidence: {result.confidence:.0%}")    # 50% — below 67% threshold
-
-# A=0 = ABSOLUTE BLOCK (Constitutional guarantee)
-F_blocked = 0.99**2.0 * 0.0  # = 0.0 — regardless of data quality
-print(f"A=0 output: {F_blocked}")  # Always 0.0
-```
-
-**Side-by-side comparison:**
-
-| Scenario | Standard LLM | RCT Platform |
-|----------|-------------|------------------|
-| Hallucinated fact (low D) | ✅ Output delivered | ❌ Score=0.16 → flagged |
-| Weak consensus (3/6) | ✅ Output delivered | ❌ Blocked (need 4/6) |
-| Human gate closed (A=0) | ✅ Output delivered | ❌ F=0 **by math** |
-| High quality intent (D=0.9, I=2) | ✅ Output delivered | ✅ Score=0.81 → approved |
-
-> **Try it yourself:** [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rctlabs/rct-platform/blob/main/notebooks/rct_playground.ipynb)
-
----
-
 ## Benchmark Results
 
 Reproducible benchmarks are in [`benchmark/`](benchmark/).
@@ -633,7 +608,7 @@ Over the next 10 months, working alone from a room in **Klong Toei, Bangkok**, I
 - 41 production algorithms (Tier 1–9)
 - The JITNA Protocol (RFC-001) — an open standard for AI-to-AI communication
 - SignedAI: multi-LLM consensus with ED25519 cryptographic attestation
-- **1,189 passing tests**, 94%+ coverage, zero failures
+- **1,193 passing tests**, 94% coverage, with 0 expected skips
 - A 450+ page whitepaper documenting every decision
 
 This is not a research paper. It runs in production at [rctlabs.co](https://rctlabs.co).
@@ -641,7 +616,6 @@ This is not a research paper. It runs in production at [rctlabs.co](https://rctl
 | | |
 |---|---|
 | **GitHub** | [@ittirit720](https://github.com/ittirit720) |
-| **Sponsors** | [Support the Architect →](https://github.com/sponsors/ittirit720) |
 | **Email** | ittirit720@gmail.com |
 | **Org** | founder@rctlabs.co |
 | **Website** | [rctlabs.co](https://rctlabs.co) |
@@ -659,23 +633,10 @@ This is not a research paper. It runs in production at [rctlabs.co](https://rctl
 | Dec 2025 | Foundation whitepaper (~100 pages) |
 | Jan 2026 | 41 algorithms complete, 4,849 enterprise tests |
 | Feb 2026 | 3,053 Python files, Level 4 Virtuoso stress test |
-| Apr 2026 | Public SDK — **1,189 tests**, **94% coverage**, Apache 2.0 |
+| Apr 2026 | Public SDK — 723 tests, 89%+ coverage, Apache 2.0 release |
+| Apr 2026 (current checkpoint) | Public SDK — 1,193 passed, 0 skipped, 94% coverage |
 
 > See [ROADMAP.md](ROADMAP.md) for what comes next.
-
----
-
-## Support & Sponsorship
-
-RCT Platform is built and maintained by a solo developer. If it's useful to you:
-
-| | |
-|---|---|
-| 🏢 **Support the Organization** | [![Sponsor rctlabs](https://img.shields.io/badge/Sponsor-rctlabs-EA4AAA?logo=github-sponsors&logoColor=white)](https://github.com/sponsors/rctlabs) |
-| 👤 **Support the Architect** | [![Sponsor ittirit720](https://img.shields.io/badge/Sponsor-ittirit720-FF6B6B?logo=github-sponsors&logoColor=white)](https://github.com/sponsors/ittirit720) |
-
-> **rctlabs** — funds platform infrastructure, CI/CD, and open-source tooling  
-> **ittirit720** — directly supports the sole architect building this from Bangkok 🇹🇭
 
 ---
 
@@ -683,5 +644,5 @@ RCT Platform is built and maintained by a solo developer. If it's useful to you:
 
 Apache 2.0 — see [LICENSE](LICENSE).
 
-Copyright 2026 [Ittirit Saengow (อิทธิฤทธิ์ แซ่โง้ว)](https://github.com/ittirit720) — RCT Labs  
+Copyright 2026 Ittirit Saengow (อิทธิฤทธิ์ แซ่โง้ว) — RCT Labs  
 Made with ❤️ from Bangkok, Thailand 🇹🇭

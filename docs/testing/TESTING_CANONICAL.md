@@ -1,116 +1,139 @@
 # RCT Platform — Public SDK Testing Canonical
 
+This document is the **single source of truth** for public test-count and coverage claims used in README, roadmap, release notes, and launch materials.
+
 **Version:** 1.0.2a0  
-**Last Updated:** 2026-04-22  
-**Total SDK Tests:** 765 passed · 0 failed · 89%+ coverage  
+**Last Updated:** 2026-04-28  
+**Authoritative checkpoint:** **1,193 passed · 0 skipped · 0 failed · 94% coverage**  
 **CI Status:** [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 
 ---
 
-## 1. Test Matrix
+## 1. Current Verified Checkpoint
 
-This matrix tracks the reference microservice slice of the SDK test suite. The
-repository-wide total shown above also includes tests under `core/tests`,
-`signedai/tests`, `rct_control_plane/tests`, and top-level `tests/`.
+The following numbers were verified from the current public repository working tree.
 
-| Microservice | Test File(s) | Tests | Scope |
-|---|---|---|---|
-| `analysearch-intent` | `test_analysearch_engine.py` | 30 | GIGOProtector, MirrorMode, CrossDisciplinarySynthesis |
-| `intent-loop` | `test_intent_loop.py`, `test_intent_loop_extended.py` | 36 | IntentState, JITNAPacket, IntentLoopEngine, FDIA gating |
-| `gateway-api` | `test_gateway_api.py` | 14 | Health endpoints, routing, CORS, JSON responses |
-| `vector-search` | `test_vector.py`, `test_vector_extended.py` | 36 | FAISSBackend, QdrantBackend, VectorEngine, API endpoints |
-| `crystallizer` | `test_crystallizer.py` | 26 | Keyword extraction, concept graph, scoring |
-| **TOTAL** | | **142** | |
-
----
-
-## 2. Python Version Matrix
-
-Tests pass on all three supported versions:
-
-| Python | CI Status |
-|---|---|
-| 3.10 | ✅ |
-| 3.11 | ✅ (coverage upload) |
-| 3.12 | ✅ |
-
----
-
-## 3. How to Run Tests Locally
-
-### Prerequisites
-
-```bash
-git clone https://github.com/rctlabs/rct-platform.git
-cd rct-platform
-pip install -r requirements.txt
-pip install pytest pytest-cov
-```
-
-### Run all SDK tests (all 5 microservices)
-
-```bash
-pytest microservices/ -v
-```
-
-### Run with coverage report
-
-```bash
-pytest microservices/ --cov=microservices --cov-report=term-missing -v
-```
-
-### Run a single microservice
-
-```bash
-pytest microservices/intent-loop/ -v
-pytest microservices/analysearch-intent/ -v
-pytest microservices/vector-search/ -v
-pytest microservices/gateway-api/ -v
-pytest microservices/crystallizer/ -v
-```
-
-### Run with importlib mode (recommended for module isolation)
-
-```bash
-pytest --import-mode=importlib microservices/ -v
-```
-
----
-
-## 4. Test Coverage Notes
-
-| Scope | Covered by tests | Not yet covered |
+| Metric | Verified Result | Validation Command |
 |---|---|---|
-| FDIA engine (`core/fdia/`) | ✅ via intent-loop tests | Direct unit tests TBD |
-| SignedAI registry (`signedai/core/`) | ✅ via examples; no formal test suite yet | Formal test suite in roadmap |
-| Control plane DSL parser | ✅ via gateway-api tests | Edge case coverage TBD |
-| Control plane state machine | ⚠️ no dedicated tests yet | Planned for v1.1.0-alpha |
-| Genome API (`microservices/gateway-api/genome_api.py`) | ✅ 501 stubs — enterprise module only | Full tests available in enterprise runtime |
+| Full SDK suite | **1,193 passed · 0 skipped · 0 failed** | `python -m pytest -q --no-header` |
+| Coverage | **94%** (`12180` statements, `769` missed) | `python -m pytest --cov=microservices --cov=core --cov=signedai --cov=rct_control_plane --cov-report=term --cov-config=pyproject.toml -q --no-header` |
+| Direct microservice tests | **258 passed** | `python -m pytest microservices -q --no-header` |
+| Supported CI matrix | Python **3.10 / 3.11 / 3.12** | `.github/workflows/ci.yml` |
+| Coverage floor | **90%** | `.github/workflows/ci.yml` + `codecov.yml` |
+
+These are the only public numbers that should be copied into README, roadmap, launch copy, or release notes.
 
 ---
 
-## 5. Scope Boundary
+## 2. Suite Composition
 
-These 142 microservice tests are one subset of the **public SDK layer** test suite:
+The 1,193 passing tests come from the public SDK surface:
 
-- ✅ 5 reference microservices
-- ✅ Core SDK modules (FDIA, SignedAI, control plane objects)
-
-**Not included in this public test suite:**
-- Private enterprise runtime (62 microservices, 4,849+ tests in v5.4.5)
-- Dashboard frontend
-- Infrastructure / k8s / Docker stack
-
----
-
-## 6. Security & Quality Gates (CI)
-
-| Gate | Tool | Threshold |
+| Suite | Scope | Current Status |
 |---|---|---|
-| Tests | pytest | Repository CI must stay green across the full SDK suite |
-| Type check | mypy | Errors fail the build |
+| `microservices/` | 5 reference microservices and API surfaces | **258 passed** |
+| `core/tests/` | FDIA, Delta Engine, regional and algorithmic primitives | Included in full suite |
+| `signedai/tests/` | SignedAI consensus, registry, routing | Included in full suite |
+| `rct_control_plane/tests/` | DSL, JITNA, replay, middleware, CLI, security | Included in full suite |
+| `tests/` | top-level integration, security, regression, benchmark support | Included in full suite |
+| `tests/hypothesis/` | property-based correctness checks | Included in full suite |
+
+`--collect-only` currently discovers a larger total than the pass count because optional or infra-dependent paths may be skipped depending on environment. The authoritative public-facing claim is the **verified pass count**, not the raw collection count.
+
+---
+
+## 3. What Counts as Public Evidence
+
+Use these sources in this order when you need to verify or update claims:
+
+1. This file — canonical test and coverage statement
+2. `README.md` — public summary copy only
+3. `ROADMAP.md` — public roadmap and current checkpoint summary
+4. `CHANGELOG.md` — historical release/change narrative
+5. `.github/workflows/ci.yml` and `codecov.yml` — enforcement configuration
+
+If any of those surfaces disagree, **this file wins first**, then the other surfaces must be updated.
+
+---
+
+## 4. Local Validation Commands
+
+### Full public SDK suite
+
+```bash
+python -m pytest -q --no-header
+```
+
+### Full suite with coverage
+
+```bash
+python -m pytest \
+	--cov=microservices \
+	--cov=core \
+	--cov=signedai \
+	--cov=rct_control_plane \
+	--cov-report=term \
+	--cov-config=pyproject.toml \
+	-q --no-header
+```
+
+### Microservice slice only
+
+```bash
+python -m pytest microservices -q --no-header
+```
+
+### Hypothesis slice only
+
+```bash
+python -m pytest tests/hypothesis/ --hypothesis-profile=ci -v
+```
+
+---
+
+## 5. Quality Gates
+
+| Gate | Tool | Current Rule |
+|---|---|---|
+| Full test suite | pytest | Must stay green on the public SDK surface |
+| Coverage floor | pytest-cov | **90% minimum** in CI |
+| Project coverage status | Codecov | **90% target** |
+| Patch coverage status | Codecov | **90% target** |
+| Lint | ruff | Fail on lint errors |
+| Type check | mypy | Run in CI as part of quality checks |
+| Secret scan | gitleaks | Fail on real secrets |
 | SAST | bandit | HIGH severity findings fail the build |
-| Secret scan | gitleaks | Any real credential fails the build |
-| CVE scan | pip-audit | Reported as advisory (upgrade backlog managed separately) |
+| CVE scan | pip-audit | Advisory artifact retained in CI |
 
-See `.github/workflows/ci.yml` and `.github/workflows/security-scan.yml` for full configuration.
+---
+
+## 6. Scope Boundary
+
+This file covers the **public SDK repository only**.
+
+Included:
+- Open SDK modules under `core/`, `signedai/`, `rct_control_plane/`
+- 5 reference microservices under `microservices/`
+- Public benchmarks, docs, notebooks, and examples used to validate the SDK experience
+
+Not included:
+- Private enterprise runtime and orchestration stack
+- 62-service internal production ecosystem
+- Dashboard frontend, ops, k8s, or proprietary infrastructure layers
+
+For the relationship between private development and public export, see [`../release/PUBLIC_RELEASE_PROVENANCE.md`](../release/PUBLIC_RELEASE_PROVENANCE.md).
+
+---
+
+## 7. Update Procedure When Numbers Change
+
+Whenever test count, skip count, or coverage changes, update these surfaces in one pass:
+
+1. This file
+2. `README.md`
+3. `ROADMAP.md`
+4. `CHANGELOG.md`
+5. `codecov.yml` and `.github/workflows/ci.yml` if thresholds changed
+6. Any release draft or social launch copy that cites numbers
+
+If you update only README and leave the rest behind, the repo re-enters claim drift immediately.
