@@ -14,6 +14,7 @@ Port: 8000
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from datetime import UTC, datetime
 import sys
 import os
 
@@ -133,7 +134,7 @@ async def rctlabs_system_stats():
         "hallucinationRate": "0.3% benchmark",
         "version": app.version,
         "source": stats.get("source", "baseline"),
-        "timestamp": __import__('datetime').datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
     }
 
 
@@ -167,7 +168,7 @@ async def rctlabs_benchmark_summary():
             {"value": 200,  "suffix": "ms", "labelEn": "Response Latency",     "labelTh": "Latency", "prefix": "<"},
         ],
         "version": app.version,
-        "timestamp": __import__('datetime').datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
     }
 
 
@@ -261,7 +262,7 @@ async def server_error_handler(request, exc):
     )
 
 # Run server
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     import uvicorn
     
     print("\n" + "="*60)

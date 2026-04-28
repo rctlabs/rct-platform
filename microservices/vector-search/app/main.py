@@ -138,7 +138,7 @@ async def global_exception_handler(request, exc):
     }
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     import uvicorn
     
     uvicorn.run(
