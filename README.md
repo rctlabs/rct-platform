@@ -83,11 +83,15 @@ If you're arriving from social media or seeing RCT Platform for the first time, 
 
 ## The FDIA Equation
 
-$$F = D^I \times A$$
+*The architectural core for computing verifiable AI outcomes.*
+
+<div align="center">
+  <h3><code>F = D<sup>I</sup> &times; A</code></h3>
+</div>
 
 | Symbol | Meaning |
 |--------|---------|
-| **F** | **Future** — the desired output the AI must deliver |
+| **F** | **Future (Outcome)** — the verifiable, desired target state |
 | **D** | Data quality — accuracy and completeness of inputs (0.0–1.0) |
 | **I** | Intent precision — clarity of intent acts as an **exponent** (higher = amplifies result) |
 | **A** | **Architect** — Human-in-the-loop approval gate (0.0–1.0) |
