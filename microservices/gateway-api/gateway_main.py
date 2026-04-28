@@ -14,6 +14,7 @@ Port: 8000
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 import sys
 import os
 
@@ -168,6 +169,45 @@ async def rctlabs_benchmark_summary():
         ],
         "version": app.version,
         "timestamp": __import__('datetime').datetime.utcnow().isoformat() + "Z",
+    }
+
+
+# ---------------------------------------------------------------------------
+# Floating Assistant API (Phase 1: Dummy RAG / Intent Loop)
+# ---------------------------------------------------------------------------
+
+class ChatRequest(BaseModel):
+    message: str
+    locale: str = "en"
+    context: str = ""
+
+@app.post("/rctlabs/assistant/chat", tags=["Assistant"])
+async def assistant_chat(req: ChatRequest):
+    """
+    Receives queries from the rctlabs-website floating assistant.
+    Phase 1: Returns simulated RAG responses about the RCT Platform.
+    """
+    msg = req.message.lower()
+    
+    # Simple simulated RAG logic
+    if "fdia" in msg or "accuracy" in msg:
+        reply_en = "The FDIA Equation (F = D^I * A) is the architectural core for computing verifiable AI outcomes. We recently achieved a 0.92 score."
+        reply_th = "สมการ FDIA (F = D^I * A) คือแกนกลางสถาปัตยกรรมสำหรับคำนวณผลลัพธ์ AI ที่ตรวจสอบได้ ล่าสุดเราทำคะแนนได้ 0.92 ครับ"
+    elif "jitna" in msg or "protocol" in msg:
+        reply_en = "JITNA (Just-In-Time Nodal Assembly) is our AI-to-AI intent wire format protocol."
+        reply_th = "JITNA Protocol คือมาตรฐานการสื่อสารระหว่าง AI (AI-to-AI) เพื่อประกอบเจตนาแบบเรียลไทม์ครับ"
+    else:
+        reply_en = f"I received your message: '{req.message}'. I am the RCT Assistant running on the Gateway API."
+        reply_th = f"ผมได้รับข้อความของคุณแล้ว: '{req.message}' ผมคือผู้ช่วย RCT ที่รันอยู่บน Gateway API ครับ"
+
+    response_text = reply_th if req.locale == "th" else reply_en
+
+    return {
+        "reply": response_text,
+        "fdia_score": 0.92,
+        "latency_ms": 45,
+        "source": "gateway-api",
+        "intent": "general_inquiry"
     }
 
 
