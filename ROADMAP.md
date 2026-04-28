@@ -1,6 +1,6 @@
 # RCT Platform — Public Roadmap
 
-> Last updated: April 22, 2026  
+> Last updated: April 28, 2026  
 > Current version: **v1.0.2a0 (Public Alpha)**  
 > Maintained by: Ittirit Saengow — [rctlabs.co](https://rctlabs.co)
 
@@ -28,7 +28,7 @@
 - ✅ Regional Language Adapter — 8 ASEAN language pairs
 - ✅ RCT Control Plane DSL — 15 modules, `rct` CLI entry point
 - ✅ 5 reference microservices (intent-loop, analysearch, vector-search, crystallizer, gateway-api)
-- ✅ 765 passing tests, 89%+ coverage, Bandit 0 HIGH
+- ✅ 1,193 passed, 0 skipped, 94% coverage, Bandit 0 HIGH
 - ✅ CI/CD: GitHub Actions (ci.yml + security-scan.yml)
 - ✅ MkDocs documentation site
 - ✅ Whitepaper: 450+ pages, bilingual (EN + TH)
@@ -46,7 +46,7 @@
 - ✅ Binder / Colab / Codespaces quick-launch badges in README
 - ✅ Hypothesis property-based tests — mathematical correctness guarantees for FDIA, Delta Engine, SignedAI
 - 📋 `docs/benchmark/hallucination-methodology.md` improvement — 100-prompt public dataset
-- 📋 GitHub Discussions enabled — Q&A, RFC Discussion, Show & Tell categories
+- 📋 Enable GitHub Discussions in the GitHub UI — Q&A, RFC Discussion, Show & Tell categories
 - 📋 API stability guarantees documented for `core/fdia`, `signedai/core`, `core/delta_engine`
 
 ---
@@ -62,7 +62,7 @@
 - 📋 Pre-built wheels for Python 3.10 / 3.11 / 3.12
 - 📋 GitHub Release with signed artifacts
 - 📋 External reproduction of hallucination benchmark (community-verified)
-- 📋 `ROADMAP.md` links to GitHub Milestones for granular tracking
+- 📋 Create GitHub Milestones for roadmap items and link them from `ROADMAP.md`
 
 ---
 
@@ -109,7 +109,7 @@ To set clear expectations:
 
 ## How to Influence the Roadmap
 
-- 💬 Open a [GitHub Discussion](https://github.com/rctlabs/rct-platform/discussions) with your use case
+- 💬 Open a [GitHub Discussion](https://github.com/rctlabs/rct-platform/discussions) with your use case once Discussions are enabled in the GitHub UI
 - 🐛 File an [issue](https://github.com/rctlabs/rct-platform/issues) for bugs or missing features
 - 🗳️ Upvote existing issues — high-engagement items move up the priority list
 - 📧 Enterprise timeline requests: founder@rctlabs.co
@@ -117,4 +117,4 @@ To set clear expectations:
 ---
 
 > This roadmap reflects current intent, not a binding commitment.  
-> Timelines may shift. Confirmed items will be tracked in [GitHub Milestones](https://github.com/rctlabs/rct-platform/milestones).
+> Timelines may shift. GitHub Milestones and Discussions require explicit GitHub UI configuration before they become visible to users.

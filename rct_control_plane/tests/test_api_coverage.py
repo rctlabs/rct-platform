@@ -182,6 +182,13 @@ class TestBuildGraphEdgeCases:
 # ─── evaluate_policy edge paths ───────────────────────────────────────────────
 
 class TestEvaluatePolicyEdgeCases:
+    VALID_DSL = '''intent "test" {
+        node n1 {
+            node_type = "agent_capability"
+            description = "Test node"
+        }
+    }'''
+
     VALID_INTENT = {
         "id": "550e8400-e29b-41d4-a716-446655440001",
         "goal": "refactor auth",
@@ -228,7 +235,7 @@ class TestEvaluatePolicyEdgeCases:
         client = TestClient(api.app)
         # Create a state
         cr = client.post("/v1/intent/compile", json={
-            "natural_language": "Evaluate with state",
+            "natural_language": "Analyze risk for existing state",
             "user_id": "u-s",
             "user_tier": "PRO",
         })
@@ -260,7 +267,7 @@ class TestEvaluatePolicyEdgeCases:
         """Graph snapshot path: state has graph_snapshot → graph used (lines 551-554)."""
         client = TestClient(api.app)
         cr = client.post("/v1/intent/compile", json={
-            "natural_language": "Evaluate with graph",
+            "natural_language": "Analyze risk with graph context",
             "user_id": "u-g2",
             "user_tier": "PRO",
         })
@@ -269,10 +276,12 @@ class TestEvaluatePolicyEdgeCases:
         if intent_id is None:
             pytest.skip("No intent_id returned from compile")
 
-        # Inject a mock graph_snapshot
-        state = api.states[intent_id]
-        mock_graph = MagicMock()
-        state.graph_snapshot = mock_graph
+        graph_response = client.post("/v1/graph/build", json={
+            "dsl_text": self.VALID_DSL,
+            "intent_id": intent_id,
+        })
+        assert graph_response.status_code == 200
+        assert graph_response.json()["success"] is True
 
         r = client.post("/v1/policy/evaluate", json={
             "intent_id": intent_id,
@@ -340,7 +349,7 @@ class TestDeleteState:
         """Delete removes both state and intent (lines 682-686)."""
         client = TestClient(api.app)
         cr = client.post("/v1/intent/compile", json={
-            "natural_language": "Delete this intent",
+            "natural_language": "Refactor this intent before cleanup",
             "user_id": "u-d",
             "user_tier": "PRO",
         })
@@ -483,7 +492,7 @@ class TestResetAndList:
         """POST /v1/reset clears states and intents."""
         client = TestClient(api.app)
         cr = client.post("/v1/intent/compile", json={
-            "natural_language": "Before reset",
+            "natural_language": "Build app before reset validation",
             "user_id": "u-r",
             "user_tier": "PRO",
         })
