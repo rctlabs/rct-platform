@@ -91,7 +91,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 | Metric | Value |
 |--------|-------|
-| **SDK Tests (this repo)** | 723 passed · 0 failed · 89% coverage — full SDK test suite |
+| **SDK Tests (this repo)** | 1,024 passed · 0 failed · 94% coverage — full SDK test suite |
 | **Algorithms** | 41 (Tier 1–9, reference implementations) |
 | **LLM Models** | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | **Hallucination Rate** | 0.3% (vs industry 12–15%) — 97% reduction via SignedAI |
@@ -102,7 +102,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 | **Universal Adapters** | 13 (Home Assistant, Terraform, n8n, Obsidian, Playwright, ...) |
 | **FDIA Accuracy** | 0.92 (industry baseline: ~0.65) |
 
-> **723 tests** currently pass across the public SDK suite. Of these, **142 tests**
+> **1,024 tests** currently pass across the public SDK suite. Of these, **142 tests**
 > cover the 5 reference microservices directly.
 
 ---
@@ -117,7 +117,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 Layer 11: CI/CD & Quality Gates
 ├─ GitHub Actions (ci.yml + security-scan.yml)
-├─ 765 passing tests · 89%+ coverage · Python 3.10/3.11/3.12
+├─ 1,024 passing tests · 94%+ coverage · Python 3.10/3.11/3.12
 └─ E2E integration tests (no Docker required)
 
 Layer 10: Enterprise Hardening
@@ -584,7 +584,7 @@ Over the next 10 months, working alone from a room in **Klong Toei, Bangkok**, I
 - 41 production algorithms (Tier 1–9)
 - The JITNA Protocol (RFC-001) — an open standard for AI-to-AI communication
 - SignedAI: multi-LLM consensus with ED25519 cryptographic attestation
-- **765 passing tests**, 89%+ coverage, zero failures
+- **1,024 passing tests**, 94%+ coverage, zero failures
 - A 450+ page whitepaper documenting every decision
 
 This is not a research paper. It runs in production at [rctlabs.co](https://rctlabs.co).
@@ -610,6 +610,7 @@ This is not a research paper. It runs in production at [rctlabs.co](https://rctl
 | Jan 2026 | 41 algorithms complete, 4,849 enterprise tests |
 | Feb 2026 | 3,053 Python files, Level 4 Virtuoso stress test |
 | Apr 2026 | Public SDK — 765 tests, 89%+ coverage, Apache 2.0 |
+| Apr 2026 (latest) | QC overhaul — 1,024 tests, 94% coverage, 0 lint errors |
 
 > See [ROADMAP.md](ROADMAP.md) for what comes next.
 
