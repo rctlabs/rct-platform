@@ -3,7 +3,7 @@
 This document is the **single source of truth** for public test-count and coverage claims used in README, roadmap, release notes, and launch materials.
 
 **Version:** 1.0.2a0  
-**Last Updated:** 2026-04-28  
+**Last Updated:** 2026-04-29  
 **Authoritative checkpoint:** **1,193 passed · 0 skipped · 0 failed · 94% coverage**  
 **CI Status:** [![CI](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/rctlabs/rct-platform/actions/workflows/ci.yml)
 
