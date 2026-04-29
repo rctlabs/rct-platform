@@ -83,15 +83,11 @@ If you're arriving from social media or seeing RCT Platform for the first time, 
 
 ## The FDIA Equation
 
-*The architectural core for computing verifiable AI outcomes.*
-
-<div align="center">
-  <h3><code>F = D<sup>I</sup> &times; A</code></h3>
-</div>
+$$F = D^I \times A$$
 
 | Symbol | Meaning |
 |--------|---------|
-| **F** | **Future (Outcome)** — the verifiable, desired target state |
+| **F** | **Future** — the desired output the AI must deliver |
 | **D** | Data quality — accuracy and completeness of inputs (0.0–1.0) |
 | **I** | Intent precision — clarity of intent acts as an **exponent** (higher = amplifies result) |
 | **A** | **Architect** — Human-in-the-loop approval gate (0.0–1.0) |
@@ -107,7 +103,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 
 | Metric | Value |
 |--------|-------|
-| **SDK Tests (this repo)** | **1,193 passed · 0 skipped · 94% coverage** — current verified public SDK checkpoint |
+| **SDK Tests (this repo)** | **1,189 passed · 4 skipped · 94% coverage** — current verified public SDK checkpoint |
 | **Algorithms** | 41 (Tier 1–9, reference implementations) |
 | **LLM Models** | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | **Hallucination Rate** | 0.3% (vs industry 12–15%) — 97% reduction via SignedAI |
@@ -118,7 +114,7 @@ Accuracy: **0.92** (industry baseline: ~0.65). Implemented in [`core/fdia/fdia.p
 | **Universal Adapters** | 13 (Home Assistant, Terraform, n8n, Obsidian, Playwright, ...) |
 | **FDIA Accuracy** | 0.92 (industry baseline: ~0.65) |
 
-> **1,193 tests** currently pass across the public SDK suite, with **0 expected skips**
+> **1,189 tests** currently pass across the public SDK suite, with **4 expected skips**
 > for optional or infrastructure-dependent paths. Of these, **258 tests** directly cover
 > the 5 reference microservices.
 
@@ -136,7 +132,7 @@ For the current single source of truth, see [`docs/testing/TESTING_CANONICAL.md`
 
 Layer 11: CI/CD & Quality Gates
 ├─ GitHub Actions (ci.yml + security-scan.yml)
-├─ 1,193 passing tests · 94% coverage · Python 3.10/3.11/3.12
+├─ 1,189 passing tests · 94% coverage · Python 3.10/3.11/3.12
 └─ E2E integration tests (no Docker required)
 
 Layer 10: Enterprise Hardening
@@ -612,7 +608,7 @@ Over the next 10 months, working alone from a room in **Klong Toei, Bangkok**, I
 - 41 production algorithms (Tier 1–9)
 - The JITNA Protocol (RFC-001) — an open standard for AI-to-AI communication
 - SignedAI: multi-LLM consensus with ED25519 cryptographic attestation
-- **1,193 passing tests**, 94% coverage, with 0 expected skips
+- **1,189 passing tests**, 94% coverage, with 4 expected skips
 - A 450+ page whitepaper documenting every decision
 
 This is not a research paper. It runs in production at [rctlabs.co](https://rctlabs.co).
@@ -638,7 +634,7 @@ This is not a research paper. It runs in production at [rctlabs.co](https://rctl
 | Jan 2026 | 41 algorithms complete, 4,849 enterprise tests |
 | Feb 2026 | 3,053 Python files, Level 4 Virtuoso stress test |
 | Apr 2026 | Public SDK — 723 tests, 89%+ coverage, Apache 2.0 release |
-| Apr 2026 (current checkpoint) | Public SDK — 1,193 passed, 0 skipped, 94% coverage |
+| Apr 2026 (current checkpoint) | Public SDK — 1,189 passed, 4 skipped, 94% coverage |
 
 > See [ROADMAP.md](ROADMAP.md) for what comes next.
 
