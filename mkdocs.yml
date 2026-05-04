@@ -1,7 +1,7 @@
 site_name: RCT Platform
 site_description: Intent-Centric AI Operating System — Constitutional Architecture SDK
 site_author: Ittirit Saengow (RCT Labs)
-site_url: https://rctlabs.co/docs
+site_url: https://rctlabs.github.io/rct-platform/
 repo_url: https://github.com/rctlabs/rct-platform
 repo_name: rctlabs/rct-platform
 edit_uri: edit/main/docs/
@@ -87,8 +87,16 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/rctlabs
+      name: GitHub — rctlabs
     - icon: fontawesome/solid/globe
       link: https://rctlabs.co
+      name: rctlabs.co
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/ittirit-saengow/
+      name: LinkedIn — Ittirit Saengow
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/ittirit_rct
+      name: X — @ittirit_rct
   # Explicitly disable version switcher — prevents 404 /versions.json spam
   # Re-enable when mike versioned docs (v1, v2 branches) are ready
   version:

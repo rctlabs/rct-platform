@@ -6,6 +6,7 @@
 [![Version](https://img.shields.io/badge/version-1.0.2a0-blue)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)](pyproject.toml)
+[![Docs](https://img.shields.io/badge/docs-rctlabs.github.io-blue?logo=readthedocs&logoColor=white)](https://rctlabs.github.io/rct-platform/)
 [![Status](https://img.shields.io/badge/status-PUBLIC%20ALPHA-orange)](CHANGELOG.md)
 [![Website](https://img.shields.io/badge/website-rctlabs.co-brightgreen)](https://rctlabs.co)
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rctlabs/rct-platform/blob/main/notebooks/rct_playground.ipynb)
@@ -619,6 +620,11 @@ This is not a research paper. It runs in production at [rctlabs.co](https://rctl
 | **Email** | ittirit720@gmail.com |
 | **Org** | founder@rctlabs.co |
 | **Website** | [rctlabs.co](https://rctlabs.co) |
+| **LinkedIn** | [linkedin.com/in/ittirit-saengow](https://www.linkedin.com/in/ittirit-saengow/) |
+| **X / Twitter** | [@ittirit_rct](https://x.com/ittirit_rct) |
+| **Reddit** | [u/WindLate5307](https://www.reddit.com/user/WindLate5307/) |
+| **BIO** | [ittiritsaengow.link](https://ittiritsaengow.link) |
+| **Docs** | [rctlabs.github.io/rct-platform](https://rctlabs.github.io/rct-platform/) |
 | **Location** | Klong Toei, Bangkok, Thailand 🇹🇭 |
 | **Started** | June 2025 |
 | **Turning Point** | August 11, 2025 |
