@@ -49,7 +49,7 @@ $$F = D^I \times A$$
 
 | Metric | Value |
 |--------|-------|
-| SDK Tests | **723 passed · 0 failed · 89% coverage** |
+| SDK Tests | **1,193 passed · 0 skipped · 94% coverage** |
 | Algorithms | 41 (Tier 1–9 reference implementations) |
 | LLM Models | 7 HexaCore (3 Western + 3 Eastern + 1 Regional Thai) |
 | Hallucination Rate | **0.3%** (vs industry 12–15%) — 97% reduction |
@@ -69,7 +69,7 @@ $$F = D^I \times A$$
 | Delta Engine (74% compression) | `core/delta_engine/` |
 | Regional Language Adapter | `core/regional_adapter/` |
 | RCT Control Plane DSL | `rct_control_plane/` (15 modules) |
-| 5 Reference Microservices | `microservices/` (142 tests) |
+| 5 Reference Microservices | `microservices/` (258 tests) |
 | CLI entry point | `rct` via `pip install -e .` |
 
 ---
